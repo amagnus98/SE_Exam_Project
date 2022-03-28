@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CucumberTest" project="empty_project" tests="7" started="7" failures="0" errors="7" ignored="0">
+  <testsuite name="dtu.calculator.CucumberTest" time="0.191" displayname="CucumberTest" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]">
+    <testsuite name="Create new project" time="0.141" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdABwZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL0NyZWF0ZU5ld1Byb2plY3QuZmVhdHVyZXg=]">
+      <testcase name="Create a new project with a name" classname="Create a new project with a name" time="0.132" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdABwZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL0NyZWF0ZU5ld1Byb2plY3QuZmVhdHVyZXg=]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAVzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAcGZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9DcmVhdGVOZXdQcm9qZWN0LmZlYXR1cmV4]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'that the user is a developer with initials "amag"' and 4 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("that the user is a developer with initials {string}")
+public void that_the_user_is_a_developer_with_initials(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user creates a new project")
+public void the_user_creates_a_new_project() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the sets the name of the project to {string}")
+public void the_sets_the_name_of_the_project_to(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("a project with a project number {string} is added to Softwarehuset A\\/Ss list of current projects")
+public void a_project_with_a_project_number_is_added_to_softwarehuset_a_ss_list_of_current_projects(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the name of the project with project number {string} is {string}")
+public void the_name_of_the_project_with_project_number_is(String string, String string2) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+      <testcase name="Create a project without a name" classname="Create a project without a name" time="0.008" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdABwZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL0NyZWF0ZU5ld1Byb2plY3QuZmVhdHVyZXg=]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAxzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAcGZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9DcmVhdGVOZXdQcm9qZWN0LmZlYXR1cmV4]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'that the user is a developer with initials "amag"' and 2 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("that the user is a developer with initials {string}")
+public void that_the_user_is_a_developer_with_initials(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user creates a new project")
+public void the_user_creates_a_new_project() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("a project with a project number {string} is added to Softwarehuset A\\/Ss list of current projects")
+public void a_project_with_a_project_number_is_added_to_softwarehuset_a_ss_list_of_current_projects(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="Perform time registration" time="0.028" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB3ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL1BlcmZvcm1UaW1lUmVnaXN0cmF0aW9uLmZlYXR1cmV4]">
+      <testcase name="Register time to a project activity" classname="Register time to a project activity" time="0.01" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB3ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL1BlcmZvcm1UaW1lUmVnaXN0cmF0aW9uLmZlYXR1cmV4]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAVzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAd2ZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9QZXJmb3JtVGltZVJlZ2lzdHJhdGlvbi5mZWF0dXJleA==]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'the user is a developer with initials "wanb"' and 4 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("the user is a developer with initials {string}")
+public void the_user_is_a_developer_with_initials(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Given("the user is allowed to register time to activity a of project {string}")
+public void the_user_is_allowed_to_register_time_to_activity_a_of_project(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user registers k hours on day d in week j to activity a of project yyxxx")
+public void the_user_registers_k_hours_on_day_d_in_week_j_to_activity_a_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("k hours are registered to the users personal calender on day d in week j")
+public void k_hours_are_registered_to_the_users_personal_calender_on_day_d_in_week_j() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the total time of project yyxxx and activity a is increased with k hours")
+public void the_total_time_of_project_yyxxx_and_activity_a_is_increased_with_k_hours() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+      <testcase name="User is not allowed to register time on the activity" classname="User is not allowed to register time on the activity" time="0.01" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB3ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL1BlcmZvcm1UaW1lUmVnaXN0cmF0aW9uLmZlYXR1cmV4]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAxzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAd2ZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9QZXJmb3JtVGltZVJlZ2lzdHJhdGlvbi5mZWF0dXJleA==]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'the user is a developer with initials xxxx' and 4 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("the user is a developer with initials xxxx")
+public void the_user_is_a_developer_with_initials_xxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Given("the user is not allowed to register time to activity a of project yyxxx")
+public void the_user_is_not_allowed_to_register_time_to_activity_a_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user registers k hours on day d in week j to activity a of project yyxxx")
+public void the_user_registers_k_hours_on_day_d_in_week_j_to_activity_a_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the system provides an error message that the user isn’t currently working on activity a")
+public void the_system_provides_an_error_message_that_the_user_isn_t_currently_working_on_activity_a() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the system does not register hours to activity a")
+public void the_system_does_not_register_hours_to_activity_a() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+      <testcase name="Register time to a non-work activity" classname="Register time to a non-work activity" time="0.007" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB3ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL1BlcmZvcm1UaW1lUmVnaXN0cmF0aW9uLmZlYXR1cmV4]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAABNzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAd2ZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9QZXJmb3JtVGltZVJlZ2lzdHJhdGlvbi5mZWF0dXJleA==]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'the user is a developer with initials xxxx' and 2 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("the user is a developer with initials xxxx")
+public void the_user_is_a_developer_with_initials_xxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user registers k hours on day d in week j to a non-work activity")
+public void the_user_registers_k_hours_on_day_d_in_week_j_to_a_non_work_activity() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("k hours are registered to the users personal calender on day d in week j")
+public void k_hours_are_registered_to_the_users_personal_calender_on_day_d_in_week_j() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="Assign estimated work hours" time="0.019" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB4ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL2Fzc2lnbkVzdGltYXRlZFdvcmtIb3Vycy5mZWF0dXJleA==]">
+      <testcase name="A project leader sets the estimated number of work hours for an activity" classname="A project leader sets the estimated number of work hours for an activity" time="0.01" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB4ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL2Fzc2lnbkVzdGltYXRlZFdvcmtIb3Vycy5mZWF0dXJleA==]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAVzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAeGZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9hc3NpZ25Fc3RpbWF0ZWRXb3JrSG91cnMuZmVhdHVyZXg=]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'that the user with initials xxxx is the project leader of project yyxxx' and 3 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("that the user with initials xxxx is the project leader of project yyxxx")
+public void that_the_user_with_initials_xxxx_is_the_project_leader_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Given("activity a is part of project yyxxx")
+public void activity_a_is_part_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user with initials xxxx sets the number of work hours for activity a of project yyxxx to k hours")
+public void the_user_with_initials_xxxx_sets_the_number_of_work_hours_for_activity_a_of_project_yyxxx_to_k_hours() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the estimated number of work hours for activity a of project yyxxx is set to k hours")
+public void the_estimated_number_of_work_hours_for_activity_a_of_project_yyxxx_is_set_to_k_hours() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+      <testcase name="The user is not the project leader" classname="The user is not the project leader" time="0.009" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdAB4ZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL2Fzc2lnbkVzdGltYXRlZFdvcmtIb3Vycy5mZWF0dXJleA==]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAtzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAeGZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9hc3NpZ25Fc3RpbWF0ZWRXb3JrSG91cnMuZmVhdHVyZXg=]">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'that the user with initials xxxx is not the project leader of project yyxxx' and 4 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("that the user with initials xxxx is not the project leader of project yyxxx")
+public void that_the_user_with_initials_xxxx_is_not_the_project_leader_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Given("activity a is part of project yyxxx")
+public void activity_a_is_part_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("the user with initials xxxx sets the number of work hours for activity a of project yyxxx to k hours")
+public void the_user_with_initials_xxxx_sets_the_number_of_work_hours_for_activity_a_of_project_yyxxx_to_k_hours() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the system provides an error message that the user is not the project leader of project yyxxx")
+public void the_system_provides_an_error_message_that_the_user_is_not_the_project_leader_of_project_yyxxx() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("the estimated time for activty a of project yyxxx is not set")
+public void the_estimated_time_for_activty_a_of_project_yyxxx_is_not_set() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>

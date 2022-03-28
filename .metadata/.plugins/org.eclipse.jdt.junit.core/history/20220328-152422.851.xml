@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CucumberTest" project="empty_project" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="dtu.calculator.CucumberTest" time="0.161" displayname="CucumberTest" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]">
+    <testsuite name="Create new project" time="0.161" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdABwZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL0NyZWF0ZU5ld1Byb2plY3QuZmVhdHVyZXg=]">
+      <testcase name="Create a new project with a name" classname="Create a new project with a name" time="0.161" uniqueid="[engine:junit-vintage]/[runner:dtu.calculator.CucumberTest]/[test:rO0ABXNyAClpby5jdWN1bWJlci5qdW5pdC5GZWF0dXJlUnVubmVyJEZlYXR1cmVJZAAAAAAAAAABAgABTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cHNyAAxqYXZhLm5ldC5VUkmsAXguQ55JqwMAAUwABnN0cmluZ3QAEkxqYXZhL2xhbmcvU3RyaW5nO3hwdABwZmlsZTovLy9DOi9Vc2Vycy9tYXJjdS9Hb29nbGUlMjBEcmV2L0RUVS8wMjE2MVNFL1NFX0V4YW1fUHJvamVjdC9lbXB0eV9wcm9qZWN0L2ZlYXR1cmVzL0NyZWF0ZU5ld1Byb2plY3QuZmVhdHVyZXg=]/[test:rO0ABXNyAChpby5jdWN1bWJlci5qdW5pdC5QaWNrbGVSdW5uZXJzJFBpY2tsZUlkAAAAAAAAAAECAAJJAApwaWNrbGVMaW5lTAADdXJpdAAOTGphdmEvbmV0L1VSSTt4cAAAAAVzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAcGZpbGU6Ly8vQzovVXNlcnMvbWFyY3UvR29vZ2xlJTIwRHJldi9EVFUvMDIxNjFTRS9TRV9FeGFtX1Byb2plY3QvZW1wdHlfcHJvamVjdC9mZWF0dXJlcy9DcmVhdGVOZXdQcm9qZWN0LmZlYXR1cmV4]">
+        <error>io.cucumber.java.PendingException: TODO: implement me&#13;
+	at dtu.calculator.ProjectSteps.that_the_user_is_a_developer_with_initials(ProjectSteps.java:13)&#13;
+	at ✽.that the user is a developer with initials "amag"(file:///C:/Users/marcu/Google%20Drev/DTU/02161SE/SE_Exam_Project/empty_project/features/CreateNewProject.feature:6)&#13;
+&#13;
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>
