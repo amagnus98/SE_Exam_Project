@@ -1,12 +1,13 @@
 package system.model.domain;
 
+import java.util.*;
+
 public class App {
     
     private Developer currentUser;
-    private Company company;
+    private Company company = new Company(new ArrayList<Developer>());
 
     public void logIn(String initials) throws OperationNotAllowedException {
-        
         if (this.company.developerExists(initials)) {
             this.setCurrentUser(this.company.getDeveloperFromInitials(initials));
         } else {

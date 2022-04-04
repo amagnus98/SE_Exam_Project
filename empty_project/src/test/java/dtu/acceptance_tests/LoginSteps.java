@@ -22,9 +22,7 @@ public class LoginSteps {
     private App app;
     private ErrorMessageHolder errorMessage;
     
-	public LoginSteps(Developer developer,Company company,App app,ErrorMessageHolder errorMessage) {
-	 	this.developer = developer;
-        this.company = company;
+	public LoginSteps(App app,ErrorMessageHolder errorMessage) {
         this.app = app;
         this.errorMessage = errorMessage;
 	}
@@ -33,10 +31,9 @@ public class LoginSteps {
     public void a_developer_with_initials_exists_in_the_company(String initials) {
         // create developer with initials
         this.developer = new Developer(initials);
-        ArrayList<Developer> developers = new ArrayList<Developer>();
 
         // add developer to company
-        this.company = new Company(developers);
+        this.company = this.app.getCompany();
         this.company.addDeveloper(this.developer);
 
         // check if developer is in the company
@@ -71,10 +68,9 @@ public class LoginSteps {
     public void a_developer_with_initials_does_not_exists_in_the_company(String initials) {
         // Write code here that turns the phrase above into concrete actions
         this.developer = new Developer(initials);
-        ArrayList<Developer> developers = new ArrayList<Developer>();
-
-        // add developer to company
-        this.company = new Company(developers);
+        
+        this.company = this.app.getCompany();
+        this.company.addDeveloper(this.developer);
         //this.company.addDeveloper(this.developer);
 
         // check if developer is not in the company
@@ -97,14 +93,10 @@ public class LoginSteps {
     @Given("that a user is logged in")
     public void that_a_user_is_logged_in()  throws Exception {
         this.developer = new Developer("amag");
-        ArrayList<Developer> developers = new ArrayList<Developer>();
-
+    
         // add developer to company
-        this.company = new Company(developers);
+        this.company = this.app.getCompany();
         this.company.addDeveloper(this.developer);
-
-        this.app = new App();
-        this.app.setCompany(this.company);
 
         // Developer logs into the app
         this.app.logIn(developer.getInitials());
