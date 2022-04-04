@@ -6,7 +6,11 @@ public class App {
     private Company company;
 
     public void logInAsUser(String initials) throws Exception {
-        if (company.developerExists(initials)) {
+        //System.out.println(this.company.developerExists(initials));
+        //for (Developer d : this.company.getDevelopers()){
+        //    System.out.println(d.getInitials());
+        //}
+        if (this.company.developerExists(initials)) {
             this.setCurrentUser(this.company.getDeveloperFromInitials(initials));
         }
     }

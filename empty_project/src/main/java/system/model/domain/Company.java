@@ -13,8 +13,8 @@ public class Company {
     
     // Check if a user is working in the company
     public boolean developerExists(String initials) {
-        for (Developer d : developers){
-            if (d.getInitials() == initials){
+        for (Developer d : this.developers){
+            if (d.getInitials().equals(initials)){
                 return true;
             }
         }
@@ -23,7 +23,7 @@ public class Company {
 
     public Developer getDeveloperFromInitials(String initials) throws Exception {
         for (Developer d : developers) {
-            if (d.getInitials() == initials) {
+            if (d.getInitials().equals(initials)) {
                 return d;
             }
         }

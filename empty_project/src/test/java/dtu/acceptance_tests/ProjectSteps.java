@@ -1,4 +1,4 @@
-package dtu.calculator;
+package dtu.acceptance_tests;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
