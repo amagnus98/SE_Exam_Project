@@ -21,13 +21,13 @@ public class Company {
         return false;
     }
 
-    public Developer getDeveloperFromInitials(String initials) throws Exception {
+    public Developer getDeveloperFromInitials(String initials) throws OperationNotAllowedException {
         for (Developer d : developers) {
             if (d.getInitials().equals(initials)) {
                 return d;
             }
         }
-        throw new Exception("developer with given initials does not exist in the system");
+        throw new OperationNotAllowedException("Developer with given initials does not exist in the system");
     }
 
     

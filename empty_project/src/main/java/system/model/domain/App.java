@@ -5,13 +5,12 @@ public class App {
     private Developer currentUser;
     private Company company;
 
-    public void logInAsUser(String initials) throws Exception {
-        //System.out.println(this.company.developerExists(initials));
-        //for (Developer d : this.company.getDevelopers()){
-        //    System.out.println(d.getInitials());
-        //}
+    public void logIn(String initials) throws OperationNotAllowedException {
+        
         if (this.company.developerExists(initials)) {
             this.setCurrentUser(this.company.getDeveloperFromInitials(initials));
+        } else {
+            throw new OperationNotAllowedException("Developer with given initials does not exist in the system");
         }
     }
 
@@ -35,6 +34,11 @@ public class App {
         return this.company;
     }
 
+    public boolean hasCurrentUser() {
+        return this.currentUser != null;
+    }
     
-
+    public void logOut() {
+        this.currentUser = null;
+    }
 }

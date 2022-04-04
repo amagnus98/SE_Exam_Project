@@ -17,15 +17,15 @@ import system.model.domain.OperationNotAllowedException;
 
 public class LoginSteps {
 
-    private App app;
     private Developer developer;
     private Company company;
+    private App app;
     private ErrorMessageHolder errorMessage;
     
-	public LoginSteps(ErrorMessageHolder errorMessage) {
-	 	//this.developer = developer;
-        //this.company = company;
-        //this.app = app;
+	public LoginSteps(Developer developer,Company company,App app,ErrorMessageHolder errorMessage) {
+	 	this.developer = developer;
+        this.company = company;
+        this.app = app;
         this.errorMessage = errorMessage;
 	}
 
@@ -44,22 +44,23 @@ public class LoginSteps {
     }
     
     @When("the user logs into the system with initials {string}")
-    public void the_user_logs_into_the_system_with_initials(String initials) throws Exception {
+    public void the_user_logs_into_the_system_with_initials(String initials) throws Exception{
         try {
             // Create instance of app system
             this.app = new App();
             this.app.setCompany(this.company);
 
             // Developer logs into the app
-            this.app.logInAsUser(initials);
-            
-        } catch (OperationNotAllowedException e){
+            this.app.logIn(initials);
+            } 
+        catch (OperationNotAllowedException e){
             this.errorMessage.setErrorMessage(e.getMessage());
         }
     }
+    
     	
-    @Then("the initials of the current user of the system is set to {string}")
-    public void the_initials_of_the_current_user_of_the_system_is_set_to(String initials) {
+    @Then("the current user of the system is set to a developer with initials {string}")
+    public void the_current_user_of_the_system_is_set_to_a_developer_with_initials(String initials) {
 
         // Check if the user is logged in to the system
         assertEquals(initials, this.app.getCurrentUser().getInitials());
@@ -82,16 +83,43 @@ public class LoginSteps {
 
     @Then("the system provides an error message {string}")
     public void the_system_provides_an_error_message(String errorMessage) throws Exception {
-            //this.errorMessage.setErrorMessage(errorMessage);
-            System.out.println(errorMessage);
-            System.out.println(this.errorMessage.getErrorMessage());
-            assertEquals(errorMessage, this.errorMessage.getErrorMessage());
+        // Check that the correct errormessage is provided
+        assertEquals(errorMessage, this.errorMessage.getErrorMessage());
         }
     
 
-    @Then("the initials of the current user of the system is not set to {string}")
-    public void the_initials_of_the_current_user_of_the_system_is_not_set_to(String initials) {
-        assertNotEquals(initials, this.app.getCurrentUser().getInitials());
+    @Then("the system has no current user")
+    public void the_system_has_no_current_user() {
+        assertFalse(this.app.hasCurrentUser());        
+    }
+
+
+    @Given("that a user is logged in")
+    public void that_a_user_is_logged_in()  throws Exception {
+        this.developer = new Developer("amag");
+        ArrayList<Developer> developers = new ArrayList<Developer>();
+
+        // add developer to company
+        this.company = new Company(developers);
+        this.company.addDeveloper(this.developer);
+
+        this.app = new App();
+        this.app.setCompany(this.company);
+
+        // Developer logs into the app
+        this.app.logIn(developer.getInitials());
+
+        assertTrue(this.app.hasCurrentUser());
+    }
+
+    @When("the user logs out")
+    public void the_user_logs_out() {
+        this.app.logOut();
+    }
+
+    @Then("the user is not logged in")
+    public void the_user_is_not_logged_in() {
+        assertFalse(this.app.hasCurrentUser());
     }
 
 }
