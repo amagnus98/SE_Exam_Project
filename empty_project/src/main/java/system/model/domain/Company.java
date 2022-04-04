@@ -27,7 +27,7 @@ public class Company {
                 return d;
             }
         }
-        throw new Exception("Developer with these initials were not found in the system.");
+        throw new Exception("developer with given initials does not exist in the system");
     }
 
     

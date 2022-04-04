@@ -1,6 +1,7 @@
 package dtu.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -51,8 +52,9 @@ public class LoginSteps {
 
             // Developer logs into the app
             this.app.logInAsUser(initials);
+            
         } catch (OperationNotAllowedException e){
-            errormessage.setErrormessage(e.getMessage());
+            this.errorMessage.setErrorMessage(e.getMessage());
         }
     }
     	
@@ -79,15 +81,17 @@ public class LoginSteps {
     }
 
     @Then("the system provides an error message {string}")
-    public void the_system_provides_an_error_message(String initials) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+    public void the_system_provides_an_error_message(String errorMessage) throws Exception {
+            //this.errorMessage.setErrorMessage(errorMessage);
+            System.out.println(errorMessage);
+            System.out.println(this.errorMessage.getErrorMessage());
+            assertEquals(errorMessage, this.errorMessage.getErrorMessage());
+        }
+    
 
     @Then("the initials of the current user of the system is not set to {string}")
-    public void the_initials_of_the_current_user_of_the_system_is_not_set_to(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_initials_of_the_current_user_of_the_system_is_not_set_to(String initials) {
+        assertNotEquals(initials, this.app.getCurrentUser().getInitials());
     }
 
 }
