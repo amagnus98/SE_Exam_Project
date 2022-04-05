@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import system.model.domain.App;
-import system.model.domain.Company;
-import system.model.domain.Developer;
-import system.model.domain.Project;
-import system.model.domain.OperationNotAllowedException;
+import system.model.domain.*;
 
 public class ProjectSteps {
 
@@ -22,10 +18,12 @@ public class ProjectSteps {
 	private App app;
 	private Company company;
 	private ErrorMessageHolder errorMessage;
+	private MockDateHolder dateHolder;
     
-	public ProjectSteps(App app,ErrorMessageHolder errorMessage) {
+	public ProjectSteps(App app,ErrorMessageHolder errorMessage,MockDateHolder dateHolder) {
         this.app = app;
         this.errorMessage = errorMessage;
+		this.dateHolder = dateHolder;
 	}
 
 	@Given("the current user is a developer with initials {string}")

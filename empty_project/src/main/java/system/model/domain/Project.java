@@ -2,13 +2,11 @@ package system.model.domain;
 
 import java.util.*;
 
-class Project extends Event{
-    int projectNumber;
+public class Project extends Event{
+    String projectID;
 
-    public Project(int projectNumber){
+    public Project(String projectID){
         super();
-        this.projectNumber = projectNumber;
+        this.projectID = projectID;
     }
-    
-
 }
