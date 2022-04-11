@@ -16,4 +16,4 @@ Scenario: Create a project without a name in the current year
 	And there are 4 projects in the system for the current year
   When the current user creates a new project without a name
 	Then a project with project number "22005" is added to the company's list of current projects
-	And the name of the project with project number "22005" is set to "Unnamed Project"
+	And the name of the project with project number "22005" is set to "Unnamed"

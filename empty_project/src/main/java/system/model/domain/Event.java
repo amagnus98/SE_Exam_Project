@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public abstract class Event {
-    protected String name = "Unnamed Project";
+    protected String name = "Unnamed";
     protected int startYear;
     protected int startWeek;
     protected int endYear;
@@ -27,24 +27,28 @@ public abstract class Event {
     public void setEndYear(int year) {
         this.endYear = year;
     }
-    public void setStartWeek(int Week) {
-        this.startWeek = Week;
+    public void setStartWeek(int week) {
+        this.startWeek = week;
     }
-    public void setEndWeek(int Week) {
-        this.endWeek = Week;
+    public void setEndWeek(int week) {
+        this.endWeek = week;
     }
+
+    public int getStartYear() {
+        return this.startYear;
+    }    
+    public int getEndYear() {
+        return this.endYear;
+    }
+    public int getStartWeek() {
+        return this.startWeek;
+    }
+    public int getEndWeek() {
+        return this.endWeek;
+    }
+
     public void setTotalHoursWorked(float totalHoursWorked){
         this.totalHoursWorked = totalHoursWorked;
-    }
-    
-
-    public void setTimeline(int startY, int startW, int endY, int endW){
-        if (this.isTimeValid(startY, startW, endY, endW)) {
-            this.setStartYear(startY);
-            this.setStartWeek(startW);
-            this.setEndWeek(endW);
-            this.setEndYear(endY);
-        }
     }
 
     public void addDeveloper(Developer developer){
@@ -55,7 +59,7 @@ public abstract class Event {
         return currentlyWorking.contains(developer);
     }
 
-    public boolean isTimeValid(int startY, int startW, int endY, int endW) {
-        return ((startY < endY) || (startY == endY && startW <= endW));
+    public boolean endTimeIsValid(int endYear, int endWeek) {
+        return (getStartYear() < endYear || (getStartYear() == endYear && getStartWeek() <= endWeek));
     }
 }

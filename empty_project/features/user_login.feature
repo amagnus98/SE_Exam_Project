@@ -10,6 +10,5 @@ Scenario: User logs in to the system
 Scenario: User logs in with invalid initials
 	Given a developer with initials "amag" does not exists in the company
 	When the user logs into the system with initials "amag"
-	Then the system provides an error message "Developer with given initials does not exist in the system"
+	Then the system provides an error message "No developer with the given initials exists in the system"
 	And the system has no current user
-

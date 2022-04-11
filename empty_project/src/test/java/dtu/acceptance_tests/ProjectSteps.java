@@ -24,7 +24,7 @@ public class ProjectSteps {
 		this.dateHolder = dateHolder;
 	}
 
-	// SCENRAIO 1
+	// SCENARIO 1
 	@Given("the current user is a developer with initials {string}")
 	public void the_current_user_is_a_developer_with_initials(String initials) throws Exception{
     	this.app.logIn(initials);

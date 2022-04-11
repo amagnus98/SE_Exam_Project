@@ -17,11 +17,8 @@ public class App {
     private DateServer dateServer = new DateServer();
 
     public void logIn(String initials) throws OperationNotAllowedException {
-        if (this.developerExists(initials)) {
-            this.setCurrentUser(this.getDeveloper(initials));
-        } else {
-            throw new OperationNotAllowedException("Developer with given initials does not exist in the system");
-        }
+        Developer d = getDeveloper(initials);
+        setCurrentUser(d);
     }
 
     // Setter method for currentUser 
@@ -61,7 +58,7 @@ public class App {
                 return d;
             }
         }
-        throw new OperationNotAllowedException("Developer with given initials does not exist in the system");
+        throw new OperationNotAllowedException("No developer with the given initials exists in the system");
     }
 
     // Add a developer to the company
@@ -143,7 +140,6 @@ public class App {
 
     // Checks whether a project with a given project number exixst in the list of projects
     public boolean projectExists(String projectNumber){
-        System.out.println(projectNumber);
         for (Project p : projects) {
             if (p.getProjectNumber().equals(projectNumber)) {
                 return true;
@@ -164,5 +160,59 @@ public class App {
 
     public void setDateServer(DateServer dateServer) {
         this.dateServer = dateServer;
+    }
+
+    // Checks whether the current user is the project leader of a given project
+    public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
+        return getProject(projectNumber).getProjectLeader().equals(this.currentUser.getInitials());
+    }
+
+    // Assign a developer as project leader on a project
+    public void assignProjectLeader(String projectNumber,String initials) throws OperationNotAllowedException{
+        Developer d = getDeveloper(initials);
+        Project project = getProject(projectNumber);
+        project.setProjectLeader(d.getInitials());
+    }
+
+    // Add activity with a name to a project 
+    public void addActivity(String activityName, String projectNumber) throws OperationNotAllowedException{
+        Activity activity = new Activity(activityName);
+        activity.setAssignedProject(projectNumber);
+        
+        // if current user is project leader adds the activity, else throws an errormessage
+        if (currentUserIsProjectLeader(projectNumber)){
+            getProject(projectNumber).addActivity(activity);
+        } else {
+            throw new OperationNotAllowedException("The activity can't be added to the project, because the user is not the project leader");
+        }
+    }
+
+    public void setStartTime(int startYear, int startWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
+        
+        // if current user is project leader adds the activity, else throws an errormessage
+        if (currentUserIsProjectLeader(projectNumber)){
+            Activity activity = getProject(projectNumber).getActivity(activityName);
+            activity.setStartYear(startYear);
+            activity.setStartWeek(startWeek);
+        } else {
+            throw new OperationNotAllowedException("The start time can't be edited, because the user is not the project leader");
+        }    
+    }
+
+    public void setEndTime(int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
+        
+        // if current user is project leader adds the activity, else throws an errormessage
+        if (currentUserIsProjectLeader(projectNumber)){
+            Activity activity = getProject(projectNumber).getActivity(activityName);
+            // check if end time occurs after start time
+            if (activity.endTimeIsValid(endYear, endWeek)){
+                activity.setEndYear(endYear);
+                activity.setEndWeek(endWeek);
+            } else {
+                throw new OperationNotAllowedException("The end time can't occur before the start time");
+            }
+        } else {
+            throw new OperationNotAllowedException("The end time can't be edited, because the user is not the project leader");
+        }
     }
 }
