@@ -1,15 +1,19 @@
-# Feature: Create new project
-# Description: The current user creates a new project
-#  Actor: Developer
+Feature: Create new project
+Description: The current user creates a new project
+Actor: Developer
 
-# Scenario: Create a new project with a name
-# 	Given the current user is a developer with initials "amag"
-# 	When the current user creates a new project with name "Project Name"
-# 	Then a project with a project number "22001" is added to the company's list of current projects
-# 	And the name of the project with project number "22001" is "Project name"
+Scenario: Create a new project with a name in the current year
+	Given the current user is a developer with initials "bond"
+  And the current year is 2022 
+	And there are 4 projects in the system for the current year
+  When the current user creates a new project with name "Project Name"
+	Then a project with project number "22005" is added to the company's list of current projects
+	And the name of the project with project number "22005" is set to "Project Name"
 
-# Scenario: Create a project without a name
-# 	Given the user is a developer with initials "amag"
-# 	When the user creates a new project
-# 	Then a project with a project number "22001" is added to Softwarehuset A/Ss list of current projects
-
+Scenario: Create a project without a name in the current year
+  Given the current user is a developer with initials "bond"
+  And the current year is 2022 
+	And there are 4 projects in the system for the current year
+  When the current user creates a new project without a name
+	Then a project with project number "22005" is added to the company's list of current projects
+	And the name of the project with project number "22005" is set to "Unnamed Project"

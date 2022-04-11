@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public abstract class Event {
-    protected String name = "Unnamed";
+    protected String name = "Unnamed Project";
     protected int startYear;
     protected int startWeek;
     protected int endYear;
@@ -15,6 +15,10 @@ public abstract class Event {
     
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public void setStartYear(int year) {
