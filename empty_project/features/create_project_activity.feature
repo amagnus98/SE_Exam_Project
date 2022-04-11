@@ -4,6 +4,7 @@ Actors: Project leader
 
 Scenario: Create activity
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" does not contain an activity with name "Activity Name"
   When the current user creates an activity with name "Activity Name" for the project with project number "22001"
@@ -11,6 +12,7 @@ Scenario: Create activity
 
 Scenario: Activity already exists
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   When the current user creates an activity with name "Activity Name" for the project with project number "22001"
@@ -20,6 +22,7 @@ Scenario: Activity already exists
   
 Scenario: User is not the project leader of project
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is not the project leader of the project with project number "22001"
   When the current user creates an activity with name "Activity Name" for the project with project number "22001"
   Then the system provides an error message "The activity can't be added to the project, because the user is not the project leader" 

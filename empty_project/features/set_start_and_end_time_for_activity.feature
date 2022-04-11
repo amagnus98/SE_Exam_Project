@@ -4,6 +4,7 @@ Actors: Project leader
 
 Scenario: Set start time of an activity
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   When the current user sets the start time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 30
@@ -11,6 +12,7 @@ Scenario: Set start time of an activity
   
 Scenario: Set end time of an activity
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   When the current user sets the end time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 40
@@ -18,6 +20,7 @@ Scenario: Set end time of an activity
 
 Scenario: Non-project leader edits start time
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is not the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   And the start time of the activity with name "Activity Name" of project with project number "22001" is not already set to year 2022 and week 30
@@ -27,6 +30,7 @@ Scenario: Non-project leader edits start time
 
 Scenario: Non-project leader edits end time
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is not the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   And the end time of the activity with name "Activity Name" of project with project number "22001" is not already set to year 2022 and week 40
@@ -36,6 +40,7 @@ Scenario: Non-project leader edits end time
 
 Scenario: End time occurs before start time
   Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
   And the start time of the activity with name "Activity Name" of project with project number "22001" is set to year 2022 and week 30

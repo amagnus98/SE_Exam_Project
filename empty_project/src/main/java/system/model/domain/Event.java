@@ -9,7 +9,6 @@ public abstract class Event {
     protected int startWeek;
     protected int endYear;
     protected int endWeek;
-    protected List<Developer> currentlyWorking = new ArrayList<Developer>(); 
     protected float totalHoursWorked;
 
     
@@ -51,15 +50,7 @@ public abstract class Event {
         this.totalHoursWorked = totalHoursWorked;
     }
 
-    public void addDeveloper(Developer developer){
-        currentlyWorking.add(developer);
-    }
-
-    public boolean isDeveloperOnEvent(Developer developer){
-        return currentlyWorking.contains(developer);
-    }
-
     public boolean endTimeIsValid(int endYear, int endWeek) {
         return (getStartYear() < endYear || (getStartYear() == endYear && getStartWeek() <= endWeek));
-    }
+    }  
 }

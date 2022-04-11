@@ -23,11 +23,13 @@ public class SetStartAndEndTimeSteps {
         this.errorMessage = errorMessage;
 	  }
 
+
+  // ACTIVITY SCENARIOS  
   // SCENARIO 1
   @When("the current user sets the start time of the activity with name {string} of project with project number {string} to year {int} and week {int}")
   public void the_current_user_sets_the_start_time_of_the_activity_with_name_of_project_with_project_number_to_year_and_week(String activityName, String projectNumber, int startYear, int startWeek) throws Exception{
       try {
-          this.app.setStartTime(startYear, startWeek, activityName, projectNumber);
+          this.app.setActivityStartTime(startYear, startWeek, activityName, projectNumber);
       } 
       catch (OperationNotAllowedException e){
           this.errorMessage.setErrorMessage(e.getMessage());
@@ -52,7 +54,7 @@ public class SetStartAndEndTimeSteps {
   @When("the current user sets the end time of the activity with name {string} of project with project number {string} to year {int} and week {int}")
   public void the_current_user_sets_the_end_time_of_the_activity_with_name_of_project_with_project_number_to_year_and_week(String activityName, String projectNumber, int endYear, int endWeek) throws Exception{
       try {
-          this.app.setEndTime(endYear, endWeek, activityName, projectNumber);
+          this.app.setActivityEndTime(endYear, endWeek, activityName, projectNumber);
       } 
       catch (OperationNotAllowedException e){
           this.errorMessage.setErrorMessage(e.getMessage());
@@ -133,5 +135,73 @@ public class SetStartAndEndTimeSteps {
 
       activity.setStartYear(startYear);
       activity.setStartWeek(startWeek);
+  }
+
+
+
+
+
+
+
+
+
+// PROJECT SCENARIOS
+
+  @When("the current user sets the start time of the project with project number {string} to year {int} and week {int}")
+  public void the_current_user_sets_the_start_time_of_the_project_with_project_number_to_year_and_week(String projectNumber, int startYear, int startWeek){
+      try {
+          this.app.setProjectStartTime(startYear, startWeek, projectNumber);
+      } 
+      catch (OperationNotAllowedException e){
+          this.errorMessage.setErrorMessage(e.getMessage());
+      }   
+  }
+
+  @Then("the start time of the project with project number {string} is updated to year {int} and week {int}")
+  public void the_start_time_of_the_project_with_project_number_is_updated_to_year_and_week(String projectNumber, int startYear, int startWeek) throws Exception{
+    // Get project
+    Project project = this.app.getProject(projectNumber);
+    
+    // Test whether start year and week is set correctly
+    assertEquals(project.getStartYear(),startYear);
+    assertEquals(project.getStartWeek(),startWeek);
+  }
+
+  @When("the current user sets the end time of the project with project number {string} to year {int} and week {int}")
+  public void the_current_user_sets_the_end_time_of_the_project_with_project_number_to_year_and_week(String projectNumber, int endYear, int endWeek) throws Exception{
+    try {
+          this.app.setProjectEndTime(endYear, endWeek, projectNumber);
+      } 
+      catch (OperationNotAllowedException e){
+          this.errorMessage.setErrorMessage(e.getMessage());
+      }    
+  }
+
+  @Then("the end time of the project with project number {string} is updated to year {int} and week {int}")
+  public void the_end_time_of_the_project_with_project_number_is_updated_to_year_and_week(String projectNumber, int endYear, int endWeek) throws Exception{
+    // Get project
+    Project project = this.app.getProject(projectNumber);
+
+    // Test whether end year and week is set correctly
+    assertEquals(project.getEndYear(),endYear);
+    assertEquals(project.getEndWeek(),endWeek);
+  }
+
+  @Given("the start time of the project with project number {string} is set to year {int} and week {int}")
+  public void the_start_time_of_the_project_with_project_number_is_set_to_year_and_week(String projectNumber, int startYear, int startWeek) throws Exception {
+      Project project = this.app.getProject(projectNumber);
+      
+      project.setStartYear(startYear);
+      project.setStartWeek(startWeek); 
+  }
+
+  @Then("the end time of the project with project number {string} is not updated to year {int} and week {int}")
+  public void the_end_time_of_the_project_with_project_number_is_not_updated_to_year_and_week(String projectNumber, int endYear, int endWeek) throws Exception{
+    // Get project
+    Project project = this.app.getProject(projectNumber);
+
+    // Checks
+    boolean notEqualTime = (project.getEndYear() != endYear) || (project.getEndWeek() != endWeek);
+    assertTrue(notEqualTime);
   }
 }

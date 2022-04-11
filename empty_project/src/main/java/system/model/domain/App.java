@@ -62,7 +62,7 @@ public class App {
     }
 
     // Add a developer to the company
-    public void addDeveloper(Developer d) {
+    public void addDeveloperToCompany(Developer d) {
         this.developers.add(d);
     }
 
@@ -187,7 +187,7 @@ public class App {
         }
     }
 
-    public void setStartTime(int startYear, int startWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
+    public void setActivityStartTime(int startYear, int startWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
         
         // if current user is project leader adds the activity, else throws an errormessage
         if (currentUserIsProjectLeader(projectNumber)){
@@ -199,7 +199,7 @@ public class App {
         }    
     }
 
-    public void setEndTime(int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
+    public void setActivityEndTime(int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
         
         // if current user is project leader adds the activity, else throws an errormessage
         if (currentUserIsProjectLeader(projectNumber)){
@@ -215,4 +215,49 @@ public class App {
             throw new OperationNotAllowedException("The end time can't be edited, because the user is not the project leader");
         }
     }
+
+    public void setProjectStartTime(int startYear, int startWeek, String projectNumber) throws OperationNotAllowedException{
+        Project project = getProject(projectNumber);
+        project.setStartYear(startYear);
+        project.setStartWeek(startWeek);
+
+    }
+
+    public void setProjectEndTime(int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
+        Project project = getProject(projectNumber);
+        // check if end time occurs after start time
+        if (project.endTimeIsValid(endYear, endWeek)){
+            project.setEndYear(endYear);
+            project.setEndWeek(endWeek);
+        } else {
+            throw new OperationNotAllowedException("The end time can't occur before the start time");
+        }
+
+    }
+
+    // Adds a developer to the list of currently working developers on an activity
+    public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(projectNumber)){
+            Project project = getProject(projectNumber);
+            Activity activity = project.getActivity(activityName);
+
+            activity.addDeveloper(initials);
+        } else {
+            throw new OperationNotAllowedException("Only the project leader can add developers to this activity");
+        }
+    }
+
+    public void setEstimatedWorkHoursForActivity(double workHours, String activityName,String projectNumber) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(projectNumber)){
+            Project project = getProject(projectNumber);
+            Activity activity = project.getActivity(activityName);
+
+            activity.setEstimatedWorkHours(workHours);
+        } else {
+            throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this activity");
+        }
+    }
+
+    
+    
 }

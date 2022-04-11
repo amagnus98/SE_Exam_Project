@@ -28,8 +28,7 @@ public class CreateProjectActivitySteps {
   // SCENARIO 1
   @Given("the developer with initials {string} is the project leader of the project with project number {string}")
   public void the_developer_with_initials_is_the_project_leader_of_the_project_with_project_number(String initials, String projectNumber) throws Exception{
-      // Create project
-      this.app.addProject();
+      // Assign project leader
       this.app.assignProjectLeader(projectNumber,initials);
       assertEquals(this.app.getProject(projectNumber).getProjectLeader(),initials);
   }
