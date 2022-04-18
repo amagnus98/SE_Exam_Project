@@ -23,14 +23,12 @@ public class CreateProjectActivitySteps {
 	}
 
 
-
-  
   // SCENARIO 1
   @Given("the developer with initials {string} is the project leader of the project with project number {string}")
   public void the_developer_with_initials_is_the_project_leader_of_the_project_with_project_number(String initials, String projectNumber) throws Exception{
       // Assign project leader
       this.app.assignProjectLeader(projectNumber,initials);
-      assertEquals(this.app.getProject(projectNumber).getProjectLeader(),initials);
+      assertEquals(this.app.getProject(projectNumber).getProjectLeader().getInitials(),initials);
   }
 
   @Given("the project with project number {string} does not contain an activity with name {string}")
@@ -43,7 +41,7 @@ public class CreateProjectActivitySteps {
   public void the_current_user_creates_an_activity_with_name_for_the_project_with_project_number(String activityName, String projectNumber) throws Exception{
       try {
         // try to add activity
-        this.app.addActivity(activityName, projectNumber);
+        this.app.addActivityToProject(activityName, projectNumber);
       }
       catch (OperationNotAllowedException e){
         this.errorMessage.setErrorMessage(e.getMessage());
@@ -76,7 +74,6 @@ public class CreateProjectActivitySteps {
 
 
 
-  
   // SCENARIO 3
   @Given("the developer with initials {string} is not the project leader of the project with project number {string}")
   public void the_developer_with_initials_is_not_the_project_leader_of_the_project_with_project_number(String initials, String projectNumber) throws Exception {

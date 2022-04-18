@@ -10,6 +10,7 @@ public abstract class Event {
     protected int endYear;
     protected int endWeek;
     protected float totalHoursWorked;
+    protected ArrayList<Developer> assignedDevelopers = new ArrayList<>();
 
     
     public void setName(String name) {

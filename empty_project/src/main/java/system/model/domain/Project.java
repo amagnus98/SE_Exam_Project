@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Project extends Event{
     private String projectNumber;
-    private String projectLeaderInitials;
+    private Developer projectLeader;
     private boolean hasProjectLeader = false;
     private ArrayList<Activity> activities = new ArrayList<>();
 
@@ -23,17 +23,18 @@ public class Project extends Event{
         return this.projectNumber;
     }
 
-    public String getProjectLeader(){
-        return this.projectLeaderInitials;
+    public Developer getProjectLeader(){
+        return this.projectLeader;
     }
 
-    public void setProjectLeader(String initials){
-        this.projectLeaderInitials = initials;
+    public void setProjectLeader(Developer d){
+        this.projectLeader = d;
     }
 
     public boolean hasProjectLeader(){
         return this.hasProjectLeader;
     }
+
 
     public boolean containsActivity(String activityName){
         for (Activity a : this.activities){
@@ -72,5 +73,25 @@ public class Project extends Event{
         }
         throw new OperationNotAllowedException("The project has no activity with the given name");
     }
+
+    // Checks if the developer is assigned to the project
+    public boolean isDeveloperAssigned(String initials){
+        for (Developer d : this.assignedDevelopers){
+            if (d.getInitials().equals(initials)){
+                return true;
+            } 
+        }
+        return false;
+    }
+
+    public void addDeveloper(Developer d) throws OperationNotAllowedException{
+        if (!isDeveloperAssigned(d.getInitials())){
+            this.assignedDevelopers.add(d);    
+        } else {
+            throw new OperationNotAllowedException("The developer is already assigned to the given project");
+        }
+    }
+
+    
 
 }

@@ -164,18 +164,18 @@ public class App {
 
     // Checks whether the current user is the project leader of a given project
     public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
-        return getProject(projectNumber).getProjectLeader().equals(this.currentUser.getInitials());
+        return getProject(projectNumber).getProjectLeader().getInitials().equals(this.currentUser.getInitials());
     }
 
     // Assign a developer as project leader on a project
     public void assignProjectLeader(String projectNumber,String initials) throws OperationNotAllowedException{
-        Developer d = getDeveloper(initials);
+        Developer developer = getDeveloper(initials);
         Project project = getProject(projectNumber);
-        project.setProjectLeader(d.getInitials());
+        project.setProjectLeader(developer);
     }
 
     // Add activity with a name to a project 
-    public void addActivity(String activityName, String projectNumber) throws OperationNotAllowedException{
+    public void addActivityToProject(String activityName, String projectNumber) throws OperationNotAllowedException{
         Activity activity = new Activity(activityName);
         activity.setAssignedProject(projectNumber);
         
@@ -235,19 +235,28 @@ public class App {
 
     }
 
+    // add developer to project
+    public void addDeveloperToProject(String initials, String projectNumber) throws OperationNotAllowedException {
+        Developer developer = getDeveloper(initials);
+        Project project = getProject(projectNumber);
+
+        project.addDeveloper(developer);
+    }
+
     // Adds a developer to the list of currently working developers on an activity
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
             Activity activity = project.getActivity(activityName);
 
-            activity.addDeveloper(initials);
+            Developer developer = getDeveloper(initials);
+            activity.addDeveloper(developer);
         } else {
-            throw new OperationNotAllowedException("Only the project leader can add developers to this activity");
+            throw new OperationNotAllowedException("Only the project leader can assign developers to this activity");
         }
     }
 
-    public void setEstimatedWorkHoursForActivity(double workHours, String activityName,String projectNumber) throws OperationNotAllowedException{
+    public void setEstimatedWorkHoursForActivity(double workHours, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
             Activity activity = project.getActivity(activityName);
@@ -258,6 +267,11 @@ public class App {
         }
     }
 
-    
-    
+    // request assistance for activity
+    public void requestAssistanceForActivity(String initialsReceiver, String activityName, String projectNumber) throws OperationNotAllowedException {
+        Developer receiver = getDeveloper(initialsReceiver);
+        Project project = getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+        activity.requestAssistance(receiver,currentUser);        
+    } 
 }

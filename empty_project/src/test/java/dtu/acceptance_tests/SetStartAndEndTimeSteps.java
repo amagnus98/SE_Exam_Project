@@ -21,7 +21,7 @@ public class SetStartAndEndTimeSteps {
 	public SetStartAndEndTimeSteps(App app, ErrorMessageHolder errorMessage) {
         this.app = app;
         this.errorMessage = errorMessage;
-	  }
+	}
 
 
   // ACTIVITY SCENARIOS  

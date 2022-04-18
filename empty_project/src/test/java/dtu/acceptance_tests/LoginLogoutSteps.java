@@ -44,8 +44,8 @@ public class LoginLogoutSteps {
         assertEquals(initials, this.app.getCurrentUser().getInitials());
     }
 
-    @Given("a developer with initials {string} does not exists in the company")
-    public void a_developer_with_initials_does_not_exists_in_the_company(String initials) {
+    @Given("a developer with initials {string} does not exist in the company")
+    public void a_developer_with_initials_does_not_exist_in_the_company(String initials) {
         // check if developer is not in the company
         assertFalse(this.app.developerExists(initials));
     }

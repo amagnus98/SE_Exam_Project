@@ -5,8 +5,11 @@ public class Activity extends Event{
   
   private String parentProjectNumber;
   private double estimatedWorkHours;
-  private ArrayList<String> currentlyWorking = new ArrayList<>(); 
-  
+  // the keys are the initials of the developers
+  // the values are booleans representing whether they were added by the project leader or not
+  // only developers assigned by project leaders can request assistance
+  private HashMap<String,Boolean> isAssignedByProjectLeader = new HashMap<>();
+
   public Activity (String name){
       super();
       this.name = name;
@@ -16,16 +19,39 @@ public class Activity extends Event{
       this.parentProjectNumber = projectNumber;
   }
 
-  public ArrayList<String> getCurrentlyWorking(){
-      return this.currentlyWorking;
+  public void addDeveloper(Developer d) throws OperationNotAllowedException{
+      if (!isDeveloperAssignedByProjectLeader(d)){
+        addAssignedDeveloper(d);
+      } else {
+        throw new OperationNotAllowedException("The developer is already assigned to the given activity by the project leader");
+      }
+      
   }
 
-  public void addDeveloper(String initials){
-      currentlyWorking.add(initials);
+  // for developers added to the activity by a project leader
+  public void addAssignedDeveloper(Developer d){
+      this.assignedDevelopers.add(d);
+      this.isAssignedByProjectLeader.put(d.getInitials(),true);
   }
 
-  public boolean isDeveloperCurrentlyWorking(String initials){
-      return currentlyWorking.contains(initials);
+  public void addRequestedDeveloper(Developer d){
+    this.assignedDevelopers.add(d);
+    this.isAssignedByProjectLeader.put(d.getInitials(),false);
+  }
+  
+  public boolean isDeveloperAssignedByProjectLeader(Developer d){
+    if (isDeveloperCurrentlyWorking(d)){
+      return this.isAssignedByProjectLeader.get(d.getInitials());
+    }
+    return false;
+  }
+
+  public boolean canRegisterHours(Developer d) {
+    return isDeveloperAssignedByProjectLeader(d);
+  }
+
+  public boolean isDeveloperCurrentlyWorking(Developer d){
+      return this.isAssignedByProjectLeader.containsKey(d.getInitials());
   }
 
   public void setEstimatedWorkHours(double hours){
@@ -35,4 +61,17 @@ public class Activity extends Event{
   public double getEstimatedWorkHours(){
     return this.estimatedWorkHours;
   }
+
+  public void requestAssistance(Developer receiver, Developer sender) throws OperationNotAllowedException {
+    if (isDeveloperAssignedByProjectLeader(sender)){
+      if (!isDeveloperCurrentlyWorking(receiver)){
+          addRequestedDeveloper(receiver);
+      } else {
+          throw new OperationNotAllowedException("The developer is already working on the given activity");
+      } 
+    } else {
+      throw new OperationNotAllowedException("The current user is not assigned to the activity by the project leader and cannot request assistance");
+    }
+  }
+    
 }

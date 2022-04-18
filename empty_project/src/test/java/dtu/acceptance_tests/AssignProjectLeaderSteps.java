@@ -44,14 +44,17 @@ public class AssignProjectLeaderSteps {
   @Then("the project leader of project with project number {string} is set to the developer with initials {string}")
   public void the_project_leader_of_project_with_project_number_is_set_to_the_developer_with_initials(String projectNumber, String initials) throws Exception{
       this.project = this.app.getProject(projectNumber);
-      assertEquals(this.project.getProjectLeader(), initials);
+      assertEquals(this.project.getProjectLeader().getInitials(), initials);
   }
 
 
   /// SCENARIO 2
   @Then("the developer with initials {string} is not assigned as project leader of project with project number {string}")
   public void the_developer_with_initials_is_not_assigned_as_project_leader_of_project_with_project_number(String initials, String projectNumber) throws Exception{
-    this.project = this.app.getProject(projectNumber);  
-    assertNotEquals(this.project.getProjectLeader(), initials);
+    this.project = this.app.getProject(projectNumber); 
+    
+    // check whether no project leader was set or that the current project leader does not have the given initials
+    assertTrue(this.project.getProjectLeader() == null || (!this.project.getProjectLeader().getInitials().equals(initials)));
+
   }
 }
