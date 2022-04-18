@@ -9,7 +9,7 @@ public abstract class Event {
     protected int startWeek;
     protected int endYear;
     protected int endWeek;
-    protected float totalHoursWorked;
+    protected double totalHoursWorked;
     protected ArrayList<Developer> assignedDevelopers = new ArrayList<>();
 
     
@@ -47,8 +47,12 @@ public abstract class Event {
         return this.endWeek;
     }
 
-    public void setTotalHoursWorked(float totalHoursWorked){
+    public void setTotalHoursWorked(double totalHoursWorked){
         this.totalHoursWorked = totalHoursWorked;
+    }
+
+    public double getTotalHoursWorked(){
+        return this.totalHoursWorked;
     }
 
     public boolean endTimeIsValid(int endYear, int endWeek) {

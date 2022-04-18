@@ -2,6 +2,8 @@ package system.model.domain;
 
 import java.util.*;
 
+import io.cucumber.java.en_old.Ac;
+
 public class App {    
 
     private Developer currentUser;
@@ -12,9 +14,16 @@ public class App {
                                                                             new Developer("mari"),
                                                                             new Developer("mani")));
     private ArrayList<Project> projects = new ArrayList<Project>();
+    // predefined non work activities
+    private ArrayList<String> nonWorkActivities = new ArrayList<>(Arrays.asList("Vacaction",
+                                                                                "Sickday",
+                                                                                "Seminar",
+                                                                                "Maternity Leave"));
+    private String nonWorkActivitiesProjectNumber = "00001";
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
     private DateServer dateServer = new DateServer();
+    
 
     public void logIn(String initials) throws OperationNotAllowedException {
         Developer d = getDeveloper(initials);
@@ -77,7 +86,6 @@ public class App {
 
     // Add project with no name
     public void addProject(){
-       
         // Sets the current year
         this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
         incrementProjectCount();
@@ -95,14 +103,24 @@ public class App {
 
         // Sets the current year
         this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        // update the counter of projects for the current year
         incrementProjectCount();
 
         // Get unique id for project and create it
         String projectNumber = getProjectNumber();
         Project newProject = new Project(projectNumber, name);
         
-        // Add the project to the list of projects and update the counter of projects for that year
+        // Add the project to the list of projects
         this.projects.add(newProject);
+    }
+
+    public void createNonWorkActivitiesProject() throws OperationNotAllowedException{
+        // assign non work activities to project number "00001"
+        Project nonWorkActivitiesProject = new Project(nonWorkActivitiesProjectNumber,"Non work activities");
+        for (String activityName : nonWorkActivities){
+            nonWorkActivitiesProject.addActivity(new Activity(activityName));
+        }
+        this.projects.add(nonWorkActivitiesProject);
     }
 
     public void incrementProjectCount(){
@@ -275,8 +293,22 @@ public class App {
         activity.requestAssistance(receiver,currentUser);        
     } 
 
-    public void registerHoursToActivity(double hours, int year, int week, String projectNumber, String activityName) {
+    public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
+        double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
+        this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
+        Project project = getProject(projectNumber);
+        project.setTotalHoursWorked(project.getTotalHoursWorked() + hours - currentlyRegisteredHours);
+        Activity activity = project.getActivity(activityName);
+        activity.setTotalHoursWorked(activity.getTotalHoursWorked() + hours - currentlyRegisteredHours);
 
+    }
+
+    public boolean isNonWorkActivity(String activity){
+        return nonWorkActivities.contains(activity);
+    }
+
+    public void viewActivitiesWithRegisteredHours(int day, int week, int year) throws OperationNotAllowedException{
+        this.currentUser.setCalendarOutput(day, week, year);
     }
 
 
