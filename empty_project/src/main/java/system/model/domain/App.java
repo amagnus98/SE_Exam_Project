@@ -274,4 +274,10 @@ public class App {
         Activity activity = project.getActivity(activityName);
         activity.requestAssistance(receiver,currentUser);        
     } 
+
+    public void registerHoursToActivity(double hours, int year, int week, String projectNumber, String activityName) {
+
+    }
+
+
 }

@@ -3,7 +3,7 @@ Description: A developer registers time to a project or non-work actitivy
 Actor: Developer
 
 Scenario: Register time to a project activity
-    Given the user is a developer with initials "bond"
+    Given the current user is a developer with initials "bond"
     And a project with project number "22001" exists in the system
     And the project with project number "22001" contains an activity with name "Activity Name"
     And the user with initials "bond" is allowed to register hours for the activity with name "Activity Name" of project with project number "22001"
