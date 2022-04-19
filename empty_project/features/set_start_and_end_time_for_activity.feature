@@ -2,51 +2,67 @@ Feature: Set start and end time of an activity
 Description: The user sets the start and end time of an activity
 Actors: Project leader
 
-Scenario: Set start time of an activity
+Scenario: Set time horizon of an activity
   Given the current user is a developer with initials "bond"
   And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
-  When the current user sets the start time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 30
+  And the start time of the project with project number "22001" is year 2022 and week 29
+  And the end time of the project with project number "22001" is year 2022 and week 45
+  When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 40 for the activity with name "Activity Name" of project with project number "22001"
   Then the start time of the activity with name "Activity Name" of project with project number "22001" is updated to year 2022 and week 30
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is updated to year 2022 and week 40
   
-Scenario: Set end time of an activity
-  Given the current user is a developer with initials "bond"
-  And a project with project number "22001" exists in the system
-  And the developer with initials "bond" is the project leader of the project with project number "22001"
-  And the project with project number "22001" contains an activity with name "Activity Name"
-  When the current user sets the end time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 40
-  Then the end time of the activity with name "Activity Name" of project with project number "22001" is updated to year 2022 and week 40
-
-Scenario: Non-project leader edits start time
+Scenario: Non-project leader edits the time horizon of an actitivy
   Given the current user is a developer with initials "bond"
   And a project with project number "22001" exists in the system
   And the developer with initials "bond" is not the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
-  And the start time of the activity with name "Activity Name" of project with project number "22001" is not already set to year 2022 and week 30
-  When the current user sets the start time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 30
-  Then the system provides an error message "The start time can't be edited, because the user is not the project leader" 
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 29
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 45
+  When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 40 for the activity with name "Activity Name" of project with project number "22001"
+  Then the system provides an error message "The start and end time of the activity can't be edited, because the user is not the project leader" 
   And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 30
-
-Scenario: Non-project leader edits end time
-  Given the current user is a developer with initials "bond"
-  And a project with project number "22001" exists in the system
-  And the developer with initials "bond" is not the project leader of the project with project number "22001"
-  And the project with project number "22001" contains an activity with name "Activity Name"
-  And the end time of the activity with name "Activity Name" of project with project number "22001" is not already set to year 2022 and week 40
-  When the current user sets the end time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 40
-  Then the system provides an error message "The end time can't be edited, because the user is not the project leader" 
   And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 40
 
-Scenario: End time occurs before start time
+Scenario: User sets time horizon of an activity when the time horizon of the project has not been set yet
   Given the current user is a developer with initials "bond"
   And a project with project number "22001" exists in the system
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   And the project with project number "22001" contains an activity with name "Activity Name"
-  And the start time of the activity with name "Activity Name" of project with project number "22001" is set to year 2022 and week 30
-  When the current user sets the end time of the activity with name "Activity Name" of project with project number "22001" to year 2022 and week 29
+  And the time horizon of the project with project number "22001" has not been set
+  When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 40 for the activity with name "Activity Name" of project with project number "22001"
+  Then the system provides an error message "The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined" 
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 30
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 40
+
+Scenario: End time occurs before start of actitivy
+  Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
+  And the developer with initials "bond" is the project leader of the project with project number "22001"
+  And the project with project number "22001" contains an activity with name "Activity Name"
+  And the start time of the project with project number "22001" is year 2022 and week 29
+  And the end time of the project with project number "22001" is year 2022 and week 45
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 29
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 45
+  When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 25 for the activity with name "Activity Name" of project with project number "22001"
   Then the system provides an error message "The end time can't occur before the start time" 
-  And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 29
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 30
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 25
+
+Scenario: User sets time horizon of an activity outside of the time horizon of the project
+  Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
+  And the developer with initials "bond" is the project leader of the project with project number "22001"
+  And the project with project number "22001" contains an activity with name "Activity Name"
+  And the start time of the project with project number "22001" is year 2022 and week 39
+  And the end time of the project with project number "22001" is year 2022 and week 45
+  When the current user sets the start time to year 2022 and week 50 and end time to year 2023 and week 17 for the activity with name "Activity Name" of project with project number "22001"
+  Then the system provides an error message "The given time horizon for the activity is not within the time horizon of its assigned project" 
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 50
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2023 and week 17
+
+
 
 
 # Scenario: Start time is before current time

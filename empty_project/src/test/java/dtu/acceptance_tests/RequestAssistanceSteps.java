@@ -48,10 +48,10 @@ public class RequestAssistanceSteps {
         try {
         // developer is added to activity
          this.app.requestAssistanceForActivity(initialsReceiver,activityName,projectNumber);
-      }
+        }
         catch (OperationNotAllowedException e){
             this.errorMessage.setErrorMessage(e.getMessage());
-      }
+        }
   } 
 
     @Then("the developer with initials {string} is allowed to register hours for the activity with name {string} of project with project number {string}")

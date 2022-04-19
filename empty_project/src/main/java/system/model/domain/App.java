@@ -205,52 +205,52 @@ public class App {
         }
     }
 
-    public void setActivityStartTime(int startYear, int startWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
-        
-        // if current user is project leader adds the activity, else throws an errormessage
+    public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
-            Activity activity = getProject(projectNumber).getActivity(activityName);
-            activity.setStartYear(startYear);
-            activity.setStartWeek(startWeek);
-        } else {
-            throw new OperationNotAllowedException("The start time can't be edited, because the user is not the project leader");
-        }    
-    }
-
-    public void setActivityEndTime(int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
-        
-        // if current user is project leader adds the activity, else throws an errormessage
-        if (currentUserIsProjectLeader(projectNumber)){
-            Activity activity = getProject(projectNumber).getActivity(activityName);
-            // check if end time occurs after start time
-            if (activity.endTimeIsValid(endYear, endWeek)){
-                activity.setEndYear(endYear);
-                activity.setEndWeek(endWeek);
+            Project project = getProject(projectNumber);
+            if (project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
+                // check that the time horizon of all of the activities still lies within the new time horizon
+                if (project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek)){
+                    // set project start and end time
+                    project.setTimeHorizon(startYear,startWeek,endYear,endWeek);
+                } else {
+                    throw new OperationNotAllowedException("The new time horizon of the project conflicts with the time horizon of the activities in the project");
+                }
             } else {
                 throw new OperationNotAllowedException("The end time can't occur before the start time");
             }
         } else {
-            throw new OperationNotAllowedException("The end time can't be edited, because the user is not the project leader");
+            throw new OperationNotAllowedException("The start and end time of the project can't be edited, because the user is not the project leader");
         }
     }
 
-    public void setProjectStartTime(int startYear, int startWeek, String projectNumber) throws OperationNotAllowedException{
-        Project project = getProject(projectNumber);
-        project.setStartYear(startYear);
-        project.setStartWeek(startWeek);
-
-    }
-
-    public void setProjectEndTime(int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
-        Project project = getProject(projectNumber);
-        // check if end time occurs after start time
-        if (project.endTimeIsValid(endYear, endWeek)){
-            project.setEndYear(endYear);
-            project.setEndWeek(endWeek);
+    public void setTimeHorizonOfActivity(int startYear, int startWeek, int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
+        // if current user is project leader adds the activity, else throws an errormessage
+        if (currentUserIsProjectLeader(projectNumber)){
+            Project project = getProject(projectNumber);
+            if (project.isTimeHorizonDefined()){
+                Activity activity = project.getActivity(activityName);
+                // check if end time occurs after start time
+                if (activity.isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
+                    // check if both the start and end time are within the time horizon of the project
+                    if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
+                        activity.setStartYear(startYear);
+                        activity.setStartWeek(startWeek);
+                        activity.setEndYear(endYear);
+                        activity.setEndWeek(endWeek);
+                    } else {
+                        throw new OperationNotAllowedException("The given time horizon for the activity is not within the time horizon of its assigned project");
+                    }
+                } else {
+                    throw new OperationNotAllowedException("The end time can't occur before the start time");
+                }
+            } else {
+                throw new OperationNotAllowedException("The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined");
+            }
+            
         } else {
-            throw new OperationNotAllowedException("The end time can't occur before the start time");
+            throw new OperationNotAllowedException("The start and end time of the activity can't be edited, because the user is not the project leader");
         }
-
     }
 
     // add developer to project
@@ -294,12 +294,25 @@ public class App {
     } 
 
     public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
-        double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
-        this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
-        Project project = getProject(projectNumber);
-        project.setTotalHoursWorked(project.getTotalHoursWorked() + hours - currentlyRegisteredHours);
-        Activity activity = project.getActivity(activityName);
-        activity.setTotalHoursWorked(activity.getTotalHoursWorked() + hours - currentlyRegisteredHours);
+        if (hours >= 0){
+            if (hours <= 24){
+                Project project = getProject(projectNumber);
+                Activity activity = project.getActivity(activityName);
+                if (activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivity(projectNumber)){
+                    double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
+                    this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
+                    project.setTotalHoursWorked(project.getTotalHoursWorked() + hours - currentlyRegisteredHours);
+                    activity.setTotalHoursWorked(activity.getTotalHoursWorked() + hours - currentlyRegisteredHours);
+                } else {
+                    throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
+                } 
+            } else {
+                throw new OperationNotAllowedException("The user cannot register more than 24 hours for an activity per day");
+            }
+        } else {
+            throw new OperationNotAllowedException("The user cannot register negative or zero hours");
+        }
+        
 
     }
 

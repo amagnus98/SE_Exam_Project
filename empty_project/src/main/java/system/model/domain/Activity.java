@@ -73,5 +73,7 @@ public class Activity extends Event{
       throw new OperationNotAllowedException("The current user is not assigned to the activity by the project leader and cannot request assistance");
     }
   }
+
+  
     
 }

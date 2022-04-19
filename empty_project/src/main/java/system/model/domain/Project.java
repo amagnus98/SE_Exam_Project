@@ -6,6 +6,7 @@ public class Project extends Event{
     private String projectNumber;
     private Developer projectLeader;
     private boolean hasProjectLeader = false;
+    private String nonWorkActivitiesProjectNumber = "00001";
     private ArrayList<Activity> activities = new ArrayList<>();
 
     public Project(String projectNumber){
@@ -35,7 +36,6 @@ public class Project extends Event{
         return this.hasProjectLeader;
     }
 
-
     public boolean containsActivity(String activityName){
         for (Activity a : this.activities){
             if (a.getName().equals(activityName)){
@@ -58,6 +58,7 @@ public class Project extends Event{
 
     public void addActivity(Activity activity) throws OperationNotAllowedException{
         if (!(containsActivity(activity.getName()))){
+            activity.setAssignedProject(this.projectNumber);
             this.activities.add(activity);
         } else {
             throw new OperationNotAllowedException("Project already contains an activity with the given name");
@@ -92,6 +93,23 @@ public class Project extends Event{
         }
     }
 
+    public boolean isNonWorkActivity(String projectNumber){
+        return this.nonWorkActivitiesProjectNumber.equals(projectNumber);
+    }
+
+    public boolean isTimeHorizonValidForAllActivities(int startYear, int startWeek, int endYear, int endWeek){
+        for (Activity activity : this.activities){
+            // check if start time of the activity comes before the project start time
+            if (activity.getStartYear() < startYear || (activity.getStartYear() == startYear && activity.getStartWeek() < startWeek)){
+                return false;
+            }
+            // check if end time of the activity comes after the project end time
+            if (activity.getEndYear() > endYear || (activity.getEndYear() == endYear && activity.getEndWeek() > endWeek)){
+                return false;
+            }
+        }
+        return true;
+    }
     
 
 }

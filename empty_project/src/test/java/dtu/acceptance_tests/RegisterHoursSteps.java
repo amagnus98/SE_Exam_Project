@@ -65,7 +65,13 @@ public class RegisterHoursSteps {
 
     @When("the current user registers {double} hours for day {int} of week {int} of year {int} to the activity with name {string} of project with project number {string}")
     public void the_current_user_registers_hours_for_day_of_week_of_year_to_the_activity_with_name_of_project_with_project_number(double registeredHours, int day, int week, int year, String activityName, String projectNumber) throws Exception {
-        this.app.registerHoursToActivity(registeredHours, day, week, year, projectNumber, activityName);
+        try {
+            this.app.registerHoursToActivity(registeredHours, day, week, year, projectNumber, activityName);
+        }
+        catch (OperationNotAllowedException e){
+            this.errorMessage.setErrorMessage(e.getMessage());
+        }
+        
 
     }
 
