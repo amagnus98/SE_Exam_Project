@@ -20,6 +20,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
     JTextField projectStartWeek;
     JTextField projectEndYear;
     JTextField projectEndWeek;
+    String previousPage;
 
     public SubmitProjectChangersAction(String name, 
     JTextField projectName, 
@@ -29,6 +30,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
     JTextField projectEndYear,
     JTextField projectEndWeek,
     Project project, 
+    String previousPage,
     Main main) {
         putValue(NAME, name);
         this.main = main;
@@ -39,6 +41,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
         this.projectStartWeek = projectStartWeek;
         this.projectEndYear = projectEndYear;
         this.projectEndWeek = projectEndWeek;
+        this.previousPage = previousPage;
     }
 
     @Override
@@ -84,6 +87,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
        if (!hasError) {
         SuccessWindow errorWindow = new SuccessWindow("Changes Sucessfully set.");
         errorWindow.showMessage();
+        main.viewProject(project, previousPage);
        }
     }
 }
