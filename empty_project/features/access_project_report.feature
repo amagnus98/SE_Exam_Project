@@ -12,10 +12,10 @@ Scenario: A project leader accesses a project report
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   When the current user requests the project report for the project with project number "22001"
   Then the project report of the project with project number "22001" is generated
-  And the project report of project with project number "22001" shows a total of 19 hours worked on the project with project number "22001"
-  And the project report of project with project number "22001" shows a total of 19 hours worked on the activity with name "Activity Name"
-  And the project report of project with project number "22001" shows an estimate of 20.5 hours remaining on project with project number "22001"
-  And the project report of project with project number "22001" shows an estimate of 20.5 hours worked on the activity with name "Activity Name"
+  And the project report of project with project number "22001" shows a total of 19 hours worked on the project
+  And the project report of project with project number "22001" shows a total of 10 hours worked on the activity with name "Activity Name"
+  And the project report of project with project number "22001" shows the estimated work hours needed is 20.5 hours for the project
+  And the project report of project with project number "22001" shows the estimated work hours needed is 20.5 hours for the activity with name "Activity Name"
 
 # Scenario: The user is not the project leader
 #   Given the current user is a developer with initials "bond"
