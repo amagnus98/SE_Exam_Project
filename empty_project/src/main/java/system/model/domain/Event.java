@@ -87,4 +87,8 @@ public abstract class Event {
         return (this.getStartYear() != 0 && this.getStartWeek() != 0 && this.getEndYear() != 0 && this.getEndWeek() != 0);
     }
 
+    public ArrayList<Developer> getDevelopers() {
+        return this.assignedDevelopers;
+    }
+
 }

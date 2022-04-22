@@ -156,6 +156,13 @@ public class App {
         return this.projects;
     }
 
+    public Project getMostRecentProject() throws OperationNotAllowedException{
+        if (this.projects.size() > 0) {
+            return this.projects.get(this.projects.size()-1);
+        }
+        throw new OperationNotAllowedException("Project with given project number does not exist in the system");
+    }
+
     // Checks whether a project with a given project number exixst in the list of projects
     public boolean projectExists(String projectNumber){
         for (Project p : projects) {
@@ -182,6 +189,9 @@ public class App {
 
     // Checks whether the current user is the project leader of a given project
     public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
+        if (!getProject(projectNumber).hasProjectLeader()) {
+            return false;
+        }
         return getProject(projectNumber).getProjectLeader().getInitials().equals(this.currentUser.getInitials());
     }
 

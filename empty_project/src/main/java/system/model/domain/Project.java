@@ -30,6 +30,7 @@ public class Project extends Event{
 
     public void setProjectLeader(Developer d){
         this.projectLeader = d;
+        this.hasProjectLeader = true;
     }
 
     public boolean hasProjectLeader(){
@@ -73,6 +74,10 @@ public class Project extends Event{
             }
         }
         throw new OperationNotAllowedException("The project has no activity with the given name");
+    }
+
+    public ArrayList<Activity> getActivities() {
+        return this.activities;
     }
 
     // Checks if the developer is assigned to the project

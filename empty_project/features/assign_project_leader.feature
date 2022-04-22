@@ -25,3 +25,8 @@ Scenario: Developer does not exist
 #   When the current user assigns a developer with initials "amag" as project leader of project with project number "22001"  
 #   Then the system provides an error message "No developer with the given initials exists in the system"
 #   And the developer with initials "amag" is not assigned as project leader of project with project number "22001"
+
+
+### 1) VI MANGLER AT TJEKKE OM DER ER EN PROCJECT LEADER FLERE STEDER. DET HAR GUI FÅET NULL ERROR FLERE GANGE.
+### 2) MAN SKAL IKKE KUNNE SÆTTE EN UGE TIL MERE END ANTALLET AF UGER PÅ ET ÅR. MAN KAN FEKS SÆTTE 70 PÅ UGE FOR PROJEKT.
+### 3) HVAD SKAL MAN KUNNE SE OM ET PROJEKT PÅ PROJEKTSIDEN?
