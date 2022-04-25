@@ -48,4 +48,16 @@ Scenario: The user tries to edit the time horizon for a project that conflicts w
   And the start time of the project with project number "22001" is not updated to year 2022 and week 30
   And the end time of the project with project number "22001" is not updated to year 2022 and week 40
 
+Scenario: Format of time horizon for project is invalid
+  Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
+  And the developer with initials "bond" is the project leader of the project with project number "22001"
+  And the start time of the project with project number "22001" is year 2022 and week 35
+  And the end time of the project with project number "22001" is year 2022 and week 40
+  When the current user sets the start time to year 2022 and week 0 and end time to year 2022 and week 30 of the project with project number "22001"
+  Then the system provides an error message "The weeks for the time horizon of the project must be set to a number between 1 to 52" 
+  And the start time of the project with project number "22001" is not updated to year 2022 and week 0
+  And the end time of the project with project number "22001" is not updated to year 2022 and week 30
+
+
 # Scenario: Start time is before current time

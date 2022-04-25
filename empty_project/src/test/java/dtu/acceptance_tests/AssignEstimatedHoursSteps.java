@@ -22,6 +22,48 @@ public class AssignEstimatedHoursSteps {
 		this.errorMessage = errorMessage;
 	}
 
+  // PROJECT
+  // SCENARIO 1
+  @When("the current user sets the estimated number of work hours needed for the project with project number {string} to {double} hours")
+  public void the_current_user_sets_the_estimated_number_of_work_hours_needed_for_the_project_with_project_number_to_hours(String projectNumber, double workHours) throws Exception{
+      // Write code here that turns the phrase above into concrete actions
+      try {
+      this.app.setEstimatedWorkHoursForProject(workHours, projectNumber);
+    }
+    catch (OperationNotAllowedException e){
+        this.errorMessage.setErrorMessage(e.getMessage());
+    }
+  }
+
+  @Then("the estimated number of work hours needed for the project with project number {string} is set to {double} hours")
+  public void the_estimated_number_of_work_hours_needed_for_the_project_with_project_number_is_set_to_hours(String projectNumber, double workHours) throws Exception{
+      // Write code here that turns the phrase above into concrete actions
+      Project project = this.app.getProject(projectNumber);
+      
+      assertTrue(project.getEstimatedWorkHours() == workHours);
+  }
+
+  // SCENARIO 2
+  @Given("the estimated work hours needed for project with project number {string} is not {double} hours")
+  public void the_estimated_work_hours_needed_for_project_with_project_number_is_not_hours(String projectNumber, double workHours) throws Exception{
+    // Write code here that turns the phrase above into concrete actions
+    Project project = this.app.getProject(projectNumber);
+
+    assertFalse(project.getEstimatedWorkHours() == workHours);
+  }
+
+  @Then("the estimated number of work hours needed for the project with project number {string} is not set to {double} hours")
+  public void the_estimated_number_of_work_hours_needed_for_the_project_with_project_number_is_not_set_to_hours(String projectNumber, double workHours) throws Exception {
+      // Write code here that turns the phrase above into concrete actions
+      Project project = this.app.getProject(projectNumber);
+      
+      assertFalse(project.getEstimatedWorkHours() == workHours);
+  }
+
+
+
+  
+  // ACTIVITY
   // SCENARIO 1
   @When("the current user sets the estimated number of work hours needed for the activity with name {string} of project with project number {string} to {double} hours")
   public void the_current_user_sets_the_estimated_number_of_work_hours_needed_for_the_activity_with_name_of_project_with_project_number_to_hours(String activityName, String projectNumber, double workHours) throws Exception{  

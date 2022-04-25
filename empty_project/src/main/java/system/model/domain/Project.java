@@ -8,6 +8,7 @@ public class Project extends Event{
     private boolean hasProjectLeader = false;
     private String nonWorkActivitiesProjectNumber = "00001";
     private ArrayList<Activity> activities = new ArrayList<>();
+    private ProjectReport projectReport;
 
     public Project(String projectNumber){
         super();
@@ -104,6 +105,9 @@ public class Project extends Event{
 
     public boolean isTimeHorizonValidForAllActivities(int startYear, int startWeek, int endYear, int endWeek){
         for (Activity activity : this.activities){
+            if (!activity.isTimeHorizonDefined()){
+                continue;
+            } 
             // check if start time of the activity comes before the project start time
             if (activity.getStartYear() < startYear || (activity.getStartYear() == startYear && activity.getStartWeek() < startWeek)){
                 return false;
@@ -115,6 +119,11 @@ public class Project extends Event{
         }
         return true;
     }
+
+
+
+
+    
     
 
 }

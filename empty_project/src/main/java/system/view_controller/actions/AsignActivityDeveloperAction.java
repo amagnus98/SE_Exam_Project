@@ -1,5 +1,7 @@
 package system.view_controller.actions;
 import javax.swing.*;
+
+import system.model.domain.Activity;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.messageWindows.ErrorWindow;
@@ -8,19 +10,19 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class AsignProjectDeveloperAction extends AbstractAction {
+public class AsignActivityDeveloperAction extends AbstractAction {
 
     JTextField textField;
     Main main;
-    Project project;
-    String previousPage;
+    Activity activity;
+    Project previousProject;
 
-    public AsignProjectDeveloperAction(String name, String previousPage, JTextField textField, Project project, Main main) {
+    public AsignActivityDeveloperAction(String name, Project previousProject, JTextField textField, Activity activity, Main main) {
         putValue(NAME, name);
         this.textField = textField;
         this.main = main;
-        this.project = project;
-        this.previousPage = previousPage;
+        this.activity = activity;
+        this.previousProject = previousProject;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class AsignProjectDeveloperAction extends AbstractAction {
 
         String initials = textField.getText();
         try {
-            main.app.addDeveloperToProject(initials, project.getProjectNumber());
+            main.app.addDeveloperToActivity(initials, activity.getName(), previousProject.getProjectNumber());
         } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();
@@ -38,9 +40,9 @@ public class AsignProjectDeveloperAction extends AbstractAction {
         }
 
         if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
+            SuccessWindow errorWindow = new SuccessWindow("Developer successfully asigned.");
             errorWindow.showMessage();
-            main.viewProject(project, previousPage);
+            main.viewActivitry(activity, previousProject);
         }
 
     }

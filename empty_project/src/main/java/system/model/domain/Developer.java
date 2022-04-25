@@ -11,7 +11,7 @@ public class Developer {
     // values are lists of hashmaps with three values - projectNumber, activityName and registeredHours
     // shows all the activities worked on for the given day
     private ArrayList<HashMap<String,String>> calendarOutput;
-    
+
     // Constructor of Developer
     public Developer(String initials) {
         this.initials = initials;
