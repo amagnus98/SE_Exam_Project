@@ -1,4 +1,4 @@
-Feature: Assign estimated work hours
+Feature: Assign estimated work hours for an activity
 Description: The estimated amount of work hours is assigned to an activity
 Actors: Project leader
 
@@ -9,7 +9,6 @@ Scenario: A project leader sets the estimated number of work hours needed for an
   And the project with project number "22001" contains an activity with name "Activity Name"
   When the current user sets the estimated number of work hours needed for the activity with name "Activity Name" of project with project number "22001" to 20.5 hours
   Then the estimated number of work hours needed for the activity with name "Activity Name" of project with project number "22001" is set to 20.5 hours
-
 
 Scenario: User is not project leader and tries to set the estimated number of work hours needed for an activity
   Given the current user is a developer with initials "bond"

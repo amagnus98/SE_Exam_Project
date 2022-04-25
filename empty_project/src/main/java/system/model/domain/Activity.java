@@ -74,10 +74,6 @@ public class Activity extends Event{
     }
   }
 
-  public String getParentProjectNumber() {
-    return this.parentProjectNumber;
-  }
-
   
     
 }

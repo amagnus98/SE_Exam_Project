@@ -12,6 +12,7 @@ public abstract class Event {
     protected int endYear = 0;
     protected int endWeek = 0;
     protected double totalHoursWorked;
+    protected double estimatedWorkHours;
     protected ArrayList<Developer> assignedDevelopers = new ArrayList<>();
 
     
@@ -34,6 +35,14 @@ public abstract class Event {
     }
     public void setEndWeek(int week) {
         this.endWeek = week;
+    }
+    
+    public void setEstimatedWorkHours(double hours){
+    this.estimatedWorkHours = hours;
+    }
+  
+    public double getEstimatedWorkHours(){
+    return this.estimatedWorkHours;
     }
 
     public int getStartYear() {
@@ -90,5 +99,8 @@ public abstract class Event {
     public ArrayList<Developer> getDevelopers() {
         return this.assignedDevelopers;
     }
-
+    
+    public boolean isWeekFormatValid(int startWeek, int endWeek) {
+        return (startWeek >= 1 && startWeek <= 52 && endWeek >= 1 && endWeek <= 52);
+    }
 }
