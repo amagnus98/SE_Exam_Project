@@ -87,7 +87,7 @@ public class ProjectPage {
         InformationScrollPanel.setPreferredSize(new Dimension(250, 300));
         BoxPanel.add(InformationScrollPanel);
 
-        AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, project, main);
+        AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, project, previousPage, main);
         JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.backgroundColor, "small", submitChangesAction).getButton();
         BoxPanel.add(submitChangesButtonPanel);
 
