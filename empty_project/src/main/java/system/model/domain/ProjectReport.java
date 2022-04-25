@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class ProjectReport {
     private Project project;
     // keeps track of how many hours have been worked on and is estimated for each activity
-    private HashMap<String,Double> estimatedActivityTime;
-    private HashMap<String,Double> registeredActivityTime;
+    private HashMap<String,Double> estimatedActivityTime = new HashMap<>();
+    private HashMap<String,Double> registeredActivityTime = new HashMap<>();
     private double estimatedHoursOnProject;
     private double totalHoursWorkedOnProject;
 
@@ -39,15 +39,15 @@ public class ProjectReport {
     }
     
     public void setEstimatedHoursOnProject(){
-        this.estimatedHoursOnProject = project.estimatedWorkHours;
+        this.estimatedHoursOnProject = project.getEstimatedWorkHours();
     }
     
-    public double getEstimatedHoursWorkedOnProject() {
+    public double getEstimatedHoursOnProject() {
         return this.estimatedHoursOnProject;
     }
 
     public void setTotalHoursWorkedOnProject(){
-        this.totalHoursWorkedOnProject = project.totalHoursWorked;
+        this.totalHoursWorkedOnProject = project.getTotalHoursWorked();
     }
 
     public double getTotalHoursWorkedOnProject(){
@@ -58,7 +58,7 @@ public class ProjectReport {
         return project.getProjectNumber();
     }
 
-    public double getEstimatedHoursWorkedOnActivity(String activityName) {
+    public double getEstimatedHoursOnActivity(String activityName) {
         return this.estimatedActivityTime.get(activityName);
     }
 

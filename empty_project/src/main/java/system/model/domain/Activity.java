@@ -66,6 +66,5 @@ public class Activity extends Event{
     }
   }
 
-  
     
 }

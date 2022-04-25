@@ -62,6 +62,19 @@ Scenario: User sets time horizon of an activity outside of the time horizon of t
   And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 50
   And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2023 and week 17
 
+Scenario: Format of time horizon for activity is invalid
+  Given the current user is a developer with initials "bond"
+  And a project with project number "22001" exists in the system
+  And the developer with initials "bond" is the project leader of the project with project number "22001"
+  And the project with project number "22001" contains an activity with name "Activity Name"
+  And the start time of the project with project number "22001" is year 2022 and week 29
+  And the end time of the project with project number "22001" is year 2022 and week 45
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 29
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is year 2022 and week 45
+  When the current user sets the start time to year 2022 and week 56 and end time to year 2022 and week 60 for the activity with name "Activity Name" of project with project number "22001"
+  Then the system provides an error message "The weeks for the time horizon of the activity must be set to a number between 1 to 52" 
+  And the start time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 56
+  And the end time of the activity with name "Activity Name" of project with project number "22001" is not updated to year 2022 and week 60
 
 
 

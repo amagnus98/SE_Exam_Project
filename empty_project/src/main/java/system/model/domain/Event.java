@@ -99,5 +99,8 @@ public abstract class Event {
     public ArrayList<Developer> getDevelopers() {
         return this.assignedDevelopers;
     }
-
+    
+    public boolean isWeekFormatValid(int startWeek, int endWeek) {
+        return (startWeek >= 1 && startWeek <= 52 && endWeek >= 1 && endWeek <= 52);
+    }
 }

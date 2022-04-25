@@ -221,16 +221,21 @@ public class App {
     public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
-            if (project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
-                // check that the time horizon of all of the activities still lies within the new time horizon
-                if (project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek)){
-                    // set project start and end time
-                    project.setTimeHorizon(startYear,startWeek,endYear,endWeek);
+            // check if the weeks are between 1 and 52
+            if (project.isWeekFormatValid(startWeek,endWeek)){
+                if (project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
+                    // check that the time horizon of all of the activities still lies within the new time horizon
+                    if (project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek)){
+                        // set project start and end time
+                        project.setTimeHorizon(startYear,startWeek,endYear,endWeek);
+                    } else {
+                        throw new OperationNotAllowedException("The new time horizon of the project conflicts with the time horizon of the activities in the project");
+                    }
                 } else {
-                    throw new OperationNotAllowedException("The new time horizon of the project conflicts with the time horizon of the activities in the project");
+                    throw new OperationNotAllowedException("The end time can't occur before the start time");
                 }
             } else {
-                throw new OperationNotAllowedException("The end time can't occur before the start time");
+                throw new OperationNotAllowedException("The weeks for the time horizon of the project must be set to a number between 1 to 52");
             }
         } else {
             throw new OperationNotAllowedException("The start and end time of the project can't be edited, because the user is not the project leader");
@@ -244,18 +249,22 @@ public class App {
             if (project.isTimeHorizonDefined()){
                 Activity activity = project.getActivity(activityName);
                 // check if end time occurs after start time
-                if (activity.isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
-                    // check if both the start and end time are within the time horizon of the project
-                    if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
-                        activity.setStartYear(startYear);
-                        activity.setStartWeek(startWeek);
-                        activity.setEndYear(endYear);
-                        activity.setEndWeek(endWeek);
+                if (activity.isWeekFormatValid(startWeek, endWeek)){
+                    if (activity.isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
+                        // check if both the start and end time are within the time horizon of the project
+                        if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
+                            activity.setStartYear(startYear);
+                            activity.setStartWeek(startWeek);
+                            activity.setEndYear(endYear);
+                            activity.setEndWeek(endWeek);
+                        } else {
+                            throw new OperationNotAllowedException("The given time horizon for the activity is not within the time horizon of its assigned project");
+                        }
                     } else {
-                        throw new OperationNotAllowedException("The given time horizon for the activity is not within the time horizon of its assigned project");
+                        throw new OperationNotAllowedException("The end time can't occur before the start time");
                     }
                 } else {
-                    throw new OperationNotAllowedException("The end time can't occur before the start time");
+                    throw new OperationNotAllowedException("The weeks for the time horizon of the activity must be set to a number between 1 to 52");
                 }
             } else {
                 throw new OperationNotAllowedException("The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined");
@@ -346,13 +355,26 @@ public class App {
         this.currentUser.setCalendarOutput(day, week, year);
     }
 
-    public void accessProjectReport(String projectNumber) throws OperationNotAllowedException{
+    public void generateProjectReport(String projectNumber) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(projectNumber)) {
         Project project = getProject(projectNumber);
-        this.currentProjectReport = new ProjectReport(project);
+        this.currentProjectReport = new ProjectReport(project); }
+        else {
+            throw new OperationNotAllowedException("Only the project leader can access the project report");
+        }
+
     }
 
-    public ProjectReport getCurrentProjectReport() {
-        return this.currentProjectReport;
+    public ProjectReport getCurrentProjectReport() throws OperationNotAllowedException{
+        if (hasCurrentProjectReport()){
+            return this.currentProjectReport;
+        } else {
+            throw new OperationNotAllowedException("No project report has been requested");
+        }   
+    }
+
+    public boolean hasCurrentProjectReport(){
+        return (!(this.currentProjectReport == null));
     }
 
 

@@ -5,3 +5,4 @@
 # project report use case
 # gør så man kan adde folk til en aktivitet
 # check that estimated hours is not set in use case
+# byt alle projektnumre "22001" ud med current year + "001"
