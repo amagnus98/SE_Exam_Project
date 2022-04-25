@@ -18,7 +18,7 @@ public class LogInAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
         String initials = this.textField.getText();
         try {
             this.main.app.logIn(initials);

@@ -38,7 +38,7 @@ public class AsignProjectDeveloperAction extends AbstractAction {
         }
 
         if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Developer successfully asigned.");
+            SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
             errorWindow.showMessage();
             main.viewProject(project, previousPage);
         }

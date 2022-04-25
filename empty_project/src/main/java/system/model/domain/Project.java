@@ -8,6 +8,7 @@ public class Project extends Event{
     private boolean hasProjectLeader = false;
     private String nonWorkActivitiesProjectNumber = "00001";
     private ArrayList<Activity> activities = new ArrayList<>();
+    private ProjectReport projectReport;
 
     public Project(String projectNumber){
         super();
@@ -115,6 +116,9 @@ public class Project extends Event{
         }
         return true;
     }
+
+
+    
     
 
 }

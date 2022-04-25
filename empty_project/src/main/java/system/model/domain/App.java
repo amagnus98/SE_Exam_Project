@@ -23,6 +23,7 @@ public class App {
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
     private DateServer dateServer = new DateServer();
+    private ProjectReport currentProjectReport;
     
 
     public void logIn(String initials) throws OperationNotAllowedException {
@@ -200,6 +201,8 @@ public class App {
         Developer developer = getDeveloper(initials);
         Project project = getProject(projectNumber);
         project.setProjectLeader(developer);
+        // add developer to project
+        project.addDeveloper(developer);
     }
 
     // Add activity with a name to a project 
@@ -295,6 +298,15 @@ public class App {
         }
     }
 
+     public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(projectNumber)){
+            Project project = getProject(projectNumber);
+            project.setEstimatedWorkHours(workHours);
+        } else {
+            throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this project");
+        }
+    }
+
     // request assistance for activity
     public void requestAssistanceForActivity(String initialsReceiver, String activityName, String projectNumber) throws OperationNotAllowedException {
         Developer receiver = getDeveloper(initialsReceiver);
@@ -332,6 +344,15 @@ public class App {
 
     public void viewActivitiesWithRegisteredHours(int day, int week, int year) throws OperationNotAllowedException{
         this.currentUser.setCalendarOutput(day, week, year);
+    }
+
+    public void accessProjectReport(String projectNumber) throws OperationNotAllowedException{
+        Project project = getProject(projectNumber);
+        this.currentProjectReport = new ProjectReport(project);
+    }
+
+    public ProjectReport getCurrentProjectReport() {
+        return this.currentProjectReport;
     }
 
 

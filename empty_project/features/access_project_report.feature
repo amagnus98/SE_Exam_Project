@@ -8,6 +8,7 @@ Scenario: A project leader accesses a project report
   And the project with project number "22001" contains an activity with name "Activity Name"
   And the total hours registered to the project with project number "22001" is 19 hours
   And the total hours registered to the activity with name "Activity Name" of the project with project number "22001" is 10 hours
+  And the estimated number of work hours needed for the project with project number "22001" is set to 20.5 hours
   And the estimated number of work hours needed for the activity with name "Activity Name" of project with project number "22001" is set to 20.5 hours
   And the developer with initials "bond" is the project leader of the project with project number "22001"
   When the current user requests the project report for the project with project number "22001"
@@ -16,6 +17,7 @@ Scenario: A project leader accesses a project report
   And the project report of project with project number "22001" shows a total of 10 hours worked on the activity with name "Activity Name"
   And the project report of project with project number "22001" shows the estimated work hours needed is 20.5 hours for the project
   And the project report of project with project number "22001" shows the estimated work hours needed is 20.5 hours for the activity with name "Activity Name"
+
 
 # Scenario: The user is not the project leader
 #   Given the current user is a developer with initials "bond"
