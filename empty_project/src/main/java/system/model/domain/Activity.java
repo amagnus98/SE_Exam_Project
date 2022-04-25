@@ -4,6 +4,7 @@ import java.util.*;
 public class Activity extends Event{
   
   private String parentProjectNumber;
+  private double estimatedWorkHours;
   // the keys are the initials of the developers
   // the values are booleans representing whether they were added by the project leader or not
   // only developers assigned by project leaders can request assistance
@@ -53,6 +54,13 @@ public class Activity extends Event{
       return this.isAssignedByProjectLeader.containsKey(d.getInitials());
   }
 
+  public void setEstimatedWorkHours(double hours){
+    this.estimatedWorkHours = hours;
+  }
+  
+  public double getEstimatedWorkHours(){
+    return this.estimatedWorkHours;
+  }
 
   public void requestAssistance(Developer receiver, Developer sender) throws OperationNotAllowedException {
     if (isDeveloperAssignedByProjectLeader(sender)){
@@ -66,5 +74,6 @@ public class Activity extends Event{
     }
   }
 
+  
     
 }
