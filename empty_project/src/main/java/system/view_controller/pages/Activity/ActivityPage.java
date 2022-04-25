@@ -98,7 +98,7 @@ public class ActivityPage {
 
 
 
-        InformationPanel.add(new JLabel("Project Developers"));
+        InformationPanel.add(new JLabel("Activity Developers"));
 
         ArrayList<Developer> developers = activity.getDevelopers();
         
