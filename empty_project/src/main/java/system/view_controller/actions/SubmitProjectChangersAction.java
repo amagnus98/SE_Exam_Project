@@ -20,6 +20,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
     JTextField projectStartWeek;
     JTextField projectEndYear;
     JTextField projectEndWeek;
+    JTextField estimatedWorkHours;
     String previousPage;
 
     public SubmitProjectChangersAction(String name, 
@@ -29,6 +30,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
     JTextField projectStartWeek, 
     JTextField projectEndYear,
     JTextField projectEndWeek,
+    JTextField estimatedWorkHours,
     Project project, 
     String previousPage,
     Main main) {
@@ -41,6 +43,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
         this.projectStartWeek = projectStartWeek;
         this.projectEndYear = projectEndYear;
         this.projectEndWeek = projectEndWeek;
+        this.estimatedWorkHours = estimatedWorkHours;
         this.previousPage = previousPage;
     }
 
@@ -52,6 +55,20 @@ public class SubmitProjectChangersAction extends AbstractAction {
 
         // PROJECT NAME CHANGE
         project.setName(projectName.getText());
+
+
+        Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText());
+
+        if (!(project.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
+            try {
+                main.app.setEstimatedWorkHoursForProject(estimatedWorkHoursDouble, project.getProjectNumber());
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            }
+        }
+
 
         // PROJECT LEADER CHANGE
        if (!project.hasProjectLeader() && !projectLeader.getText().equals("") || project.hasProjectLeader() && !projectLeader.getText().equals(project.getProjectLeader().getInitials())) {
@@ -91,7 +108,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
        if (!hasError) {
         SuccessWindow successWindow = new SuccessWindow("Changes Sucessfully set.");
         successWindow.showMessage();
-        main.viewProject(project, previousPage);
        }
+       main.viewProject(project, previousPage);
     }
 }

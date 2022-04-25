@@ -21,6 +21,7 @@ public class SubmitActivityChangesAction extends AbstractAction {
     JTextField activityStartWeek;
     JTextField activityEndYear;
     JTextField activityEndWeek;
+    JTextField estimatedWorkHours;
     Project previousProject;
 
     public SubmitActivityChangesAction(String name, 
@@ -29,6 +30,7 @@ public class SubmitActivityChangesAction extends AbstractAction {
     JTextField activityStartWeek, 
     JTextField activityEndYear,
     JTextField activityEndWeek,
+    JTextField estimatedWorkHours,
     Activity activity, 
     Project previousProject,
     Main main) {
@@ -40,6 +42,7 @@ public class SubmitActivityChangesAction extends AbstractAction {
         this.activityStartWeek = activityStartWeek;
         this.activityEndYear = activityEndYear;
         this.activityEndWeek = activityEndWeek;
+        this.estimatedWorkHours = estimatedWorkHours;
         this.previousProject = previousProject;
     }
 
@@ -51,6 +54,20 @@ public class SubmitActivityChangesAction extends AbstractAction {
 
         // PROJECT NAME CHANGE
         activity.setName(activityName.getText());
+
+
+        Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText());
+
+        if (!(activity.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
+            try {
+                main.app.setEstimatedWorkHoursForActivity(estimatedWorkHoursDouble, activityName.getText(), activity.getParentProjectNumber());
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            }
+        }
+
 
         try {
         int startYear = Integer.parseInt(activityStartYear.getText());
@@ -76,7 +93,7 @@ public class SubmitActivityChangesAction extends AbstractAction {
        if (!hasError) {
         SuccessWindow successWindow = new SuccessWindow("Changes Sucessfully set.");
         successWindow.showMessage();
-        main.viewActivitry(activity, previousProject);
        }
+       main.viewActivitry(activity, previousProject);
     }
 }

@@ -87,9 +87,13 @@ public class ProjectPage {
         TextField endYearTextField = new TextField("Project endYear", String.valueOf(project.getEndYear()), constants.boxColor).getTextField();
         InformationPanel.add(endYearTextField.textField);
         InformationPanel.add(new JLabel("Project End Week"));
-        TextField endWeekTextField = new TextField("Project endWeek", String.valueOf(project.getEndYear()), constants.boxColor).getTextField();
+        TextField endWeekTextField = new TextField("Project endWeek", String.valueOf(project.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
 
+
+        InformationPanel.add(new JLabel("Estimated Work Hours"));
+        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(project.getEstimatedWorkHours()), constants.boxColor).getTextField();
+        InformationPanel.add(estimatedWorkHoursTextField.textField);
 
 
 
@@ -176,7 +180,7 @@ public class ProjectPage {
 
         
 
-        AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, project, previousPage, main);
+        AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, project, previousPage, main);
         JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.backgroundColor, "small", submitChangesAction).getButton();
         BoxPanel.add(submitChangesButtonPanel);
 
