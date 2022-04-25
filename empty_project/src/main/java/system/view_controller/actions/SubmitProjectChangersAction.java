@@ -63,30 +63,34 @@ public class SubmitProjectChangersAction extends AbstractAction {
             hasError = true;
         }
        }
-
+       try {
         int startYear = Integer.parseInt(projectStartYear.getText());
         int startWeek = Integer.parseInt(projectStartWeek.getText());
         int endYear = Integer.parseInt(projectEndYear.getText());
         int endWeek = Integer.parseInt(projectEndWeek.getText());
-
-       if (!(startYear == project.getStartYear()) || !(startWeek == project.getStartWeek())  || !(endYear == project.getEndYear())  || !(endWeek == project.getEndWeek()))  {
-           try {
-            main.app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, project.getProjectNumber());
-        } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
+        if (!(startYear == project.getStartYear()) || !(startWeek == project.getStartWeek())  || !(endYear == project.getEndYear())  || !(endWeek == project.getEndWeek()))  {
+            try {
+             main.app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, project.getProjectNumber());
+         } catch (NumberFormatException error) {
+             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+             errorWindow.showMessage();
+             hasError = true;
+         } catch (OperationNotAllowedException error) {
+             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+             errorWindow.showMessage();
+             hasError = true;
+         }
         }
+       } catch (NumberFormatException error) {
+        ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+        errorWindow.showMessage();
+        hasError = true;
        }
 
 
        if (!hasError) {
-        SuccessWindow errorWindow = new SuccessWindow("Changes Sucessfully set.");
-        errorWindow.showMessage();
+        SuccessWindow successWindow = new SuccessWindow("Changes Sucessfully set.");
+        successWindow.showMessage();
         main.viewProject(project, previousPage);
        }
     }

@@ -2,6 +2,7 @@ package system.view_controller.pages;
 import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
+import system.view_controller.pages.Activity.ActivityPage;
 import system.view_controller.pages.LogIn.LogInPage;
 import system.view_controller.pages.ManageProjects.ManageProjectsPage;
 import system.view_controller.pages.ManageProjects.ViewProjectsPage;
@@ -9,7 +10,7 @@ import system.view_controller.pages.Navigator.NavigatorPage;
 import system.view_controller.pages.Project.ProjectPage;
 import system.view_controller.pages.ManageProjects.ViewProjectsPage;
 import system.view_controller.pages.ManageProjects.CreateNewProjectPage;
-
+import system.model.domain.Activity;
 import system.model.domain.App;
 import system.model.domain.Project;
 
@@ -54,6 +55,15 @@ public class Main {
         ProjectPage projectPage = new ProjectPage(frame, this, previousPage, project);
         JPanel projectPagePanel = projectPage.draw();
         frame.getContentPane().add(projectPagePanel);
+        frame.validate();
+        frame.repaint();
+    }
+
+    public void viewActivitry(Activity activity, Project previousProject) {
+        frame.getContentPane().removeAll();
+        ActivityPage activityPage = new ActivityPage(frame, this, activity, previousProject);
+        JPanel activityPagePanel = activityPage.draw();
+        frame.getContentPane().add(activityPagePanel);
         frame.validate();
         frame.repaint();
     }

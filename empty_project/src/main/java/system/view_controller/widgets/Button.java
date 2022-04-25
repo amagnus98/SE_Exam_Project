@@ -18,6 +18,10 @@ public class Button {
             this.buttonPanel.setPreferredSize(new Dimension(200, 75));
             this.button.setFont(new Font("Arial", Font.PLAIN, 15));
             this.button.setPreferredSize(new Dimension(150, 50));
+        } else if (size == "micro") {
+            this.buttonPanel.setPreferredSize(new Dimension(150, 50));
+            this.button.setFont(new Font("Arial", Font.PLAIN, 15));
+            this.button.setPreferredSize(new Dimension(150, 50));
         } else {
             this.buttonPanel.setPreferredSize(new Dimension(300, 100));
             this.button.setFont(new Font("Arial", Font.PLAIN, 20));
