@@ -6,3 +6,4 @@
 # gør så man kan adde folk til en aktivitet
 # check that estimated hours is not set in use case
 # byt alle projektnumre "22001" ud med current year + "001"
+# hvis man prøver at assigne developer til en aktivitet, som ikke er tilknyttet projektet 
