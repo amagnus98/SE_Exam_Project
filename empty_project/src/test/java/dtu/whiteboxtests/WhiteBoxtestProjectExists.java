@@ -1,24 +1,16 @@
 package dtu.whiteboxtests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import system.model.domain.Activity;
 import system.model.domain.App;
-import system.model.domain.Developer;
 import system.model.domain.OperationNotAllowedException;
-import system.model.domain.Project;
 
 
-public class WhiteBoxtest {
+
+public class WhiteBoxtestProjectExists {
   
     App app = new App();
 
@@ -29,7 +21,7 @@ public class WhiteBoxtest {
         app.logIn("kape");
     }
 
-
+    // No project exists, returns false
     @Test
     public void testProjectExistsA(){
       // Asserts that no projects exists initially
@@ -39,6 +31,7 @@ public class WhiteBoxtest {
       assertFalse(app.projectExists("22001"));
     }  
     
+    // A single project exists and has same project number as the input. Returns True
     @Test
     public void testProjectExistsB(){
       app.addProject();
@@ -46,11 +39,21 @@ public class WhiteBoxtest {
       assertTrue(app.projectExists("22001"));
     }
 
+    // A single project exists and does not have same project number as the input. Returns false
     @Test
     public void testProjectExistsC(){
       app.addProject();
+
+      assertFalse(app.projectExists("22002"));
+    }
+    
+    // 2 projects exists in and the second project has the same project number as input project number. 
+    // returns true
+    @Test
+    public void testProjectExistsD(){
+      app.addProject();
       app.addProject();
 
-      assertFalse(app.projectExists("22003"));
+      assertTrue(app.projectExists("22002"));
     }
   }
