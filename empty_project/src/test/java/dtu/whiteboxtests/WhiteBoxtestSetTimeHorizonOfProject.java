@@ -28,7 +28,7 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
     public void testSetTimeHorizonOfProjectA(){
         // Add a new project
         app.addProject();
-        
+
         // Define input
         String projectNumber = app.getProjectNumber();
         int startYear = app.getCurrentYear();
@@ -65,7 +65,6 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
             assertEquals(e.getMessage(), "The end time can't occur before the start time");
         }
     }
-
 
     @Test
     public void testSetTimeHorizonOfProjectC() throws OperationNotAllowedException{

@@ -376,6 +376,4 @@ public class App {
     public boolean hasCurrentProjectReport(){
         return (!(this.currentProjectReport == null));
     }
-
-
 }
