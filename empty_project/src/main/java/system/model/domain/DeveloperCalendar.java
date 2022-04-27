@@ -74,12 +74,9 @@ public class DeveloperCalendar {
             for (String projectNumber : projectCalendar.keySet()){
                 HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
                 for (String activityName : activityCalendar.keySet()){
-                    HashMap<String,String> activity = new HashMap<String,String>();
-                    activity.put("Project number",projectNumber);
-                    activity.put("Activity name", activityName);
                     double registeredHours = activityCalendar.get(activityName);
-                    activity.put("Registered hours", "" + registeredHours);
-                    registeredActivities.add(activity);
+                    HashMap<String,String> activityInformation = getActivityInformation(activityName, projectNumber, registeredHours);
+                    registeredActivities.add(activityInformation);
                 }
             }
             return registeredActivities;
@@ -88,4 +85,13 @@ public class DeveloperCalendar {
         }
     }
 
+    // Helper Method: Creates and returns a hashmap containing information of both 
+    // projectNumber, activityName, and registerred Hours associated with an activity
+    public HashMap<String,String> getActivityInformation(String activityName, String projectNumber, double registeredHours){
+        HashMap<String,String> activityInformation = new HashMap<String,String>();
+        activityInformation.put("Project number",projectNumber);
+        activityInformation.put("Activity name", activityName);
+        activityInformation.put("Registered hours", "" + registeredHours);
+        return activityInformation;
+    }
 }
