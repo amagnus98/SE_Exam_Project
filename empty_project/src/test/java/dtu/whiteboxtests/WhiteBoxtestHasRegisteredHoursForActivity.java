@@ -29,6 +29,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     public void hasRegisteredHoursForActivityA() throws OperationNotAllowedException{
         Developer developer = this.app.getDeveloper("kape");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
+        HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
         // define input
         int day = 1;
@@ -40,7 +41,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
 
         // check that //1 is false
         String dateKey = developerCalendar.generateDateKey(day, week, year);
-        assertFalse(developerCalendar.getCalendar().containsKey(dateKey));
+        assertFalse(calendar.containsKey(dateKey));
 
         // check that output is false when //1 is false
         assertFalse(developerCalendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName));
@@ -50,6 +51,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     public void hasRegisteredHoursForActivityB() throws OperationNotAllowedException{
         Developer developer = this.app.getDeveloper("kape");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
+        HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
         // define dateKey input
         int day = 1;
@@ -73,10 +75,10 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
 
         // check that //1 is true
         String dateKey = developerCalendar.generateDateKey(day, week, year);
-        assertTrue(developerCalendar.getCalendar().containsKey(dateKey));
+        assertTrue(calendar.containsKey(dateKey));
 
         // check that //2 is false
-        assertFalse(developerCalendar.getCalendar().containsKey(projectNumber2));
+        assertFalse(calendar.get(dateKey).containsKey(projectNumber2));
 
         // check that output is false when //2 is false
         assertFalse(developerCalendar.hasRegisteredHoursForActivity(day, week, year, projectNumber2, "activityName"));
@@ -111,11 +113,11 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         // check that //2 is true
         assertTrue(calendar.get(dateKey).containsKey(projectNumber));
 
-        // check that //3 is false
-        assertFalse(calendar.get(dateKey).get(projectNumber).containsKey("activityName2"));
-
         // create a new project activity and don't register hours to it so //3 is not passed
         app.addActivityToProject("activityName2", projectNumber);
+
+        // check that //3 is false
+        assertFalse(calendar.get(dateKey).get(projectNumber).containsKey("activityName2"));
 
         // check that output is false when no hours have been registered to activity with activityName2
         assertFalse(developerCalendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, "activityName2"));
