@@ -11,6 +11,10 @@ public class DeveloperCalendar {
         return "" + year + week + day;
     }
 
+    public HashMap<String, HashMap<String, HashMap<String, Double>>> getCalendar(){
+        return this.calendar;
+    }
+
     public void setHours(double hours, int day, int week, int year, String projectNumber, String activityName){
         // get key that corresponds to the given date
         String dateKey = generateDateKey(day, week, year);
