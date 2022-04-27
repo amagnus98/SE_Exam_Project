@@ -7,3 +7,5 @@
 # check that estimated hours is not set in use case
 # byt alle projektnumre "22001" ud med current year + "001"
 # hvis man prøver at assigne developer til en aktivitet, som ikke er tilknyttet projektet 
+# husk at opdatere current year
+# gør så datekey funktionen returnerer "20220101" i stedet for "202211"

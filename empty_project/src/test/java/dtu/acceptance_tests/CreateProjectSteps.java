@@ -12,13 +12,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import system.model.domain.*;
 
-public class ProjectSteps {
+public class CreateProjectSteps {
 
 	private App app;
 	private ErrorMessageHolder errorMessage;
 	private MockDateHolder dateHolder;
     
-	public ProjectSteps(App app, ErrorMessageHolder errorMessage, MockDateHolder dateHolder) {
+	public CreateProjectSteps(App app, ErrorMessageHolder errorMessage, MockDateHolder dateHolder) {
 		this.app = app;
 		this.errorMessage = errorMessage;
 		this.dateHolder = dateHolder;
@@ -50,6 +50,12 @@ public class ProjectSteps {
 	@When("the current user creates a new project with name {string}")
 	public void the_current_user_creates_a_new_project_with_name(String name) {
 		this.app.addProject(name);
+	}
+
+	@Then("a project with project number current year plus {string} is added to the company's list of current projects")
+	public void a_project_with_project_number_current_year_plus_is_added_to_the_company_s_list_of_current_projects(String string) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("a project with project number {string} is added to the company's list of current projects")
