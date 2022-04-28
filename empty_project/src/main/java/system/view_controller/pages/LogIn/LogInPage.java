@@ -1,5 +1,10 @@
 package system.view_controller.pages.LogIn;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.lang.ProcessHandle.Info;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import org.w3c.dom.Text;
 
@@ -24,19 +29,35 @@ public class LogInPage {
 
     public JPanel draw() {
 
-        JPanel BoxPanel = new BoxPanel().getPanel();
+        JPanel InformationPanel = new JPanel();
+        InformationPanel.setLayout(new BoxLayout(InformationPanel, BoxLayout.Y_AXIS));
+        InformationPanel.setBackground(constants.backgroundColor);
 
-        new Header("Log In", BoxPanel);
-        new SubHeader("Enter Initials:", constants.backgroundColor, BoxPanel);
+        JPanel headerPanel = new JPanel();
+        new Header("Log In", headerPanel);
+        headerPanel.setBackground(constants.backgroundColor);
+        headerPanel.setBorder(new EmptyBorder(100,0,0,0));
+        InformationPanel.add(headerPanel);
 
-        TextField textField = new TextField("Initials", "", constants.backgroundColor).getTextField();
-        BoxPanel.add(textField.textFieldPanel);
+        JPanel loginPanel = new JPanel();
+        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
+        loginPanel.setBorder(new EmptyBorder(30,0,30,0));
+        loginPanel.setBackground(constants.boxColor);
+        
+        new SubHeader("Enter Initials:", constants.boxColor, loginPanel);
+
+        TextField textField = new TextField("Initials", "", constants.boxColor).getTextField();
+        loginPanel.add(textField.textFieldPanel);
 
         AbstractAction action = new LogInAction("Log In", textField.textField, main);
-        JPanel ButtonPanel = new Button("Log In", constants.backgroundColor, "small", action).getButton();
-        BoxPanel.add(ButtonPanel);
+        JPanel ButtonPanel = new Button("Log In", constants.boxColor, "small", action).getButton();
+        loginPanel.add(ButtonPanel);
+        InformationPanel.add(loginPanel);
 
-        JPanel container = new Container(BoxPanel).getContainer();
+
+        JPanel container = new Container(InformationPanel).getContainer();
+        InformationPanel.setAlignmentX(container.CENTER_ALIGNMENT);
+        InformationPanel.setAlignmentY(container.CENTER_ALIGNMENT);
         return container;
     }
 }

@@ -1,5 +1,8 @@
 package system.view_controller.pages.ManageProjects;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.*;
 import system.view_controller.widgets.Button;
 import system.view_controller.actions.CreateNewProjectAction;
 import system.view_controller.actions.MainMenuAction;
@@ -26,17 +29,30 @@ public class CreateNewProjectPage {
     public JPanel draw() {
         JPanel BoxPanel = new BoxPanel().getPanel();
 
-        new Header("Create New Project", BoxPanel);
+        JPanel subHeaderPanel = new JPanel();
+        subHeaderPanel.setBackground(constants.backgroundColor);
+        JLabel subHeader = new JLabel("Create New Project");
+        subHeader.setFont(new Font("Arial", Font.BOLD, 25));
+        subHeader.setBorder(new EmptyBorder(75,0,25,0));
+        subHeaderPanel.add(subHeader);
+        BoxPanel.add(subHeaderPanel);
 
-        new SubHeader("Project Name (optional):", constants.backgroundColor, BoxPanel);
-        TextField textField = new TextField("Project Name", "", constants.backgroundColor).getTextField();
-        BoxPanel.add(textField.textFieldPanel);
+        JPanel createPanel = new JPanel();
+        createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.Y_AXIS));
+        createPanel.setBackground(constants.boxColor);
+        createPanel.setBorder(new EmptyBorder(30,10,30,10));
+
+
+        new SubHeader("Project Name (optional):", constants.boxColor, createPanel);
+        TextField textField = new TextField("Project Name", "", constants.boxColor).getTextField();
+        createPanel.add(textField.textFieldPanel);
 
         AbstractAction createNewProjectAction = new CreateNewProjectAction("Create", "Create new Project", textField.textField, main);
-        JPanel createNewProjectButtonPanel = new Button("Create", constants.backgroundColor, "small", createNewProjectAction).getButton();
-        BoxPanel.add(createNewProjectButtonPanel);
+        JPanel createNewProjectButtonPanel = new Button("Create", constants.boxColor, "small", createNewProjectAction).getButton();
+        createPanel.add(createNewProjectButtonPanel);
+        BoxPanel.add(createPanel);
 
-        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Manage Projects", main);
+        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         BoxPanel.add(backToManageProjectsButtonPanel);
 

@@ -14,7 +14,7 @@ public class ProjectButton {
 
         this.button = new JButton(ProjectNumber + "; " + ProjectName);
 
-        this.buttonPanel.setSize(new Dimension(250, 75));
+        this.buttonPanel.setMaximumSize(new Dimension(250, 60));
         this.button.setFont(new Font("Arial", Font.PLAIN, 15));
         this.button.setPreferredSize(new Dimension(200, 50));
 

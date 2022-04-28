@@ -1,41 +1,39 @@
 package system.view_controller.actions;
 import javax.swing.*;
 
+import system.model.domain.Activity;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.messageWindows.SuccessWindow;
 import system.view_controller.pages.Main;
-
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class CreateNewProjectAction extends AbstractAction {
+public class RequestAssistanceAction extends AbstractAction {
 
     JTextField textField;
     Main main;
-    String previousPage;
+    Activity activity;
+    Project previousProject;
 
-    public CreateNewProjectAction(String name, String previousPage, JTextField textField, Main main) {
+    public RequestAssistanceAction(String name, Project previousProject, JTextField textField, Activity activity, Main main) {
         putValue(NAME, name);
         this.textField = textField;
         this.main = main;
-        this.previousPage = previousPage;
+        this.activity = activity;
+        this.previousProject = previousProject;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean hasError = false;
 
-        if (textField.getText() == "") {
-            main.app.addProject();
-        } else {
-            main.app.addProject(textField.getText());
-        }
-        Project project;
+        Boolean hasError = false;
+
+        String initials = textField.getText();
+
         try {
-            project = main.app.getMostRecentProject();
-            main.viewProject(project, this.previousPage);
+            main.app.requestAssistanceForActivity(initials, activity.getName(), previousProject.getProjectNumber());
         } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();
@@ -43,8 +41,10 @@ public class CreateNewProjectAction extends AbstractAction {
         }
 
         if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Project successfully created.");
+            SuccessWindow errorWindow = new SuccessWindow("Request successfully sent.");
             errorWindow.showMessage();
+            main.viewActivitry(activity, previousProject);
         }
+
     }
 }

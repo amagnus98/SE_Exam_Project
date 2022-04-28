@@ -15,15 +15,15 @@ public class Button {
         this.button = new JButton(name);
 
         if (size == "small") {
-            this.buttonPanel.setPreferredSize(new Dimension(200, 75));
+            this.buttonPanel.setMaximumSize(new Dimension(600, 75));
             this.button.setFont(new Font("Arial", Font.PLAIN, 15));
             this.button.setPreferredSize(new Dimension(150, 50));
         } else if (size == "micro") {
-            this.buttonPanel.setPreferredSize(new Dimension(150, 50));
+            this.buttonPanel.setMaximumSize(new Dimension(600, 55));
             this.button.setFont(new Font("Arial", Font.PLAIN, 15));
             this.button.setPreferredSize(new Dimension(150, 50));
         } else {
-            this.buttonPanel.setPreferredSize(new Dimension(300, 100));
+            this.buttonPanel.setMaximumSize(new Dimension(600, 100));
             this.button.setFont(new Font("Arial", Font.PLAIN, 20));
             this.button.setPreferredSize(new Dimension(250, 75));
         }
