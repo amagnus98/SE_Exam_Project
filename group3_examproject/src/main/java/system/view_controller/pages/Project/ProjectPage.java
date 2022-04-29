@@ -1,26 +1,17 @@
 package system.view_controller.pages.Project;
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
-
-import org.w3c.dom.Text;
-
-import io.cucumber.java.bs.I;
-
 import java.awt.*;
 import java.util.ArrayList;
 
 import system.view_controller.widgets.Button;
-import system.view_controller.widgets.ProjectButton;
-import system.view_controller.widgets.SubHeader;
 import system.view_controller.widgets.TextField;
 import system.view_controller.actions.ActivityButtonAction;
 import system.view_controller.actions.AsignProjectDeveloperAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
+import system.view_controller.actions.GetProjectReportAction;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.ProjectButtonAction;
 import system.view_controller.actions.SubmitProjectChangersAction;
-import system.view_controller.widgets.Header;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
@@ -47,13 +38,16 @@ public class ProjectPage {
     public JPanel draw() {
 
         JPanel BoxPanel = new BoxPanel().getPanel();
-        BoxPanel.setPreferredSize(new Dimension(550,800));
+        BoxPanel.setPreferredSize(new Dimension(550,750));
         BoxPanel.setBorder(new EmptyBorder(25,25,25,25));
 
-
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(constants.backgroundColor);
         JLabel header = new JLabel("Project Details");
         header.setFont(new Font("Arial", Font.BOLD, 20));
-        BoxPanel.add(header);
+        header.setBorder(new EmptyBorder(10,10,10,10));
+        headerPanel.add(header);
+        BoxPanel.add(headerPanel);
 
         JPanel InformationPanel = new JPanel(new GridLayout(0,2,5,2));
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
@@ -109,23 +103,20 @@ public class ProjectPage {
         
         if (activities1.size() < 1) {
             InformationPanel.add(new JLabel("No activities yet."));
-        } else {
             InformationPanel.add(new JLabel(""));
+        } else {
             for (int i = 0; i < activities1.size(); i++) {
                 Activity activity = activities1.get(i);
                 AbstractAction viewActivityAction = new ActivityButtonAction(activity.getName(), activity, project, main);
                 JPanel viewActivityButtonPanel = new Button(activity.getName(), constants.boxColor, "micro", viewActivityAction).getButton();
                 InformationPanel.add(viewActivityButtonPanel);
-            }
-            if (activities1.size() % 2 == 1) {
                 InformationPanel.add(new JLabel(""));
             }
         }
 
-        
         TextField addActivityTextField = new TextField("Activity Name", "activity name...", constants.boxColor).getTextField();
         InformationPanel.add(addActivityTextField.textField);
-
+        InformationPanel.add(new JLabel(""));
         AbstractAction addActivityAction = new CreateNewProjectActivityAction("create new activity", previousPage, addActivityTextField.textField, project, main);
         JPanel addActivityButtonPanel = new Button("create new activity", constants.boxColor, "micro", addActivityAction).getButton();
         InformationPanel.add(addActivityButtonPanel);
@@ -143,46 +134,48 @@ public class ProjectPage {
         
         if (developers.size() < 1) {
             InformationPanel.add(new JLabel("No developers yet."));
-        } else {
             InformationPanel.add(new JLabel(""));
+        } else {
             for (int i = 0; i < developers.size(); i++) {
                 Developer developer = developers.get(i);
                 JLabel developerLabel = new JLabel(developer.getInitials());
                 developerLabel.setFont(new Font("Arial", Font.BOLD, 15));
                 JPanel devePanel = new JPanel(new GridBagLayout());
                 devePanel.add(developerLabel);
-                devePanel.setBackground(constants.backgroundColor);
+                devePanel.setBackground(constants.boxColor);
                 InformationPanel.add(devePanel);
-            }
-            if (developers.size() % 2 == 1) {
                 InformationPanel.add(new JLabel(""));
             }
         }
 
-
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
-
-
+        InformationPanel.add(new JLabel(""));
         AbstractAction addDeveloperAction = new AsignProjectDeveloperAction("Asign Developer", previousPage, addDeveloperTextField.textField, project, main);
         JPanel addDeveloperButtonPanel = new Button("Asign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 
-
-    
-
-
         JScrollPane InformationScrollPanel = new JScrollPane(InformationPanel);
-        InformationScrollPanel.setPreferredSize(new Dimension(550, 700));
+        InformationScrollPanel.setPreferredSize(new Dimension(550, 600));
 
         BoxPanel.add(InformationScrollPanel);
 
         
 
+        JPanel buttonPanel = new JPanel(new GridLayout(0,2,5,2));
+        buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
+        buttonPanel.setBackground(constants.secondBoxColor);
+
         AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, project, previousPage, main);
-        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.backgroundColor, "small", submitChangesAction).getButton();
-        BoxPanel.add(submitChangesButtonPanel);
+        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.secondBoxColor, "small", submitChangesAction).getButton();
+        buttonPanel.add(submitChangesButtonPanel);
+
+        AbstractAction getProjectReportAction = new GetProjectReportAction("Generate Report", project, main);
+        JPanel getProjectReportButtonPanel = new Button("Generate Report", constants.secondBoxColor, "small", getProjectReportAction).getButton();
+        buttonPanel.add(getProjectReportButtonPanel);
+
+        BoxPanel.add(buttonPanel);
 
 
         AbstractAction backToManageProjectsAction = new MainMenuAction("Back", previousPage, main);

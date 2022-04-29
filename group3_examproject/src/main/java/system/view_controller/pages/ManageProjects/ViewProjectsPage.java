@@ -1,5 +1,6 @@
 package system.view_controller.pages.ManageProjects;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import system.view_controller.widgets.Button;
@@ -30,19 +31,26 @@ public class ViewProjectsPage {
 
     public JPanel draw() {
         JPanel BoxPanel = new BoxPanel().getPanel();
+        BoxPanel.setPreferredSize(new Dimension(350, 700));
 
-        new Header("Project Overview", BoxPanel);
+        JPanel subHeaderPanel = new JPanel();
+        subHeaderPanel.setBackground(constants.backgroundColor);
+        JLabel subHeader = new JLabel("Project Overview");
+        subHeader.setFont(new Font("Arial", Font.BOLD, 25));
+        subHeader.setBorder(new EmptyBorder(75,0,25,0));
+        subHeaderPanel.add(subHeader);
+        BoxPanel.add(subHeaderPanel);
 
         ArrayList<Project> projects = main.app.getProjects();
 
         if (projects.size() < 1) {
             JPanel labelPanel = new JPanel();
             labelPanel.setLayout(new GridBagLayout());
-            JLabel label = new JLabel("<html>There are no projects to view yet. To create a new project, click \'Create New Project\' on the Manage Projects page.</html>");
+            JLabel label = new JLabel("<html>There are no projects to view yet. To create a new project, click on the \'Create New Project\' button below.</html>");
             label.setPreferredSize(new Dimension(250, 200));
             labelPanel.setBackground(constants.boxColor);
             labelPanel.add(label);
-            labelPanel.setMaximumSize(new Dimension(300, 200));
+            labelPanel.setPreferredSize(new Dimension(350, 700));
             BoxPanel.add(labelPanel);
 
         } else {
@@ -56,15 +64,26 @@ public class ViewProjectsPage {
                 AbstractAction projectButtonAction = new ProjectButtonAction(project.getProjectNumber(), project.getName(), project, "Project View", main);
                 JPanel projectButtonButtonPanel = new ProjectButton(project.getProjectNumber(), project.getName(), constants.boxColor, projectButtonAction).getButton();
                 ProjectViewPanel.add(projectButtonButtonPanel);
+                projectButtonButtonPanel.setAlignmentX(ProjectViewPanel.CENTER_ALIGNMENT);
+                projectButtonButtonPanel.setAlignmentY(ProjectViewPanel.CENTER_ALIGNMENT);
             }
 
             JScrollPane scrollPanel = new JScrollPane(ProjectViewPanel);
             scrollPanel.setBackground(constants.boxColor);
-            scrollPanel.setPreferredSize(new Dimension(250, 500));
+            scrollPanel.setPreferredSize(new Dimension(350, 700));
             BoxPanel.add(scrollPanel);
+            
         }
 
-        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Manage Projects", main);
+        JPanel createNewProjectPanel = new JPanel();
+        createNewProjectPanel.setBackground(constants.secondBoxColor);
+        createNewProjectPanel.setBorder(new EmptyBorder(10,0,10,0));
+        AbstractAction createNewProjectAction = new MainMenuAction("Create new Project", "Create new Project", main);
+        JPanel createNewProjectButtonPanel = new Button("Create new Project", constants.secondBoxColor, "small", createNewProjectAction).getButton();
+        createNewProjectPanel.add(createNewProjectButtonPanel);
+        BoxPanel.add(createNewProjectPanel);
+
+        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Navigator", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         BoxPanel.add(backToManageProjectsButtonPanel);
 
