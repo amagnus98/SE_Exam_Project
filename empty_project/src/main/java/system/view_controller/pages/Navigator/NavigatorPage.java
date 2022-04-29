@@ -1,5 +1,7 @@
 package system.view_controller.pages.Navigator;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import system.view_controller.widgets.Header;
 import system.view_controller.widgets.SubHeader;
@@ -29,7 +31,7 @@ public class NavigatorPage {
 
         new Header("Main Menu", BoxPanel);
 
-        AbstractAction manageProjectsAction = new MainMenuAction("Manage Projects", "Manage Projects", main);
+        AbstractAction manageProjectsAction = new MainMenuAction("Manage Projects", "Project View", main);
         JPanel manageProjectsButtonPanel = new Button("Manage Projects", constants.backgroundColor, "big", manageProjectsAction).getButton();
         BoxPanel.add(manageProjectsButtonPanel);
 
@@ -37,9 +39,13 @@ public class NavigatorPage {
         JPanel timeRegistrationButtonPanel = new Button("Time Registration", constants.backgroundColor, "big", timeRegistrationAction).getButton();
         BoxPanel.add(timeRegistrationButtonPanel);
 
-        AbstractAction accessCalenderAction = new MainMenuAction("Access Calender", "Access Calender", main);
-        JPanel accessCalenderButtonPanel = new Button("Access Calender", constants.backgroundColor, "big", accessCalenderAction).getButton();
+        AbstractAction accessCalenderAction = new MainMenuAction("My Calender", "View Calender", main);
+        JPanel accessCalenderButtonPanel = new Button("My Calender", constants.backgroundColor, "big", accessCalenderAction).getButton();
         BoxPanel.add(accessCalenderButtonPanel);
+
+        JLabel spacer = new JLabel("");
+        spacer.setBorder(new EmptyBorder(20,20,20,20));
+        BoxPanel.add(spacer);
 
         new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 

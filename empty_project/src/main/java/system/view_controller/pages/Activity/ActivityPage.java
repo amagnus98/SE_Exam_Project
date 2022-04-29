@@ -16,6 +16,7 @@ import system.view_controller.actions.AsignProjectDeveloperAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
+import system.view_controller.actions.RequestAssistanceAction;
 import system.view_controller.actions.SubmitActivityChangesAction;
 import system.view_controller.actions.SubmitProjectChangersAction;
 import system.view_controller.widgets.Header;
@@ -48,12 +49,13 @@ public class ActivityPage {
     public JPanel draw() {
 
         JPanel BoxPanel = new BoxPanel().getPanel();
-        BoxPanel.setPreferredSize(new Dimension(550,800));
+        BoxPanel.setPreferredSize(new Dimension(550,750));
         BoxPanel.setBorder(new EmptyBorder(25,25,25,25));
 
 
         JLabel header = new JLabel("Activity Details");
         header.setFont(new Font("Arial", Font.BOLD, 20));
+        header.setBorder(new EmptyBorder(10,10,10,10));
         BoxPanel.add(header);
 
         JPanel InformationPanel = new JPanel(new GridLayout(0,2,5,2));
@@ -86,10 +88,10 @@ public class ActivityPage {
         InformationPanel.add(startWeekTextField.textField);
 
         InformationPanel.add(new JLabel("Activity End Year"));
-        TextField endYearTextField = new TextField("Activity endYear", String.valueOf(activity.getEndWeek()), constants.boxColor).getTextField();
+        TextField endYearTextField = new TextField("Activity endYear", String.valueOf(activity.getEndYear()), constants.boxColor).getTextField();
         InformationPanel.add(endYearTextField.textField);
         InformationPanel.add(new JLabel("Activity End Week"));
-        TextField endWeekTextField = new TextField("Activity endWeek", String.valueOf(activity.getEndYear()), constants.boxColor).getTextField();
+        TextField endWeekTextField = new TextField("Activity endWeek", String.valueOf(activity.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
 
 
@@ -109,8 +111,8 @@ public class ActivityPage {
         
         if (developers.size() < 1) {
             InformationPanel.add(new JLabel("No developers yet."));
-        } else {
             InformationPanel.add(new JLabel(""));
+        } else {
             for (int i = 0; i < developers.size(); i++) {
                 Developer developer = developers.get(i);
                 JLabel developerLabel = new JLabel(developer.getInitials());
@@ -119,8 +121,6 @@ public class ActivityPage {
                 devePanel.add(developerLabel);
                 devePanel.setBackground(constants.backgroundColor);
                 InformationPanel.add(devePanel);
-            }
-            if (developers.size() % 2 == 1) {
                 InformationPanel.add(new JLabel(""));
             }
         }
@@ -128,32 +128,46 @@ public class ActivityPage {
 
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
-
-
+        InformationPanel.add(new JLabel(""));
         AbstractAction addDeveloperAction = new AsignActivityDeveloperAction("Asign Developer", previousProject, addDeveloperTextField.textField, activity, main);
         JPanel addDeveloperButtonPanel = new Button("Asign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 
+        InformationPanel.add(new JLabel(""));
+        InformationPanel.add(new JLabel(""));
 
+
+        InformationPanel.add(new JLabel("Request Assistance"));
+        TextField requestAssistanceTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
+        InformationPanel.add(requestAssistanceTextField.textField);
+        InformationPanel.add(new JLabel(""));
+        AbstractAction requestAssistanceAction = new RequestAssistanceAction("Submit Request", previousProject, requestAssistanceTextField.textField, activity, main);
+        JPanel requestAssistanceButtonPanel = new Button("Submit Request", constants.boxColor, "micro", requestAssistanceAction).getButton();
+        InformationPanel.add(requestAssistanceButtonPanel);
     
 
 
         JScrollPane InformationScrollPanel = new JScrollPane(InformationPanel);
-        InformationScrollPanel.setPreferredSize(new Dimension(550, 700));
+        InformationScrollPanel.setPreferredSize(new Dimension(550, 650));
 
         BoxPanel.add(InformationScrollPanel);
 
         
-
+        JPanel submitChangesPanel = new JPanel();
+        submitChangesPanel.setBackground(constants.secondBoxColor);
+        submitChangesPanel.setBorder(new EmptyBorder(10,0,10,0));
         AbstractAction submitChangesAction = new SubmitActivityChangesAction("Submit Changes", activityNameTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, activity, previousProject, main);
-        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.backgroundColor, "small", submitChangesAction).getButton();
-        BoxPanel.add(submitChangesButtonPanel);
+        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.secondBoxColor, "small", submitChangesAction).getButton();
+        submitChangesPanel.add(submitChangesButtonPanel);
+        BoxPanel.add(submitChangesPanel);
 
-
-        AbstractAction backToManageProjectsAction = new ProjectButtonAction(previousProject.getProjectNumber(), "back to ", previousProject, "Manage Projects", main);
+        JPanel backPanel = new JPanel();
+        backPanel.setBackground(constants.backgroundColor);
+        AbstractAction backToManageProjectsAction = new ProjectButtonAction(previousProject.getProjectNumber(), "back to ", previousProject, "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
-        BoxPanel.add(backToManageProjectsButtonPanel);
+        backPanel.add(backToManageProjectsButtonPanel);
+        BoxPanel.add(backPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

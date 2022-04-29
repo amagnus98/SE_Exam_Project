@@ -3,12 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 import system.view_controller.pages.Activity.ActivityPage;
+import system.view_controller.pages.Calender.ViewCalender;
 import system.view_controller.pages.LogIn.LogInPage;
-import system.view_controller.pages.ManageProjects.ManageProjectsPage;
 import system.view_controller.pages.ManageProjects.ViewProjectsPage;
 import system.view_controller.pages.Navigator.NavigatorPage;
 import system.view_controller.pages.Project.ProjectPage;
-import system.view_controller.pages.ManageProjects.ViewProjectsPage;
+import system.view_controller.pages.TimeRegistration.ChooseActivityPage;
+import system.view_controller.pages.TimeRegistration.RegisterTimePage;
 import system.view_controller.pages.ManageProjects.CreateNewProjectPage;
 import system.model.domain.Activity;
 import system.model.domain.App;
@@ -23,9 +24,10 @@ public class Main {
     NavigatorPage navigatorPage = new NavigatorPage(frame, this);
 
 
-    ManageProjectsPage manageProjectsPage = new ManageProjectsPage(frame, this);
     ViewProjectsPage viewProjectsPage = new ViewProjectsPage(frame, this);
     CreateNewProjectPage createNewProjectPage = new CreateNewProjectPage(frame, this);
+    ChooseActivityPage timeRegistrationPage = new ChooseActivityPage(frame, this);
+    ViewCalender ViewCalender = new ViewCalender(frame, this);
 
 
 
@@ -68,6 +70,15 @@ public class Main {
         frame.repaint();
     }
 
+    public void registerTimeOnActivity(String ActivityName, String ProjectNumber) {
+        frame.getContentPane().removeAll();
+        RegisterTimePage registerTimePage = new RegisterTimePage(frame, ActivityName, ProjectNumber, this);
+        JPanel registerTimePagePanel = registerTimePage.draw();
+        frame.getContentPane().add(registerTimePagePanel);
+        frame.validate();
+        frame.repaint();
+    }
+
     public void changeScreen(String changeTo) {
 
         if (changeTo == "Log In") {
@@ -84,14 +95,6 @@ public class Main {
             frame.validate();
             frame.repaint();
 
-
-        } else if (changeTo == "Manage Projects") {
-            frame.getContentPane().removeAll();
-            JPanel manageProjectsPagePanel = manageProjectsPage.draw();
-            frame.getContentPane().add(manageProjectsPagePanel);
-            frame.validate();
-            frame.repaint();
-
         } else if (changeTo == "Project View") {
             frame.getContentPane().removeAll();
             JPanel viewProjectsPagePanel = viewProjectsPage.draw();
@@ -104,6 +107,21 @@ public class Main {
             frame.getContentPane().removeAll();
             JPanel createNewProjectPagePanel = createNewProjectPage.draw();
             frame.getContentPane().add(createNewProjectPagePanel);
+            frame.validate();
+            frame.repaint();
+
+
+        } else if (changeTo == "Time Registration") {
+            frame.getContentPane().removeAll();
+            JPanel timeRegistrationPagePanel = timeRegistrationPage.draw();
+            frame.getContentPane().add(timeRegistrationPagePanel);
+            frame.validate();
+            frame.repaint();
+
+        } else if (changeTo == "View Calender") {
+            frame.getContentPane().removeAll();
+            JPanel viewCalenderPanel = ViewCalender.draw();
+            frame.getContentPane().add(viewCalenderPanel);
             frame.validate();
             frame.repaint();
         }

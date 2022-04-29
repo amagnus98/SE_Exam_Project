@@ -53,6 +53,17 @@ public class SubmitProjectChangersAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
+        // PROJECT LEADER CHANGE
+       if (!project.hasProjectLeader() && !projectLeader.getText().equals("") || project.hasProjectLeader() && !projectLeader.getText().equals(project.getProjectLeader().getInitials())) {
+        try {
+         main.app.assignProjectLeader(project.getProjectNumber(), projectLeader.getText());
+        } catch (OperationNotAllowedException error) {
+         ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+         errorWindow.showMessage();
+         hasError = true;
+     }
+    }
+
         // PROJECT NAME CHANGE
         project.setName(projectName.getText());
 
@@ -68,18 +79,7 @@ public class SubmitProjectChangersAction extends AbstractAction {
                 hasError = true;
             }
         }
-
-
-        // PROJECT LEADER CHANGE
-       if (!project.hasProjectLeader() && !projectLeader.getText().equals("") || project.hasProjectLeader() && !projectLeader.getText().equals(project.getProjectLeader().getInitials())) {
-           try {
-            main.app.assignProjectLeader(project.getProjectNumber(), projectLeader.getText());
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        }
-       }
+    
        try {
         int startYear = Integer.parseInt(projectStartYear.getText());
         int startWeek = Integer.parseInt(projectStartWeek.getText());

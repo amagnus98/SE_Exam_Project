@@ -24,7 +24,14 @@ public class App {
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
     private DateServer dateServer = new DateServer();
     private ProjectReport currentProjectReport;
-    
+
+    public String getnonWorkActivitiesProjectNumber() {
+        return this.nonWorkActivitiesProjectNumber;
+    }
+
+    public ArrayList<String> getNonWorkActivities() {
+        return this.nonWorkActivities;
+    }
 
     public void logIn(String initials) throws OperationNotAllowedException {
         Developer d = getDeveloper(initials);
