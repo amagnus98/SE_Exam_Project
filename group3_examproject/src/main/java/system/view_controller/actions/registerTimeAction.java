@@ -41,7 +41,12 @@ public class registerTimeAction extends AbstractAction {
         int year = Integer.parseInt(this.year.getText());
 
         try {
-            main.app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);
+            if (main.app.getProject(projectNumber).isNonWorkActivityProject()) {
+                main.app.registerHoursToNonWorkActivity(hours, day, week, year, activityName);
+                System.out.print(projectNumber);
+            } else {
+                main.app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);
+            }
         } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();

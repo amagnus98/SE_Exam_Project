@@ -1,5 +1,7 @@
 package system.view_controller.actions;
 import javax.swing.*;
+
+import system.model.domain.Activity;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.messageWindows.ErrorWindow;
@@ -30,7 +32,11 @@ public class CreateNewProjectActivityAction extends AbstractAction {
 
         String activityName = textField.getText();
         try {
-            main.app.addActivityToProject(activityName, project.getProjectNumber());
+            if (project.isNonWorkActivityProject()) {
+                project.addToActivityList(new Activity(activityName));
+            } else {
+                main.app.addActivityToProject(activityName, project.getProjectNumber());
+            }
         } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();
@@ -40,7 +46,11 @@ public class CreateNewProjectActivityAction extends AbstractAction {
         if (!hasError) {
             SuccessWindow errorWindow = new SuccessWindow("Activity successfully created.");
             errorWindow.showMessage();
-            main.viewProject(project, previousPage);
+            if (project.isNonWorkActivityProject()) {
+                main.viewNonWorkActivityProject(project, previousPage);
+            } else {
+                main.viewProject(project, previousPage);
+            }
         }
 
         

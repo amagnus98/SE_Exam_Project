@@ -24,6 +24,10 @@ public class ProjectButtonAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.viewProject(project, this.previousPage);
+        if (project.isNonWorkActivityProject()) {
+            main.viewNonWorkActivityProject(project, this.previousPage);
+        } else {
+            main.viewProject(project, this.previousPage);
+        }
     }
 }

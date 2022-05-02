@@ -103,4 +103,12 @@ public abstract class Event {
     public boolean isWeekFormatValid(int startWeek, int endWeek) {
         return (startWeek >= 1 && startWeek <= 52 && endWeek >= 1 && endWeek <= 52);
     }
+
+    public boolean isRegisterWeekFormatValid(int week) {
+        return (week >= 1 && week <= 52);
+    }
+
+    public boolean isRegisterDayFormatValid(int day) {
+        return (day >= 1 && day <= 7);
+    }
 }

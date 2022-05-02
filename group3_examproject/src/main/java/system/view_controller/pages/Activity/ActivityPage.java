@@ -66,7 +66,7 @@ public class ActivityPage {
         TextField activityNameTextField = new TextField("Project Name", activity.getName(), constants.boxColor).getTextField();
         InformationPanel.add(activityNameTextField.textField);
 
-        InformationPanel.add(new JLabel("Parent Project"));
+        InformationPanel.add(new JLabel("Assigned Project"));
         Project parentProject;
         try {
             parentProject = main.app.getProject(activity.getParentProjectNumber());
@@ -75,10 +75,18 @@ public class ActivityPage {
             } else {
                 InformationPanel.add(new JLabel(parentProject.getName() + " (" + parentProject.getProjectNumber() + ")"));
             }
+
+            InformationPanel.add(new JLabel("Assigned Project Start Time"));
+            InformationPanel.add(new JLabel("Week: " + parentProject.getStartWeek() + ", Year: " + parentProject.getStartYear()));
+            InformationPanel.add(new JLabel("Assigned Project End Time"));
+            InformationPanel.add(new JLabel("Week: " + parentProject.getEndWeek() + ", Year: " + parentProject.getEndYear()));
+
         } catch (OperationNotAllowedException error) {
             InformationPanel.add(new JLabel("???"));
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
         }
+
+
 
         InformationPanel.add(new JLabel("Activity Start Year"));
         TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();

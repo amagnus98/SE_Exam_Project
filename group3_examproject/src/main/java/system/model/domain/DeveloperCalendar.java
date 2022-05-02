@@ -11,6 +11,16 @@ public class DeveloperCalendar {
         return year + String.format("%02d", week) + String.format("%02d", day);
     }
 
+    public ArrayList<String> getSortedDateKeys(){
+        ArrayList<String> dateKeys = new ArrayList<>(this.calendar.keySet());
+        ArrayList<Integer> sortedDateKeysInts = new ArrayList<>();
+        for(String s : dateKeys) sortedDateKeysInts.add(Integer.valueOf(s));
+        Collections.sort(sortedDateKeysInts);
+        ArrayList<String> sortedDateKeys = new ArrayList<>();
+        for(Integer i : sortedDateKeysInts) sortedDateKeys.add(Integer.toString(i));
+        return sortedDateKeys;
+    }
+
     public HashMap<String, HashMap<String, HashMap<String, Double>>> getCalendar(){
         return this.calendar;
     }

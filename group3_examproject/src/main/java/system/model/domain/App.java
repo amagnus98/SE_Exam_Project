@@ -108,7 +108,8 @@ public class App {
         // mark project as non work activity project
         nonWorkActivitiesProject.setAsNonWorkActivityProject();
         for (String activityName : nonWorkActivities){
-            nonWorkActivitiesProject.addToActivityList(new Activity(activityName));
+            Activity nonWorkActivity = new Activity(activityName);
+            nonWorkActivitiesProject.addToActivityList(nonWorkActivity);
         }
         return nonWorkActivitiesProject;
     }
@@ -225,7 +226,9 @@ public class App {
         Project project = getProject(projectNumber);
         project.setProjectLeader(developer);
         // add developer to project
-        project.addDeveloper(developer);
+        if (!(project.isDeveloperAssigned(initials))) {
+            project.addDeveloper(developer);
+        }
     }
 
     // Add activity with a name to a project 
@@ -356,14 +359,22 @@ public class App {
             if (hours <= 24){
                 Project project = getProject(projectNumber);
                 Activity activity = project.getActivity(activityName);
-                if (activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject()){
-                    double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
-                    this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
-                    project.setTotalHoursRegistered(project.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
-                    activity.setTotalHoursRegistered(activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+                if (activity.isRegisterWeekFormatValid(week)) {
+                    if (activity.isRegisterDayFormatValid(day)) {
+                        if (activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject()){
+                            double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
+                            this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
+                            project.setTotalHoursRegistered(project.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+                            activity.setTotalHoursRegistered(activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+                        } else {
+                            throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
+                        } 
+                    } else {
+                        throw new OperationNotAllowedException("Day must be a number between 1 and 7");
+                    }
                 } else {
-                    throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
-                } 
+                    throw new OperationNotAllowedException("Week must be a number between 1 and 52");
+                }
             } else {
                 throw new OperationNotAllowedException("The user cannot register more than 24 hours for an activity per day");
             }

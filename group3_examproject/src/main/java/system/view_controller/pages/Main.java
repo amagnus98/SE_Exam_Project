@@ -7,6 +7,7 @@ import system.view_controller.pages.Calender.ViewCalender;
 import system.view_controller.pages.LogIn.LogInPage;
 import system.view_controller.pages.ManageProjects.ViewProjectsPage;
 import system.view_controller.pages.Navigator.NavigatorPage;
+import system.view_controller.pages.Project.NonWorkActivityProjectPage;
 import system.view_controller.pages.Project.ProjectPage;
 import system.view_controller.pages.TimeRegistration.ChooseActivityPage;
 import system.view_controller.pages.TimeRegistration.RegisterTimePage;
@@ -57,6 +58,15 @@ public class Main {
         ProjectPage projectPage = new ProjectPage(frame, this, previousPage, project);
         JPanel projectPagePanel = projectPage.draw();
         frame.getContentPane().add(projectPagePanel);
+        frame.validate();
+        frame.repaint();
+    }
+
+    public void viewNonWorkActivityProject(Project project, String previousPage) {
+        frame.getContentPane().removeAll();
+        NonWorkActivityProjectPage nonWorkActivityProjectPage = new NonWorkActivityProjectPage(frame, this, previousPage, project);
+        JPanel nonWorkActivityProjectPagePanel = nonWorkActivityProjectPage.draw();
+        frame.getContentPane().add(nonWorkActivityProjectPagePanel);
         frame.validate();
         frame.repaint();
     }

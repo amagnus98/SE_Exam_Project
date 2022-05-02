@@ -4,9 +4,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+import system.model.domain.Activity;
+import system.model.domain.OperationNotAllowedException;
+import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.registerTimeAction;
 import system.view_controller.constants.Constants;
+import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.*;
 import system.view_controller.widgets.Button;
@@ -56,8 +60,30 @@ public class RegisterTimePage {
         InformationPanel.add(new JLabel("Activity"));
         InformationPanel.add(new JLabel(this.activityName));
 
-        InformationPanel.add(new JLabel("Parent Project"));
-        InformationPanel.add(new JLabel(this.projectNumber));
+
+        Project assignedProject;
+        try {
+            assignedProject = main.app.getProject(projectNumber);
+
+            InformationPanel.add(new JLabel("Assigned Project"));
+            InformationPanel.add(new JLabel(assignedProject.getName() + " (" + assignedProject.getProjectNumber() + ")"));
+
+
+            Activity activity = assignedProject.getActivity(activityName);
+            if (!(assignedProject.isNonWorkActivityProject())) {
+                InformationPanel.add(new JLabel("Assigned Project Start Time"));
+                InformationPanel.add(new JLabel("Week: " + activity.getStartWeek() + ", Year: " + activity.getStartYear()));
+                InformationPanel.add(new JLabel("Assigned Project End Time"));
+                InformationPanel.add(new JLabel("Week: " + activity.getEndWeek() + ", Year: " + activity.getEndYear()));
+            }
+        } catch (OperationNotAllowedException error) {
+            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+            errorWindow.showMessage();
+        }
+
+
+
+
 
         InformationPanel.add(new JLabel("Number of Hours"));
         TextField numberOfHoursTextField = new TextField("Number of Hours", "", constants.boxColor).getTextField();

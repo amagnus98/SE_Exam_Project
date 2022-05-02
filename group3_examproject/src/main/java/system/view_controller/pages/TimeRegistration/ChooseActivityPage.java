@@ -45,25 +45,6 @@ public class ChooseActivityPage {
         InformationPanel.setBackground(constants.boxColor);
 
 
-
-        JLabel nonWorkActivitiesHeader = new JLabel("Non-Work Activities");
-        nonWorkActivitiesHeader.setFont(new Font("Arial", Font.BOLD, 20));
-        nonWorkActivitiesHeader.setBorder(new EmptyBorder(30,0,10,0));
-        InformationPanel.add(nonWorkActivitiesHeader);
-        nonWorkActivitiesHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
-        nonWorkActivitiesHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
-
-        String nonWorkActivitiesProjectNumber = main.app.getnonWorkActivitiesProjectNumber();
-        ArrayList<String> nonWorkActivities = main.app.getNonWorkActivities();
-        
-        for (int i = 0; i < nonWorkActivities.size(); i++) {
-            String nonWorkActivity = nonWorkActivities.get(i);
-            AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(nonWorkActivitiesProjectNumber, nonWorkActivity, main);
-            JPanel nonWorkActivityButton = new Button(nonWorkActivity, constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
-            InformationPanel.add(nonWorkActivityButton);
-        }
-
-
         ArrayList<Project> projects = main.app.getProjects();
 
         for (int i = 0; i < projects.size(); i++) {

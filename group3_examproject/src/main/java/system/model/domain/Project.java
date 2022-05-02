@@ -59,12 +59,12 @@ public class Project extends Event{
     }
 
     public void addToActivityList(Activity activity){
+        activity.setAssignedProject(this.projectNumber);
         this.activities.add(activity);
     }
 
     public void addActivity(Activity activity) throws OperationNotAllowedException{
         if (!(containsActivity(activity.getName()))){
-            activity.setAssignedProject(this.projectNumber);
             this.addToActivityList(activity);
         } else {
             throw new OperationNotAllowedException("Project already contains an activity with the given name");
