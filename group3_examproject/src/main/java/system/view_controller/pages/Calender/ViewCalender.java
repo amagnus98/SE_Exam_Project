@@ -35,7 +35,7 @@ public class ViewCalender {
         JPanel BoxPanel = new BoxPanel().getPanel();
         BoxPanel.setPreferredSize(new Dimension(350, 700));
 
-        new Header("Project Overview", BoxPanel);
+        new Header("My Calender", BoxPanel);
 
         
 

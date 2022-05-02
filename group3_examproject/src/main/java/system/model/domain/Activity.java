@@ -38,6 +38,10 @@ public class Activity extends Event{
     this.assignedDevelopers.add(d);
     this.isAssignedByProjectLeader.put(d.getInitials(),false);
   }
+
+  public void changeDeveloperFromRequstedToAssisgned(Developer d){
+    this.isAssignedByProjectLeader.put(d.getInitials(),true);
+  }
   
   public boolean isDeveloperAssignedByProjectLeader(Developer d){
     if (isDeveloperCurrentlyWorking(d)){
@@ -46,8 +50,12 @@ public class Activity extends Event{
     return false;
   }
 
-  public boolean canRegisterHours(Developer d) {
+  public boolean isDeveloperAssigned(Developer d){
     return this.assignedDevelopers.contains(d);
+  }
+
+  public boolean canRegisterHours(Developer d) {
+    return this.isDeveloperAssigned(d);
   }
 
   public boolean isDeveloperCurrentlyWorking(Developer d){

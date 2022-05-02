@@ -313,14 +313,18 @@ public class App {
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
-            // check if the developer is assigned to the project or not
+            Activity activity = project.getActivity(activityName);
+            Developer developer = this.getDeveloper(initials);
+
+            if (activity.isDeveloperAssigned(developer) && !activity.isDeveloperAssignedByProjectLeader(developer)) {
+                activity.changeDeveloperFromRequstedToAssisgned(developer);
+            } else {
+                // check if the developer is assigned to the project or not
+                activity.addDeveloper(developer);
+            }
             if (!project.isDeveloperAssigned(initials)){
                 addDeveloperToProject(initials, projectNumber);
             }
-            Activity activity = project.getActivity(activityName);
-
-            Developer developer = getDeveloper(initials);
-            activity.addDeveloper(developer);
         } else {
             throw new OperationNotAllowedException("Only the project leader can assign developers to this activity");
         }
