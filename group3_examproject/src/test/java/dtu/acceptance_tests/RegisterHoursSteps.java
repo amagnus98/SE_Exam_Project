@@ -125,7 +125,7 @@ public class RegisterHoursSteps {
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         developer.registerHours(hours, day, week, year, projectNumber, activityName);
         
-        assertTrue(developerCalendar.getHours(day, week, year, projectNumber, activityName) == hours);
+        assertTrue(developerCalendar.getRegisteredHours(day, week, year, projectNumber, activityName) == hours);
     }
 
     // SCENARIO 3

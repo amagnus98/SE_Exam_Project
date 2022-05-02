@@ -46,7 +46,6 @@ public class LogInPage {
             String path = currentRelativePath.toAbsolutePath().toString();
             path = path.replace("\\", "/");
             String pathImage = path + "/src/main/java/system/view_controller/pages/LogIn/assets/logo.png";
-            System.out.println(pathImage);
             File image = new File(pathImage);
             BufferedImage logo = ImageIO.read(image);
             JLabel logoLabel = new JLabel(new ImageIcon(logo));

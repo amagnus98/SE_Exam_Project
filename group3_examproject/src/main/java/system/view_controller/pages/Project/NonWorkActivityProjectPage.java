@@ -67,6 +67,9 @@ public class NonWorkActivityProjectPage {
             for (int i = 0; i < activities.size(); i++) {
                 Activity activity = activities.get(i);
                 JLabel activityLabel = new JLabel(activity.getName());
+                if (activity.getName().equals("")) {
+                    activityLabel = new JLabel("Unnamed");
+                }
                 activityLabel.setFont(new Font("Arial", Font.BOLD, 15));
                 JPanel devePanel = new JPanel(new GridBagLayout());
                 devePanel.add(activityLabel);

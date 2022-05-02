@@ -19,7 +19,7 @@ public class AssignProjectLeaderSteps {
 	private ErrorMessageHolder errorMessage;
   private Project project;
 
-  public AssignProjectLeaderSteps(App app, ErrorMessageHolder errorMessage, MockDateHolder dateHolder) {
+  public AssignProjectLeaderSteps(App app, ErrorMessageHolder errorMessage) {
 		this.app = app;
 		this.errorMessage = errorMessage;
 	}

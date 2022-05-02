@@ -16,12 +16,10 @@ public class CreateProjectSteps {
 
 	private App app;
 	private ErrorMessageHolder errorMessage;
-	private MockDateHolder dateHolder;
     
-	public CreateProjectSteps(App app, ErrorMessageHolder errorMessage, MockDateHolder dateHolder) {
+	public CreateProjectSteps(App app, ErrorMessageHolder errorMessage) {
 		this.app = app;
 		this.errorMessage = errorMessage;
-		this.dateHolder = dateHolder;
 	}
 
 	// SCENARIO 1

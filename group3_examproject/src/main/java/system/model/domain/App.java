@@ -1,6 +1,10 @@
 package system.model.domain;
 
+<<<<<<< HEAD
+import java.lang.reflect.Array;
+=======
 import java.rmi.server.Operation;
+>>>>>>> f6ad3bb0d88ba2cf6c1358ab71b8be5c22762627
 import java.util.*;
 
 import io.cucumber.java.en_old.Ac;
@@ -25,7 +29,6 @@ public class App {
     
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
-    private DateServer dateServer = new DateServer();
     private ProjectReport currentProjectReport;
 
     public String getnonWorkActivitiesProjectNumber() {
@@ -74,7 +77,7 @@ public class App {
     // Return the developer object corresponding to given initials
     public Developer getDeveloper(String initials) throws OperationNotAllowedException {
         for (Developer d : developers) {
-            if (d.getInitials().equals(initials)) {
+            if (d.getInitials().equals(initials.toLowerCase())) {
                 return d;
             }
         }
@@ -209,10 +212,6 @@ public class App {
         throw new OperationNotAllowedException("Project with given project number does not exist in the system");
     }
 
-    public void setDateServer(DateServer dateServer) {
-        this.dateServer = dateServer;
-    }
-
     // Checks whether the current user is the project leader of a given project
     public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
         if (!getProject(projectNumber).hasProjectLeader()) {
@@ -311,10 +310,28 @@ public class App {
     }
 
     // Adds a developer to the list of currently working developers on an activity
+    // the user has to be project leader
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
+<<<<<<< HEAD
+            Activity activity = project.getActivity(activityName);
+            Developer developer = this.getDeveloper(initials);
+
+<<<<<<< HEAD
+            activity.addDeveloper(developer);
+            
+=======
+            if (activity.isDeveloperAssigned(developer) && !activity.isDeveloperAssignedByProjectLeader(developer)) {
+                activity.changeDeveloperFromRequestedToAssisgned(developer);
+            } else {
+                // check if the developer is assigned to the project or not
+                activity.addDeveloper(developer);
+            }
+=======
             // check if the developer is assigned to the project or not
+>>>>>>> f6ad3bb0d88ba2cf6c1358ab71b8be5c22762627
+>>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
             if (!project.isDeveloperAssigned(initials)){
                 addDeveloperToProject(initials, projectNumber);
             }
@@ -438,4 +455,29 @@ public class App {
     public boolean hasCurrentProjectReport(){
         return (!(this.currentProjectReport == null));
     }
+
+    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getCurrentDeveloperActivities(int week, int year) throws OperationNotAllowedException {
+        
+        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivities = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+
+        for (Developer d : this.developers) {
+            HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
+            ArrayList<Activity> developerActivities = d.getCurrentAssignedActivities(week, year);
+            for (Activity activity : developerActivities) {
+                Project parentProject;
+                
+                parentProject = this.getProject(activity.getParentProjectNumber());
+
+                if (!developerActivitiesHashMap.containsKey(parentProject)) {
+                    developerActivitiesHashMap.put(parentProject, new ArrayList<>());
+                }
+                developerActivitiesHashMap.get(parentProject).add(activity);
+            }
+            currentDeveloperActivities.put(d, developerActivitiesHashMap);
+        }
+        
+        return currentDeveloperActivities;
+
+    }
+
 }

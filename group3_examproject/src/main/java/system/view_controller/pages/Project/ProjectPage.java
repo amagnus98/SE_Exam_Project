@@ -117,8 +117,8 @@ public class ProjectPage {
         TextField addActivityTextField = new TextField("Activity Name", "activity name...", constants.boxColor).getTextField();
         InformationPanel.add(addActivityTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addActivityAction = new CreateNewProjectActivityAction("create new activity", previousPage, addActivityTextField.textField, project, main);
-        JPanel addActivityButtonPanel = new Button("create new activity", constants.boxColor, "micro", addActivityAction).getButton();
+        AbstractAction addActivityAction = new CreateNewProjectActivityAction("Create new Activity", previousPage, addActivityTextField.textField, project, main);
+        JPanel addActivityButtonPanel = new Button("Create new Activity", constants.boxColor, "micro", addActivityAction).getButton();
         InformationPanel.add(addActivityButtonPanel);
 
 
