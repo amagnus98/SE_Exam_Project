@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import system.view_controller.widgets.Button;
 import system.view_controller.widgets.TextField;
 import system.view_controller.actions.ActivityButtonAction;
-import system.view_controller.actions.AsignProjectDeveloperAction;
+import system.view_controller.actions.AssignProjectDeveloperAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.GetProjectReportAction;
 import system.view_controller.actions.MainMenuAction;
@@ -151,7 +151,7 @@ public class ProjectPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AsignProjectDeveloperAction("Assign Developer", previousPage, addDeveloperTextField.textField, project, main);
+        AbstractAction addDeveloperAction = new AssignProjectDeveloperAction("Assign Developer", previousPage, addDeveloperTextField.textField, project, main);
         JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 

@@ -1,40 +1,34 @@
 package system.model.domain;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-import io.cucumber.java.en_old.Ac;
-
 public class App {    
-
+    // keeps track of the current user that is logged in
     private Developer currentUser;
     // Add initial list of developers working in the company
-    private ArrayList<Developer> developers = new ArrayList<>(Arrays.asList(new Developer("bond"),
+    private ArrayList<Developer> developers = new ArrayList<>(Arrays.asList(new Developer("amag"),
                                                                             new Developer("anbi"),
                                                                             new Developer("kape"),
                                                                             new Developer("mari"),
                                                                             new Developer("mani")));
+    // project number for the non work activity project
     private String nonWorkActivityProjectNumber = "00001";
     // predefined non work activities
-    private ArrayList<String> nonWorkActivities = new ArrayList<>(Arrays.asList("Vacation",
-                                                                                "Sickday",
+    private ArrayList<String> initialNonWorkActivities = new ArrayList<>(Arrays.asList("Vacation",
+                                                                                "Sick day",
                                                                                 "Seminar",
                                                                                 "Maternity Leave"));
     // initialize project list with a project for non work activities
     private ArrayList<Project> projects = getInitialProjectList();
     
+    // variable used to keep track of current year
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+    // used to keep track of the number of projects for each year
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
+    // used as a container for the project report
     private ProjectReport currentProjectReport;
 
-    public String getnonWorkActivitiesProjectNumber() {
-        return this.nonWorkActivityProjectNumber;
-    }
-
-    public ArrayList<String> getNonWorkActivities() {
-        return this.nonWorkActivities;
-    }
-
+    // log in function
     public void logIn(String initials) throws OperationNotAllowedException {
         Developer d = getDeveloper(initials);
         setCurrentUser(d);
@@ -85,12 +79,13 @@ public class App {
         this.developers.add(d);
     }
 
+    // getter method for the current year - also updates the current year variable
     public int getCurrentYear(){
         this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
         return this.currentYear;
     }
 
-    // Get a list of developers
+    // Get the list of developers
     public ArrayList<Developer> getDevelopers(){
       return this.developers;
     }
@@ -102,22 +97,30 @@ public class App {
         return initialProjectList;
     }
 
+    public String getNonWorkActivitiesProjectNumber() {
+        return this.nonWorkActivityProjectNumber;
+    }
+
+    // create non work activity project
     public Project createNonWorkActivitiesProject(){
-        // assign non work activities to project number "00001"
+        // assign non work activities to a project called "Non work activities"
         Project nonWorkActivitiesProject = new Project(nonWorkActivityProjectNumber,"Non work activities");
         // mark project as non work activity project
         nonWorkActivitiesProject.setAsNonWorkActivityProject();
-        for (String activityName : nonWorkActivities){
+        // loop over the predefined initial non work activities
+        for (String activityName : initialNonWorkActivities){
             Activity nonWorkActivity = new Activity(activityName);
             nonWorkActivitiesProject.addToActivityList(nonWorkActivity);
         }
         return nonWorkActivitiesProject;
     }
-
+    
+    // checks that the project list contains a non work activity project
     public boolean hasNonWorkActivityProject() throws OperationNotAllowedException {
         return (projectExists(nonWorkActivityProjectNumber) && getProject(nonWorkActivityProjectNumber).isNonWorkActivityProject());
     }
 
+    // getter method for the non work activity project
     public Project getNonWorkActivityProject() throws OperationNotAllowedException {
         return getProject(nonWorkActivityProjectNumber);
     }
@@ -147,7 +150,8 @@ public class App {
         // Add the project to the list of projects
         this.projects.add(newProject);
     }
-
+    
+    // increment project count for current year
     public void incrementProjectCount(){
         this.projectCount.put(this.getCurrentYear(), getProjectCountForCurrentYear()+1);
     }
@@ -172,8 +176,8 @@ public class App {
         // Retrieve the project count in the given year
         int currentYearProjectCount  = this.getProjectCountForCurrentYear();
 
-        // Combine current year and project count into an ID number
-        return this.getCurrentYear() % 100 + String.format("%03d", currentYearProjectCount);
+        // Combine current year and project count into an ID number with 3 digits
+        return String.format("%02d",this.getCurrentYear() % 100) + String.format("%03d", currentYearProjectCount);
     }
 
     // Returns the list of projects
@@ -188,7 +192,7 @@ public class App {
         throw new OperationNotAllowedException("Project with given project number does not exist in the system");
     }
 
-    // Checks whether a project with a given project number exixst in the list of projects
+    // Checks whether a project with a given project number exist in the list of projects
     public boolean projectExists(String projectNumber){
         for (Project p : projects) {
             if (p.getProjectNumber().equals(projectNumber)) {
@@ -198,7 +202,7 @@ public class App {
         return false;
     }
     
-    // Get a project from the projects number
+    // Get a project from the project number
     public Project getProject(String projectNumber) throws OperationNotAllowedException {
         for (Project p : projects) {
             if (p.getProjectNumber().equals(projectNumber)) {
@@ -221,7 +225,7 @@ public class App {
         Developer developer = getDeveloper(initials);
         Project project = getProject(projectNumber);
         project.setProjectLeader(developer);
-        // add developer to project
+        // if the developer is not already assigned the project add him/her as well
         if (!(project.isDeveloperAssigned(developer))) {
             project.addDeveloper(developer);
         }
@@ -232,7 +236,7 @@ public class App {
         Activity activity = new Activity(activityName);
         activity.setAssignedProject(projectNumber);
         
-        // if current user is project leader adds the activity, else throws an errormessage
+        // if current user is project leader add the activity, else throw an error message
         if (currentUserIsProjectLeader(projectNumber)){
             getProject(projectNumber).addActivity(activity);
         } else {
@@ -240,7 +244,7 @@ public class App {
         }
     }
 
-    // time helper function
+    // time helper functions
     // check that hours format is valid
     public boolean isHoursFormatValid(double hours){
         return (hours > 0 && hours <= 24);
@@ -255,8 +259,6 @@ public class App {
     public boolean isWeekFormatValid(int week){
         return (week >= 1 && week <= 52);
     }
-
-    // check that start and end time format 
 
     public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
@@ -309,7 +311,6 @@ public class App {
             } else {
                 throw new OperationNotAllowedException("The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined");
             }
-            
         } else {
             throw new OperationNotAllowedException("The start and end time of the activity can't be edited, because the user is not the project leader");
         }
@@ -333,12 +334,47 @@ public class App {
 
             activity.addDeveloper(developer);
 
-            // check if the developer is assigned to the project or not
+            // check if the developer is already assigned to the project or not
             if (!project.isDeveloperAssigned(developer)){
                 addDeveloperToProject(initials, projectNumber);
             }
         } else {
             throw new OperationNotAllowedException("Only the project leader can assign developers to this activity");
+        }
+    }
+
+    // get the activities that each developer is assigned to in a given week and year
+    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getCurrentDeveloperActivities(int week, int year) throws OperationNotAllowedException {
+        // nested hash map where the outer key is the developer and the inner key is the project
+        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivities = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+
+        for (Developer d : this.developers) {
+            HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
+            ArrayList<Activity> developerActivities = d.getCurrentAssignedActivities(week, year);
+            for (Activity activity : developerActivities) {
+                Project parentProject;
+                
+                parentProject = this.getProject(activity.getParentProjectNumber());
+
+                // if no previous activities for the developer for the specific project has been registered yet
+                if (!developerActivitiesHashMap.containsKey(parentProject)) {
+                    developerActivitiesHashMap.put(parentProject, new ArrayList<>());
+                }
+                developerActivitiesHashMap.get(parentProject).add(activity);
+            }
+            currentDeveloperActivities.put(d, developerActivitiesHashMap);
+        }
+        
+        return currentDeveloperActivities;
+
+    }
+
+    public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(projectNumber)){
+            Project project = getProject(projectNumber);
+            project.setEstimatedWorkHours(workHours);
+        } else {
+            throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this project");
         }
     }
 
@@ -353,23 +389,17 @@ public class App {
         }
     }
 
-     public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
-        if (currentUserIsProjectLeader(projectNumber)){
-            Project project = getProject(projectNumber);
-            project.setEstimatedWorkHours(workHours);
-        } else {
-            throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this project");
-        }
-    }
-
-    // request assistance for activity
+    // request assistance for an activity
     public void requestAssistanceForActivity(String initialsReceiver, String activityName, String projectNumber) throws OperationNotAllowedException {
+        // get developer that is being requested
         Developer receiver = getDeveloper(initialsReceiver);
         Project project = getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
+        // the current user request assistance
         activity.requestAssistance(receiver,currentUser);        
     } 
 
+    // register hours to an activity
     public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
         Project project = getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
@@ -385,30 +415,32 @@ public class App {
         if (!(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject())) {
             throw new OperationNotAllowedException("The user is not assigned the given activity");
         }
+        // check that the user registers hours within the allowed time horizon of the activity
+        // this always returns false if the activity is a non work activity since it doesn't have a time horizon
         if (!(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject())){
             throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
         }
+        // register hours and update the total hours for both the project and the activity
         double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
         this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
-        project.setTotalHoursRegistered(project.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
-        activity.setTotalHoursRegistered(activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+        // if no hours have been registered before currentlyRegisteredHours=0
+        // therefore in order to update properly when a user sets or edits the registered hours
+        // it should update as follows
+        double newProjectTotalHoursRegistered = project.getTotalHoursRegistered() + hours - currentlyRegisteredHours;
+        project.setTotalHoursRegistered(newProjectTotalHoursRegistered);
+        double newActivityTotalHoursRegistered = activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours;
+        activity.setTotalHoursRegistered(newActivityTotalHoursRegistered);
     }
-
-
-    
 
     public void registerHoursToNonWorkActivity(double hours, int day, int week, int year, String activityName) throws OperationNotAllowedException{
         registerHoursToActivity(hours, day, week, year, nonWorkActivityProjectNumber, activityName);
     }
 
-    public boolean isNonWorkActivity(String activity){
-        return nonWorkActivities.contains(activity);
-    }
-
+    // use the calendar output variable to see activities with registered hours
     public void viewActivitiesWithRegisteredHours(int day, int week, int year) throws OperationNotAllowedException{
         this.currentUser.setCalendarOutput(day, week, year);
     }
-
+    
     public void generateProjectReport(String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)) {
         Project project = getProject(projectNumber);
@@ -431,28 +463,6 @@ public class App {
         return (!(this.currentProjectReport == null));
     }
 
-    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getCurrentDeveloperActivities(int week, int year) throws OperationNotAllowedException {
-        
-        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivities = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
-
-        for (Developer d : this.developers) {
-            HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
-            ArrayList<Activity> developerActivities = d.getCurrentAssignedActivities(week, year);
-            for (Activity activity : developerActivities) {
-                Project parentProject;
-                
-                parentProject = this.getProject(activity.getParentProjectNumber());
-
-                if (!developerActivitiesHashMap.containsKey(parentProject)) {
-                    developerActivitiesHashMap.put(parentProject, new ArrayList<>());
-                }
-                developerActivitiesHashMap.get(parentProject).add(activity);
-            }
-            currentDeveloperActivities.put(d, developerActivitiesHashMap);
-        }
-        
-        return currentDeveloperActivities;
-
-    }
+    
 
 }

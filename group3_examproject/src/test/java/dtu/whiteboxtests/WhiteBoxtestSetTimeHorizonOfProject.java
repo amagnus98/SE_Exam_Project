@@ -20,7 +20,7 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
     @BeforeEach
     public void setUp() throws OperationNotAllowedException, Exception {
         System.out.println("Executing setup");
-        app.logIn("bond");
+        app.logIn("amag");
     }
 
 
@@ -57,7 +57,7 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
         int endWeek = 10;
 
         // assign current user as project leader
-        app.assignProjectLeader(projectNumber, "bond");
+        app.assignProjectLeader(projectNumber, "amag");
 
         // Check that the correct message is given when end time is before start time
         try {app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);}
@@ -80,7 +80,7 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
         int startYear2 = app.getCurrentYear();
 
         // assign current user as project leader
-        app.assignProjectLeader(projectNumber, "bond");
+        app.assignProjectLeader(projectNumber, "amag");
 
         // set initial project time horizon
         app.setTimeHorizonOfProject(startYear1, startWeek, endYear, endWeek, projectNumber);
@@ -116,7 +116,7 @@ public class WhiteBoxtestSetTimeHorizonOfProject {
 
 
         // assign current user as project leader
-        app.assignProjectLeader(projectNumber, "bond");
+        app.assignProjectLeader(projectNumber, "amag");
 
         // set initial project time horizon
         app.setTimeHorizonOfProject(startYear1, startWeek1, endYear1, endWeek1, projectNumber);

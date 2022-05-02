@@ -11,8 +11,8 @@ import system.view_controller.widgets.Button;
 import system.view_controller.widgets.ProjectButton;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.widgets.TextField;
-import system.view_controller.actions.AsignActivityDeveloperAction;
-import system.view_controller.actions.AsignProjectDeveloperAction;
+import system.view_controller.actions.AssignActivityDeveloperAction;
+import system.view_controller.actions.AssignProjectDeveloperAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
@@ -140,7 +140,7 @@ public class ActivityPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AsignActivityDeveloperAction("Assign Developer", previousProject, addDeveloperTextField.textField, activity, main);
+        AbstractAction addDeveloperAction = new AssignActivityDeveloperAction("Assign Developer", previousProject, addDeveloperTextField.textField, activity, main);
         JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 

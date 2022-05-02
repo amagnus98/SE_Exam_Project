@@ -1,6 +1,5 @@
 package system.model.domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,16 +13,22 @@ public class ProjectReport {
 
     public ProjectReport(Project project){
         this.project = project;
-        updateProjectReport();
+        // generate project report
+        generateProjectReport();
     }
 
-    public void updateProjectReport(){
+    public String getProjectNumber(){
+        return project.getProjectNumber();
+    }
+
+    public void generateProjectReport(){
         setEstimatedActivityTime();
         setRegisteredActivityTime();
         setEstimatedHoursForProject();
         setTotalHoursRegisteredToProject();
     }
 
+    // retrieve the estimated hours for each activity and put it into the project report hash map
     public void setEstimatedActivityTime(){
         ArrayList<Activity> activities = this.project.getActivities();
         for (Activity a : activities){
@@ -31,11 +36,20 @@ public class ProjectReport {
         }
     }
 
+    // retrieve the total registered hours for each activity and put it into the project report hash map
     public void setRegisteredActivityTime(){
         ArrayList<Activity> activities = this.project.getActivities();
         for (Activity a : activities){
             this.registeredActivityTime.put(a.getName(), a.getTotalHoursRegistered());
         }
+    }
+
+    public double getEstimatedHoursOnActivity(String activityName) {
+        return this.estimatedActivityTime.get(activityName);
+    }
+
+     public double getTotalHoursWorkedOnActivity(String activityName) {
+        return this.registeredActivityTime.get(activityName);
     }
     
     public void setEstimatedHoursForProject(){
@@ -54,15 +68,4 @@ public class ProjectReport {
         return this.totalHoursRegisteredToProject;
     }
 
-    public String getProjectNumber(){
-        return project.getProjectNumber();
-    }
-
-    public double getEstimatedHoursOnActivity(String activityName) {
-        return this.estimatedActivityTime.get(activityName);
-    }
-
-     public double getTotalHoursWorkedOnActivity(String activityName) {
-        return this.registeredActivityTime.get(activityName);
-    }
 }

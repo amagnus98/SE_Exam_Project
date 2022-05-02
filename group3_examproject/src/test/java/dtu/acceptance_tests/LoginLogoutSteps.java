@@ -65,7 +65,7 @@ public class LoginLogoutSteps {
     @Given("that a user is logged in")
     public void that_a_user_is_logged_in()  throws Exception {
         // Developer logs into the app
-        this.app.logIn("bond");
+        this.app.logIn("amag");
 
         assertTrue(this.app.hasCurrentUser());
     }

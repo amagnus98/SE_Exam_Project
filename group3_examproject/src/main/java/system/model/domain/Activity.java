@@ -34,8 +34,6 @@ public class Activity extends Event{
   public void addAssignedDeveloper(Developer d){
       this.assignedDevelopers.add(d);
       this.isAssignedByProjectLeader.put(d.getInitials(),true);
-      this.assignedDevelopers.add(d);
-      this.isAssignedByProjectLeader.put(d.getInitials(),true);
       d.assignActivity(this);
   }
 

@@ -90,7 +90,7 @@ public class CreateProjectActivitySteps {
       // Create new project (will have project number 22001)
       this.app.addProject();
 
-      // assign current project leader to a different developer than "bond"
+      // assign current project leader to a different developer than "amag"
       this.app.assignProjectLeader(projectNumber,"kape");
       assertNotEquals(this.app.getProject(projectNumber).getProjectLeader(), initials);
   }

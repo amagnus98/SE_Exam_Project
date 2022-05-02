@@ -10,14 +10,14 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class AsignActivityDeveloperAction extends AbstractAction {
+public class AssignActivityDeveloperAction extends AbstractAction {
 
     JTextField textField;
     Main main;
     Activity activity;
     Project previousProject;
 
-    public AsignActivityDeveloperAction(String name, Project previousProject, JTextField textField, Activity activity, Main main) {
+    public AssignActivityDeveloperAction(String name, Project previousProject, JTextField textField, Activity activity, Main main) {
         putValue(NAME, name);
         this.textField = textField;
         this.main = main;
@@ -27,7 +27,6 @@ public class AsignActivityDeveloperAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         Boolean hasError = false;
 
         String initials = textField.getText();

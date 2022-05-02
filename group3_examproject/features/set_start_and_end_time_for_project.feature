@@ -3,17 +3,17 @@ Description: The user sets the start and end time of a project
 Actors: Project leader
 
 Scenario: Set time horizon of a project
-  Given the current user is a developer with initials "bond"
+  Given the current user is a developer with initials "amag"
   And a project with project number current year plus "001" exists in the system
-  And the developer with initials "bond" is the project leader of the project with project number current year plus "001"
+  And the developer with initials "amag" is the project leader of the project with project number current year plus "001"
   When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 40 of the project with project number current year plus "001"
   Then the start time of the project with project number current year plus "001" is updated to year 2022 and week 30
   And the end time of the project with project number current year plus "001" is updated to year 2022 and week 40
   
 Scenario: Non-project leader edits the time horizon of a project
-  Given the current user is a developer with initials "bond"
+  Given the current user is a developer with initials "amag"
   And a project with project number current year plus "001" exists in the system
-  And the developer with initials "bond" is not the project leader of the project with project number current year plus "001"
+  And the developer with initials "amag" is not the project leader of the project with project number current year plus "001"
   And the start time of the project with project number current year plus "001" is year 2022 and week 35
   And the end time of the project with project number current year plus "001" is year 2022 and week 38
   When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 40 of the project with project number current year plus "001"
@@ -22,9 +22,9 @@ Scenario: Non-project leader edits the time horizon of a project
   And the end time of the project with project number current year plus "001" is not updated to year 2022 and week 40
 
 Scenario: End time occurs before start time for project
-  Given the current user is a developer with initials "bond"
+  Given the current user is a developer with initials "amag"
   And a project with project number current year plus "001" exists in the system
-  And the developer with initials "bond" is the project leader of the project with project number current year plus "001"
+  And the developer with initials "amag" is the project leader of the project with project number current year plus "001"
   And the start time of the project with project number current year plus "001" is year 2022 and week 35
   And the end time of the project with project number current year plus "001" is year 2022 and week 40
   When the current user sets the start time to year 2022 and week 30 and end time to year 2022 and week 25 of the project with project number current year plus "001"
@@ -35,9 +35,9 @@ Scenario: End time occurs before start time for project
 # if a project contains activities with a given time horizon the user cannot
 # set the time horizon of the project so that the activities time horizons will lie outside
 Scenario: The user tries to edit the time horizon for a project that conflicts with the time horizon of its activities
-  Given the current user is a developer with initials "bond"
+  Given the current user is a developer with initials "amag"
   And a project with project number current year plus "001" exists in the system
-  And the developer with initials "bond" is the project leader of the project with project number current year plus "001"
+  And the developer with initials "amag" is the project leader of the project with project number current year plus "001"
   And the start time of the project with project number current year plus "001" is year 2022 and week 20
   And the end time of the project with project number current year plus "001" is year 2022 and week 50
   And the project with project number current year plus "001" contains an activity with name "Activity Name"
@@ -49,9 +49,9 @@ Scenario: The user tries to edit the time horizon for a project that conflicts w
   And the end time of the project with project number current year plus "001" is not updated to year 2022 and week 40
 
 Scenario: Format of time horizon for project is invalid
-  Given the current user is a developer with initials "bond"
+  Given the current user is a developer with initials "amag"
   And a project with project number current year plus "001" exists in the system
-  And the developer with initials "bond" is the project leader of the project with project number current year plus "001"
+  And the developer with initials "amag" is the project leader of the project with project number current year plus "001"
   And the start time of the project with project number current year plus "001" is year 2022 and week 35
   And the end time of the project with project number current year plus "001" is year 2022 and week 40
   When the current user sets the start time to year 2022 and week 0 and end time to year 2022 and week 30 of the project with project number current year plus "001"

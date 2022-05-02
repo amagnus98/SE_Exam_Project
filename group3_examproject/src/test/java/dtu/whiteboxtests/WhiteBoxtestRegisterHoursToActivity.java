@@ -20,7 +20,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
     @BeforeEach
     public void setUp() throws OperationNotAllowedException, Exception {
         System.out.println("Executing setup");
-        app.logIn("bond");
+        app.logIn("amag");
     }
 
 
@@ -31,7 +31,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 0;
@@ -46,7 +46,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
-      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
+      app.addDeveloperToActivity("amag", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -65,7 +65,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 5;
@@ -80,7 +80,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
-      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
+      app.addDeveloperToActivity("amag", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -100,7 +100,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 5;
@@ -115,7 +115,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
-      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
+      app.addDeveloperToActivity("amag", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -135,7 +135,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 5;
@@ -169,7 +169,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 5;
@@ -184,7 +184,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project, add current user to activity and set time horizon for both project and activity
       app.addActivityToProject(activityName, projectNumber);
-      app.addDeveloperToActivity("bond", activityName, projectNumber);
+      app.addDeveloperToActivity("amag", activityName, projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activityName, projectNumber);
 
@@ -203,7 +203,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       int week = 20;
       int year = app.getCurrentYear();
       String activityName = "Vacation";
-      String projectNumber = app.getnonWorkActivitiesProjectNumber();
+      String projectNumber = app.getNonWorkActivitiesProjectNumber();
 
       // store previous data to check that it updates
       double prevRegisteredHoursUser = app.getCurrentUser().getRegisteredHours(day, week, year, projectNumber, activityName);
@@ -226,7 +226,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
       // assign current user as project leader
       String projectNumber = app.getProjectNumber();
-      app.assignProjectLeader(projectNumber, "bond");
+      app.assignProjectLeader(projectNumber, "amag");
       
       // Define input
       double hours = 5;
@@ -241,7 +241,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project, add current user to activity and set time horizon for both project and activity
       app.addActivityToProject(activityName, projectNumber);
-      app.addDeveloperToActivity("bond", activityName, projectNumber);
+      app.addDeveloperToActivity("amag", activityName, projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activityName, projectNumber);
 

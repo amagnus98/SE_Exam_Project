@@ -8,14 +8,14 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class AsignProjectDeveloperAction extends AbstractAction {
+public class AssignProjectDeveloperAction extends AbstractAction {
 
     JTextField textField;
     Main main;
     Project project;
     String previousPage;
 
-    public AsignProjectDeveloperAction(String name, String previousPage, JTextField textField, Project project, Main main) {
+    public AssignProjectDeveloperAction(String name, String previousPage, JTextField textField, Project project, Main main) {
         putValue(NAME, name);
         this.textField = textField;
         this.main = main;
