@@ -43,7 +43,6 @@ public class registerTimeAction extends AbstractAction {
         try {
             if (main.app.getProject(projectNumber).isNonWorkActivityProject()) {
                 main.app.registerHoursToNonWorkActivity(hours, day, week, year, activityName);
-                System.out.print(projectNumber);
             } else {
                 main.app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);
             }
