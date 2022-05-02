@@ -35,6 +35,10 @@ public class NavigatorPage {
         JPanel manageProjectsButtonPanel = new Button("Manage Projects", constants.backgroundColor, "big", manageProjectsAction).getButton();
         BoxPanel.add(manageProjectsButtonPanel);
 
+        AbstractAction developerOverviewAction = new MainMenuAction("Developer Overview", "Developer Overview", main);
+        JPanel developerOverviewButtonPanel = new Button("Developer Overview", constants.backgroundColor, "big", developerOverviewAction).getButton();
+        BoxPanel.add(developerOverviewButtonPanel);
+
         AbstractAction timeRegistrationAction = new MainMenuAction("Time Registration", "Time Registration", main);
         JPanel timeRegistrationButtonPanel = new Button("Time Registration", constants.backgroundColor, "big", timeRegistrationAction).getButton();
         BoxPanel.add(timeRegistrationButtonPanel);

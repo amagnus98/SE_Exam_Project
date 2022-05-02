@@ -13,6 +13,7 @@ public class Developer {
     // values are lists of hashmaps with three values - projectNumber, activityName and registeredHours
     // shows all the activities worked on for the given day
     private ArrayList<HashMap<String,String>> calendarOutput;
+    private ArrayList<Activity> assignedActivities = new ArrayList<>();
 
     // Constructor of Developer
     public Developer(String initials) {
@@ -60,6 +61,25 @@ public class Developer {
             }
         }
         return false;
+    }
+
+    public void assignActivity(Activity activity) {
+        this.assignedActivities.add(activity);
+    }
+
+    public ArrayList<Activity> getAssignedActivities() {
+        return this.assignedActivities;
+    }
+
+    public ArrayList<Activity> getCurrentAssignedActivities(int week, int year) {
+        ArrayList<Activity> currentActivities = new ArrayList<>();
+        for (Activity activity : this.assignedActivities) {
+            if (activity.isDateWithinTimeHorizon(year, week)) {
+                currentActivities.add(activity);
+            }
+        }
+        return currentActivities;
+
     }
 
 }

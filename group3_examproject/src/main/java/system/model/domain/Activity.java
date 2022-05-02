@@ -32,8 +32,14 @@ public class Activity extends Event{
 
   // for developers added to the activity by a project leader
   public void addAssignedDeveloper(Developer d){
+<<<<<<< HEAD
     this.assignedDevelopers.add(d);
     this.isAssignedByProjectLeader.put(d.getInitials(),true);
+=======
+      this.assignedDevelopers.add(d);
+      this.isAssignedByProjectLeader.put(d.getInitials(),true);
+      d.assignActivity(this);
+>>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
   }
 
   // for developers requested to the activity by other assigned developers
@@ -42,6 +48,7 @@ public class Activity extends Event{
     this.isAssignedByProjectLeader.put(d.getInitials(),false);
   }
 
+<<<<<<< HEAD
   // add developer to activity
   public void addDeveloper(Developer d) throws OperationNotAllowedException {
       // check if the developer has already been added to the activity by the project leader
@@ -59,6 +66,9 @@ public class Activity extends Event{
 
   // change developer status from requested to assigned
   public void changeDeveloperFromRequstedToAssisgned(Developer d){
+=======
+  public void changeDeveloperFromRequestedToAssisgned(Developer d){
+>>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
     this.isAssignedByProjectLeader.put(d.getInitials(),true);
   }
   
@@ -98,6 +108,7 @@ public class Activity extends Event{
       if (!isDeveloperAssigned(receiver)){
           // add the developer as a requested developer
           addRequestedDeveloper(receiver);
+          receiver.assignActivity(this);
       } else {
           throw new OperationNotAllowedException("The developer is already working on the given activity");
       } 

@@ -30,10 +30,11 @@ public class CreateNewProjectActivityAction extends AbstractAction {
 
         Boolean hasError = false;
 
-        String activityName = textField.getText();
+        String activityName = textField.getText().trim();
+        
         try {
             if (project.isNonWorkActivityProject()) {
-                project.addToActivityList(new Activity(activityName));
+                project.addActivity(new Activity(activityName));
             } else {
                 main.app.addActivityToProject(activityName, project.getProjectNumber());
             }

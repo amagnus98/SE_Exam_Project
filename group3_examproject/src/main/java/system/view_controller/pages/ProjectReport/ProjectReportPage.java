@@ -118,7 +118,7 @@ public class ProjectReportPage {
             activityPanel.add(activityEstLabel);
             activityEstLabel.setHorizontalAlignment(JLabel.LEFT);
 
-            JLabel activityTotalLabel = new JLabel("Total: " + activity.getTotalHoursRegistered());
+            JLabel activityTotalLabel = new JLabel("Worked: " + activity.getTotalHoursRegistered());
             activityPanel.add(activityTotalLabel);
             activityTotalLabel.setHorizontalAlignment(JLabel.RIGHT);
             

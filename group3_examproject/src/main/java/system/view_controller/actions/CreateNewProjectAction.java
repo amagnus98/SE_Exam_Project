@@ -27,10 +27,12 @@ public class CreateNewProjectAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         boolean hasError = false;
 
+        String projectName = textField.getText().trim();
+
         if (textField.getText() == "") {
             main.app.addProject();
         } else {
-            main.app.addProject(textField.getText());
+            main.app.addProject(projectName);
         }
         Project project;
         try {
