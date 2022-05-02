@@ -1,8 +1,14 @@
 package system.view_controller.pages.LogIn;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.ProcessHandle.Info;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -33,11 +39,39 @@ public class LogInPage {
         InformationPanel.setLayout(new BoxLayout(InformationPanel, BoxLayout.Y_AXIS));
         InformationPanel.setBackground(constants.backgroundColor);
 
-        JPanel headerPanel = new JPanel();
-        new Header("Log In", headerPanel);
-        headerPanel.setBackground(constants.backgroundColor);
-        headerPanel.setBorder(new EmptyBorder(100,0,0,0));
-        InformationPanel.add(headerPanel);
+
+        try {
+            JPanel headerPanel = new JPanel();
+            Path currentRelativePath = Paths.get("");
+            String path = currentRelativePath.toAbsolutePath().toString();
+            String pathImage = path + "/src/main/java/system/view_controller/pages/LogIn/assets/logo.png";
+            System.out.println(pathImage);
+            File image = new File(pathImage);
+            BufferedImage logo = ImageIO.read(image);
+            JLabel logoLabel = new JLabel(new ImageIcon(logo));
+            headerPanel.add(logoLabel);
+            headerPanel.setBackground(constants.backgroundColor);
+            headerPanel.setBorder(new EmptyBorder(100,0,0,0));
+            InformationPanel.add(headerPanel);
+        } catch (IOException e) {
+            System.out.println(e);
+            JPanel headerPanel = new JPanel();
+            JLabel headerLabel = new JLabel("KAMMA Time Registration");
+            headerLabel.setFont(new Font("Arial", Font.BOLD, 25));
+            headerPanel.add(headerLabel);
+            headerPanel.setBackground(constants.backgroundColor);
+            headerPanel.setBorder(new EmptyBorder(75,0,0,0));
+            InformationPanel.add(headerPanel);
+        }
+
+
+        JPanel logInHeaderPanel = new JPanel();
+        JLabel logInHeader = new JLabel("Log In");
+        logInHeader.setFont(new Font("Arial", Font.BOLD, 20));
+        logInHeaderPanel.add(logInHeader);
+        logInHeaderPanel.setBackground(constants.backgroundColor);
+        logInHeaderPanel.setBorder(new EmptyBorder(35,0,0,0));
+        InformationPanel.add(logInHeaderPanel);
 
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
