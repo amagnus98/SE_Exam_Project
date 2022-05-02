@@ -32,6 +32,21 @@ Scenario: Register time to a project activity on a date with preregistred hours
     And the total registered time of the project with project number current year plus "001" is set to 17.5 hours
     And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 8.5 hours
 
+Scenario: Non assigned developer tries to register hours to activity
+    Given the current user is a developer with initials "bond"
+    And a project with project number current year plus "001" exists in the system
+    And the project with project number current year plus "001" contains an activity with name "Activity Name"
+    And the user with initials "bond" is not allowed to register hours for the activity with name "Activity Name" of project with project number current year plus "001"
+    And the total hours registered to the project with project number current year plus "001" is 19 hours
+    And the total hours registered to the activity with name "Activity Name" of the project with project number current year plus "001" is 10 hours
+    And the start time of the activity with name "Activity Name" of project with project number current year plus "001" is year 2022 and week 20
+    And the end time of the activity with name "Activity Name" of project with project number current year plus "001" is year 2022 and week 40
+    When the current user registers 5.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
+    Then the system provides an error message "The user is not assigned the given activity" 
+    And the total registered time of the project with project number current year plus "001" is set to 19 hours
+    And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 10 hours
+
+
 Scenario: Register time to a non work activity
     Given the current user is a developer with initials "bond"
     And a project exists in the system for non work activities

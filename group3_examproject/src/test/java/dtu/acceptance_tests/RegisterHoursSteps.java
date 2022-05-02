@@ -129,6 +129,19 @@ public class RegisterHoursSteps {
     }
 
     // SCENARIO 3
+    @Given("the user with initials {string} is not allowed to register hours for the activity with name {string} of project with project number current year plus {string}")
+    public void the_user_with_initials_is_not_allowed_to_register_hours_for_the_activity_with_name_of_project_with_project_number_current_year_plus(String initials, String activityName, String trackNumber) throws Exception {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String projectNumber = currentYear % 100 + trackNumber;
+
+        Developer developer = this.app.getDeveloper(initials);
+        Project project = this.app.getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+
+        assertFalse(activity.canRegisterHours(developer));
+    }
+
+    // SCENARIO 4
     @Given("a project exists in the system for non work activities")
     public void a_project_exists_in_the_system_for_non_work_activities() throws Exception {
         assertTrue(this.app.hasNonWorkActivityProject());
