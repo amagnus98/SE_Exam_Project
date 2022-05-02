@@ -40,7 +40,7 @@ public class AssignDeveloperToActivitySteps {
 
   @When("the current user assigns the developer with initials {string} to activity with name {string} of project with project number current year plus {string}")
   public void the_current_user_assigns_the_developer_with_initials_to_activity_with_name_of_project_with_project_number_current_year_plus(String initials, String activityName, String trackNumber) throws Exception {
-      try {
+    try {
           int currentYear = Calendar.getInstance().get(Calendar.YEAR);
           String projectNumber = currentYear % 100 + trackNumber;
           // developer is added to activity

@@ -85,18 +85,8 @@ public class Project extends Event{
         return this.activities;
     }
 
-    // Checks if the developer is assigned to the project
-    public boolean isDeveloperAssigned(String initials){
-        for (Developer d : this.assignedDevelopers){
-            if (d.getInitials().equals(initials)){
-                return true;
-            } 
-        }
-        return false;
-    }
-
     public void addDeveloper(Developer d) throws OperationNotAllowedException{
-        if (!isDeveloperAssigned(d.getInitials())){
+        if (!isDeveloperAssigned(d)){
             this.assignedDevelopers.add(d);    
         } else {
             throw new OperationNotAllowedException("The developer is already assigned to the given project");

@@ -31,8 +31,9 @@ public class AssignDeveloperToProjectSteps {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		String projectNumber = currentYear % 100 + trackNumber;
         Project project = this.app.getProject(projectNumber);
+        Developer developer = this.app.getDeveloper(initials);
 
-        assertFalse(project.isDeveloperAssigned(initials));
+        assertFalse(project.isDeveloperAssigned(developer));
     }
 
     @When("the current user assigns the developer with initials {string} to the project with project number current year plus {string}")
@@ -53,7 +54,9 @@ public class AssignDeveloperToProjectSteps {
 		String projectNumber = currentYear % 100 + trackNumber;
         Project project = this.app.getProject(projectNumber);
 
-        assertTrue(project.isDeveloperAssigned(initials));
+        Developer developer = this.app.getDeveloper(initials);
+        
+        assertTrue(project.isDeveloperAssigned(developer));
     }
 
     // SCENARIO 2
@@ -65,7 +68,7 @@ public class AssignDeveloperToProjectSteps {
         Developer developer = this.app.getDeveloper(initials);
         Project project = this.app.getProject(projectNumber);
         project.addDeveloper(developer);    
-        assertTrue(project.isDeveloperAssigned(initials));
+        assertTrue(project.isDeveloperAssigned(developer));
     }
 
     // SCENARIO 3
@@ -75,8 +78,9 @@ public class AssignDeveloperToProjectSteps {
 		String projectNumber = currentYear % 100 + trackNumber;
 
         Project project = this.app.getProject(projectNumber);
+        Developer developer = new Developer(initials);
 
-        assertFalse(project.isDeveloperAssigned(initials));
+        assertFalse(project.isDeveloperAssigned(developer));
     }
 
 

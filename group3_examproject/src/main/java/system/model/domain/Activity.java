@@ -32,14 +32,11 @@ public class Activity extends Event{
 
   // for developers added to the activity by a project leader
   public void addAssignedDeveloper(Developer d){
-<<<<<<< HEAD
-    this.assignedDevelopers.add(d);
-    this.isAssignedByProjectLeader.put(d.getInitials(),true);
-=======
+      this.assignedDevelopers.add(d);
+      this.isAssignedByProjectLeader.put(d.getInitials(),true);
       this.assignedDevelopers.add(d);
       this.isAssignedByProjectLeader.put(d.getInitials(),true);
       d.assignActivity(this);
->>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
   }
 
   // for developers requested to the activity by other assigned developers
@@ -48,14 +45,14 @@ public class Activity extends Event{
     this.isAssignedByProjectLeader.put(d.getInitials(),false);
   }
 
-<<<<<<< HEAD
+
   // add developer to activity
   public void addDeveloper(Developer d) throws OperationNotAllowedException {
       // check if the developer has already been added to the activity by the project leader
       if (!isDeveloperAssignedByProjectLeader(d)){
         // check if the developer has already been requested to the project
         if (isDeveloperAssigned(d)) {
-          changeDeveloperFromRequstedToAssisgned(d);
+          changeDeveloperFromRequestedToAssisgned(d);
         } else {
           addAssignedDeveloper(d);
         }
@@ -65,10 +62,7 @@ public class Activity extends Event{
   }
 
   // change developer status from requested to assigned
-  public void changeDeveloperFromRequstedToAssisgned(Developer d){
-=======
   public void changeDeveloperFromRequestedToAssisgned(Developer d){
->>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
     this.isAssignedByProjectLeader.put(d.getInitials(),true);
   }
   
@@ -79,17 +73,6 @@ public class Activity extends Event{
       return this.isAssignedByProjectLeader.get(d.getInitials());
     }
     return false;
-  }
-
-  // check if the developer is currently assigned to work on the activity
-  public boolean isDeveloperAssigned(Developer developer){
-    for (Developer d : this.assignedDevelopers){
-      if (d.getInitials().equals(developer.getInitials())){
-        return true;
-      }
-    }
-    return false;
-    
   }
 
   // used to check if the user can register hours to the activity

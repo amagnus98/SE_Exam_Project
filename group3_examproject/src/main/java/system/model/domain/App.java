@@ -1,10 +1,6 @@
 package system.model.domain;
 
-<<<<<<< HEAD
 import java.lang.reflect.Array;
-=======
-import java.rmi.server.Operation;
->>>>>>> f6ad3bb0d88ba2cf6c1358ab71b8be5c22762627
 import java.util.*;
 
 import io.cucumber.java.en_old.Ac;
@@ -226,7 +222,7 @@ public class App {
         Project project = getProject(projectNumber);
         project.setProjectLeader(developer);
         // add developer to project
-        if (!(project.isDeveloperAssigned(initials))) {
+        if (!(project.isDeveloperAssigned(developer))) {
             project.addDeveloper(developer);
         }
     }
@@ -314,31 +310,15 @@ public class App {
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
-<<<<<<< HEAD
             Activity activity = project.getActivity(activityName);
             Developer developer = this.getDeveloper(initials);
 
-<<<<<<< HEAD
             activity.addDeveloper(developer);
-            
-=======
-            if (activity.isDeveloperAssigned(developer) && !activity.isDeveloperAssignedByProjectLeader(developer)) {
-                activity.changeDeveloperFromRequestedToAssisgned(developer);
-            } else {
-                // check if the developer is assigned to the project or not
-                activity.addDeveloper(developer);
-            }
-=======
+
             // check if the developer is assigned to the project or not
->>>>>>> f6ad3bb0d88ba2cf6c1358ab71b8be5c22762627
->>>>>>> 091432a1d882cb2a403aa6d3e7713d750402c199
-            if (!project.isDeveloperAssigned(initials)){
+            if (!project.isDeveloperAssigned(developer)){
                 addDeveloperToProject(initials, projectNumber);
             }
-            Activity activity = project.getActivity(activityName);
-
-            Developer developer = getDeveloper(initials);
-            activity.addDeveloper(developer);
         } else {
             throw new OperationNotAllowedException("Only the project leader can assign developers to this activity");
         }
