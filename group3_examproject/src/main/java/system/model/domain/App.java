@@ -240,11 +240,29 @@ public class App {
         }
     }
 
+    // time helper function
+    // check that hours format is valid
+    public boolean isHoursFormatValid(double hours){
+        return (hours > 0 && hours <= 24);
+    }
+
+    // check that day format is valid
+    public boolean isDayFormatValid(int day) throws OperationNotAllowedException{
+        return (day >= 1 && day <= 7);
+    }
+
+    // check that week format is valid
+    public boolean isWeekFormatValid(int week){
+        return (week >= 1 && week <= 52);
+    }
+
+    // check that start and end time format 
+
     public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
             // check if the weeks are between 1 and 52
-            if (project.isWeekFormatValid(startWeek,endWeek)){
+            if (isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek)){
                 if (project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
                     // check that the time horizon of all of the activities still lies within the new time horizon
                     if (project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek)){
@@ -271,7 +289,7 @@ public class App {
             if (project.isTimeHorizonDefined()){
                 Activity activity = project.getActivity(activityName);
                 // check if end time occurs after start time
-                if (activity.isWeekFormatValid(startWeek, endWeek)){
+                if (isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek)){
                     if (activity.isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
                         // check if both the start and end time are within the time horizon of the project
                         if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
@@ -355,13 +373,13 @@ public class App {
     public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
         Project project = getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
-        if (!isRegisterHoursFormatValid(hours)){
+        if (!isHoursFormatValid(hours)){
             throw new OperationNotAllowedException("Hours must be more than zero and not greater than 24");
         }
-        if (!isRegisterDayFormatValid(day)){
+        if (!isDayFormatValid(day)){
             throw new OperationNotAllowedException("Days must be more than zero and not greater than 7");
         }
-        if (!isRegisterWeekFormatValid(week)){
+        if (!isWeekFormatValid(week)){
             throw new OperationNotAllowedException("Weeks must be more than zero and not greater than 52");
         }
         if (!(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject())) {
@@ -377,30 +395,7 @@ public class App {
     }
 
 
-    // helper functions for registerHoursToActivity
-    // check that hours format is valid
-    public boolean isRegisterHoursFormatValid(double hours){
-        if (hours <= 0 || hours > 24){
-            return false;
-        }
-        return true;
-    }
-
-    // check that day format is valid
-    public boolean isRegisterDayFormatValid(int day) throws OperationNotAllowedException{
-        if (day < 1 || day > 7){
-            return false;
-        }
-        return true;
-    }
-
-    // check that week format is valid
-    public boolean isRegisterWeekFormatValid(int week){
-        if (week < 0 || week > 52){
-            return false;
-        }
-        return true;
-    }
+    
 
     public void registerHoursToNonWorkActivity(double hours, int day, int week, int year, String activityName) throws OperationNotAllowedException{
         registerHoursToActivity(hours, day, week, year, nonWorkActivityProjectNumber, activityName);

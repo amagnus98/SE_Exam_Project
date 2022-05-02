@@ -48,29 +48,33 @@ public class Developer {
     // set the calendar output for the developer
     // retrieves all the registered activities for the given day
     public void setCalendarOutput(int day, int week, int year) throws OperationNotAllowedException{
-        this.calendarOutput = this.calendar.getRegisteredActivities(day,week,year);
+        this.calendarOutput = this.calendar.getRegisteredActivitiesInformation(day,week,year);
     }
 
     // check if the developer has registered hours for a given day
     public boolean calendarOutputContainsActivity(double hours, String activityName, String projectNumber){
-        for (HashMap<String,String> activity : this.calendarOutput){
-            if (activity.get("Project number").equals(projectNumber) &&
-                activity.get("Activity name").equals(activityName) &&
-                activity.get("Registered hours").equals("" + hours)){
+        for (HashMap<String,String> activityInformation : this.calendarOutput){
+            if (activityInformation.get("Project number").equals(projectNumber) &&
+                activityInformation.get("Activity name").equals(activityName) &&
+                activityInformation.get("Registered hours").equals("" + hours)){
                     return true;
             }
         }
         return false;
     }
 
+    // add activity to developers assigned activities
+    // used to keep track of which activity the developers are working on
     public void assignActivity(Activity activity) {
         this.assignedActivities.add(activity);
     }
 
+    // get the developers assigned activities
     public ArrayList<Activity> getAssignedActivities() {
         return this.assignedActivities;
     }
 
+    // 
     public ArrayList<Activity> getCurrentAssignedActivities(int week, int year) {
         ArrayList<Activity> currentActivities = new ArrayList<>();
         for (Activity activity : this.assignedActivities) {

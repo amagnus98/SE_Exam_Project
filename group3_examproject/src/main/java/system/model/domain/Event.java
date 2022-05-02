@@ -2,8 +2,9 @@ package system.model.domain;
 
 import java.util.*;
 
-
+// this abstract class is used to store identical functionality for the project and activity class
 public abstract class Event {
+    // Set default name of event
     protected String name = "Unnamed";
     // initialized to zero to test whether they have been defined before or not
     // if the value is 0 they have not been set yet
@@ -36,14 +37,6 @@ public abstract class Event {
     public void setEndWeek(int week) {
         this.endWeek = week;
     }
-    
-    public void setEstimatedWorkHours(double hours){
-    this.estimatedWorkHours = hours;
-    }
-  
-    public double getEstimatedWorkHours(){
-    return this.estimatedWorkHours;
-    }
 
     public int getStartYear() {
         return this.startYear;
@@ -58,6 +51,23 @@ public abstract class Event {
         return this.endWeek;
     }
 
+    public void setTotalHoursRegistered(double totalHoursRegistered){
+        this.totalHoursRegistered = totalHoursRegistered;
+    }
+
+    public void setEstimatedWorkHours(double hours){
+        this.estimatedWorkHours = hours;
+    }
+  
+    public double getEstimatedWorkHours(){
+        return this.estimatedWorkHours;
+    }
+
+    public double getTotalHoursRegistered(){
+        return this.totalHoursRegistered;
+    }
+
+    // set time horizon of event, i.e. set start and end time
     public void setTimeHorizon(int startYear, int startWeek, int endYear, int endWeek){
         this.setStartYear(startYear);
         this.setStartWeek(startWeek);
@@ -65,18 +75,12 @@ public abstract class Event {
         this.setEndWeek(endWeek);
     }
 
-    public void setTotalHoursRegistered(double totalHoursRegistered){
-        this.totalHoursRegistered = totalHoursRegistered;
-    }
-
-    public double getTotalHoursRegistered(){
-        return this.totalHoursRegistered;
-    }
-
+    // check that the end time comes after the start time
     public boolean isEndTimeIsAfterStartTime(int startYear, int startWeek, int endYear, int endWeek) {
         return (startYear < endYear || (startYear == endYear && startWeek <= endWeek));
     }
 
+    // check if a date (to the precision of week and year) is within the event's time horizon
     public boolean isDateWithinTimeHorizon(int year, int week){
         int eventStartYear = this.getStartYear();
         int eventStartWeek = this.getStartWeek();
@@ -91,15 +95,18 @@ public abstract class Event {
         return false;
     }
 
+    // check if the start and end time has been set yet
     public boolean isTimeHorizonDefined(){
-        // if their value is zero it means they are uninitialized
-        return (this.getStartYear() != 0 && this.getStartWeek() != 0 && this.getEndYear() != 0 && this.getEndWeek() != 0);
+        // if the week value is zero it means they are uninitialized
+        return (this.getStartWeek() != 0 && this.getEndWeek() != 0);
     }
 
     public ArrayList<Developer> getDevelopers() {
         return this.assignedDevelopers;
     }
 
+
+    // check if the developer is assigned to the event
     public boolean isDeveloperAssigned(Developer developer){
         for (Developer d : this.assignedDevelopers){
             if (d.getInitials().equals(developer.getInitials())){
@@ -110,7 +117,4 @@ public abstract class Event {
     }
 
     
-    public boolean isWeekFormatValid(int startWeek, int endWeek) {
-        return (startWeek >= 1 && startWeek <= 52 && endWeek >= 1 && endWeek <= 52);
-    }
 }

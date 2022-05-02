@@ -45,7 +45,7 @@ public class WhiteBoxtestGetRegisteredActivities {
 
         // Checks that the correct error message is thrown
         try{
-          developerCalendar.getRegisteredActivities(day, week, year);
+          developerCalendar.getRegisteredActivitiesInformation(day, week, year);
         } catch (OperationNotAllowedException e){
           assertEquals(e.getMessage(), "The user has registered no hours on the given day");
         }
@@ -91,7 +91,7 @@ public class WhiteBoxtestGetRegisteredActivities {
       assertTrue(developerCalendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, "activityName")); // Hours has been registered to the activity on the given date
 
       // Test that output is as expected 
-      assertEquals(expectedOutput, developerCalendar.getRegisteredActivities(day, week, year));
+      assertEquals(expectedOutput, developerCalendar.getRegisteredActivitiesInformation(day, week, year));
       }
 
 
@@ -155,7 +155,7 @@ public class WhiteBoxtestGetRegisteredActivities {
       
       
       // Test that output is as expected 
-      assertEquals(expectedOutput, developerCalendar.getRegisteredActivities(day, week, year));
+      assertEquals(expectedOutput, developerCalendar.getRegisteredActivitiesInformation(day, week, year));
       }
 
 
@@ -228,6 +228,6 @@ public class WhiteBoxtestGetRegisteredActivities {
         
         
         // Test that output is as expected 
-        assertEquals(expectedOutput, developerCalendar.getRegisteredActivities(day, week, year));
+        assertEquals(expectedOutput, developerCalendar.getRegisteredActivitiesInformation(day, week, year));
         }
     }
