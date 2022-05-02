@@ -35,9 +35,12 @@ public class ViewCalender {
         JPanel BoxPanel = new BoxPanel().getPanel();
         BoxPanel.setPreferredSize(new Dimension(350, 700));
 
-        new Header("My Calender", BoxPanel);
-
-        
+        JLabel subHeader = new JLabel("My Calender");
+        subHeader.setFont(new Font("Arial", Font.BOLD, 25));
+        subHeader.setBorder(new EmptyBorder(75,0,25,0));
+        BoxPanel.add(subHeader);
+        subHeader.setAlignmentX(BoxPanel.CENTER_ALIGNMENT);
+        subHeader.setAlignmentY(BoxPanel.CENTER_ALIGNMENT);
 
         JPanel InformationPanel = new JPanel();
         InformationPanel.setLayout(new BoxLayout(InformationPanel, BoxLayout.Y_AXIS));
