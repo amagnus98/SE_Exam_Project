@@ -25,7 +25,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
 
 
     @Test
-    public void testSetTimeHorizonOfProjectA() throws OperationNotAllowedException{
+    public void testRegisterHoursToActivityA() throws OperationNotAllowedException{
       // Add a new project
       app.addProject();
 
@@ -34,15 +34,15 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.assignProjectLeader(projectNumber, "bond");
       
       // Define input
-      double hours = -2.0;
+      double hours = 0;
       int day = 2;
       int week = 2;
       int year = app.getCurrentYear();
       String activityName = "Activity Name";
       int startYear = app.getCurrentYear();
       int endYear = app.getCurrentYear()+1;
-      int startWeek = 11;
-      int endWeek = 13;
+      int startWeek = 20;
+      int endWeek = 25;
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
@@ -51,15 +51,15 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
 
-      // Check that the correct message is given when negative hours are registerred
+      // Check that the correct message is given when hours format is not valid
       try {app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);}
       catch (OperationNotAllowedException e){
-          assertEquals("The user cannot register negative or zero hours", e.getMessage());
+          assertEquals("Hours must be more than zero and not greater than 24", e.getMessage());
       }
     }
     
     @Test
-    public void testSetTimeHorizonOfProjectB() throws OperationNotAllowedException{
+    public void testRegisterHoursToActivityB() throws OperationNotAllowedException{
       // Add a new project
       app.addProject();
 
@@ -68,15 +68,15 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.assignProjectLeader(projectNumber, "bond");
       
       // Define input
-      double hours = 25.0;
-      int day = 2;
+      double hours = 5;
+      int day = 8;
       int week = 2;
       int year = app.getCurrentYear();
       String activityName = "Activity Name";
       int startYear = app.getCurrentYear();
       int endYear = app.getCurrentYear()+1;
-      int startWeek = 11;
-      int endWeek = 13;
+      int startWeek = 20;
+      int endWeek = 25;
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
@@ -85,16 +85,16 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
 
-      // Check that the correct message is given when negative hours are registerred
+      // Check that the correct message is given when day format is not valid
       try {app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);}
       catch (OperationNotAllowedException e){
-          assertEquals("The user cannot register more than 24 hours for an activity per day", e.getMessage());
+          assertEquals("Days must be more than zero and not greater than 7", e.getMessage());
       }
     }
 
 
     @Test
-    public void testSetTimeHorizonOfProjectC() throws OperationNotAllowedException{
+    public void testRegisterHoursToActivityC() throws OperationNotAllowedException{
       // Add a new project
       app.addProject();
 
@@ -103,15 +103,15 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.assignProjectLeader(projectNumber, "bond");
       
       // Define input
-      double hours = 7.5;
-      int day = 2;
-      int week = 15;
+      double hours = 5;
+      int day = 1;
+      int week = 54;
       int year = app.getCurrentYear()+5;
       String activityName = "Activity Name";
       int startYear = app.getCurrentYear();
       int endYear = app.getCurrentYear()+1;
-      int startWeek = 11;
-      int endWeek = 13;
+      int startWeek = 20;
+      int endWeek = 25;
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
@@ -120,16 +120,16 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
 
-      // Check that the correct message is given when negative hours are registerred
+      // Check that the correct message is given when week format is not valid
       try {app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);}
       catch (OperationNotAllowedException e){
-          assertEquals("The user cannot register hours outside of the time horizon of the activity", e.getMessage());
+          assertEquals("Weeks must be more than zero and not greater than 52", e.getMessage());
       }
     }
     
 
     @Test
-    public void testSetTimeHorizonOfProjectD() throws OperationNotAllowedException{
+    public void testRegisterHoursToActivityD() throws OperationNotAllowedException{
       // Add a new project
       app.addProject();
 
@@ -138,40 +138,32 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.assignProjectLeader(projectNumber, "bond");
       
       // Define input
-      double hours = 7.5;
-      int day = 2;
-      int week = 15;
+      double hours = 5;
+      int day = 1;
+      int week = 20;
       int year = app.getCurrentYear();
       String activityName = "Activity Name";
       int startYear = app.getCurrentYear();
       int endYear = app.getCurrentYear()+1;
-      int startWeek = 11;
-      int endWeek = 13;
+      int startWeek = 20;
+      int endWeek = 25;
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
-      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
-      // Store the previous data to check that it updates
-      double currentlyRegisteredHoursUser = app.getCurrentUser().getRegisteredHours(day, week, year, projectNumber, activityName);
-      double currentlyRegisteredHoursProject = app.getProject(projectNumber).getTotalHoursRegistered();
-      double currentlyRegisteredHoursActivity =  app.getProject(projectNumber).getActivity(activityName).getTotalHoursRegistered();
-
-      // call method
-      app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);
-
-      // check that the correct updates have been made
-      assertTrue(app.getCurrentUser().getRegisteredHours(day, week, year, projectNumber, activityName) == (currentlyRegisteredHoursUser+7.5));
-      assertTrue(app.getProject(projectNumber).getTotalHoursRegistered() == (currentlyRegisteredHoursProject+7.5));
-      assertTrue(app.getProject(projectNumber).getActivity(activityName).getTotalHoursRegistered() == (currentlyRegisteredHoursActivity+7.5));
+       // Check that the correct message is given when the current user is not assigned to the activity
+       try {app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);}
+       catch (OperationNotAllowedException e){
+           assertEquals("The user is not assigned the given activity", e.getMessage());
+       }
     }
 
 
 
     @Test
-    public void testSetTimeHorizonOfProjectE() throws OperationNotAllowedException{
+    public void testRegisterHoursToActivityE() throws OperationNotAllowedException{
       // Add a new project
       app.createNonWorkActivitiesProject();
 
@@ -180,32 +172,26 @@ public class WhiteBoxtestRegisterHoursToActivity{
       app.assignProjectLeader(projectNumber, "bond");
       
       // Define input
-      double hours = 7.5;
-      int day = 2;
-      int week = 15;
-      int year = app.getCurrentYear()+5;
-      String activityName = "Activity Name";
+      double hours = 5;
+      int day = 1;
+      int week = 20;
+      int year = app.getCurrentYear()-1;
+      String activityName = "activityName";
       int startYear = app.getCurrentYear();
       int endYear = app.getCurrentYear()+1;
-      int startWeek = 11;
-      int endWeek = 13;
+      int startWeek = 20;
+      int endWeek = 25;
       
-      // Add activity to project and set time horizon for both project and activity
-      app.addActivityToProject("Activity Name", projectNumber);
+      // Add activity to project, add current user to activity and set time horizon for both project and activity
+      app.addActivityToProject(activityName, projectNumber);
+      app.addDeveloperToActivity("bond", activityName, projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
-      app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
+      app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activityName, projectNumber);
 
-      // Store the previous data to check that it updates
-      double currentlyRegisteredHoursUser = app.getCurrentUser().getRegisteredHours(day, week, year, projectNumber, activityName);
-      double currentlyRegisteredHoursProject = app.getProject(projectNumber).getTotalHoursRegistered();
-      double currentlyRegisteredHoursActivity =  app.getProject(projectNumber).getActivity(activityName).getTotalHoursRegistered();
-
-      // call method
-      app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);
-
-      // check that the correct updates have been made
-      assertTrue(app.getCurrentUser().getRegisteredHours(day, week, year, projectNumber, activityName) == (currentlyRegisteredHoursUser+7.5));
-      assertTrue(app.getProject(projectNumber).getTotalHoursRegistered() == (currentlyRegisteredHoursProject+7.5));
-      assertTrue(app.getProject(projectNumber).getActivity(activityName).getTotalHoursRegistered() == (currentlyRegisteredHoursActivity+7.5));
+      // Check that the correct message is given when year is not within the time horizon of the activity
+      try {app.registerHoursToActivity(hours, day, week, year, projectNumber, activityName);}
+      catch (OperationNotAllowedException e){
+          assertEquals("The user is not assigned the given activity", e.getMessage());
+      }
     }
   }
