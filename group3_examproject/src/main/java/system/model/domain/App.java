@@ -370,13 +370,13 @@ public class App {
         if (!(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject())) {
             throw new OperationNotAllowedException("The user is not assigned the given activity");
         }
-        if (activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject()){
-            double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
-            this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
-            project.setTotalHoursRegistered(project.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
-            activity.setTotalHoursRegistered(activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+        if (!(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject())){
+            throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
         }
-        throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
+        double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
+        this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
+        project.setTotalHoursRegistered(project.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
+        activity.setTotalHoursRegistered(activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours);
     }
 
 
