@@ -10,6 +10,6 @@ public class SuccessWindow {
     }
 
     public void showMessage() {
-        JOptionPane.showMessageDialog(null, successMessage, "Error", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, successMessage, "Success", JOptionPane.PLAIN_MESSAGE);
     }
 }

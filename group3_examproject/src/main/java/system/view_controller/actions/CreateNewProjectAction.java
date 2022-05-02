@@ -43,8 +43,8 @@ public class CreateNewProjectAction extends AbstractAction {
         }
 
         if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Project successfully created.");
-            errorWindow.showMessage();
+            SuccessWindow successWindow = new SuccessWindow("Project successfully created.");
+            successWindow.showMessage();
         }
     }
 }
