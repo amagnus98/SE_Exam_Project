@@ -46,6 +46,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
+      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -79,6 +80,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
+      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -113,6 +115,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
+      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 
@@ -147,6 +150,7 @@ public class WhiteBoxtestRegisterHoursToActivity{
       
       // Add activity to project and set time horizon for both project and activity
       app.addActivityToProject("Activity Name", projectNumber);
+      app.addDeveloperToActivity("bond", "Activity Name", projectNumber);
       app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, projectNumber);
       app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, "Activity Name", projectNumber);
 

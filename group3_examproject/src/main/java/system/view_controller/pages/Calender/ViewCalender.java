@@ -77,7 +77,7 @@ public class ViewCalender {
                 JPanel DayPanel = new JPanel();
                 DayPanel.setLayout(new BoxLayout(DayPanel, BoxLayout.Y_AXIS));
                 DayPanel.setBackground(constants.secondBoxColor);
-                DayPanel.setBorder(new EmptyBorder(5,5,5,5));
+                DayPanel.setBorder(new EmptyBorder(10,10,10,10));
 
                 int keyLength = key.length();
                 String year = key.substring(0,keyLength-4);
@@ -113,7 +113,7 @@ public class ViewCalender {
 
                     for ( String activityKey : calendar.get(key).get(projectKey).keySet() ) {
 
-                        JLabel activityHeader = new JLabel(activityKey + ": " + calendar.get(key).get(projectKey).get(activityKey));
+                        JLabel activityHeader = new JLabel(activityKey + ": " + calendar.get(key).get(projectKey).get(activityKey) + " hours");
                         activityHeader.setFont(new Font("Arial", Font.BOLD, 10));
                         activityHeader.setBackground(constants.secondBoxColor);
                         DayPanel.add(activityHeader);

@@ -73,6 +73,7 @@ public class WhiteBoxtestGetRegisteredActivities {
       
       // create project activity and register some hours to it so 
       app.addActivityToProject("activityName", projectNumber);
+      app.addDeveloperToActivity(developer.getInitials(), "activityName", projectNumber);
       app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName", projectNumber);
       app.registerHoursToActivity(5, day, week, year, projectNumber, "activityName");
 
@@ -115,11 +116,13 @@ public class WhiteBoxtestGetRegisteredActivities {
       
       // create first project activity and register some hours to it 
       app.addActivityToProject("activityName1", projectNumber);
+      app.addDeveloperToActivity(developer.getInitials(), "activityName1", projectNumber);
       app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName1", projectNumber);
       app.registerHoursToActivity(5, day, week, year, projectNumber, "activityName1");
 
       // Create second project activity and registers some hours on it
       app.addActivityToProject("activityName2", projectNumber);
+      app.addDeveloperToActivity(developer.getInitials(), "activityName2", projectNumber);
       app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName2", projectNumber);
       app.registerHoursToActivity(2, day, week, year, projectNumber, "activityName2");
 
@@ -185,11 +188,13 @@ public class WhiteBoxtestGetRegisteredActivities {
 
         // Create activity in first project and register some hours to it 
         app.addActivityToProject("activityName1", projectNumber1);
+        app.addDeveloperToActivity(developer.getInitials(), "activityName1", projectNumber1);
         app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName1", projectNumber1);
         app.registerHoursToActivity(5, day, week, year, projectNumber1, "activityName1");
   
         // Create activity in second project and registers some hours on it
         app.addActivityToProject("activityName2", projectNumber2);
+        app.addDeveloperToActivity(developer.getInitials(), "activityName2", projectNumber2);
         app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName2", projectNumber2);
         app.registerHoursToActivity(2, day, week, year, projectNumber2, "activityName2");
   

@@ -71,9 +71,9 @@ public class RegisterTimePage {
 
             Activity activity = assignedProject.getActivity(activityName);
             if (!(assignedProject.isNonWorkActivityProject())) {
-                InformationPanel.add(new JLabel("Assigned Project Start Time"));
+                InformationPanel.add(new JLabel("Activity Start Time"));
                 InformationPanel.add(new JLabel("Week: " + activity.getStartWeek() + ", Year: " + activity.getStartYear()));
-                InformationPanel.add(new JLabel("Assigned Project End Time"));
+                InformationPanel.add(new JLabel("Activity End Time"));
                 InformationPanel.add(new JLabel("Week: " + activity.getEndWeek() + ", Year: " + activity.getEndYear()));
             }
         } catch (OperationNotAllowedException error) {

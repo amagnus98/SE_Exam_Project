@@ -91,7 +91,7 @@ public class SubmitActivityChangesAction extends AbstractAction {
         }
 
        if (!hasError) {
-        SuccessWindow successWindow = new SuccessWindow("Changes Sucessfully set.");
+        SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
         successWindow.showMessage();
        }
        main.viewActivitry(activity, previousProject);

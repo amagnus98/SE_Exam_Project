@@ -124,6 +124,9 @@ public class ActivityPage {
             for (int i = 0; i < developers.size(); i++) {
                 Developer developer = developers.get(i);
                 JLabel developerLabel = new JLabel(developer.getInitials());
+                if (!activity.isDeveloperAssignedByProjectLeader(developer)) {
+                    developerLabel = new JLabel(developer.getInitials() + " (requested)");
+                }
                 developerLabel.setFont(new Font("Arial", Font.BOLD, 15));
                 JPanel devePanel = new JPanel(new GridBagLayout());
                 devePanel.add(developerLabel);
@@ -137,8 +140,8 @@ public class ActivityPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AsignActivityDeveloperAction("Asign Developer", previousProject, addDeveloperTextField.textField, activity, main);
-        JPanel addDeveloperButtonPanel = new Button("Asign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
+        AbstractAction addDeveloperAction = new AsignActivityDeveloperAction("Assign Developer", previousProject, addDeveloperTextField.textField, activity, main);
+        JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 

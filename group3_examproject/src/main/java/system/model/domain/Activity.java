@@ -47,7 +47,7 @@ public class Activity extends Event{
   }
 
   public boolean canRegisterHours(Developer d) {
-    return isDeveloperAssignedByProjectLeader(d);
+    return this.assignedDevelopers.contains(d);
   }
 
   public boolean isDeveloperCurrentlyWorking(Developer d){

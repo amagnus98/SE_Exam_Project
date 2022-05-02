@@ -151,8 +151,8 @@ public class ProjectPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AsignProjectDeveloperAction("Asign Developer", previousPage, addDeveloperTextField.textField, project, main);
-        JPanel addDeveloperButtonPanel = new Button("Asign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
+        AbstractAction addDeveloperAction = new AsignProjectDeveloperAction("Assign Developer", previousPage, addDeveloperTextField.textField, project, main);
+        JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 
@@ -178,7 +178,7 @@ public class ProjectPage {
         BoxPanel.add(buttonPanel);
 
 
-        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", previousPage, main);
+        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         BoxPanel.add(backToManageProjectsButtonPanel);
 

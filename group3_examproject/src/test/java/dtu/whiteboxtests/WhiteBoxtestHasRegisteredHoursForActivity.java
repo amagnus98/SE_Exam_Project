@@ -66,6 +66,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         
         // create project activity and register some hours to it so //1 is passed
         app.addActivityToProject("activityName", projectNumber);
+        app.addDeveloperToActivity(developer.getInitials(), "activityName", projectNumber);
         app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName", projectNumber);
         app.registerHoursToActivity(5, day, week, year, projectNumber, "activityName");
 
@@ -103,6 +104,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         
         // create project activity and register some hours to it so //1 is passed
         app.addActivityToProject("activityName", projectNumber);
+        app.addDeveloperToActivity(developer.getInitials(), "activityName", projectNumber);
         app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName", projectNumber);
         app.registerHoursToActivity(5, day, week, year, projectNumber, "activityName");
 
@@ -143,6 +145,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         
         // create project activity and register some hours to it so //1 is passed
         app.addActivityToProject("activityName", projectNumber);
+        app.addDeveloperToActivity(developer.getInitials(), "activityName", projectNumber);
         app.setTimeHorizonOfActivity(year, week, app.getCurrentYear()+1, 2, "activityName", projectNumber);
         app.registerHoursToActivity(5, day, week, year, projectNumber, "activityName");
 
