@@ -17,7 +17,7 @@ public class Button {
         if (size == "small") {
             this.buttonPanel.setMaximumSize(new Dimension(600, 75));
             this.button.setFont(new Font("Arial", Font.PLAIN, 15));
-            this.button.setPreferredSize(new Dimension(150, 50));
+            this.button.setPreferredSize(new Dimension(175, 50));
         } else if (size == "micro") {
             this.buttonPanel.setMaximumSize(new Dimension(600, 55));
             this.button.setFont(new Font("Arial", Font.PLAIN, 15));

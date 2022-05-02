@@ -1,5 +1,6 @@
 package system.model.domain;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import io.cucumber.java.en_old.Ac;
@@ -73,7 +74,7 @@ public class App {
     // Return the developer object corresponding to given initials
     public Developer getDeveloper(String initials) throws OperationNotAllowedException {
         for (Developer d : developers) {
-            if (d.getInitials().equals(initials)) {
+            if (d.getInitials().equals(initials.toLowerCase())) {
                 return d;
             }
         }
@@ -317,7 +318,7 @@ public class App {
             Developer developer = this.getDeveloper(initials);
 
             if (activity.isDeveloperAssigned(developer) && !activity.isDeveloperAssignedByProjectLeader(developer)) {
-                activity.changeDeveloperFromRequstedToAssisgned(developer);
+                activity.changeDeveloperFromRequestedToAssisgned(developer);
             } else {
                 // check if the developer is assigned to the project or not
                 activity.addDeveloper(developer);
@@ -424,4 +425,29 @@ public class App {
     public boolean hasCurrentProjectReport(){
         return (!(this.currentProjectReport == null));
     }
+
+    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getCurrentDeveloperActivities(int week, int year) throws OperationNotAllowedException {
+        
+        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivities = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+
+        for (Developer d : this.developers) {
+            HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
+            ArrayList<Activity> developerActivities = d.getCurrentAssignedActivities(week, year);
+            for (Activity activity : developerActivities) {
+                Project parentProject;
+                
+                parentProject = this.getProject(activity.getParentProjectNumber());
+
+                if (!developerActivitiesHashMap.containsKey(parentProject)) {
+                    developerActivitiesHashMap.put(parentProject, new ArrayList<>());
+                }
+                developerActivitiesHashMap.get(parentProject).add(activity);
+            }
+            currentDeveloperActivities.put(d, developerActivitiesHashMap);
+        }
+        
+        return currentDeveloperActivities;
+
+    }
+
 }

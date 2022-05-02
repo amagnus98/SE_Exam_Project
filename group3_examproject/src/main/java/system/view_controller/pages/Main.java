@@ -4,6 +4,8 @@ import java.awt.*;
 import system.view_controller.constants.Constants;
 import system.view_controller.pages.Activity.ActivityPage;
 import system.view_controller.pages.Calender.ViewCalender;
+import system.view_controller.pages.DeveloperOverview.ChooseOverviewDate;
+import system.view_controller.pages.DeveloperOverview.DeveloperOverviewPage;
 import system.view_controller.pages.LogIn.LogInPage;
 import system.view_controller.pages.ManageProjects.ViewProjectsPage;
 import system.view_controller.pages.Navigator.NavigatorPage;
@@ -29,6 +31,7 @@ public class Main {
     CreateNewProjectPage createNewProjectPage = new CreateNewProjectPage(frame, this);
     ChooseActivityPage timeRegistrationPage = new ChooseActivityPage(frame, this);
     ViewCalender ViewCalender = new ViewCalender(frame, this);
+    ChooseOverviewDate chooseOverviewDate = new ChooseOverviewDate(frame, this);
 
 
 
@@ -89,6 +92,15 @@ public class Main {
         frame.repaint();
     }
 
+    public void viewDeveloperOverview(int week, int year) {
+        frame.getContentPane().removeAll();
+        DeveloperOverviewPage developerOverviewPage = new DeveloperOverviewPage(frame, week, year, this);
+        JPanel developerOverviewPagePanel = developerOverviewPage.draw();
+        frame.getContentPane().add(developerOverviewPagePanel);
+        frame.validate();
+        frame.repaint();
+    }
+
     public void changeScreen(String changeTo) {
 
         if (changeTo == "Log In") {
@@ -132,6 +144,12 @@ public class Main {
             frame.getContentPane().removeAll();
             JPanel viewCalenderPanel = ViewCalender.draw();
             frame.getContentPane().add(viewCalenderPanel);
+            frame.validate();
+            frame.repaint();
+        } else if (changeTo == "Developer Overview") {
+            frame.getContentPane().removeAll();
+            JPanel chooseOverviewDatePanel = chooseOverviewDate.draw();
+            frame.getContentPane().add(chooseOverviewDatePanel);
             frame.validate();
             frame.repaint();
         }

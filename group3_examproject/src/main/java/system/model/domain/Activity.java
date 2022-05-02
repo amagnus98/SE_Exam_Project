@@ -32,6 +32,7 @@ public class Activity extends Event{
   public void addAssignedDeveloper(Developer d){
       this.assignedDevelopers.add(d);
       this.isAssignedByProjectLeader.put(d.getInitials(),true);
+      d.assignActivity(this);
   }
 
   public void addRequestedDeveloper(Developer d){
@@ -39,7 +40,7 @@ public class Activity extends Event{
     this.isAssignedByProjectLeader.put(d.getInitials(),false);
   }
 
-  public void changeDeveloperFromRequstedToAssisgned(Developer d){
+  public void changeDeveloperFromRequestedToAssisgned(Developer d){
     this.isAssignedByProjectLeader.put(d.getInitials(),true);
   }
   
@@ -74,6 +75,7 @@ public class Activity extends Event{
     if (isDeveloperAssignedByProjectLeader(sender)){
       if (!isDeveloperCurrentlyWorking(receiver)){
           addRequestedDeveloper(receiver);
+          receiver.assignActivity(this);
       } else {
           throw new OperationNotAllowedException("The developer is already working on the given activity");
       } 
