@@ -44,6 +44,7 @@ public class LogInPage {
             JPanel headerPanel = new JPanel();
             Path currentRelativePath = Paths.get("");
             String path = currentRelativePath.toAbsolutePath().toString();
+            path = path.replace("\\", "/");
             String pathImage = path + "/src/main/java/system/view_controller/pages/LogIn/assets/logo.png";
             System.out.println(pathImage);
             File image = new File(pathImage);
@@ -51,7 +52,7 @@ public class LogInPage {
             JLabel logoLabel = new JLabel(new ImageIcon(logo));
             headerPanel.add(logoLabel);
             headerPanel.setBackground(constants.backgroundColor);
-            headerPanel.setBorder(new EmptyBorder(100,0,0,0));
+            headerPanel.setBorder(new EmptyBorder(75,0,0,0));
             InformationPanel.add(headerPanel);
         } catch (IOException e) {
             System.out.println(e);
