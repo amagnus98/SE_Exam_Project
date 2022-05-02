@@ -24,7 +24,6 @@ public class App {
     
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     public HashMap<Integer, Integer> projectCount = new HashMap<>();
-    private DateServer dateServer = new DateServer();
     private ProjectReport currentProjectReport;
 
     public String getnonWorkActivitiesProjectNumber() {
@@ -208,10 +207,6 @@ public class App {
         throw new OperationNotAllowedException("Project with given project number does not exist in the system");
     }
 
-    public void setDateServer(DateServer dateServer) {
-        this.dateServer = dateServer;
-    }
-
     // Checks whether the current user is the project leader of a given project
     public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
         if (!getProject(projectNumber).hasProjectLeader()) {
@@ -310,18 +305,15 @@ public class App {
     }
 
     // Adds a developer to the list of currently working developers on an activity
+    // the user has to be project leader
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             Project project = getProject(projectNumber);
             Activity activity = project.getActivity(activityName);
             Developer developer = this.getDeveloper(initials);
 
-            if (activity.isDeveloperAssigned(developer) && !activity.isDeveloperAssignedByProjectLeader(developer)) {
-                activity.changeDeveloperFromRequstedToAssisgned(developer);
-            } else {
-                // check if the developer is assigned to the project or not
-                activity.addDeveloper(developer);
-            }
+            activity.addDeveloper(developer);
+            
             if (!project.isDeveloperAssigned(initials)){
                 addDeveloperToProject(initials, projectNumber);
             }

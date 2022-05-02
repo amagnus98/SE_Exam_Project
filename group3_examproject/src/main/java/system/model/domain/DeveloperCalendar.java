@@ -7,41 +7,52 @@ public class DeveloperCalendar {
     // dateKey -> projectNumber -> activityName
     private HashMap<String, HashMap<String, HashMap<String, Double>>> calendar = new HashMap<String, HashMap<String, HashMap<String,Double>>>();
     
+    // Getter for the calendar
+    public HashMap<String, HashMap<String, HashMap<String, Double>>> getCalendar(){
+        return this.calendar;
+    }
+
+    // generates date keys for the hashmap
+    // e.g. generateDateKey(6,1,2022) = "20220106"
     public String generateDateKey(int day, int week, int year){
         return year + String.format("%02d", week) + String.format("%02d", day);
     }
 
+    // sort list of date keys
     public ArrayList<String> getSortedDateKeys(){
+        // get date keys from the calendar for the days with registered hours
         ArrayList<String> dateKeys = new ArrayList<>(this.calendar.keySet());
+        // convert from string to int
         ArrayList<Integer> sortedDateKeysInts = new ArrayList<>();
         for(String s : dateKeys) sortedDateKeysInts.add(Integer.valueOf(s));
+        // sort datekeys
         Collections.sort(sortedDateKeysInts);
+        // convert back to string
         ArrayList<String> sortedDateKeys = new ArrayList<>();
         for(Integer i : sortedDateKeysInts) sortedDateKeys.add(Integer.toString(i));
         return sortedDateKeys;
     }
 
-    public HashMap<String, HashMap<String, HashMap<String, Double>>> getCalendar(){
-        return this.calendar;
-    }
-
-    public void setHours(double hours, int day, int week, int year, String projectNumber, String activityName){
+    // set registered hours for a given day
+    public void setRegisteredHours(double hours, int day, int week, int year, String projectNumber, String activityName){
         // get key that corresponds to the given date
         String dateKey = generateDateKey(day, week, year);
-        // get all information about registered hours on the given date
+        // check if any hours have been registered already for the given day
         if (!calendar.containsKey(dateKey)){
             calendar.put(dateKey, new HashMap<String, HashMap<String, Double>>());
         }
         HashMap<String, HashMap<String, Double>> projectCalendar = calendar.get(dateKey);
-        // get all information about registered hours on the given date for the specific project
+        // check if any hours have been registered already for the project on the given day
         if (!projectCalendar.containsKey(projectNumber)){
             projectCalendar.put(projectNumber, new HashMap<String,Double>());
         }
         HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
+        // set the registered hours for the activity
         activityCalendar.put(activityName,hours);
     }
     
-    public double getHours(int day, int week, int year, String projectNumber, String activityName){
+    // get registered hours for an activity on a given day
+    public double getRegisteredHours(int day, int week, int year, String projectNumber, String activityName){
         // if no hours have been registered return 0
         if (!hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName)){
             return 0;

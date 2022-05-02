@@ -56,10 +56,10 @@ public class AssignDeveloperToActivitySteps {
       int currentYear = Calendar.getInstance().get(Calendar.YEAR);
       String projectNumber = currentYear % 100 + trackNumber;
 
-      Developer developer = new Developer(initials);
+      Developer developer = this.app.getDeveloper(initials);
       Project project = this.app.getProject(projectNumber);
       Activity activity = project.getActivity(activityName);
-
+      
       assertTrue(activity.isDeveloperAssignedByProjectLeader(developer));   
   }
 
@@ -82,7 +82,7 @@ public class AssignDeveloperToActivitySteps {
       int currentYear = Calendar.getInstance().get(Calendar.YEAR);
       String projectNumber = currentYear % 100 + trackNumber;
 
-      Developer developer = this.app.getDeveloper(initials);
+      Developer developer = new Developer(initials);
       Project project = this.app.getProject(projectNumber);
       Activity activity = project.getActivity(activityName);
 

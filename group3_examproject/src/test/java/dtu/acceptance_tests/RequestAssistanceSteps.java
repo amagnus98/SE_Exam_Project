@@ -46,7 +46,7 @@ public class RequestAssistanceSteps {
         Project project = this.app.getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
         
-        assertFalse(activity.isDeveloperCurrentlyWorking(developer));
+        assertFalse(activity.isDeveloperAssigned(developer));
     }
     
     @When("the current user requests assistance from the developer with initials {string} for the activity with name {string} of project with project number current year plus {string}")
@@ -71,7 +71,7 @@ public class RequestAssistanceSteps {
         Project project = this.app.getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
         
-        assertTrue(activity.isDeveloperCurrentlyWorking(developer));
+        assertTrue(activity.isDeveloperAssigned(developer));
     }
 
 

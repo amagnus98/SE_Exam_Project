@@ -17,7 +17,7 @@ public class AssignEstimatedHoursSteps {
   private App app;
   private ErrorMessageHolder errorMessage;
 
-  public AssignEstimatedHoursSteps(App app, ErrorMessageHolder errorMessage, MockDateHolder dateHolder) {
+  public AssignEstimatedHoursSteps(App app, ErrorMessageHolder errorMessage) {
 		this.app = app;
 		this.errorMessage = errorMessage;
 	}
