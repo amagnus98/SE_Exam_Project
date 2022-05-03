@@ -57,7 +57,7 @@ public class ViewCalender {
         if (calendar.keySet().size() < 1) {
             JPanel labelPanel = new JPanel();
             labelPanel.setLayout(new GridBagLayout());
-            JLabel label = new JLabel("<html>You currently have no registered hours on activities. Register hours on an assigned activity to view them here.</html>");
+            JLabel label = new JLabel("<html>You currently have no registered hours for any activities. Register hours on an assigned activity to view them here.</html>");
             label.setPreferredSize(new Dimension(250, 200));
             labelPanel.setBackground(constants.boxColor);
             labelPanel.add(label);
@@ -140,9 +140,10 @@ public class ViewCalender {
         }
 
 
-        AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Navigator", main);
-        JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
-        BoxPanel.add(backToManageProjectsButtonPanel);
+        AbstractAction backToMainMenuAction = new MainMenuAction("Back", "Navigator", main);
+        JPanel backToMainMenuButtonPanel = new Button("Back", constants.backgroundColor, "small", backToMainMenuAction).getButton();
+        backToMainMenuButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
+        BoxPanel.add(backToMainMenuButtonPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

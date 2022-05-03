@@ -23,14 +23,6 @@ public class Activity extends Event{
     return this.parentProject;
   }
 
-  public void setActivityName(String activityName) throws OperationNotAllowedException{
-    if (!parentProject.containsActivity(activityName) || activityName.equals(this.getName())){
-      this.setName(activityName);
-    } else {
-      throw new OperationNotAllowedException("Project already contains an activity with the given name");
-    }
-  }
-
   public void setAssignedProject(Project project){
     this.parentProject = project;
 }

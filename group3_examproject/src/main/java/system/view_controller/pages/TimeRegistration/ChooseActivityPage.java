@@ -54,8 +54,11 @@ public class ChooseActivityPage {
             if (!projects.get(i).getName().equals("")) {
                 projectName = project.getName();
             }
-
             JLabel projectHeader = new JLabel(projectName + " (" + project.getProjectNumber() + ")");
+            if (project.isNonWorkActivityProject()){
+                projectHeader = new JLabel(projectName);
+            } 
+        
             projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
             projectHeader.setBorder(new EmptyBorder(30,0,10,0));
             InformationPanel.add(projectHeader);
@@ -78,6 +81,7 @@ public class ChooseActivityPage {
 
         AbstractAction backToMainAction = new MainMenuAction("Back", "Navigator", main);
         JPanel backToMainButtonPanel = new Button("Back", constants.backgroundColor, "small", backToMainAction).getButton();
+        backToMainButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToMainButtonPanel);
 
 

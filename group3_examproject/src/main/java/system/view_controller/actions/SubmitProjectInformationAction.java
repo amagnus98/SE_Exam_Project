@@ -40,9 +40,9 @@ public class SubmitProjectInformationAction extends AbstractAction {
         Boolean hasError = false;
 
         // PROJECT LEADER CHANGE
-        if (!project.hasProjectLeader() && !projectLeader.getText().equals("") || project.hasProjectLeader() && !projectLeader.getText().equals(project.getProjectLeader().getInitials())) {
+        if (!project.hasProjectLeader() && !projectLeader.getText().trim().equals("") || project.hasProjectLeader() && !projectLeader.getText().trim().equals(project.getProjectLeader().getInitials())) {
             try {
-                main.app.assignProjectLeader(project.getProjectNumber(), projectLeader.getText());
+                main.app.assignProjectLeader(project.getProjectNumber(), projectLeader.getText().trim());
             } catch (OperationNotAllowedException error) {
                 ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                 errorWindow.showMessage();
@@ -51,7 +51,7 @@ public class SubmitProjectInformationAction extends AbstractAction {
         }
 
         // PROJECT NAME CHANGE
-        project.setName(projectName.getText());
+        project.setName(projectName.getText().trim());
     
         if (!hasError) {
             SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");

@@ -244,6 +244,18 @@ public class App {
         }
     }
 
+    public void setActivityName(String activityName, Activity activity, Project project) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(project.getProjectNumber())){
+            if (!project.containsActivity(activityName) || activityName.equals(activity.getName())){
+                activity.setName(activityName);
+            } else {
+            throw new OperationNotAllowedException("Project already contains an activity with the given name");
+            }
+        } else {
+            throw new OperationNotAllowedException("The activity can't be renamed, because the user is not the project leader");
+        }
+    }
+
     // time helper functions
     // check that hours format is valid
     public boolean isHoursFormatValid(double hours){

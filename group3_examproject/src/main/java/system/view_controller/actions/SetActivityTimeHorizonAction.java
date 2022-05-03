@@ -50,10 +50,10 @@ public class SetActivityTimeHorizonAction extends AbstractAction {
         Boolean hasError = false;
 
         try {
-            int startYear = Integer.parseInt(activityStartYear.getText());
-            int startWeek = Integer.parseInt(activityStartWeek.getText());
-            int endYear = Integer.parseInt(activityEndYear.getText());
-            int endWeek = Integer.parseInt(activityEndWeek.getText());
+            int startYear = Integer.parseInt(activityStartYear.getText().trim());
+            int startWeek = Integer.parseInt(activityStartWeek.getText().trim());
+            int endYear = Integer.parseInt(activityEndYear.getText().trim());
+            int endWeek = Integer.parseInt(activityEndWeek.getText().trim());
         
             try {
                 main.app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activityName.getText(), activity.getParentProject().getProjectNumber());
@@ -63,7 +63,7 @@ public class SetActivityTimeHorizonAction extends AbstractAction {
                 hasError = true;
             }
         } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
             errorWindow.showMessage();
             hasError = true;
         }

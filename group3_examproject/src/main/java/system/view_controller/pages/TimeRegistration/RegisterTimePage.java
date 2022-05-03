@@ -48,10 +48,6 @@ public class RegisterTimePage {
         BoxPanel.add(subHeaderPanel);
 
 
-
-
-
-
         JPanel InformationPanel = new JPanel(new GridLayout(0,2,5,2));
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
         InformationPanel.setBackground(constants.boxColor);
@@ -66,7 +62,11 @@ public class RegisterTimePage {
             assignedProject = main.app.getProject(projectNumber);
 
             InformationPanel.add(new JLabel("Assigned Project"));
-            InformationPanel.add(new JLabel(assignedProject.getName() + " (" + assignedProject.getProjectNumber() + ")"));
+            if (assignedProject.isNonWorkActivityProject()){
+                InformationPanel.add(new JLabel(assignedProject.getName()));
+            } else {
+                InformationPanel.add(new JLabel(assignedProject.getName() + " (" + assignedProject.getProjectNumber() + ")"));
+            }
 
 
             Activity activity = assignedProject.getActivity(activityName);
@@ -90,15 +90,15 @@ public class RegisterTimePage {
         InformationPanel.add(numberOfHoursTextField.textField);
 
         InformationPanel.add(new JLabel("Day"));
-        TextField dayTextField = new TextField("Number of Hours", "", constants.boxColor).getTextField();
+        TextField dayTextField = new TextField("Day", "", constants.boxColor).getTextField();
         InformationPanel.add(dayTextField.textField);
 
         InformationPanel.add(new JLabel("Week"));
-        TextField weekTextField = new TextField("Number of Hours", "", constants.boxColor).getTextField();
+        TextField weekTextField = new TextField("Week", "", constants.boxColor).getTextField();
         InformationPanel.add(weekTextField.textField);
         
         InformationPanel.add(new JLabel("Year"));
-        TextField yearTextField = new TextField("Number of Hours", "", constants.boxColor).getTextField();
+        TextField yearTextField = new TextField("Year", "", constants.boxColor).getTextField();
         InformationPanel.add(yearTextField.textField);
 
 
@@ -118,6 +118,7 @@ public class RegisterTimePage {
 
         AbstractAction backToMainAction = new MainMenuAction("Back", "Time Registration", main);
         JPanel backToMainButtonPanel = new Button("Back", constants.backgroundColor, "small", backToMainAction).getButton();
+        backToMainButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToMainButtonPanel);
         
         JPanel container = new Container(BoxPanel).getContainer();

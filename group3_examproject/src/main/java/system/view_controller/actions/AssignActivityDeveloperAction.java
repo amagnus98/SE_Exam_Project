@@ -29,7 +29,7 @@ public class AssignActivityDeveloperAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         Boolean hasError = false;
 
-        String initials = textField.getText();
+        String initials = textField.getText().trim();
         try {
             main.app.addDeveloperToActivity(initials, activity.getName(), previousProject.getProjectNumber());
         } catch (OperationNotAllowedException error) {

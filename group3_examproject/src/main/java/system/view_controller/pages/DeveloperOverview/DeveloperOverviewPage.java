@@ -96,6 +96,8 @@ public class DeveloperOverviewPage {
                     JLabel projectHeader = new JLabel(project.getName() + " (" + project.getProjectNumber() + ")");
                     if (project.getName().equals("")) {
                         projectHeader = new JLabel("Unnamed" + " (" + project.getProjectNumber() + ")");
+                    } else if (project.isNonWorkActivityProject()){
+                        projectHeader = new JLabel(project.getName());
                     }
                     projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
                     projectHeader.setBorder(new EmptyBorder(10,0,0,0));

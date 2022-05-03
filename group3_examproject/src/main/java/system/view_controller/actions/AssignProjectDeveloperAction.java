@@ -28,7 +28,7 @@ public class AssignProjectDeveloperAction extends AbstractAction {
 
         Boolean hasError = false;
 
-        String initials = textField.getText();
+        String initials = textField.getText().trim();
         try {
             main.app.addDeveloperToProject(initials, project.getProjectNumber());
         } catch (OperationNotAllowedException error) {

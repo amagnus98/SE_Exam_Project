@@ -39,17 +39,24 @@ public class SetEstimatedWorkHoursActivityAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
-        Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText());
+        try {
+            Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText().trim());
 
-        if (!(activity.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
-            try {
-                main.app.setEstimatedWorkHoursForActivity(estimatedWorkHoursDouble, activityName.getText(), activity.getParentProject().getProjectNumber());
-            } catch (OperationNotAllowedException error) {
-                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-                errorWindow.showMessage();
-                hasError = true;
+            if (!(activity.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
+                try {
+                    main.app.setEstimatedWorkHoursForActivity(estimatedWorkHoursDouble, activityName.getText().trim(), activity.getParentProject().getProjectNumber());
+                } catch (OperationNotAllowedException error) {
+                    ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                    errorWindow.showMessage();
+                    hasError = true;
+                } 
             }
+        } catch (NumberFormatException error){
+            ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
+            errorWindow.showMessage();
+            hasError = true;
         }
+        
     
         if (!hasError) {
             SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");

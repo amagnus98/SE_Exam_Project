@@ -9,7 +9,7 @@ import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.RegisterTimeAction;
-import system.view_controller.actions.viewDeveloperOverviewAction;
+import system.view_controller.actions.ViewDeveloperOverviewAction;
 import system.view_controller.constants.Constants;
 import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
@@ -68,7 +68,7 @@ public class ChooseOverviewDate {
         getOverviewPanel.setBackground(constants.secondBoxColor);
         getOverviewPanel.setBorder(new EmptyBorder(20,0,20,0));
 
-        AbstractAction getOverviewAction = new viewDeveloperOverviewAction(weekTextField.textField, yearTextField.textField, main);
+        AbstractAction getOverviewAction = new ViewDeveloperOverviewAction(weekTextField.textField, yearTextField.textField, main);
         JPanel registerHoursButtonPanel= new Button("Get Overview", constants.secondBoxColor, "small", getOverviewAction).getButton();
         getOverviewPanel.add(registerHoursButtonPanel);
         BoxPanel.add(getOverviewPanel);

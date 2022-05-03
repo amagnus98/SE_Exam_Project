@@ -6,14 +6,14 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import system.model.domain.Project;
 
-public class viewDeveloperOverviewAction extends AbstractAction {
+public class ViewDeveloperOverviewAction extends AbstractAction {
 
     JTextField textField;
     Main main;
     JTextField weekTextField;
     JTextField yearTextField;
 
-    public viewDeveloperOverviewAction(JTextField weekTextField, JTextField yearTextField, Main main) {
+    public ViewDeveloperOverviewAction(JTextField weekTextField, JTextField yearTextField, Main main) {
         putValue(NAME, "Get Overview");
         this.main = main;
         this.weekTextField = weekTextField;
@@ -24,8 +24,8 @@ public class viewDeveloperOverviewAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
 
         try {
-            int week = Integer.parseInt(weekTextField.getText());
-            int year = Integer.parseInt(yearTextField.getText());
+            int week = Integer.parseInt(weekTextField.getText().trim());
+            int year = Integer.parseInt(yearTextField.getText().trim());
             if (week >= 1 && week <= 52 && year >= 1) {
                 main.viewDeveloperOverview(week, year);
             } else {

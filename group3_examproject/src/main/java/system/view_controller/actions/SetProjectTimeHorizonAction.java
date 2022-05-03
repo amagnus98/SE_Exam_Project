@@ -52,29 +52,22 @@ public class SetProjectTimeHorizonAction extends AbstractAction {
 
         // ERROR BOOLEAN
         Boolean hasError = false;
-
+    
         try {
-            int startYear = Integer.parseInt(projectStartYear.getText());
-            int startWeek = Integer.parseInt(projectStartWeek.getText());
-            int endYear = Integer.parseInt(projectEndYear.getText());
-            int endWeek = Integer.parseInt(projectEndWeek.getText());
-            try {
-                main.app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, project.getProjectNumber());
-            } catch (NumberFormatException error) {
-                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-                errorWindow.showMessage();
-                hasError = true;
-            } catch (OperationNotAllowedException error) {
-                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-                errorWindow.showMessage();
-                hasError = true;
-            }
-        } catch (NumberFormatException error) {
+            int startYear = Integer.parseInt(projectStartYear.getText().trim());
+            int startWeek = Integer.parseInt(projectStartWeek.getText().trim());
+            int endYear = Integer.parseInt(projectEndYear.getText().trim());
+            int endWeek = Integer.parseInt(projectEndWeek.getText().trim());
+            main.app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, project.getProjectNumber());
+        } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();
             hasError = true;
+        } catch (NumberFormatException error) {
+            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
+            errorWindow.showMessage();
+            hasError = true;
         }
-
 
         if (!hasError) {
             SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");

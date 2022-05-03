@@ -36,9 +36,9 @@ public class SubmitActivityInformationAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
-        // PROJECT NAME CHANGE
+        // ACTIVITY NAME CHANGE
         try {
-            activity.setActivityName(activityName.getText());
+            this.main.app.setActivityName(activityName.getText().trim(),activity, previousProject);
         } catch (OperationNotAllowedException error){
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
             errorWindow.showMessage();

@@ -17,7 +17,6 @@ import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
 import system.view_controller.actions.RequestAssistanceAction;
-import system.view_controller.actions.SubmitActivityChangesAction;
 import system.view_controller.actions.SubmitActivityInformationAction;
 import system.view_controller.actions.SetEstimatedWorkHoursActivityAction;
 import system.view_controller.actions.SetActivityTimeHorizonAction;
@@ -72,6 +71,9 @@ public class ActivityPage {
         } else {
             InformationPanel.add(new JLabel(parentProject.getName() + " (" + parentProject.getProjectNumber() + ")"));
         }
+
+        InformationPanel.add(new JLabel("Assigned Project Leader"));
+        InformationPanel.add(new JLabel(parentProject.getProjectLeader().getInitials()));
 
         InformationPanel.add(new JLabel("Activity Name"));
         TextField activityNameTextField = new TextField("Project Name", activity.getName(), constants.boxColor).getTextField();

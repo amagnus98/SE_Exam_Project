@@ -19,7 +19,7 @@ public class LogInAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        String initials = this.textField.getText();
+        String initials = this.textField.getText().trim();
         try {
             this.main.app.logIn(initials);
             this.main.changeScreen("Navigator");
