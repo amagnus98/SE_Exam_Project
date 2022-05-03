@@ -47,11 +47,11 @@ public class CreateNewProjectActivityAction extends AbstractAction {
         if (!hasError) {
             SuccessWindow errorWindow = new SuccessWindow("Activity successfully created.");
             errorWindow.showMessage();
-            if (project.isNonWorkActivityProject()) {
-                main.viewNonWorkActivityProject(project, previousPage);
-            } else {
-                main.viewProject(project, previousPage);
-            }
+        }
+        if (project.isNonWorkActivityProject()) {
+            main.viewNonWorkActivityProject(project, previousPage);
+        } else {
+            main.viewProject(project, previousPage);
         }
 
         

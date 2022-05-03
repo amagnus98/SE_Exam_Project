@@ -64,27 +64,21 @@ public class LogInPage {
             InformationPanel.add(headerPanel);
         }
 
-
-        JPanel logInHeaderPanel = new JPanel();
-        JLabel logInHeader = new JLabel("Log In");
-        logInHeader.setFont(new Font("Arial", Font.BOLD, 20));
-        logInHeaderPanel.add(logInHeader);
-        logInHeaderPanel.setBackground(constants.backgroundColor);
-        logInHeaderPanel.setBorder(new EmptyBorder(35,0,0,0));
-        InformationPanel.add(logInHeaderPanel);
-
+        // set header
+        new Header("Login Page", InformationPanel);
+    
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setBorder(new EmptyBorder(30,0,30,0));
         loginPanel.setBackground(constants.boxColor);
         
-        new SubHeader("Enter Initials:", constants.boxColor, loginPanel);
+        new SubHeader("Please enter your initials here:", constants.boxColor, loginPanel);
 
         TextField textField = new TextField("Initials", "", constants.boxColor).getTextField();
         loginPanel.add(textField.textFieldPanel);
 
-        AbstractAction action = new LogInAction("Log In", textField.textField, main);
-        JPanel ButtonPanel = new Button("Log In", constants.boxColor, "small", action).getButton();
+        AbstractAction action = new LogInAction("Log in", textField.textField, main);
+        JPanel ButtonPanel = new Button("Log in", constants.boxColor, "small", action).getButton();
         loginPanel.add(ButtonPanel);
         InformationPanel.add(loginPanel);
 

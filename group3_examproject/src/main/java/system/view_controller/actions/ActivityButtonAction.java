@@ -26,6 +26,6 @@ public class ActivityButtonAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.viewActivitry(activity, previousProject);
+        main.viewActivity(activity, previousProject);
     }
 }

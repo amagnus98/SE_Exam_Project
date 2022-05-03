@@ -1,5 +1,7 @@
 package system.view_controller.constants;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 
 public class Constants {
@@ -9,6 +11,9 @@ public class Constants {
     public Color boxColor = new Color(164, 182, 193);
     public Color secondBoxColor = new Color(97, 115, 129);
     public Color projectButtonColor = new Color(200, 210, 220);
+    public Color buttonBorderColor = new Color(0,0,0);
+    public int borderLineSize = 2;
+    public Border buttonBorder = BorderFactory.createLineBorder(buttonBorderColor,borderLineSize);
     public String softwareName = "KAMMA Time Registration";
 
 }

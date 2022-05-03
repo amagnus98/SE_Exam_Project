@@ -64,7 +64,7 @@ public class Project extends Event{
 
     // add activity to activity list
     public void addToActivityList(Activity activity){
-        activity.setAssignedProject(this.projectNumber);
+        activity.setAssignedProject(this);
         this.activities.add(activity);
     }
 

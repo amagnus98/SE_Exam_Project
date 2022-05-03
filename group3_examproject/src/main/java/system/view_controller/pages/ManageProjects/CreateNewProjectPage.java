@@ -47,7 +47,7 @@ public class CreateNewProjectPage {
         TextField textField = new TextField("Project Name", "", constants.boxColor).getTextField();
         createPanel.add(textField.textFieldPanel);
 
-        AbstractAction createNewProjectAction = new CreateNewProjectAction("Create", "Create new Project", textField.textField, main);
+        AbstractAction createNewProjectAction = new CreateNewProjectAction("Create", "Create new project", textField.textField, main);
         JPanel createNewProjectButtonPanel = new Button("Create", constants.boxColor, "small", createNewProjectAction).getButton();
         createPanel.add(createNewProjectButtonPanel);
         BoxPanel.add(createPanel);

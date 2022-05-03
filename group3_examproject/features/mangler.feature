@@ -2,3 +2,4 @@
 
 # overvejelser
 # use case med at registrere timer. skal dagen afhænge af current year?
+# man kan godt registere decimaltal

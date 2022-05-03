@@ -8,7 +8,7 @@ import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.messageWindows.SuccessWindow;
 import system.view_controller.pages.*;
 
-public class registerTimeAction extends AbstractAction {
+public class RegisterTimeAction extends AbstractAction {
 
     JTextField textField;
     Main main;
@@ -19,7 +19,7 @@ public class registerTimeAction extends AbstractAction {
     JTextField week;
     JTextField year;
 
-    public registerTimeAction(String projectNumber, String activityName, JTextField hours, JTextField day, JTextField week, JTextField year, Main main) {
+    public RegisterTimeAction(String projectNumber, String activityName, JTextField hours, JTextField day, JTextField week, JTextField year, Main main) {
         putValue(NAME, "Register Hours");
         this.main = main;
         this.projectNumber = projectNumber;

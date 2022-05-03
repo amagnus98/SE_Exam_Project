@@ -78,13 +78,14 @@ public class ViewProjectsPage {
         JPanel createNewProjectPanel = new JPanel();
         createNewProjectPanel.setBackground(constants.secondBoxColor);
         createNewProjectPanel.setBorder(new EmptyBorder(10,0,10,0));
-        AbstractAction createNewProjectAction = new MainMenuAction("Create new Project", "Create new Project", main);
-        JPanel createNewProjectButtonPanel = new Button("Create new Project", constants.secondBoxColor, "small", createNewProjectAction).getButton();
+        AbstractAction createNewProjectAction = new MainMenuAction("Create new project", "Create new project", main);
+        JPanel createNewProjectButtonPanel = new Button("Create new project", constants.secondBoxColor, "small", createNewProjectAction).getButton();
         createNewProjectPanel.add(createNewProjectButtonPanel);
         BoxPanel.add(createNewProjectPanel);
 
         AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Navigator", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
+        backToManageProjectsButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToManageProjectsButtonPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();

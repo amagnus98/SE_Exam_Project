@@ -4,7 +4,7 @@ import java.util.*;
 public class Activity extends Event{
   
   // Variable used to get the project of the activity
-  private String parentProjectNumber;
+  private Project parentProject;
 
   // the keys are the initials of the developers
   // the values are booleans representing whether they were added by the project leader or not
@@ -19,16 +19,23 @@ public class Activity extends Event{
       this.name = name;
   }
 
-  // get parent project number
-  public String getParentProjectNumber() {
-    return this.parentProjectNumber;
+  public Project getParentProject() {
+    return this.parentProject;
   }
 
-  // set the assigned project of the activity
-  // e.g. if activity is under project "22001" then parentProjectNumber = "22001"
-  public void setAssignedProject(String projectNumber){
-      this.parentProjectNumber = projectNumber;
+  public void setActivityName(String activityName) throws OperationNotAllowedException{
+    if (!parentProject.containsActivity(activityName) || activityName.equals(this.getName())){
+      this.setName(activityName);
+    } else {
+      throw new OperationNotAllowedException("Project already contains an activity with the given name");
+    }
   }
+
+  public void setAssignedProject(Project project){
+    this.parentProject = project;
+}
+
+
 
   // for developers added to the activity by a project leader
   public void addAssignedDeveloper(Developer d){

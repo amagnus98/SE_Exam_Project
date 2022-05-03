@@ -12,11 +12,16 @@ public class ProjectButtonAction extends AbstractAction {
     String previousPage;
 
     public ProjectButtonAction(String projectNumber, String projectName, Project project, String previousPage, Main main) {
-        if (projectName.equals("")) {
-            putValue(NAME, "Unnamed " + "(" +projectNumber + ")");
+        if (project.isNonWorkActivityProject()){
+            putValue(NAME, projectName);
         } else {
-            putValue(NAME, projectName + " (" +projectNumber + ")");
+            if (projectName.equals("")) {
+                putValue(NAME, "Unnamed " + "(" +projectNumber + ")");
+            } else {
+                putValue(NAME, projectName + " (" +projectNumber + ")");
+            }
         }
+        
         this.main = main;
         this.project = project;
         this.previousPage = previousPage;

@@ -1,6 +1,8 @@
 package system.view_controller.widgets;
+import system.view_controller.constants.Constants;
 import javax.swing.*;
 import java.awt.*;
+
 
 public class Button {
 
@@ -8,10 +10,9 @@ public class Button {
     JPanel buttonPanel;
     
     public Button(String name, Color bgcolor, String size, AbstractAction action) {
-
+        Constants constants = new Constants();
         this.buttonPanel = new JPanel();
         this.buttonPanel.setBackground(bgcolor);
-
         this.button = new JButton(name);
 
         if (size == "small") {
@@ -27,7 +28,7 @@ public class Button {
             this.button.setFont(new Font("Arial", Font.PLAIN, 20));
             this.button.setPreferredSize(new Dimension(250, 75));
         }
-
+        this.button.setBorder(constants.buttonBorder);
         this.button.setAction(action);
         this.buttonPanel.add(this.button);
 

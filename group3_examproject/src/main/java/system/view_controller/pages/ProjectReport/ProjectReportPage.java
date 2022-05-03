@@ -56,13 +56,13 @@ public class ProjectReportPage {
         numberLabel.setHorizontalAlignment(JLabel.RIGHT);
 
 
-        InformationPanel.add(new JLabel("Est. Project Hours:"));
+        InformationPanel.add(new JLabel("Estimated project work hours:"));
         JLabel estimatedHoursLabel = new JLabel("" + projectReport.getEstimatedHoursForProject());
         InformationPanel.add(estimatedHoursLabel);
         estimatedHoursLabel.setHorizontalAlignment(JLabel.RIGHT);
         
 
-        InformationPanel.add(new JLabel("Hours Worked To Date:"));
+        InformationPanel.add(new JLabel("Total registered hours to project:"));
         JLabel totalHoursLabel = new JLabel("" + projectReport.getTotalHoursRegisteredToProject());
         InformationPanel.add(totalHoursLabel);
         totalHoursLabel.setHorizontalAlignment(JLabel.RIGHT);
@@ -118,7 +118,7 @@ public class ProjectReportPage {
             activityPanel.add(activityEstLabel);
             activityEstLabel.setHorizontalAlignment(JLabel.LEFT);
 
-            JLabel activityTotalLabel = new JLabel("Worked: " + activity.getTotalHoursRegistered());
+            JLabel activityTotalLabel = new JLabel("Reg.: " + activity.getTotalHoursRegistered());
             activityPanel.add(activityTotalLabel);
             activityTotalLabel.setHorizontalAlignment(JLabel.RIGHT);
             

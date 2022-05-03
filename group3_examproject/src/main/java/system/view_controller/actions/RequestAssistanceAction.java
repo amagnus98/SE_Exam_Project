@@ -43,7 +43,7 @@ public class RequestAssistanceAction extends AbstractAction {
         if (!hasError) {
             SuccessWindow errorWindow = new SuccessWindow("Request successfully sent.");
             errorWindow.showMessage();
-            main.viewActivitry(activity, previousProject);
+            main.viewActivity(activity, previousProject);
         }
 
     }

@@ -53,8 +53,8 @@ public class NavigatorPage {
 
         new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 
-        AbstractAction logOutAction = new LogOutAction("Log Out", main);
-        JPanel logOutButtonPanel = new Button("Log Out", constants.backgroundColor, "small", logOutAction).getButton();
+        AbstractAction logOutAction = new LogOutAction("Log out", main);
+        JPanel logOutButtonPanel = new Button("Log out", constants.backgroundColor, "small", logOutAction).getButton();
         BoxPanel.add(logOutButtonPanel);
         
         JPanel container = new Container(BoxPanel).getContainer();

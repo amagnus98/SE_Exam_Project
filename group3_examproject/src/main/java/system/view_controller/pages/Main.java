@@ -51,6 +51,7 @@ public class Main {
 
     public void runApp() {
         JPanel loginPagePanel = logInPage.draw();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(loginPagePanel);
         frame.validate();
         frame.repaint();
@@ -74,7 +75,7 @@ public class Main {
         frame.repaint();
     }
 
-    public void viewActivitry(Activity activity, Project previousProject) {
+    public void viewActivity(Activity activity, Project previousProject) {
         frame.getContentPane().removeAll();
         ActivityPage activityPage = new ActivityPage(frame, this, activity, previousProject);
         JPanel activityPagePanel = activityPage.draw();
@@ -125,7 +126,7 @@ public class Main {
             frame.repaint();
 
 
-        } else if (changeTo == "Create new Project") {
+        } else if (changeTo == "Create new project") {
             frame.getContentPane().removeAll();
             JPanel createNewProjectPagePanel = createNewProjectPage.draw();
             frame.getContentPane().add(createNewProjectPagePanel);

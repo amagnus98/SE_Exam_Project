@@ -66,7 +66,7 @@ public class ChooseActivityPage {
             for (int j = 0; j < activitites.size(); j++) {
                 Activity activity = activitites.get(j);
 
-                AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProjectNumber(), activity.getName(), main);
+                AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
                 JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
                 InformationPanel.add(projectActivityButton);
             }

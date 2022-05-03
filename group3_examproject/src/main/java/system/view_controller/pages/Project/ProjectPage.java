@@ -11,10 +11,14 @@ import system.view_controller.actions.AssignProjectDeveloperAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.GetProjectReportAction;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.SubmitProjectChangersAction;
+import system.view_controller.actions.SetEstimatedWorkHoursProjectAction;
+import system.view_controller.actions.SubmitProjectInformationAction;
+import system.view_controller.actions.SetProjectTimeHorizonAction;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
+import system.view_controller.widgets.Header;
+import system.view_controller.widgets.SubHeader;
 import system.view_controller.constants.Constants;
 import system.model.domain.Activity;
 import system.model.domain.Developer;
@@ -54,6 +58,11 @@ public class ProjectPage {
         InformationPanel.setBackground(constants.boxColor);
 
 
+        JLabel setProjectInformationHeader = new JLabel("Project information");
+        setProjectInformationHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setProjectInformationHeader);
+        InformationPanel.add(new JLabel(""));
+
         InformationPanel.add(new JLabel("Project Number"));
         InformationPanel.add(new JLabel(project.getProjectNumber()));
 
@@ -70,6 +79,36 @@ public class ProjectPage {
             InformationPanel.add(projectLeaderTextField.textField);
         }
 
+        InformationPanel.add(new JLabel(""));
+        AbstractAction submitProjectInformationAction = new SubmitProjectInformationAction("Submit changes", projectNameTextField.textField, projectLeaderTextField.textField, project, previousPage, main);
+        JPanel submitProjectInformationButtonPanel = new Button("Submit changes", constants.boxColor, "small", submitProjectInformationAction).getButton();
+        InformationPanel.add(submitProjectInformationButtonPanel);
+
+        JLabel setEstimatedWorkHoursHeader = new JLabel("Hour information");
+        setEstimatedWorkHoursHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setEstimatedWorkHoursHeader);
+
+        InformationPanel.add(new JLabel(""));
+        InformationPanel.add(new JLabel("Total hours registered"));
+        InformationPanel.add(new JLabel(String.valueOf(project.getTotalHoursRegistered())));
+
+        InformationPanel.add(new JLabel("Estimated work hours"));
+        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(project.getEstimatedWorkHours()), constants.boxColor).getTextField();
+        InformationPanel.add(estimatedWorkHoursTextField.textField);
+
+        InformationPanel.add(new JLabel(""));
+        AbstractAction setEstimatedWorkHoursAction = new SetEstimatedWorkHoursProjectAction("Set estimated hours", projectNameTextField.textField, projectLeaderTextField.textField, estimatedWorkHoursTextField.textField,project, previousPage, main);
+        JPanel setEstimatedWorkHoursButtonPanel = new Button("Set estimated hours", constants.boxColor, "small", setEstimatedWorkHoursAction).getButton();
+        InformationPanel.add(setEstimatedWorkHoursButtonPanel);
+
+
+
+
+        JLabel setTimeHeader = new JLabel("Set project time horizon");
+        setTimeHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setTimeHeader);
+        InformationPanel.add(new JLabel(""));
+
         InformationPanel.add(new JLabel("Project Start Year"));
         TextField startYearTextField = new TextField("Project startYear", String.valueOf(project.getStartYear()), constants.boxColor).getTextField();
         InformationPanel.add(startYearTextField.textField);
@@ -84,17 +123,17 @@ public class ProjectPage {
         TextField endWeekTextField = new TextField("Project endWeek", String.valueOf(project.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
 
-
-        InformationPanel.add(new JLabel("Estimated Work Hours"));
-        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(project.getEstimatedWorkHours()), constants.boxColor).getTextField();
-        InformationPanel.add(estimatedWorkHoursTextField.textField);
-
-
-
         InformationPanel.add(new JLabel(""));
+        AbstractAction setProjectTimeHorizonAction = new SetProjectTimeHorizonAction("Set time horizon", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, project, previousPage, main);
+        JPanel setProjectTimeHorizonButtonPanel = new Button("Set time horizon", constants.boxColor, "small", setProjectTimeHorizonAction).getButton();
+        InformationPanel.add(setProjectTimeHorizonButtonPanel);
+
+
+
+        JLabel setActivityOverviewHeader = new JLabel("Activity overview");
+        setActivityOverviewHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setActivityOverviewHeader);
         InformationPanel.add(new JLabel(""));
-
-
 
 
         InformationPanel.add(new JLabel("Project Activities"));
@@ -104,29 +143,34 @@ public class ProjectPage {
         if (activities1.size() < 1) {
             InformationPanel.add(new JLabel("No activities yet."));
             InformationPanel.add(new JLabel(""));
-        } else {
+        } else {    
             for (int i = 0; i < activities1.size(); i++) {
                 Activity activity = activities1.get(i);
                 AbstractAction viewActivityAction = new ActivityButtonAction(activity.getName(), activity, project, main);
                 JPanel viewActivityButtonPanel = new Button(activity.getName(), constants.boxColor, "micro", viewActivityAction).getButton();
                 InformationPanel.add(viewActivityButtonPanel);
-                InformationPanel.add(new JLabel(""));
+                if (i == 0){
+                    JLabel activityInfoText = new JLabel("Press on an activity to edit it");
+                    activityInfoText.setFont(new Font("Arial", Font.PLAIN, 12));
+                    InformationPanel.add(activityInfoText);
+                } else {
+                    InformationPanel.add(new JLabel(""));
+                }
             }
         }
 
         TextField addActivityTextField = new TextField("Activity Name", "activity name...", constants.boxColor).getTextField();
         InformationPanel.add(addActivityTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addActivityAction = new CreateNewProjectActivityAction("Create new Activity", previousPage, addActivityTextField.textField, project, main);
-        JPanel addActivityButtonPanel = new Button("Create new Activity", constants.boxColor, "micro", addActivityAction).getButton();
+        AbstractAction addActivityAction = new CreateNewProjectActivityAction("Create new activity", previousPage, addActivityTextField.textField, project, main);
+        JPanel addActivityButtonPanel = new Button("Create new activity", constants.boxColor, "micro", addActivityAction).getButton();
         InformationPanel.add(addActivityButtonPanel);
 
 
-
+        JLabel setDeveloperOverviewHeader = new JLabel("Developer overview");
+        setDeveloperOverviewHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setDeveloperOverviewHeader);
         InformationPanel.add(new JLabel(""));
-        InformationPanel.add(new JLabel(""));
-
-
 
         InformationPanel.add(new JLabel("Project Developers"));
 
@@ -151,8 +195,8 @@ public class ProjectPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AssignProjectDeveloperAction("Assign Developer", previousPage, addDeveloperTextField.textField, project, main);
-        JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
+        AbstractAction addDeveloperAction = new AssignProjectDeveloperAction("Assign developer", previousPage, addDeveloperTextField.textField, project, main);
+        JPanel addDeveloperButtonPanel = new Button("Assign developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 
@@ -163,23 +207,22 @@ public class ProjectPage {
 
         
 
-        JPanel buttonPanel = new JPanel(new GridLayout(0,2,5,2));
+        JPanel buttonPanel = new JPanel(new GridLayout(0,1,5,2));
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         buttonPanel.setBackground(constants.secondBoxColor);
 
-        AbstractAction submitChangesAction = new SubmitProjectChangersAction("Submit Changes", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, project, previousPage, main);
-        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.secondBoxColor, "small", submitChangesAction).getButton();
-        buttonPanel.add(submitChangesButtonPanel);
-
-        AbstractAction getProjectReportAction = new GetProjectReportAction("Generate Report", project, main);
-        JPanel getProjectReportButtonPanel = new Button("Generate Report", constants.secondBoxColor, "small", getProjectReportAction).getButton();
+        AbstractAction getProjectReportAction = new GetProjectReportAction("Generate report", project, main);
+        JPanel getProjectReportButtonPanel = new Button("Generate report", constants.secondBoxColor, "small", getProjectReportAction).getButton();
+        getProjectReportButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         buttonPanel.add(getProjectReportButtonPanel);
 
         BoxPanel.add(buttonPanel);
 
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 
         AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
+        backToManageProjectsButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToManageProjectsButtonPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();

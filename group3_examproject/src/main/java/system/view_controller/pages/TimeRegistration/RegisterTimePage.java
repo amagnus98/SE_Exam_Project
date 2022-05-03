@@ -8,7 +8,7 @@ import system.model.domain.Activity;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.registerTimeAction;
+import system.view_controller.actions.RegisterTimeAction;
 import system.view_controller.constants.Constants;
 import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
@@ -111,7 +111,7 @@ public class RegisterTimePage {
         JPanel registerHoursPanel = new JPanel();
         registerHoursPanel.setBackground(constants.secondBoxColor);
         registerHoursPanel.setBorder(new EmptyBorder(20,0,20,0));
-        AbstractAction registerHoursAction = new registerTimeAction(this.projectNumber, this.activityName, numberOfHoursTextField.textField, dayTextField.textField, weekTextField.textField, yearTextField.textField, main);
+        AbstractAction registerHoursAction = new RegisterTimeAction(this.projectNumber, this.activityName, numberOfHoursTextField.textField, dayTextField.textField, weekTextField.textField, yearTextField.textField, main);
         JPanel registerHoursButtonPanel= new Button("Register Hours", constants.secondBoxColor, "small", registerHoursAction).getButton();
         registerHoursPanel.add(registerHoursButtonPanel);
         BoxPanel.add(registerHoursPanel);

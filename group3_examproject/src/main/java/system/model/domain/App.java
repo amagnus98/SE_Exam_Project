@@ -234,7 +234,7 @@ public class App {
     // Add activity with a name to a project 
     public void addActivityToProject(String activityName, String projectNumber) throws OperationNotAllowedException{
         Activity activity = new Activity(activityName);
-        activity.setAssignedProject(projectNumber);
+        activity.setAssignedProject(this.getProject(projectNumber));
         
         // if current user is project leader add the activity, else throw an error message
         if (currentUserIsProjectLeader(projectNumber)){
@@ -354,7 +354,7 @@ public class App {
             for (Activity activity : developerActivities) {
                 Project parentProject;
                 
-                parentProject = this.getProject(activity.getParentProjectNumber());
+                parentProject = activity.getParentProject();
 
                 // if no previous activities for the developer for the specific project has been registered yet
                 if (!developerActivitiesHashMap.containsKey(parentProject)) {
@@ -371,8 +371,12 @@ public class App {
 
     public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
-            Project project = getProject(projectNumber);
-            project.setEstimatedWorkHours(workHours);
+            if (workHours >= 0){
+                Project project = getProject(projectNumber);
+                project.setEstimatedWorkHours(workHours);
+            } else {
+                throw new OperationNotAllowedException("The estimated number of hours must be non-negative");
+            }            
         } else {
             throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this project");
         }
@@ -380,10 +384,14 @@ public class App {
 
     public void setEstimatedWorkHoursForActivity(double workHours, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
-            Project project = getProject(projectNumber);
-            Activity activity = project.getActivity(activityName);
+            if (workHours >= 0){
+                Project project = getProject(projectNumber);
+                Activity activity = project.getActivity(activityName);
 
-            activity.setEstimatedWorkHours(workHours);
+                activity.setEstimatedWorkHours(workHours);
+            } else {
+                throw new OperationNotAllowedException("The estimated number of hours must be non-negative");
+            }       
         } else {
             throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this activity");
         }

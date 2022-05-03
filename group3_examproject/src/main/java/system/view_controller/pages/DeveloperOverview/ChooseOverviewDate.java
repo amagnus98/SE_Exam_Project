@@ -8,7 +8,7 @@ import system.model.domain.Activity;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.registerTimeAction;
+import system.view_controller.actions.RegisterTimeAction;
 import system.view_controller.actions.viewDeveloperOverviewAction;
 import system.view_controller.constants.Constants;
 import system.view_controller.messageWindows.ErrorWindow;

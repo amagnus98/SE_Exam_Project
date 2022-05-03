@@ -50,8 +50,8 @@ public class NonWorkActivityProjectPage {
         InformationPanel.setBackground(constants.boxColor);
 
 
-        InformationPanel.add(new JLabel("Project Number"));
-        InformationPanel.add(new JLabel(project.getProjectNumber()));
+        //InformationPanel.add(new JLabel("Project Number"));
+        //InformationPanel.add(new JLabel(project.getProjectNumber()));
 
         InformationPanel.add(new JLabel("Project Name"));
         InformationPanel.add(new JLabel(project.getName()));
@@ -70,7 +70,7 @@ public class NonWorkActivityProjectPage {
                 if (activity.getName().equals("")) {
                     activityLabel = new JLabel("Unnamed");
                 }
-                activityLabel.setFont(new Font("Arial", Font.BOLD, 15));
+                activityLabel.setFont(new Font("Arial", Font.BOLD, 12));
                 JPanel devePanel = new JPanel(new GridBagLayout());
                 devePanel.add(activityLabel);
                 devePanel.setBackground(constants.boxColor);
@@ -79,11 +79,11 @@ public class NonWorkActivityProjectPage {
             }
         }
 
-        TextField addActivityTextField = new TextField("Activity Name", "activity name...", constants.boxColor).getTextField();
+        TextField addActivityTextField = new TextField("Activity Name", "Non work activity name...", constants.boxColor).getTextField();
         InformationPanel.add(addActivityTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addActivityAction = new CreateNewProjectActivityAction("create new activity", previousPage, addActivityTextField.textField, project, main);
-        JPanel addActivityButtonPanel = new Button("create new activity", constants.boxColor, "micro", addActivityAction).getButton();
+        AbstractAction addActivityAction = new CreateNewProjectActivityAction("Create new activity", previousPage, addActivityTextField.textField, project, main);
+        JPanel addActivityButtonPanel = new Button("Create new activity", constants.boxColor, "micro", addActivityAction).getButton();
         InformationPanel.add(addActivityButtonPanel);
 
 

@@ -18,7 +18,9 @@ import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
 import system.view_controller.actions.RequestAssistanceAction;
 import system.view_controller.actions.SubmitActivityChangesAction;
-import system.view_controller.actions.SubmitProjectChangersAction;
+import system.view_controller.actions.SubmitActivityInformationAction;
+import system.view_controller.actions.SetEstimatedWorkHoursActivityAction;
+import system.view_controller.actions.SetActivityTimeHorizonAction;
 import system.view_controller.widgets.Header;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
@@ -62,32 +64,53 @@ public class ActivityPage {
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
         InformationPanel.setBackground(constants.boxColor);
 
+        InformationPanel.add(new JLabel("Assigned Project"));
+        Project parentProject = activity.getParentProject();
+
+        if (parentProject.getName().equals("")) {
+            InformationPanel.add(new JLabel("Unnamed (" + parentProject.getProjectNumber() + ")"));
+        } else {
+            InformationPanel.add(new JLabel(parentProject.getName() + " (" + parentProject.getProjectNumber() + ")"));
+        }
+
         InformationPanel.add(new JLabel("Activity Name"));
         TextField activityNameTextField = new TextField("Project Name", activity.getName(), constants.boxColor).getTextField();
         InformationPanel.add(activityNameTextField.textField);
 
-        InformationPanel.add(new JLabel("Assigned Project"));
-        Project parentProject;
-        try {
-            parentProject = main.app.getProject(activity.getParentProjectNumber());
-            if (parentProject.getName().equals("")) {
-                InformationPanel.add(new JLabel("Unnamed (" + parentProject.getProjectNumber() + ")"));
-            } else {
-                InformationPanel.add(new JLabel(parentProject.getName() + " (" + parentProject.getProjectNumber() + ")"));
-            }
-
-            InformationPanel.add(new JLabel("Assigned Project Start Time"));
-            InformationPanel.add(new JLabel("Week: " + parentProject.getStartWeek() + ", Year: " + parentProject.getStartYear()));
-            InformationPanel.add(new JLabel("Assigned Project End Time"));
-            InformationPanel.add(new JLabel("Week: " + parentProject.getEndWeek() + ", Year: " + parentProject.getEndYear()));
-
-        } catch (OperationNotAllowedException error) {
-            InformationPanel.add(new JLabel("???"));
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-        }
+        InformationPanel.add(new JLabel(""));
+        AbstractAction submitActivityInformationAction = new SubmitActivityInformationAction("Submit changes", activityNameTextField.textField, activity, previousProject, main);;
+        JPanel submitActivityInformationButtonPanel = new Button("Submit changes", constants.boxColor, "small", submitActivityInformationAction).getButton();
+        InformationPanel.add(submitActivityInformationButtonPanel);
 
 
+        JLabel setEstimatedWorkHoursHeader = new JLabel("Hour information");
+        setEstimatedWorkHoursHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setEstimatedWorkHoursHeader);
 
+        InformationPanel.add(new JLabel(""));
+        InformationPanel.add(new JLabel("Total hours registered"));
+        InformationPanel.add(new JLabel(String.valueOf(activity.getTotalHoursRegistered())));
+
+        InformationPanel.add(new JLabel("Estimated work hours"));
+        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(activity.getEstimatedWorkHours()), constants.boxColor).getTextField();
+        InformationPanel.add(estimatedWorkHoursTextField.textField);
+
+        InformationPanel.add(new JLabel(""));
+        AbstractAction setEstimatedWorkHoursAction = new SetEstimatedWorkHoursActivityAction("Set estimated hours", activityNameTextField.textField, estimatedWorkHoursTextField.textField, activity, previousProject, main);
+        JPanel setEstimatedWorkHoursButtonPanel = new Button("Set estimated hours", constants.boxColor, "small", setEstimatedWorkHoursAction).getButton();
+        InformationPanel.add(setEstimatedWorkHoursButtonPanel);
+
+
+        JLabel setTimeHeader = new JLabel("Set activity time horizon");
+        setTimeHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setTimeHeader);
+        InformationPanel.add(new JLabel(""));
+        
+        InformationPanel.add(new JLabel("Assigned Project Start Time"));
+        InformationPanel.add(new JLabel("Week: " + parentProject.getStartWeek() + ", Year: " + parentProject.getStartYear()));
+        InformationPanel.add(new JLabel("Assigned Project End Time"));
+        InformationPanel.add(new JLabel("Week: " + parentProject.getEndWeek() + ", Year: " + parentProject.getEndYear()));
+        
         InformationPanel.add(new JLabel("Activity Start Year"));
         TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();
         InformationPanel.add(startYearTextField.textField);
@@ -102,16 +125,16 @@ public class ActivityPage {
         TextField endWeekTextField = new TextField("Activity endWeek", String.valueOf(activity.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
 
-
-        InformationPanel.add(new JLabel("Estimated Work Hours"));
-        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(activity.getEstimatedWorkHours()), constants.boxColor).getTextField();
-        InformationPanel.add(estimatedWorkHoursTextField.textField);
-
-
         InformationPanel.add(new JLabel(""));
+        AbstractAction setActivityTimeHorizonAction = new SetActivityTimeHorizonAction("Set time horizon", activityNameTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, activity, previousProject, main);
+        JPanel setActivityTimeHorizonButtonPanel = new Button("Set time horizon", constants.boxColor, "small", setActivityTimeHorizonAction).getButton();
+        InformationPanel.add(setActivityTimeHorizonButtonPanel);
+
+
+        JLabel setDeveloperOverviewHeader = new JLabel("Developer overview");
+        setDeveloperOverviewHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setDeveloperOverviewHeader);
         InformationPanel.add(new JLabel(""));
-
-
 
         InformationPanel.add(new JLabel("Activity Developers"));
 
@@ -140,20 +163,22 @@ public class ActivityPage {
         TextField addDeveloperTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(addDeveloperTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction addDeveloperAction = new AssignActivityDeveloperAction("Assign Developer", previousProject, addDeveloperTextField.textField, activity, main);
+        AbstractAction addDeveloperAction = new AssignActivityDeveloperAction("Assign developer", previousProject, addDeveloperTextField.textField, activity, main);
         JPanel addDeveloperButtonPanel = new Button("Assign Developer", constants.boxColor, "micro", addDeveloperAction).getButton();
         InformationPanel.add(addDeveloperButtonPanel);
 
 
-        InformationPanel.add(new JLabel(""));
+        JLabel setRequestAssistanceHeader = new JLabel("Request assistance");
+        setRequestAssistanceHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(setRequestAssistanceHeader);
         InformationPanel.add(new JLabel(""));
 
 
-        InformationPanel.add(new JLabel("Request Assistance"));
+        InformationPanel.add(new JLabel("Request developer"));
         TextField requestAssistanceTextField = new TextField("Initials", "initials...", constants.boxColor).getTextField();
         InformationPanel.add(requestAssistanceTextField.textField);
         InformationPanel.add(new JLabel(""));
-        AbstractAction requestAssistanceAction = new RequestAssistanceAction("Submit Request", previousProject, requestAssistanceTextField.textField, activity, main);
+        AbstractAction requestAssistanceAction = new RequestAssistanceAction("Submit request", previousProject, requestAssistanceTextField.textField, activity, main);
         JPanel requestAssistanceButtonPanel = new Button("Submit Request", constants.boxColor, "micro", requestAssistanceAction).getButton();
         InformationPanel.add(requestAssistanceButtonPanel);
     
@@ -164,7 +189,7 @@ public class ActivityPage {
 
         BoxPanel.add(InformationScrollPanel);
 
-        
+        /*
         JPanel submitChangesPanel = new JPanel();
         submitChangesPanel.setBackground(constants.secondBoxColor);
         submitChangesPanel.setBorder(new EmptyBorder(10,0,10,0));
@@ -172,10 +197,13 @@ public class ActivityPage {
         JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.secondBoxColor, "small", submitChangesAction).getButton();
         submitChangesPanel.add(submitChangesButtonPanel);
         BoxPanel.add(submitChangesPanel);
+        */
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 
         JPanel backPanel = new JPanel();
         backPanel.setBackground(constants.backgroundColor);
-        AbstractAction backToManageProjectsAction = new ProjectButtonAction(previousProject.getProjectNumber(), "back to ", previousProject, "Project View", main);
+        AbstractAction backToManageProjectsAction = new ProjectButtonAction(previousProject.getProjectNumber(), "Back to ", previousProject, "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         backPanel.add(backToManageProjectsButtonPanel);
         BoxPanel.add(backPanel);
