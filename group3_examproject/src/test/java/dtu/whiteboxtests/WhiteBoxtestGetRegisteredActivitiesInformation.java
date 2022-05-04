@@ -14,7 +14,7 @@ import system.model.domain.Developer;
 import system.model.domain.DeveloperCalendar;
 import system.model.domain.OperationNotAllowedException;
 
-public class WhiteBoxtestGetRegisteredActivities {
+public class WhiteBoxtestGetRegisteredActivitiesInformation {
 
     App app = new App();
 
@@ -26,7 +26,7 @@ public class WhiteBoxtestGetRegisteredActivities {
     }
 
     @Test
-    public void getRegisteredHActivitiesA() throws OperationNotAllowedException{
+    public void getRegisteredActivitiesInformationA() throws OperationNotAllowedException{
         Developer developer = this.app.getDeveloper("kape");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
@@ -53,7 +53,7 @@ public class WhiteBoxtestGetRegisteredActivities {
 
 
     @Test
-    public void getRegisteredHActivitiesB() throws OperationNotAllowedException{
+    public void getRegisteredActivitiesInformationB() throws OperationNotAllowedException{
       Developer developer = this.app.getDeveloper("kape");
       DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
       HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
@@ -96,7 +96,7 @@ public class WhiteBoxtestGetRegisteredActivities {
 
 
     @Test
-    public void getRegisteredHActivitiesC() throws OperationNotAllowedException{
+    public void getRegisteredActivitiesInformationC() throws OperationNotAllowedException{
       Developer developer = this.app.getDeveloper("kape");
       DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
       HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
@@ -161,7 +161,7 @@ public class WhiteBoxtestGetRegisteredActivities {
 
 
       @Test
-      public void getRegisteredHActivitiesD() throws OperationNotAllowedException{
+      public void getRegisteredActivitiesInformationD() throws OperationNotAllowedException{
         Developer developer = this.app.getDeveloper("kape");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
