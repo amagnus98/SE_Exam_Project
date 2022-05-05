@@ -1,5 +1,7 @@
 package system.model.domain;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.*;
 
 public class App {    
@@ -194,12 +196,27 @@ public class App {
 
     // Checks whether a project with a given project number exist in the list of projects
     public boolean projectExists(String projectNumber){
+
+        // Precondition
+        assertTrue(projectNumber != null);
+        boolean result = false;
+
         for (Project p : projects) {
             if (p.getProjectNumber().equals(projectNumber)) {
-                return true;
+                result = true;
+                break;
             }
         }
-        return false;
+
+        // Postcondition
+        for (Project p : projects) {
+            if (p.getProjectNumber().equals(projectNumber)){
+                assertTrue(result == true);
+                return result;
+            }
+        }
+        assertTrue(result == false);
+        return result;
     }
     
     // Get a project from the project number
@@ -290,9 +307,30 @@ public class App {
         if (!project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek)){
             throw new OperationNotAllowedException("The new time horizon of the project conflicts with the time horizon of the activities in the project");
         }
-        // set project start and end tim
+        
+
+        // precondition
+        assertTrue(currentUserIsProjectLeader(projectNumber));
+        assertTrue(isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek));
+        assertTrue(project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek));
+        assertTrue(project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek));
+
+
+        // set project start and end time
         project.setTimeHorizon(startYear,startWeek,endYear,endWeek);
+
+
+        // Postcondition
+        Project p = getProject(projectNumber);
+        assertTrue(p.getProjectNumber().equals(projectNumber));
+        assertTrue(p.getStartWeek()== startWeek);
+        assertTrue(p.getEndWeek() == endWeek);
+        assertTrue(p.getStartYear() == startYear);
+        assertTrue(p.getEndYear() == endYear);
     }
+
+
+
 
     public void setTimeHorizonOfActivity(int startYear, int startWeek, int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
         // if current user is project leader adds the activity, else throws an errormessage
@@ -438,16 +476,38 @@ public class App {
         if (!(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject())){
             throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
         }
+
+        // Precondition
+        assertTrue(project.getActivity(activityName) != null);
+        assertTrue(isHoursFormatValid(hours));
+        assertTrue(isDayFormatValid(day));
+        assertTrue(isWeekFormatValid(week));
+        assertTrue(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject());
+        assertTrue(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject());
+        double x = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
+        double y = project.getTotalHoursRegistered();
+        double z = activity.getTotalHoursRegistered();
+        assertTrue(x == this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName));
+        assertTrue(y == project.getTotalHoursRegistered());
+        assertTrue(z == activity.getTotalHoursRegistered());
+
+
         // register hours and update the total hours for both the project and the activity
         double currentlyRegisteredHours = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
         this.currentUser.registerHours(hours, day, week, year, projectNumber, activityName);
-        // if no hours have been registered before currentlyRegisteredHours=0
+        // if no hours have been registered before, currentlyRegisteredHours=0
         // therefore in order to update properly when a user sets or edits the registered hours
         // it should update as follows
         double newProjectTotalHoursRegistered = project.getTotalHoursRegistered() + hours - currentlyRegisteredHours;
         project.setTotalHoursRegistered(newProjectTotalHoursRegistered);
         double newActivityTotalHoursRegistered = activity.getTotalHoursRegistered() + hours - currentlyRegisteredHours;
         activity.setTotalHoursRegistered(newActivityTotalHoursRegistered);
+
+
+        // Postcondition
+        assertTrue(hours == this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName));
+        assertTrue(y + hours - x == project.getTotalHoursRegistered());
+        assertTrue(z + hours - x == activity.getTotalHoursRegistered());
     }
 
     public void registerHoursToNonWorkActivity(double hours, int day, int week, int year, String activityName) throws OperationNotAllowedException{

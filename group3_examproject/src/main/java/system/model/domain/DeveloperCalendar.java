@@ -1,5 +1,7 @@
 package system.model.domain;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.*;
 
 public class DeveloperCalendar {
@@ -68,6 +70,15 @@ public class DeveloperCalendar {
 
     // check if the user has registered any hours for the given activity on the specific day
     public boolean hasRegisteredHoursForActivity(int day, int week, int year, String projectNumber, String activityName){
+        
+        // Precondition
+        assertTrue(day >= 1 && day <= 7);
+        assertTrue(week >= 1 && day <= 52);
+        assertTrue(year >= 0);
+        assertTrue(projectNumber != null);
+        assertTrue(activityName != null);
+        boolean result = false;
+        
         // get key that corresponds to the given date
         String dateKey = generateDateKey(day, week, year);
 
@@ -79,11 +90,26 @@ public class DeveloperCalendar {
                 // check if there has been registered any hours for the specific day
                 HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
                 if (activityCalendar.containsKey(activityName)){
-                    return true;
+                    result = true;
                 }
             }
         } 
-        return false;
+
+        // Postcondition
+        if (hasRegisteredHoursForDay(day, week, year)) {
+            // get all projects of the activities that have been registered hours to for the specific day
+            HashMap<String, HashMap<String, Double>> projectCalendar = calendar.get(dateKey);
+            if (projectCalendar.containsKey(projectNumber)){
+                // check if there has been registered any hours for the specific day
+                HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
+                if (activityCalendar.containsKey(activityName)){
+                    assertTrue(result == true);
+                    return result;
+                }
+            }
+        } 
+        assertTrue(result == false);
+        return result;
     }
 
     // check if there has been registered any hours for the specific day
@@ -97,23 +123,45 @@ public class DeveloperCalendar {
         // Initialize empty list of hash maps
         // each activity that have been registered hours to will have its information stored in a hashmap
         // three keys - Project number, activity name and the number of registered hours for the specific day
-        ArrayList<HashMap<String,String>> registeredActivitiesInformation = new ArrayList<HashMap<String,String>>();
-        String dateKey = generateDateKey(day, week, year);
-        if (hasRegisteredHoursForDay(day, week, year)){
-            HashMap<String, HashMap<String, Double>> projectCalendar = calendar.get(dateKey);
-            for (String projectNumber : projectCalendar.keySet()){
-                HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
-                for (String activityName : activityCalendar.keySet()){
-                    // get activity information for the activity and store in hash map
-                    double registeredHours = activityCalendar.get(activityName);
-                    HashMap<String,String> activityInformation = getActivityInformation(activityName, projectNumber, registeredHours);
-                    registeredActivitiesInformation.add(activityInformation);
-                }
-            }
-            return registeredActivitiesInformation;
-        } else {
+
+        if (!hasRegisteredHoursForDay(day, week, year)){
             throw new OperationNotAllowedException("The user has registered no hours on the given day");
         }
+
+        // Predondition
+        assertTrue(day >= 1 && day <= 7);
+        assertTrue(week >= 1 && day <= 52);
+        assertTrue(year >= 0);
+        assertTrue(hasRegisteredHoursForDay(day, week, year));
+    
+        
+        ArrayList<HashMap<String,String>> registeredActivitiesInformation = new ArrayList<HashMap<String,String>>();
+        String dateKey = generateDateKey(day, week, year);
+
+        HashMap<String, HashMap<String, Double>> projectCalendar = calendar.get(dateKey);
+        for (String projectNumber : projectCalendar.keySet()){
+            HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
+            for (String activityName : activityCalendar.keySet()){
+                // get activity information for the activity and store in hash map
+                double registeredHours = activityCalendar.get(activityName);
+                HashMap<String,String> activityInformation = getActivityInformation(activityName, projectNumber, registeredHours);
+                registeredActivitiesInformation.add(activityInformation);
+            }
+        }
+
+        // Postcondition
+        for (String projectNumber : projectCalendar.keySet()){
+            HashMap<String,Double> activityCalendar = projectCalendar.get(projectNumber);
+            for (String activityName : activityCalendar.keySet()){
+                // get activity information for the activity and store in hash map
+                double registeredHours = activityCalendar.get(activityName);
+                HashMap<String,String> activityInformation = getActivityInformation(activityName, projectNumber, registeredHours);
+
+                // Asserts that the correct element is contained within the arraylist
+                assertTrue(registeredActivitiesInformation.contains(activityInformation));
+            }
+        }
+        return registeredActivitiesInformation;  
     }
 
     // Helper Method: Creates and returns a hashmap containing information of both 
