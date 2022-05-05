@@ -60,16 +60,21 @@ public class LogInPage {
             headerLabel.setFont(new Font("Arial", Font.BOLD, 25));
             headerPanel.add(headerLabel);
             headerPanel.setBackground(constants.backgroundColor);
-            headerPanel.setBorder(new EmptyBorder(75,0,0,0));
+            headerPanel.setBorder(new EmptyBorder(35,0,0,0));
             InformationPanel.add(headerPanel);
         }
 
         // set header
-        new Header("Login Page", InformationPanel);
+        JLabel subHeader = new JLabel("Login Page");
+        subHeader.setFont(new Font("Arial", Font.BOLD, 25));
+        subHeader.setBorder(new EmptyBorder(10,0,10,0));
+        InformationPanel.add(subHeader);
+        subHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+        subHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
     
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
-        loginPanel.setBorder(new EmptyBorder(30,0,30,0));
+        loginPanel.setBorder(new EmptyBorder(10,0,30,0));
         loginPanel.setBackground(constants.boxColor);
         
         new SubHeader("Please enter your initials here:", constants.boxColor, loginPanel);

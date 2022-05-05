@@ -39,7 +39,7 @@ public class NonWorkActivityProjectPage {
 
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(constants.backgroundColor);
-        JLabel header = new JLabel("Project Details");
+        JLabel header = new JLabel("Non Work Activities");
         header.setFont(new Font("Arial", Font.BOLD, 20));
         header.setBorder(new EmptyBorder(10,10,10,10));
         headerPanel.add(header);
@@ -49,14 +49,7 @@ public class NonWorkActivityProjectPage {
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
         InformationPanel.setBackground(constants.boxColor);
 
-
-        //InformationPanel.add(new JLabel("Project Number"));
-        //InformationPanel.add(new JLabel(project.getProjectNumber()));
-
-        InformationPanel.add(new JLabel("Project Name"));
-        InformationPanel.add(new JLabel(project.getName()));
-
-        InformationPanel.add(new JLabel("Project Activities"));
+        InformationPanel.add(new JLabel("Non Work Activities"));
         
         ArrayList<Activity> activities = project.getActivities();
         

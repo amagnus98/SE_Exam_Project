@@ -63,6 +63,11 @@ public class ActivityPage {
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
         InformationPanel.setBackground(constants.boxColor);
 
+        JLabel informationHeader = new JLabel("Activity Information");
+        informationHeader.setFont(new Font("Arial", Font.BOLD, 18));
+        InformationPanel.add(informationHeader);
+        InformationPanel.add(new JLabel(""));
+
         InformationPanel.add(new JLabel("Assigned Project"));
         Project parentProject = activity.getParentProject();
 

@@ -9,7 +9,7 @@ public class Constants {
     public Color backgroundColor = new Color(230, 231, 236);
     public Color appBarColor = new Color(113, 121, 154);
     public Color boxColor = new Color(164, 182, 193);
-    public Color secondBoxColor = new Color(97, 115, 129);
+    public Color secondBoxColor = new Color(110, 130, 150);
     public Color projectButtonColor = new Color(200, 210, 220);
     public Color buttonBorderColor = new Color(0,0,0);
     public int borderLineSize = 2;

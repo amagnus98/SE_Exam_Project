@@ -85,5 +85,4 @@ public class Developer {
         return currentActivities;
 
     }
-
 }

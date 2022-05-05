@@ -46,34 +46,85 @@ public class ChooseActivityPage {
 
 
         ArrayList<Project> projects = main.app.getProjects();
+        ArrayList<Activity> requestedActivities = new ArrayList<>();
 
         for (int i = 0; i < projects.size(); i++) {
             Project project = projects.get(i);
 
-            String projectName = "Unnamed";
-            if (!projects.get(i).getName().equals("")) {
-                projectName = project.getName();
-            }
-            JLabel projectHeader = new JLabel(projectName + " (" + project.getProjectNumber() + ")");
-            if (project.isNonWorkActivityProject()){
-                projectHeader = new JLabel(projectName);
-            } 
-        
-            projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
-            projectHeader.setBorder(new EmptyBorder(30,0,10,0));
-            InformationPanel.add(projectHeader);
-            projectHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
-            projectHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+            if (project.getDevelopers().contains(main.app.getCurrentUser()) || project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber())) {
+                
+                String projectName = "Unnamed";
+                if (!projects.get(i).getName().equals("")) {
+                    projectName = project.getName();
+                }
+                JLabel projectHeader = new JLabel(projectName + " (" + project.getProjectNumber() + ")");
+                if (project.isNonWorkActivityProject()){
+                    projectHeader = new JLabel(projectName);
+                } 
             
-            ArrayList<Activity> activitites = project.getActivities();
-            for (int j = 0; j < activitites.size(); j++) {
-                Activity activity = activitites.get(j);
+                projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
+                projectHeader.setBorder(new EmptyBorder(30,0,10,0));
+                InformationPanel.add(projectHeader);
+                projectHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+                projectHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+                
+                ArrayList<Activity> allActivitites = project.getActivities();
+                ArrayList<Activity> activitites = new ArrayList<>();
 
-                AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
-                JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
-                InformationPanel.add(projectActivityButton);
+                for (Activity activity : allActivitites) {
+                    if (activity.getDevelopers().contains(main.app.getCurrentUser()) || project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber())) {
+                        activitites.add(activity);
+                    }
+                }
+
+                if (activitites.size() < 1) {
+                    JLabel noActivitiesText = new JLabel("No Activities.");
+                    noActivitiesText.setFont(new Font("Arial", Font.PLAIN, 12));
+                    InformationPanel.add(noActivitiesText);
+                    noActivitiesText.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+                    noActivitiesText.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+                } else {
+                    for (int j = 0; j < activitites.size(); j++) {
+                        Activity activity = activitites.get(j);
+    
+                        AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
+                        JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
+                        InformationPanel.add(projectActivityButton);
+
+                        if (!project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber()) && !activity.isDeveloperAssignedByProjectLeader(main.app.getCurrentUser())) {
+                            requestedActivities.add(activity);
+                        }
+                    }
+                }
+            } else {
+                ArrayList<Activity> activities = project.getActivities();
+                for (Activity activity : activities) {
+                    if (!project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber()) && activity.isDeveloperAssigned(main.app.getCurrentUser()) && !activity.isDeveloperAssignedByProjectLeader(main.app.getCurrentUser())) {
+                        requestedActivities.add(activity);
+                    }
+                }
             }
         }
+        JLabel requestedHeader = new JLabel("Requested Activities");
+            requestedHeader.setFont(new Font("Arial", Font.BOLD, 20));
+            requestedHeader.setBorder(new EmptyBorder(30,0,10,0));
+            InformationPanel.add(requestedHeader);
+            requestedHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+            requestedHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+
+            if (requestedActivities.size() < 1) {
+                JLabel noActivitiesText = new JLabel("No Activities.");
+                noActivitiesText.setFont(new Font("Arial", Font.PLAIN, 12));
+                InformationPanel.add(noActivitiesText);
+                noActivitiesText.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+                noActivitiesText.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+            } else {
+                for (Activity activity : requestedActivities) {
+                    AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
+                    JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
+                    InformationPanel.add(projectActivityButton);
+                }
+            }
 
         JScrollPane InformationScrollPanel = new JScrollPane(InformationPanel);
         InformationScrollPanel.setPreferredSize(new Dimension(350, 700));
