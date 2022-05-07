@@ -29,8 +29,10 @@ public class Button {
             this.button.setPreferredSize(new Dimension(250, 75));
         }
         this.button.setBorder(constants.buttonBorder);
-        button.setBackground(buttonBackgroundColor);
-        button.setOpaque(true);
+        if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+            this.button.setBackground(constants.buttonBackgroundColor);
+            this.button.setOpaque(true);
+        }
         this.button.setAction(action);
         this.buttonPanel.add(this.button);
 

@@ -22,6 +22,10 @@ public class ProjectButton {
         this.button.setPreferredSize(new Dimension(200, 50));
         this.button.setBorder(constants.buttonBorder);
         this.button.setAction(action);
+        if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+            this.button.setBackground(constants.buttonBackgroundColor);
+            this.button.setOpaque(true);
+        }
         this.buttonPanel.add(this.button);
 
     }
