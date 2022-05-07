@@ -130,7 +130,7 @@ public class ChooseActivityPage {
             requestedHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
 
             if (requestedActivities.size() < 1) {
-                JLabel noActivitiesText = new JLabel("No requsted activities.");
+                JLabel noActivitiesText = new JLabel("No requested activities.");
                 noActivitiesText.setFont(new Font("Arial", Font.PLAIN, 12));
                 InformationPanel.add(noActivitiesText);
                 noActivitiesText.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
