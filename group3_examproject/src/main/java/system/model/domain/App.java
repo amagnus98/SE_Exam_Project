@@ -472,7 +472,7 @@ public class App {
             throw new OperationNotAllowedException("The user is not assigned the given activity");
         }
 
-        if (!(activity.isTimeHorizonDefined())){
+        if (!(activity.isTimeHorizonDefined() || project.isNonWorkActivityProject())){
             throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been defined");
         }
 
