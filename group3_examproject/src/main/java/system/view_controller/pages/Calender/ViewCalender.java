@@ -79,7 +79,7 @@ public class ViewCalender {
 
                 JPanel DayPanel = new JPanel();
                 DayPanel.setLayout(new BoxLayout(DayPanel, BoxLayout.Y_AXIS));
-                DayPanel.setBackground(constants.secondBoxColor);
+                DayPanel.setBackground(constants.calendarColor);
                 DayPanel.setBorder(new EmptyBorder(10,10,10,10));
 
                 int keyLength = key.length();
