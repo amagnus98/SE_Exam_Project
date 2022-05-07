@@ -153,6 +153,9 @@ public class ChooseActivityPage {
         BoxPanel.add(backToMainButtonPanel);
 
 
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
+
+
         JPanel container = new Container(BoxPanel).getContainer();
         return container;
 

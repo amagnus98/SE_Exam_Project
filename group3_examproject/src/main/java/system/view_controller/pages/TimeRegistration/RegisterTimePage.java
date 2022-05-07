@@ -129,6 +129,8 @@ public class RegisterTimePage {
         JPanel backToMainButtonPanel = new Button("Back", constants.backgroundColor, "small", backToMainAction).getButton();
         backToMainButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToMainButtonPanel);
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
         
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

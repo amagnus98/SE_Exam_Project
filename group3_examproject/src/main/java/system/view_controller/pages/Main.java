@@ -16,7 +16,9 @@ import system.view_controller.pages.TimeRegistration.RegisterTimePage;
 import system.view_controller.pages.ManageProjects.CreateNewProjectPage;
 import system.model.domain.Activity;
 import system.model.domain.App;
+import system.model.domain.Developer;
 import system.model.domain.Project;
+import java.util.*;
 
 public class Main {
 
@@ -93,9 +95,9 @@ public class Main {
         frame.repaint();
     }
 
-    public void viewDeveloperOverview(int week, int year) {
+    public void viewDeveloperOverview(int startWeek, int startYear, int endWeek, int endYear, HashMap<Developer, HashMap<Project, ArrayList<Activity>>> developerActivitiesInPeriod) {
         frame.getContentPane().removeAll();
-        DeveloperOverviewPage developerOverviewPage = new DeveloperOverviewPage(frame, week, year, this);
+        DeveloperOverviewPage developerOverviewPage = new DeveloperOverviewPage(frame, startWeek, startYear, endWeek, endYear, developerActivitiesInPeriod, this);
         JPanel developerOverviewPagePanel = developerOverviewPage.draw();
         frame.getContentPane().add(developerOverviewPagePanel);
         frame.validate();

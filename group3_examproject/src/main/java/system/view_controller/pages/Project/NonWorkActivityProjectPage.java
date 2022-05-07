@@ -12,6 +12,7 @@ import system.view_controller.actions.MainMenuAction;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
+import system.view_controller.widgets.SubHeader;
 import system.view_controller.constants.Constants;
 import system.model.domain.Activity;
 import system.model.domain.Project;
@@ -95,6 +96,10 @@ public class NonWorkActivityProjectPage {
         AbstractAction backToManageProjectsAction = new MainMenuAction("Back", previousPage, main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         BoxPanel.add(backToManageProjectsButtonPanel);
+
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
+
 
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

@@ -56,6 +56,10 @@ public class CreateNewProjectPage {
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         BoxPanel.add(backToManageProjectsButtonPanel);
 
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
+
+
         JPanel container = new Container(BoxPanel).getContainer();
         return container;
     }

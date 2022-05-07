@@ -88,6 +88,8 @@ public class ViewProjectsPage {
         backToManageProjectsButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToManageProjectsButtonPanel);
 
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
+
         JPanel container = new Container(BoxPanel).getContainer();
         return container;
     }

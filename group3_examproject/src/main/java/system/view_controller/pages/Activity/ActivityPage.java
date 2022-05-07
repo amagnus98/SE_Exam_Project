@@ -126,19 +126,20 @@ public class ActivityPage {
             InformationPanel.add(new JLabel("Undefined"));
         }
         
-        InformationPanel.add(new JLabel("Activity Start Year"));
-        TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();
-        InformationPanel.add(startYearTextField.textField);
         InformationPanel.add(new JLabel("Activity Start Week"));
         TextField startWeekTextField = new TextField("Activity startWeek", String.valueOf(activity.getStartWeek()), constants.boxColor).getTextField();
         InformationPanel.add(startWeekTextField.textField);
-
-        InformationPanel.add(new JLabel("Activity End Year"));
-        TextField endYearTextField = new TextField("Activity endYear", String.valueOf(activity.getEndYear()), constants.boxColor).getTextField();
-        InformationPanel.add(endYearTextField.textField);
+        InformationPanel.add(new JLabel("Activity Start Year"));
+        TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();
+        InformationPanel.add(startYearTextField.textField);
+        
         InformationPanel.add(new JLabel("Activity End Week"));
         TextField endWeekTextField = new TextField("Activity endWeek", String.valueOf(activity.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
+        InformationPanel.add(new JLabel("Activity End Year"));
+        TextField endYearTextField = new TextField("Activity endYear", String.valueOf(activity.getEndYear()), constants.boxColor).getTextField();
+        InformationPanel.add(endYearTextField.textField);
+        
 
         InformationPanel.add(new JLabel(""));
         AbstractAction setActivityTimeHorizonAction = new SetActivityTimeHorizonAction("Set time horizon", activityNameTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, activity, previousProject, main);
@@ -204,24 +205,14 @@ public class ActivityPage {
 
         BoxPanel.add(InformationScrollPanel);
 
-        /*
-        JPanel submitChangesPanel = new JPanel();
-        submitChangesPanel.setBackground(constants.secondBoxColor);
-        submitChangesPanel.setBorder(new EmptyBorder(10,0,10,0));
-        AbstractAction submitChangesAction = new SubmitActivityChangesAction("Submit Changes", activityNameTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, activity, previousProject, main);
-        JPanel submitChangesButtonPanel = new Button("Submit Changes", constants.secondBoxColor, "small", submitChangesAction).getButton();
-        submitChangesPanel.add(submitChangesButtonPanel);
-        BoxPanel.add(submitChangesPanel);
-        */
-
-        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
-
         JPanel backPanel = new JPanel();
         backPanel.setBackground(constants.backgroundColor);
         AbstractAction backToManageProjectsAction = new ProjectButtonAction(previousProject.getProjectNumber(), "Back to ", previousProject, "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         backPanel.add(backToManageProjectsButtonPanel);
         BoxPanel.add(backPanel);
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

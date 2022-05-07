@@ -5,36 +5,49 @@ import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import system.model.domain.Project;
+import java.util.*;
+import system.model.domain.Developer;
+import system.model.domain.OperationNotAllowedException;
+import system.model.domain.Activity;
 
 public class ViewDeveloperOverviewAction extends AbstractAction {
 
     JTextField textField;
     Main main;
-    JTextField weekTextField;
-    JTextField yearTextField;
+    JTextField startWeekTextField;
+    JTextField startYearTextField;
+    JTextField endWeekTextField;
+    JTextField endYearTextField;
 
-    public ViewDeveloperOverviewAction(JTextField weekTextField, JTextField yearTextField, Main main) {
+    public ViewDeveloperOverviewAction(JTextField startWeekTextField, JTextField startYearTextField, JTextField endWeekTextField, JTextField endYearTextField, Main main) {
         putValue(NAME, "Get Overview");
         this.main = main;
-        this.weekTextField = weekTextField;
-        this.yearTextField = yearTextField;
+        this.startWeekTextField = startWeekTextField;
+        this.startYearTextField = startYearTextField;
+        this.endWeekTextField = endWeekTextField;
+        this.endYearTextField = endYearTextField;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         try {
-            int week = Integer.parseInt(weekTextField.getText().trim());
-            int year = Integer.parseInt(yearTextField.getText().trim());
-            if (week >= 1 && week <= 52 && year >= 1) {
-                main.viewDeveloperOverview(week, year);
-            } else {
-                ErrorWindow errorWindow = new ErrorWindow("The current week or year is not valid.");
+            int startWeek = Integer.parseInt(startWeekTextField.getText().trim());
+            int startYear = Integer.parseInt(startYearTextField.getText().trim());
+            int endWeek = Integer.parseInt(endWeekTextField.getText().trim());
+            int endYear = Integer.parseInt(endYearTextField.getText().trim());
+
+            try {
+                HashMap<Developer, HashMap<Project, ArrayList<Activity>>> developerActivitiesInPeriod = main.app.getDeveloperActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
+                main.viewDeveloperOverview(startWeek, startYear, endWeek, endYear, developerActivitiesInPeriod);
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                 errorWindow.showMessage();
+                main.changeScreen("Developer Overview");
             }
-           } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+        } catch (NumberFormatException error) {
+            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
             errorWindow.showMessage();
-           }
+        }
     }
 }

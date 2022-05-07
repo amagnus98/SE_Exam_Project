@@ -67,10 +67,24 @@ public class ProjectPage {
         InformationPanel.add(new JLabel(project.getProjectNumber()));
 
         InformationPanel.add(new JLabel("Project Name"));
+        if (project.getName().equals("")) {
+            InformationPanel.add(new JLabel("Undefined"));
+        } else {
+            InformationPanel.add(new JLabel(project.getName()));
+        }
+        
+        InformationPanel.add(new JLabel("Project Leader"));
+        if (project.hasProjectLeader()) {
+            InformationPanel.add(new JLabel(project.getProjectLeader().getInitials()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
+
+        InformationPanel.add(new JLabel("Edit Project Name"));
         TextField projectNameTextField = new TextField("Project Name", project.getName(), constants.boxColor).getTextField();
         InformationPanel.add(projectNameTextField.textField);
 
-        InformationPanel.add(new JLabel("Project Leader"));
+        InformationPanel.add(new JLabel("Assign Project Leader"));
         TextField projectLeaderTextField = new TextField("Project Leader", "", constants.boxColor).getTextField();
         if (project.hasProjectLeader()) {
             projectLeaderTextField = new TextField("Project Leader", project.getProjectLeader().getInitials(), constants.boxColor).getTextField();
@@ -109,19 +123,20 @@ public class ProjectPage {
         InformationPanel.add(setTimeHeader);
         InformationPanel.add(new JLabel(""));
 
-        InformationPanel.add(new JLabel("Project Start Year"));
-        TextField startYearTextField = new TextField("Project startYear", String.valueOf(project.getStartYear()), constants.boxColor).getTextField();
-        InformationPanel.add(startYearTextField.textField);
         InformationPanel.add(new JLabel("Project Start Week"));
         TextField startWeekTextField = new TextField("Project startWeek", String.valueOf(project.getStartWeek()), constants.boxColor).getTextField();
         InformationPanel.add(startWeekTextField.textField);
-
-        InformationPanel.add(new JLabel("Project End Year"));
-        TextField endYearTextField = new TextField("Project endYear", String.valueOf(project.getEndYear()), constants.boxColor).getTextField();
-        InformationPanel.add(endYearTextField.textField);
+        InformationPanel.add(new JLabel("Project Start Year"));
+        TextField startYearTextField = new TextField("Project startYear", String.valueOf(project.getStartYear()), constants.boxColor).getTextField();
+        InformationPanel.add(startYearTextField.textField);
+        
         InformationPanel.add(new JLabel("Project End Week"));
         TextField endWeekTextField = new TextField("Project endWeek", String.valueOf(project.getEndWeek()), constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
+        InformationPanel.add(new JLabel("Project End Year"));
+        TextField endYearTextField = new TextField("Project endYear", String.valueOf(project.getEndYear()), constants.boxColor).getTextField();
+        InformationPanel.add(endYearTextField.textField);
+        
 
         InformationPanel.add(new JLabel(""));
         AbstractAction setProjectTimeHorizonAction = new SetProjectTimeHorizonAction("Set time horizon", projectNameTextField.textField, projectLeaderTextField.textField, startYearTextField.textField, startWeekTextField.textField, endYearTextField.textField, endWeekTextField.textField, estimatedWorkHoursTextField.textField, project, previousPage, main);
@@ -218,12 +233,12 @@ public class ProjectPage {
 
         BoxPanel.add(buttonPanel);
 
-        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
-
         AbstractAction backToManageProjectsAction = new MainMenuAction("Back", "Project View", main);
         JPanel backToManageProjectsButtonPanel = new Button("Back", constants.backgroundColor, "small", backToManageProjectsAction).getButton();
         backToManageProjectsButtonPanel.setBorder(new EmptyBorder(10,0,10,0));
         BoxPanel.add(backToManageProjectsButtonPanel);
+
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
 
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

@@ -75,11 +75,6 @@ public abstract class Event {
         this.setEndWeek(endWeek);
     }
 
-    // check that the end time comes after the start time
-    public boolean isEndTimeIsAfterStartTime(int startYear, int startWeek, int endYear, int endWeek) {
-        return (startYear < endYear || (startYear == endYear && startWeek <= endWeek));
-    }
-
     // check if a date (to the precision of week and year) is within the event's time horizon
     public boolean isDateWithinTimeHorizon(int year, int week){
         int eventStartYear = this.getStartYear();

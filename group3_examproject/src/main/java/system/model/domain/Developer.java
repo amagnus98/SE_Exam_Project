@@ -85,4 +85,19 @@ public class Developer {
         return currentActivities;
 
     }
+
+    public ArrayList<Activity> getAssignedActivitiesInPeriod(int startWeek, int startYear, int endWeek, int endYear) {
+        ArrayList<Activity> activitiesInPeriod = new ArrayList<>();
+        
+        for (Activity activity : this.assignedActivities) {
+            // check that the end time of the period comes after the activity start time
+            // and the start time of the period comes before the activity end time
+            if ((endYear > activity.getStartYear() || (endYear == activity.getStartYear() && endWeek >= activity.getStartWeek())) &&
+                (startYear < activity.getEndYear() || (startYear == activity.getEndYear() && startWeek <= activity.getEndWeek()))){
+                    activitiesInPeriod.add(activity);
+            }
+        }
+        return activitiesInPeriod;
+
+    }
 }

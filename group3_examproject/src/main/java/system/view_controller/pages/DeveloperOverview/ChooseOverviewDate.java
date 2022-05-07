@@ -50,16 +50,25 @@ public class ChooseOverviewDate {
         InformationPanel.setBorder(new EmptyBorder(10,10,10,10));
         InformationPanel.setBackground(constants.boxColor);
 
-        InformationPanel.add(new JLabel("Week"));
-        TextField weekTextField = new TextField("Week", "", constants.boxColor).getTextField();
-        InformationPanel.add(weekTextField.textField);
+        InformationPanel.add(new JLabel("Start Week"));
+        TextField startWeekTextField = new TextField("Start Week", "", constants.boxColor).getTextField();
+        InformationPanel.add(startWeekTextField.textField);
 
-        InformationPanel.add(new JLabel("Year"));
-        TextField yearTextField = new TextField("Year", "", constants.boxColor).getTextField();
-        InformationPanel.add(yearTextField.textField);
+        InformationPanel.add(new JLabel("Start Year"));
+        TextField startYearTextField = new TextField("Start Year", "", constants.boxColor).getTextField();
+        InformationPanel.add(startYearTextField.textField);
+
+        InformationPanel.add(new JLabel("End Week"));
+        TextField endWeekTextField = new TextField("End Week", "", constants.boxColor).getTextField();
+        InformationPanel.add(endWeekTextField.textField);
+
+        InformationPanel.add(new JLabel("End Year"));
+        TextField endYearTextField = new TextField("End Year", "", constants.boxColor).getTextField();
+        InformationPanel.add(endYearTextField.textField);
+
 
         JScrollPane InformationScrollPanel = new JScrollPane(InformationPanel);
-        InformationScrollPanel.setPreferredSize(new Dimension(550, 300));
+        InformationScrollPanel.setPreferredSize(new Dimension(550, 500));
 
         BoxPanel.add(InformationScrollPanel);
 
@@ -68,15 +77,18 @@ public class ChooseOverviewDate {
         getOverviewPanel.setBackground(constants.secondBoxColor);
         getOverviewPanel.setBorder(new EmptyBorder(20,0,20,0));
 
-        AbstractAction getOverviewAction = new ViewDeveloperOverviewAction(weekTextField.textField, yearTextField.textField, main);
+        AbstractAction getOverviewAction = new ViewDeveloperOverviewAction(startWeekTextField.textField, startYearTextField.textField, endWeekTextField.textField, endYearTextField.textField, main);
         JPanel registerHoursButtonPanel= new Button("Get Overview", constants.secondBoxColor, "small", getOverviewAction).getButton();
         getOverviewPanel.add(registerHoursButtonPanel);
         BoxPanel.add(getOverviewPanel);
 
         AbstractAction backToMainAction = new MainMenuAction("Back", "Navigator", main);
         JPanel backToMainButtonPanel = new Button("Back", constants.backgroundColor, "small", backToMainAction).getButton();
-        backToMainButtonPanel.setBorder(new EmptyBorder(0,0,200,0));
+        backToMainButtonPanel.setBorder(new EmptyBorder(0,0,50,0));
         BoxPanel.add(backToMainButtonPanel);
+
+        
+        new SubHeader("Logged in as: " + main.app.getCurrentUser().getInitials(), constants.backgroundColor, BoxPanel);
         
         JPanel container = new Container(BoxPanel).getContainer();
         return container;

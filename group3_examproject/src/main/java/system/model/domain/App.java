@@ -289,6 +289,11 @@ public class App {
         return (week >= 1 && week <= 52);
     }
 
+    // check that the end time comes after the start time
+    public boolean isEndTimeIsAfterStartTime(int startYear, int startWeek, int endYear, int endWeek) {
+        return (startYear < endYear || (startYear == endYear && startWeek <= endWeek));
+    }
+
     public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         // check that the current user is the project leader 
         if (!currentUserIsProjectLeader(projectNumber)){
@@ -300,7 +305,7 @@ public class App {
             throw new OperationNotAllowedException("The weeks for the time horizon of the project must be set to a number between 1 to 52");
         }
         // check that the end time is after the start time
-        if (!project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
+        if (!isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek)){
             throw new OperationNotAllowedException("The end time can't occur before the start time");
         }
         // check that the time horizon of all of the activities of the project still lies within the new time horizon
@@ -312,7 +317,7 @@ public class App {
         // precondition
         assertTrue(currentUserIsProjectLeader(projectNumber));
         assertTrue(isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek));
-        assertTrue(project.isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek));
+        assertTrue(isEndTimeIsAfterStartTime(startYear,startWeek, endYear, endWeek));
         assertTrue(project.isTimeHorizonValidForAllActivities(startYear,startWeek,endYear,endWeek));
 
 
@@ -340,7 +345,7 @@ public class App {
                 Activity activity = project.getActivity(activityName);
                 // check if end time occurs after start time
                 if (isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek)){
-                    if (activity.isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
+                    if (isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
                         // check if both the start and end time are within the time horizon of the project
                         if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
                             activity.setStartYear(startYear);
@@ -392,13 +397,20 @@ public class App {
     }
 
     // get the activities that each developer is assigned to in a given week and year
-    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getCurrentDeveloperActivities(int week, int year) throws OperationNotAllowedException {
+    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getDeveloperActivitiesInPeriod(int startWeek, int startYear, int endWeek, int endYear) throws OperationNotAllowedException {
         // nested hash map where the outer key is the developer and the inner key is the project
-        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivities = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivitiesInPeriod = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+        if (!(isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek))){
+            throw new OperationNotAllowedException("The weeks for the period must be a number between 1 to 52");
+        }
+
+        if (!isEndTimeIsAfterStartTime(startYear, startWeek, endYear, endWeek)){
+            throw new OperationNotAllowedException("The end time must come after the start time");
+        }
 
         for (Developer d : this.developers) {
             HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
-            ArrayList<Activity> developerActivities = d.getCurrentAssignedActivities(week, year);
+            ArrayList<Activity> developerActivities = d.getAssignedActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
             for (Activity activity : developerActivities) {
                 Project parentProject;
                 
@@ -410,10 +422,10 @@ public class App {
                 }
                 developerActivitiesHashMap.get(parentProject).add(activity);
             }
-            currentDeveloperActivities.put(d, developerActivitiesHashMap);
+            currentDeveloperActivitiesInPeriod.put(d, developerActivitiesHashMap);
         }
         
-        return currentDeveloperActivities;
+        return currentDeveloperActivitiesInPeriod;
 
     }
 
