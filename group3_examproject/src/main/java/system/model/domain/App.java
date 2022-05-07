@@ -338,35 +338,34 @@ public class App {
 
 
     public void setTimeHorizonOfActivity(int startYear, int startWeek, int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
-        // if current user is project leader adds the activity, else throws an errormessage
-        if (currentUserIsProjectLeader(projectNumber)){
-            Project project = getProject(projectNumber);
-            if (project.isTimeHorizonDefined()){
-                Activity activity = project.getActivity(activityName);
-                // check if end time occurs after start time
-                if (isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek)){
-                    if (isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
-                        // check if both the start and end time are within the time horizon of the project
-                        if (project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek)){
-                            activity.setStartYear(startYear);
-                            activity.setStartWeek(startWeek);
-                            activity.setEndYear(endYear);
-                            activity.setEndWeek(endWeek);
-                        } else {
-                            throw new OperationNotAllowedException("The given time horizon for the activity is not within the time horizon of its assigned project");
-                        }
-                    } else {
-                        throw new OperationNotAllowedException("The end time can't occur before the start time");
-                    }
-                } else {
-                    throw new OperationNotAllowedException("The weeks for the time horizon of the activity must be set to a number between 1 to 52");
-                }
-            } else {
-                throw new OperationNotAllowedException("The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined");
-            }
-        } else {
+        if (!currentUserIsProjectLeader(projectNumber)){
             throw new OperationNotAllowedException("The start and end time of the activity can't be edited, because the user is not the project leader");
         }
+        
+        Project project = getProject(projectNumber);
+        if (!project.isTimeHorizonDefined()){
+            throw new OperationNotAllowedException("The start and end time for the activity cannot be set until the time horizon of its assigned project has been defined");  
+        } 
+
+        Activity activity = project.getActivity(activityName);
+        // check if end time occurs after start time
+        if (!(isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek))){
+            throw new OperationNotAllowedException("The weeks for the time horizon of the activity must be set to a number between 1 to 52");
+        } 
+
+        if (!isEndTimeIsAfterStartTime(startYear,startWeek,endYear, endWeek)){
+            throw new OperationNotAllowedException("The end time can't occur before the start time");
+        }
+
+        if (!(project.isDateWithinTimeHorizon(startYear,startWeek) && project.isDateWithinTimeHorizon(endYear, endWeek))){
+            throw new OperationNotAllowedException("The given time horizon for the activity is not within the time horizon of its assigned project");
+        }
+
+        activity.setStartYear(startYear);
+        activity.setStartWeek(startWeek);
+        activity.setEndYear(endYear);
+        activity.setEndWeek(endWeek);
+        
     }
 
     // add developer to project
