@@ -13,6 +13,7 @@ public class Constants {
     public Color projectButtonColor = new Color(200, 210, 220);
     public Color buttonBorderColor = new Color(0,0,0);
     public Color buttonBackgroundColor = new Color(250, 250, 250);
+    public Color calendarColor = new Color(250, 250, 250);
     public int borderLineSize = 2;
     public Border buttonBorder = BorderFactory.createLineBorder(buttonBorderColor,borderLineSize);
     public String softwareName = "KAMMA Time Registration";
