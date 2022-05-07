@@ -46,7 +46,10 @@ public class Main {
     public void prepareFrame() {
         frame.setSize(600,800);
         frame.setResizable(false);
-        frame.setLocation(500,200);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
     }

@@ -38,25 +38,32 @@ public class SubmitProjectInformationAction extends AbstractAction {
 
         // ERROR BOOLEAN
         Boolean hasError = false;
+        Boolean hasChanged = false;
 
         // PROJECT LEADER CHANGE
-        if (!project.hasProjectLeader() && !projectLeader.getText().trim().equals("") || project.hasProjectLeader() && !projectLeader.getText().trim().equals(project.getProjectLeader().getInitials())) {
+        if (!projectLeader.getText().trim().equals("")) {
             try {
                 main.app.assignProjectLeader(project.getProjectNumber(), projectLeader.getText().trim());
+                hasChanged = true;
             } catch (OperationNotAllowedException error) {
                 ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                 errorWindow.showMessage();
                 hasError = true;
             }
         }
-
-        // PROJECT NAME CHANGE
-        project.setName(projectName.getText().trim());
+        if (!projectName.getText().trim().equals("")) {
+            // PROJECT NAME CHANGE
+            project.setName(projectName.getText().trim());
+            hasChanged = true;
+        }
     
-        if (!hasError) {
+        if (!hasError && hasChanged) {
             SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
             successWindow.showMessage();
+            main.viewProject(project, previousPage);
+        } else if (!hasError && !hasChanged) {
+            ErrorWindow errorWindow = new ErrorWindow("No changes have been made.");
+            errorWindow.showMessage();
         }
-        main.viewProject(project, previousPage);
     }
 }

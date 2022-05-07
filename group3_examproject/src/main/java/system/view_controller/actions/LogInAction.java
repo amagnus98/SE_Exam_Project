@@ -20,13 +20,18 @@ public class LogInAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         
         String initials = this.textField.getText().trim();
-        try {
-            this.main.app.logIn(initials);
-            this.main.changeScreen("Navigator");
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+        
+        if (!initials.equals("")){
+            try {
+                this.main.app.logIn(initials);
+                this.main.changeScreen("Navigator");
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert a value!");
             errorWindow.showMessage();
         }
-
     }
 }

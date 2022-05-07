@@ -36,7 +36,10 @@ public class GetProjectReportAction extends AbstractAction {
             JFrame frame = new JFrame("Project Report of " + project.getName() + " (" + project.getProjectNumber() + ")");
             frame.setSize(500,700);
             frame.setResizable(false);
-            frame.setLocation(550,250);
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+            int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+            int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+            frame.setLocation(x, y);
             frame.setVisible(true);
 
             frame.getContentPane().removeAll();

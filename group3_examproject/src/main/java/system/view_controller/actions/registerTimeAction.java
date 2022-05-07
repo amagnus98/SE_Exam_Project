@@ -34,8 +34,9 @@ public class RegisterTimeAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
 
         boolean hasError = false;
-        
-        try {
+
+        if (!hours.getText().trim().equals("") && !day.getText().trim().equals("") && !week.getText().trim().equals("") && !year.getText().trim().equals("")) {
+            try {
             double hours  = Double.parseDouble(this.hours.getText().trim());
             try {
                 int day = Integer.parseInt(this.day.getText().trim());
@@ -58,18 +59,22 @@ public class RegisterTimeAction extends AbstractAction {
                 errorWindow.showMessage();
                 hasError = true;
             }
-        } catch (NumberFormatException error){
-            ErrorWindow errorWindow = new ErrorWindow("The hours must be an integer or a float!");
-            errorWindow.showMessage();
-            hasError = true;
-        }
-        
-        
+            } catch (NumberFormatException error){
+                ErrorWindow errorWindow = new ErrorWindow("The hours must be an integer or a float!");
+                errorWindow.showMessage();
+                hasError = true;
+            }
+            
+            
 
-        if (!hasError) {
-            SuccessWindow successWindow = new SuccessWindow("Time successfully registered.");
-            successWindow.showMessage();
-            main.changeScreen("Time Registration");
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Time successfully registered.");
+                successWindow.showMessage();
+                main.changeScreen("Time Registration");
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert all values.");
+            errorWindow.showMessage();
         }
     }
 }

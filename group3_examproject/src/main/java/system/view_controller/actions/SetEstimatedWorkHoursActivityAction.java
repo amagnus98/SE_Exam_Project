@@ -39,29 +39,36 @@ public class SetEstimatedWorkHoursActivityAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
-        try {
+        if (!estimatedWorkHours.getText().trim().equals("")) {
+
+            try {
             Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText().trim());
 
             if (!(activity.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
                 try {
-                    main.app.setEstimatedWorkHoursForActivity(estimatedWorkHoursDouble, activityName.getText().trim(), activity.getParentProject().getProjectNumber());
+                    main.app.setEstimatedWorkHoursForActivity(estimatedWorkHoursDouble, activity.getName(), activity.getParentProject().getProjectNumber());
                 } catch (OperationNotAllowedException error) {
                     ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                     errorWindow.showMessage();
                     hasError = true;
                 } 
             }
-        } catch (NumberFormatException error){
-            ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
-            errorWindow.showMessage();
-            hasError = true;
-        }
+            } catch (NumberFormatException error){
+                ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
+                errorWindow.showMessage();
+                hasError = true;
+            }
+            
         
-    
-        if (!hasError) {
-            SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
-            successWindow.showMessage();
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
+                successWindow.showMessage();
+                main.viewActivity(activity, previousProject);
+            }
+
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("No changes have been made.");
+            errorWindow.showMessage();
         }
-        main.viewActivity(activity, previousProject);
     }
 }

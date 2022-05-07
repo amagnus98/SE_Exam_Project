@@ -49,29 +49,34 @@ public class SetActivityTimeHorizonAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
-        try {
+        if (!activityStartYear.getText().trim().equals("") && !activityStartWeek.getText().trim().equals("") && !activityEndYear.getText().trim().equals("") && !activityEndWeek.getText().trim().equals("")) {
+            try {
             int startYear = Integer.parseInt(activityStartYear.getText().trim());
             int startWeek = Integer.parseInt(activityStartWeek.getText().trim());
             int endYear = Integer.parseInt(activityEndYear.getText().trim());
             int endWeek = Integer.parseInt(activityEndWeek.getText().trim());
         
             try {
-                main.app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activityName.getText(), activity.getParentProject().getProjectNumber());
+                main.app.setTimeHorizonOfActivity(startYear, startWeek, endYear, endWeek, activity.getName(), activity.getParentProject().getProjectNumber());
             } catch (OperationNotAllowedException error) {
                 ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                 errorWindow.showMessage();
                 hasError = true;
             }
-        } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
-            errorWindow.showMessage();
-            hasError = true;
-        }
+            } catch (NumberFormatException error) {
+                ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
+                errorWindow.showMessage();
+                hasError = true;
+            }
 
-        if (!hasError) {
-            SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
-            successWindow.showMessage();
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
+                successWindow.showMessage();
+                main.viewActivity(activity, previousProject);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please define all values!");
+            errorWindow.showMessage();
         }
-        main.viewActivity(activity, previousProject);
     }
 }

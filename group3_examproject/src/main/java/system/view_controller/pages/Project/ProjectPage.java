@@ -81,17 +81,12 @@ public class ProjectPage {
         }
 
         InformationPanel.add(new JLabel("Edit Project Name"));
-        TextField projectNameTextField = new TextField("Project Name", project.getName(), constants.boxColor).getTextField();
+        TextField projectNameTextField = new TextField("Project Name", "", constants.boxColor).getTextField();
         InformationPanel.add(projectNameTextField.textField);
 
         InformationPanel.add(new JLabel("Assign Project Leader"));
         TextField projectLeaderTextField = new TextField("Project Leader", "", constants.boxColor).getTextField();
-        if (project.hasProjectLeader()) {
-            projectLeaderTextField = new TextField("Project Leader", project.getProjectLeader().getInitials(), constants.boxColor).getTextField();
-            InformationPanel.add(projectLeaderTextField.textField);
-        } else {
-            InformationPanel.add(projectLeaderTextField.textField);
-        }
+        InformationPanel.add(projectLeaderTextField.textField);
 
         InformationPanel.add(new JLabel(""));
         AbstractAction submitProjectInformationAction = new SubmitProjectInformationAction("Submit changes", projectNameTextField.textField, projectLeaderTextField.textField, project, previousPage, main);
@@ -105,9 +100,11 @@ public class ProjectPage {
         InformationPanel.add(new JLabel(""));
         InformationPanel.add(new JLabel("Total hours registered"));
         InformationPanel.add(new JLabel(String.valueOf(project.getTotalHoursRegistered())));
-
         InformationPanel.add(new JLabel("Estimated work hours"));
-        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(project.getEstimatedWorkHours()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel(String.valueOf(project.getEstimatedWorkHours())));
+
+        InformationPanel.add(new JLabel("Set estimated work hours"));
+        TextField estimatedWorkHoursTextField = new TextField("Set Estimated Work Hours", "", constants.boxColor).getTextField();
         InformationPanel.add(estimatedWorkHoursTextField.textField);
 
         InformationPanel.add(new JLabel(""));
@@ -115,26 +112,36 @@ public class ProjectPage {
         JPanel setEstimatedWorkHoursButtonPanel = new Button("Set estimated hours", constants.boxColor, "small", setEstimatedWorkHoursAction).getButton();
         InformationPanel.add(setEstimatedWorkHoursButtonPanel);
 
-
-
-
         JLabel setTimeHeader = new JLabel("Set project time horizon");
         setTimeHeader.setFont(new Font("Arial", Font.BOLD, 18));
         InformationPanel.add(setTimeHeader);
         InformationPanel.add(new JLabel(""));
 
-        InformationPanel.add(new JLabel("Project Start Week"));
-        TextField startWeekTextField = new TextField("Project startWeek", String.valueOf(project.getStartWeek()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel("Project Start Time"));
+        if (project.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + project.getStartWeek() + ", Year: " + project.getStartYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
+        InformationPanel.add(new JLabel("Project End Time"));
+        if (project.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + project.getEndWeek() + ", Year: " + project.getEndYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
+
+        InformationPanel.add(new JLabel("Set Project Start Week"));
+        TextField startWeekTextField = new TextField("Project startWeek", "", constants.boxColor).getTextField();
         InformationPanel.add(startWeekTextField.textField);
-        InformationPanel.add(new JLabel("Project Start Year"));
-        TextField startYearTextField = new TextField("Project startYear", String.valueOf(project.getStartYear()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel("Set Project Start Year"));
+        TextField startYearTextField = new TextField("Project startYear","", constants.boxColor).getTextField();
         InformationPanel.add(startYearTextField.textField);
         
-        InformationPanel.add(new JLabel("Project End Week"));
-        TextField endWeekTextField = new TextField("Project endWeek", String.valueOf(project.getEndWeek()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel("Set Project End Week"));
+        TextField endWeekTextField = new TextField("Project endWeek", "", constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
-        InformationPanel.add(new JLabel("Project End Year"));
-        TextField endYearTextField = new TextField("Project endYear", String.valueOf(project.getEndYear()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel("Set Project End Year"));
+        TextField endYearTextField = new TextField("Project endYear", "", constants.boxColor).getTextField();
         InformationPanel.add(endYearTextField.textField);
         
 

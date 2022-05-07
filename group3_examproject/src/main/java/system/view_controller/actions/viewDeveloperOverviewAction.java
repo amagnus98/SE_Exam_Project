@@ -31,22 +31,26 @@ public class ViewDeveloperOverviewAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        try {
-            int startWeek = Integer.parseInt(startWeekTextField.getText().trim());
-            int startYear = Integer.parseInt(startYearTextField.getText().trim());
-            int endWeek = Integer.parseInt(endWeekTextField.getText().trim());
-            int endYear = Integer.parseInt(endYearTextField.getText().trim());
-
+        if (!startWeekTextField.getText().trim().equals("") && !startYearTextField.getText().trim().equals("") && !endWeekTextField.getText().trim().equals("") && !endYearTextField.getText().trim().equals("")) {
             try {
-                HashMap<Developer, HashMap<Project, ArrayList<Activity>>> developerActivitiesInPeriod = main.app.getDeveloperActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
-                main.viewDeveloperOverview(startWeek, startYear, endWeek, endYear, developerActivitiesInPeriod);
-            } catch (OperationNotAllowedException error) {
-                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                int startWeek = Integer.parseInt(startWeekTextField.getText().trim());
+                int startYear = Integer.parseInt(startYearTextField.getText().trim());
+                int endWeek = Integer.parseInt(endWeekTextField.getText().trim());
+                int endYear = Integer.parseInt(endYearTextField.getText().trim());
+
+                try {
+                    HashMap<Developer, HashMap<Project, ArrayList<Activity>>> developerActivitiesInPeriod = main.app.getDeveloperActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
+                    main.viewDeveloperOverview(startWeek, startYear, endWeek, endYear, developerActivitiesInPeriod);
+                } catch (OperationNotAllowedException error) {
+                    ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                    errorWindow.showMessage();
+                }
+            } catch (NumberFormatException error) {
+                ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
                 errorWindow.showMessage();
-                main.changeScreen("Developer Overview");
             }
-        } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert all values.");
             errorWindow.showMessage();
         }
     }

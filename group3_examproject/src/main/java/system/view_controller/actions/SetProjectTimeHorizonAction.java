@@ -52,27 +52,32 @@ public class SetProjectTimeHorizonAction extends AbstractAction {
 
         // ERROR BOOLEAN
         Boolean hasError = false;
-    
-        try {
+
+        if (!projectStartYear.getText().trim().equals("") && !projectStartWeek.getText().trim().equals("") && !projectEndYear.getText().trim().equals("") && !projectEndWeek.getText().trim().equals("")) {
+            try {
             int startYear = Integer.parseInt(projectStartYear.getText().trim());
             int startWeek = Integer.parseInt(projectStartWeek.getText().trim());
             int endYear = Integer.parseInt(projectEndYear.getText().trim());
             int endWeek = Integer.parseInt(projectEndWeek.getText().trim());
             main.app.setTimeHorizonOfProject(startYear, startWeek, endYear, endWeek, project.getProjectNumber());
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        } catch (NumberFormatException error) {
-            ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
-            errorWindow.showMessage();
-            hasError = true;
-        }
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            } catch (NumberFormatException error) {
+                ErrorWindow errorWindow = new ErrorWindow("The start and end time must be written as integers!");
+                errorWindow.showMessage();
+                hasError = true;
+            }
 
-        if (!hasError) {
-            SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
-            successWindow.showMessage();
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
+                successWindow.showMessage();
+                main.viewProject(project, previousPage);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please define all values!");
+            errorWindow.showMessage();
         }
-        main.viewProject(project, previousPage);
     }
 }

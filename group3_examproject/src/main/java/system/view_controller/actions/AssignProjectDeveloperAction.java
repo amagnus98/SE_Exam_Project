@@ -29,19 +29,24 @@ public class AssignProjectDeveloperAction extends AbstractAction {
         Boolean hasError = false;
 
         String initials = textField.getText().trim();
-        try {
+
+        if (!initials.equals("")) {
+            try {
             main.app.addDeveloperToProject(initials, project.getProjectNumber());
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        }
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            }
 
-        if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
+            if (!hasError) {
+                SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
+                errorWindow.showMessage();
+                main.viewProject(project, previousPage);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert initials.");
             errorWindow.showMessage();
-            main.viewProject(project, previousPage);
         }
-
     }
 }

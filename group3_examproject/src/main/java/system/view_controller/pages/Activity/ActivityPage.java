@@ -81,7 +81,10 @@ public class ActivityPage {
         InformationPanel.add(new JLabel(parentProject.getProjectLeader().getInitials()));
 
         InformationPanel.add(new JLabel("Activity Name"));
-        TextField activityNameTextField = new TextField("Project Name", activity.getName(), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel(activity.getName()));
+
+        InformationPanel.add(new JLabel("Edit Activity Name"));
+        TextField activityNameTextField = new TextField("Edit activity Name", "", constants.boxColor).getTextField();
         InformationPanel.add(activityNameTextField.textField);
 
         InformationPanel.add(new JLabel(""));
@@ -99,7 +102,10 @@ public class ActivityPage {
         InformationPanel.add(new JLabel(String.valueOf(activity.getTotalHoursRegistered())));
 
         InformationPanel.add(new JLabel("Estimated work hours"));
-        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", String.valueOf(activity.getEstimatedWorkHours()), constants.boxColor).getTextField();
+        InformationPanel.add(new JLabel(String.valueOf(activity.getEstimatedWorkHours())));
+
+        InformationPanel.add(new JLabel("Set estimated work hours"));
+        TextField estimatedWorkHoursTextField = new TextField("Estimated Work Hours", "", constants.boxColor).getTextField();
         InformationPanel.add(estimatedWorkHoursTextField.textField);
 
         InformationPanel.add(new JLabel(""));
@@ -125,19 +131,32 @@ public class ActivityPage {
         } else {
             InformationPanel.add(new JLabel("Undefined"));
         }
+
+        InformationPanel.add(new JLabel("Activity Start Time"));
+        if (activity.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + activity.getStartWeek() + ", Year: " + activity.getStartYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
+        InformationPanel.add(new JLabel("Activity End Time"));
+        if (activity.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + activity.getEndWeek() + ", Year: " + activity.getEndYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
         
         InformationPanel.add(new JLabel("Activity Start Week"));
-        TextField startWeekTextField = new TextField("Activity startWeek", String.valueOf(activity.getStartWeek()), constants.boxColor).getTextField();
+        TextField startWeekTextField = new TextField("Activity startWeek", "", constants.boxColor).getTextField();
         InformationPanel.add(startWeekTextField.textField);
         InformationPanel.add(new JLabel("Activity Start Year"));
-        TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();
+        TextField startYearTextField = new TextField("Activity startYear", "", constants.boxColor).getTextField();
         InformationPanel.add(startYearTextField.textField);
         
         InformationPanel.add(new JLabel("Activity End Week"));
-        TextField endWeekTextField = new TextField("Activity endWeek", String.valueOf(activity.getEndWeek()), constants.boxColor).getTextField();
+        TextField endWeekTextField = new TextField("Activity endWeek", "", constants.boxColor).getTextField();
         InformationPanel.add(endWeekTextField.textField);
         InformationPanel.add(new JLabel("Activity End Year"));
-        TextField endYearTextField = new TextField("Activity endYear", String.valueOf(activity.getEndYear()), constants.boxColor).getTextField();
+        TextField endYearTextField = new TextField("Activity endYear", "", constants.boxColor).getTextField();
         InformationPanel.add(endYearTextField.textField);
         
 

@@ -33,10 +33,16 @@ public class CreateNewProjectActivityAction extends AbstractAction {
         String activityName = textField.getText().trim();
         
         try {
-            if (project.isNonWorkActivityProject()) {
-                project.addActivity(new Activity(activityName));
+             if (!activityName.equals("")) {
+                if (project.isNonWorkActivityProject()) {
+                    project.addActivity(new Activity(activityName));
+                } else {
+                    main.app.addActivityToProject(activityName, project.getProjectNumber());
+                }    
             } else {
-                main.app.addActivityToProject(activityName, project.getProjectNumber());
+                hasError = true;
+                ErrorWindow errorWindow = new ErrorWindow("Please insert activity name.");
+                errorWindow.showMessage();
             }
         } catch (OperationNotAllowedException error) {
             ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
@@ -47,11 +53,11 @@ public class CreateNewProjectActivityAction extends AbstractAction {
         if (!hasError) {
             SuccessWindow errorWindow = new SuccessWindow("Activity successfully created.");
             errorWindow.showMessage();
-        }
-        if (project.isNonWorkActivityProject()) {
-            main.viewNonWorkActivityProject(project, previousPage);
-        } else {
-            main.viewProject(project, previousPage);
+            if (project.isNonWorkActivityProject()) {
+                main.viewNonWorkActivityProject(project, previousPage);
+            } else {
+                main.viewProject(project, previousPage);
+            }
         }
 
         

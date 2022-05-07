@@ -37,19 +37,22 @@ public class SubmitActivityInformationAction extends AbstractAction {
         Boolean hasError = false;
 
         // ACTIVITY NAME CHANGE
-        try {
+        if (!activityName.getText().trim().equals("")) {
+            try {
             this.main.app.setActivityName(activityName.getText().trim(),activity, previousProject);
-        } catch (OperationNotAllowedException error){
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+            } catch (OperationNotAllowedException error){
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            } 
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
+                successWindow.showMessage();
+                main.viewActivity(activity, previousProject);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("No changes have been made.");
             errorWindow.showMessage();
-            hasError = true;
         }
-        
-        
-       if (!hasError) {
-        SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
-        successWindow.showMessage();
-       }
-       main.viewActivity(activity, previousProject);
     }
 }

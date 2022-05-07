@@ -480,19 +480,23 @@ public class App {
         if (!isWeekFormatValid(week)){
             throw new OperationNotAllowedException("Weeks must be more than zero and not greater than 52");
         }
-        if (!(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject())) {
-            throw new OperationNotAllowedException("The user is not assigned the given activity");
-        }
 
-        if (!(activity.isTimeHorizonDefined() || project.isNonWorkActivityProject())){
-            throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been defined");
+        if (!project.isNonWorkActivityProject()){
+            if (!activity.canRegisterHours(this.currentUser)) {
+                throw new OperationNotAllowedException("The user is not assigned the given activity");
+            }
+    
+            if (!activity.isTimeHorizonDefined()){
+                throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been defined");
+            }
+    
+            // check that the user registers hours within the allowed time horizon of the activity
+            // this always returns false if the activity is a non work activity since it doesn't have a time horizon
+            if (!activity.isDateWithinTimeHorizon(year, week)){
+                throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
+            }
         }
-
-        // check that the user registers hours within the allowed time horizon of the activity
-        // this always returns false if the activity is a non work activity since it doesn't have a time horizon
-        if (!(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject())){
-            throw new OperationNotAllowedException("The user cannot register hours outside of the time horizon of the activity");
-        }
+        
 
         // Precondition
         assertTrue(project.getActivity(activityName) != null);

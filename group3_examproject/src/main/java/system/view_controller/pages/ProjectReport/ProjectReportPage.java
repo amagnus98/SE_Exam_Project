@@ -46,6 +46,9 @@ public class ProjectReportPage {
 
         InformationPanel.add(new JLabel("Project Name:"));
         JLabel nameLabel = new JLabel("" + project.getName());
+        if (project.getName().equals("")) {
+            nameLabel = new JLabel("Undefined");
+        }
         InformationPanel.add(nameLabel);
         nameLabel.setHorizontalAlignment(JLabel.RIGHT);
 

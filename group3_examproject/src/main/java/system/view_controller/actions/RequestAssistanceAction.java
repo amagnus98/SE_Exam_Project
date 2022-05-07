@@ -32,19 +32,23 @@ public class RequestAssistanceAction extends AbstractAction {
 
         String initials = textField.getText();
 
-        try {
+        if (!initials.equals("")) {
+             try {
             main.app.requestAssistanceForActivity(initials, activity.getName(), previousProject.getProjectNumber());
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        }
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            }
 
-        if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Request successfully sent.");
+            if (!hasError) {
+                SuccessWindow errorWindow = new SuccessWindow("Request successfully sent.");
+                errorWindow.showMessage();
+                main.viewActivity(activity, previousProject);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert initials");
             errorWindow.showMessage();
-            main.viewActivity(activity, previousProject);
         }
-
     }
 }

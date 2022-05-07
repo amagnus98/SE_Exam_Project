@@ -41,28 +41,33 @@ public class SetEstimatedWorkHoursProjectAction extends AbstractAction {
         // ERROR BOOLEAN
         Boolean hasError = false;
 
-        try {
-            Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText().trim());
+        if (!estimatedWorkHours.getText().trim().equals("")) {
+            try {
+                Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText().trim());
 
-            if (!(project.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
-                try {
-                    main.app.setEstimatedWorkHoursForProject(estimatedWorkHoursDouble, project.getProjectNumber());
-                } catch (OperationNotAllowedException error) {
-                    ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-                    errorWindow.showMessage();
-                    hasError = true;
-                } 
+                if (!(project.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
+                    try {
+                        main.app.setEstimatedWorkHoursForProject(estimatedWorkHoursDouble, project.getProjectNumber());
+                    } catch (OperationNotAllowedException error) {
+                        ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                        errorWindow.showMessage();
+                        hasError = true;
+                    } 
+                }
+            } catch (NumberFormatException error){
+                ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
+                errorWindow.showMessage();
+                hasError = true;
             }
-        } catch (NumberFormatException error){
-            ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
+        
+            if (!hasError) {
+                SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
+                successWindow.showMessage();
+                main.viewProject(project, previousPage);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("No value has been inserted!");
             errorWindow.showMessage();
-            hasError = true;
         }
-    
-        if (!hasError) {
-            SuccessWindow successWindow = new SuccessWindow("Changes successfully set.");
-            successWindow.showMessage();
-        }
-        main.viewProject(project, previousPage);
     }
 }

@@ -30,18 +30,24 @@ public class AssignActivityDeveloperAction extends AbstractAction {
         Boolean hasError = false;
 
         String initials = textField.getText().trim();
-        try {
-            main.app.addDeveloperToActivity(initials, activity.getName(), previousProject.getProjectNumber());
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        }
 
-        if (!hasError) {
-            SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
+        if (!initials.equals("")) {
+             try {
+                main.app.addDeveloperToActivity(initials, activity.getName(), previousProject.getProjectNumber());
+            } catch (OperationNotAllowedException error) {
+                ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
+                errorWindow.showMessage();
+                hasError = true;
+            }
+
+            if (!hasError) {
+                SuccessWindow errorWindow = new SuccessWindow("Developer successfully assigned.");
+                errorWindow.showMessage();
+                main.viewActivity(activity, previousProject);
+            }
+        } else {
+            ErrorWindow errorWindow = new ErrorWindow("Please insert initials.");
             errorWindow.showMessage();
         }
-        main.viewActivity(activity, previousProject);
     }
 }
