@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 import system.view_controller.pages.Activity.ActivityPage;
-import system.view_controller.pages.Calender.ViewCalender;
+import system.view_controller.pages.Calendar.ViewCalendar;
 import system.view_controller.pages.DeveloperOverview.ChooseOverviewDate;
 import system.view_controller.pages.DeveloperOverview.DeveloperOverviewPage;
 import system.view_controller.pages.LogIn.LogInPage;
@@ -32,7 +32,7 @@ public class Main {
     ViewProjectsPage viewProjectsPage = new ViewProjectsPage(frame, this);
     CreateNewProjectPage createNewProjectPage = new CreateNewProjectPage(frame, this);
     ChooseActivityPage timeRegistrationPage = new ChooseActivityPage(frame, this);
-    ViewCalender ViewCalender = new ViewCalender(frame, this);
+    ViewCalendar ViewCalendar = new ViewCalendar(frame, this);
     ChooseOverviewDate chooseOverviewDate = new ChooseOverviewDate(frame, this);
 
 
@@ -148,7 +148,7 @@ public class Main {
 
         } else if (changeTo == "View Calender") {
             frame.getContentPane().removeAll();
-            JPanel viewCalenderPanel = ViewCalender.draw();
+            JPanel viewCalenderPanel = ViewCalendar.draw();
             frame.getContentPane().add(viewCalenderPanel);
             frame.validate();
             frame.repaint();

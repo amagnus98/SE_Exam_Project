@@ -93,7 +93,9 @@ public class RegisterHoursSteps {
 		String projectNumber = currentYear % 100 + trackNumber;
 
         Developer currentUser = this.app.getCurrentUser();
-        assertTrue(currentUser.getRegisteredHours(day,week,year,projectNumber,activityName) == hours);
+        DeveloperCalendar calendar = currentUser.getDeveloperCalendar();
+        assertTrue(calendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName));
+        assertTrue(calendar.getRegisteredHoursForActivity(day,week,year,projectNumber,activityName) == hours);
     }
 
     @Then("the total registered time of the project with project number current year plus {string} is set to {double} hours")
@@ -125,7 +127,8 @@ public class RegisterHoursSteps {
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         developer.registerHours(hours, day, week, year, projectNumber, activityName);
         
-        assertTrue(developerCalendar.getRegisteredHours(day, week, year, projectNumber, activityName) == hours);
+        assertTrue(developerCalendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName));
+        assertTrue(developerCalendar.getRegisteredHoursForActivity(day, week, year, projectNumber, activityName) == hours);
     }
 
     // SCENARIO 3
@@ -139,6 +142,16 @@ public class RegisterHoursSteps {
         Activity activity = project.getActivity(activityName);
 
         assertFalse(activity.canRegisterHours(developer));
+    }
+
+    @Then("{double} hours are not registered to the current users personal calender on day {int} of week {int} of year {int} to the activity with name {string} of project with project number current year plus {string}")
+    public void hours_are_not_registered_to_the_current_users_personal_calender_on_day_of_week_of_year_to_the_activity_with_name_of_project_with_project_number_current_year_plus(double hours, int day, int week, int year, String activityName, String trackNumber) {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String projectNumber = currentYear % 100 + trackNumber;
+
+        Developer currentUser = this.app.getCurrentUser();
+        DeveloperCalendar calendar = currentUser.getDeveloperCalendar();
+        assertFalse(calendar.hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName));
     }
 
     // SCENARIO 4
@@ -184,7 +197,8 @@ public class RegisterHoursSteps {
     public void hours_are_registered_to_the_current_users_personal_calender_on_day_of_week_of_year_to_the_activity_with_name_of_the_non_work_activity_project(double hours, int day, int week, int year, String activityName) throws Exception {
         String projectNumber = this.app.getNonWorkActivityProject().getProjectNumber();
         Developer currentUser = this.app.getCurrentUser();
-        assertTrue(currentUser.getRegisteredHours(day,week,year,projectNumber,activityName) == hours);
+        DeveloperCalendar calendar = currentUser.getDeveloperCalendar();
+        assertTrue(calendar.getRegisteredHoursForActivity(day,week,year,projectNumber,activityName) == hours);
     }
 
     @Then("the total registered time of the non work activity project is set to {double} hours")
@@ -198,6 +212,18 @@ public class RegisterHoursSteps {
         Project project = this.app.getNonWorkActivityProject();
         Activity activity = project.getActivity(activityName);
         assertTrue(activity.getTotalHoursRegistered() == totalHours);
+    }
+
+    // SCENARIO 8
+    @Given("the time horizon of the activity with name {string} of project with project number current year plus {string} has not been defined")
+    public void the_time_horizon_of_the_activity_with_name_of_project_with_project_number_current_year_plus_has_not_been_defined(String activityName, String trackNumber) throws Exception {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String projectNumber = currentYear % 100 + trackNumber;
+        
+        Project project = this.app.getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+        
+        assertFalse(activity.isTimeHorizonDefined());
     }
 
 

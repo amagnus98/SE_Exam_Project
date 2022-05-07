@@ -57,7 +57,8 @@ public class AccessProjectReportSteps {
         try {
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
             String projectNumber = currentYear % 100 + trackNumber;
-            this.app.generateProjectReport(projectNumber); 
+            Project project = this.app.getProject(projectNumber);
+            this.app.generateProjectReport(project); 
         } 
         catch (OperationNotAllowedException e){
             this.errorMessage.setErrorMessage(e.getMessage());
@@ -68,8 +69,9 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_the_project_with_project_number_current_year_plus_is_generated(String trackNumber) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
 
-        ProjectReport projectReport = this.app.getCurrentProjectReport();
+        ProjectReport projectReport = this.app.getProjectReport(project);
         assertEquals(projectReport.getProjectNumber(), projectNumber);
     }
 
@@ -77,8 +79,9 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_project_with_project_number_current_year_plus_shows_a_total_of_hours_worked_on_the_project(String trackNumber, double workHours) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
 
-        ProjectReport projectReport = this.app.getCurrentProjectReport();
+        ProjectReport projectReport = this.app.getProjectReport(project);
         assertEquals(projectReport.getProjectNumber(), projectNumber);
         assertTrue(projectReport.getTotalHoursRegisteredToProject() == workHours);
     }
@@ -87,8 +90,9 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_project_with_project_number_current_year_plus_shows_a_total_of_hours_worked_on_the_activity_with_name(String trackNumber, double workHours, String activityName) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
-        
-        ProjectReport projectReport = this.app.getCurrentProjectReport();
+        Project project = this.app.getProject(projectNumber);
+
+        ProjectReport projectReport = this.app.getProjectReport(project);
         assertEquals(projectReport.getProjectNumber(), projectNumber);
         assertTrue(projectReport.getTotalHoursWorkedOnActivity(activityName) == workHours);
     }
@@ -97,8 +101,9 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_project_with_project_number_current_year_plus_shows_the_estimated_work_hours_needed_is_hours_for_the_project(String trackNumber, double workHours) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
 
-        ProjectReport projectReport = this.app.getCurrentProjectReport();
+        ProjectReport projectReport = this.app.getProjectReport(project);
         assertEquals(projectReport.getProjectNumber(), projectNumber);
         assertTrue(projectReport.getEstimatedHoursForProject() == workHours);
     }
@@ -107,8 +112,9 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_project_with_project_number_current_year_plus_shows_the_estimated_work_hours_needed_is_hours_for_the_activity_with_name(String trackNumber, double workHours, String activityName) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
 
-        ProjectReport projectReport = this.app.getCurrentProjectReport();
+        ProjectReport projectReport = this.app.getProjectReport(project);
         assertEquals(projectReport.getProjectNumber(), projectNumber);
         assertTrue(projectReport.getEstimatedHoursOnActivity(activityName) == workHours);
     }
@@ -118,10 +124,11 @@ public class AccessProjectReportSteps {
     public void the_project_report_of_the_project_with_project_number_current_year_plus_is_not_generated(String trackNumber) throws Exception {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
 
         boolean hasProjectReport = this.app.hasCurrentProjectReport();
 
-        assertTrue((!hasProjectReport) || this.app.getCurrentProjectReport().getProjectNumber().equals(projectNumber));
+        assertTrue((!hasProjectReport) || this.app.getProjectReport(project).getProjectNumber().equals(projectNumber));
     }
 
 

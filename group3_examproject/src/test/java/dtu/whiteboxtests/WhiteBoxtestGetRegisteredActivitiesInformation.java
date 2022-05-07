@@ -1,3 +1,4 @@
+/*
 package dtu.whiteboxtests;
 
 import static org.junit.Assert.assertEquals;
@@ -231,3 +232,4 @@ public class WhiteBoxtestGetRegisteredActivitiesInformation {
         assertEquals(expectedOutput, developerCalendar.getRegisteredActivitiesInformation(day, week, year));
         }
     }
+*/

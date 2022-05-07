@@ -34,15 +34,8 @@ public class CreateNewProjectAction extends AbstractAction {
         } else {
             main.app.addProject(projectName);
         }
-        Project project;
-        try {
-            project = main.app.getMostRecentProject();
-            main.viewProject(project, this.previousPage);
-        } catch (OperationNotAllowedException error) {
-            ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
-            errorWindow.showMessage();
-            hasError = true;
-        }
+        Project project = main.app.getProjects().get(main.app.getProjects().size()-1);;
+        main.viewProject(project, this.previousPage);
 
         if (!hasError) {
             SuccessWindow successWindow = new SuccessWindow("Project successfully created.");

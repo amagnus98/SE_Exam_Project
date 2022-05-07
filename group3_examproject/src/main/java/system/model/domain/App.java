@@ -68,17 +68,12 @@ public class App {
     
     // Return the developer object corresponding to given initials
     public Developer getDeveloper(String initials) throws OperationNotAllowedException {
-        for (Developer d : developers) {
+        for (Developer d : getDevelopers()) {
             if (d.getInitials().equals(initials.toLowerCase())) {
                 return d;
             }
         }
         throw new OperationNotAllowedException("No developer with the given initials exists in the system");
-    }
-
-    // Add a developer to the company
-    public void addDeveloperToCompany(Developer d) {
-        this.developers.add(d);
     }
 
     // getter method for the current year - also updates the current year variable
@@ -187,13 +182,6 @@ public class App {
         return this.projects;
     }
 
-    public Project getMostRecentProject() throws OperationNotAllowedException{
-        if (this.projects.size() > 0) {
-            return this.projects.get(this.projects.size()-1);
-        }
-        throw new OperationNotAllowedException("Project with given project number does not exist in the system");
-    }
-
     // Checks whether a project with a given project number exist in the list of projects
     public boolean projectExists(String projectNumber){
 
@@ -261,10 +249,10 @@ public class App {
         }
     }
 
-    public void setActivityName(String activityName, Activity activity, Project project) throws OperationNotAllowedException{
+    public void setActivityName(String newName, Activity activity, Project project) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(project.getProjectNumber())){
-            if (!project.containsActivity(activityName) || activityName.equals(activity.getName())){
-                activity.setName(activityName);
+            if (!project.containsActivity(newName) || newName.equals(activity.getName())){
+                activity.setName(newName);
             } else {
             throw new OperationNotAllowedException("Project already contains an activity with the given name");
             }
@@ -395,39 +383,6 @@ public class App {
         }
     }
 
-    // get the activities that each developer is assigned to in a given week and year
-    public HashMap<Developer, HashMap<Project, ArrayList<Activity>>> getDeveloperActivitiesInPeriod(int startWeek, int startYear, int endWeek, int endYear) throws OperationNotAllowedException {
-        // nested hash map where the outer key is the developer and the inner key is the project
-        HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivitiesInPeriod = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
-        if (!(isWeekFormatValid(startWeek) && isWeekFormatValid(endWeek))){
-            throw new OperationNotAllowedException("The weeks for the period must be a number between 1 to 52");
-        }
-
-        if (!isEndTimeIsAfterStartTime(startYear, startWeek, endYear, endWeek)){
-            throw new OperationNotAllowedException("The end time must come after the start time");
-        }
-
-        for (Developer d : this.developers) {
-            HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
-            ArrayList<Activity> developerActivities = d.getAssignedActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
-            for (Activity activity : developerActivities) {
-                Project parentProject;
-                
-                parentProject = activity.getParentProject();
-
-                // if no previous activities for the developer for the specific project has been registered yet
-                if (!developerActivitiesHashMap.containsKey(parentProject)) {
-                    developerActivitiesHashMap.put(parentProject, new ArrayList<>());
-                }
-                developerActivitiesHashMap.get(parentProject).add(activity);
-            }
-            currentDeveloperActivitiesInPeriod.put(d, developerActivitiesHashMap);
-        }
-        
-        return currentDeveloperActivitiesInPeriod;
-
-    }
-
     public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             if (workHours >= 0){
@@ -533,28 +488,21 @@ public class App {
     public void registerHoursToNonWorkActivity(double hours, int day, int week, int year, String activityName) throws OperationNotAllowedException{
         registerHoursToActivity(hours, day, week, year, nonWorkActivityProjectNumber, activityName);
     }
-
-    // use the calendar output variable to see activities with registered hours
-    public void viewActivitiesWithRegisteredHours(int day, int week, int year) throws OperationNotAllowedException{
-        this.currentUser.setCalendarOutput(day, week, year);
-    }
     
-    public void generateProjectReport(String projectNumber) throws OperationNotAllowedException{
-        if (currentUserIsProjectLeader(projectNumber)) {
-        Project project = getProject(projectNumber);
-        this.currentProjectReport = new ProjectReport(project); }
+    public void generateProjectReport(Project project) throws OperationNotAllowedException{
+        if (currentUserIsProjectLeader(project.getProjectNumber())) {
+            this.currentProjectReport = new ProjectReport(project); }
         else {
             throw new OperationNotAllowedException("Only the project leader can access the project report");
         }
 
     }
 
-    public ProjectReport getCurrentProjectReport() throws OperationNotAllowedException{
-        if (hasCurrentProjectReport()){
-            return this.currentProjectReport;
-        } else {
-            throw new OperationNotAllowedException("No project report has been requested");
-        }   
+    public ProjectReport getProjectReport(Project project) throws OperationNotAllowedException{
+        generateProjectReport(project);
+        
+        return this.currentProjectReport;
+        
     }
 
     public boolean hasCurrentProjectReport(){

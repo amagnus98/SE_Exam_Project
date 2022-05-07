@@ -38,6 +38,18 @@ public class AssignDeveloperToActivitySteps {
       assertFalse(activity.isDeveloperAssignedByProjectLeader(developer));
   }
 
+    @Given("the developer with initials {string} has not been requested to the activity with name {string} of project with project number current year plus {string}")
+    public void the_developer_with_initials_has_not_been_requested_to_the_activity_with_name_of_project_with_project_number_current_year_plus(String initials, String activityName, String trackNumber) throws Exception {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String projectNumber = currentYear % 100 + trackNumber;
+
+        Developer developer = this.app.getDeveloper(initials);
+        Project project = this.app.getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+
+        assertFalse(activity.isDeveloperRequested(developer));
+    }
+
   @When("the current user assigns the developer with initials {string} to activity with name {string} of project with project number current year plus {string}")
   public void the_current_user_assigns_the_developer_with_initials_to_activity_with_name_of_project_with_project_number_current_year_plus(String initials, String activityName, String trackNumber) throws Exception {
     try {
@@ -90,5 +102,22 @@ public class AssignDeveloperToActivitySteps {
       
       assertTrue(activity.isDeveloperAssignedByProjectLeader(developer));
   }
+
+    // SCENARIO 5
+    @Given("the developer with initials {string} has already been requested to the activity with name {string} of project with project number current year plus {string}")
+    public void the_developer_with_initials_has_already_been_requested_to_the_activity_with_name_of_project_with_project_number_current_year_plus(String initials, String activityName, String trackNumber) throws Exception {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String projectNumber = currentYear % 100 + trackNumber;
+
+        Developer developer = this.app.getDeveloper(initials);
+        Project project = this.app.getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+
+        activity.addRequestedDeveloper(developer);
+
+        assertTrue(activity.isDeveloperRequested(developer));
+
+
+    }
 
 }

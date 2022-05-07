@@ -20,23 +20,8 @@ public class DeveloperCalendar {
         return year + String.format("%02d", week) + String.format("%02d", day);
     }
 
-    // sort list of date keys
-    public ArrayList<String> getSortedDateKeys(){
-        // get date keys from the calendar for the days with registered hours
-        ArrayList<String> dateKeys = new ArrayList<>(this.calendar.keySet());
-        // convert from string to int
-        ArrayList<Integer> sortedDateKeysInts = new ArrayList<>();
-        for(String s : dateKeys) sortedDateKeysInts.add(Integer.valueOf(s));
-        // sort datekeys
-        Collections.sort(sortedDateKeysInts);
-        // convert back to string
-        ArrayList<String> sortedDateKeys = new ArrayList<>();
-        for(Integer i : sortedDateKeysInts) sortedDateKeys.add(Integer.toString(i));
-        return sortedDateKeys;
-    }
-
     // set registered hours for a given day
-    public void setRegisteredHours(double hours, int day, int week, int year, String projectNumber, String activityName){
+    public void setRegisteredHoursForActivity(double hours, int day, int week, int year, String projectNumber, String activityName){
         // get key that corresponds to the given date
         String dateKey = generateDateKey(day, week, year);
         // check if any hours have been registered already for the given day
@@ -54,7 +39,7 @@ public class DeveloperCalendar {
     }
     
     // get registered hours for an activity on a given day
-    public double getRegisteredHours(int day, int week, int year, String projectNumber, String activityName){
+    public double getRegisteredHoursForActivity(int day, int week, int year, String projectNumber, String activityName){
         // if no hours have been registered return 0
         if (!hasRegisteredHoursForActivity(day, week, year, projectNumber, activityName)){
             return 0;
@@ -118,6 +103,7 @@ public class DeveloperCalendar {
         return calendar.containsKey(dateKey);
     }
 
+    /*
     // get all registered activities for a specific day
     public ArrayList<HashMap<String,String>> getRegisteredActivitiesInformation(int day,int week,int year) throws OperationNotAllowedException {
         // Initialize empty list of hash maps
@@ -164,6 +150,7 @@ public class DeveloperCalendar {
         return registeredActivitiesInformation;  
     }
 
+
     // Helper Method: Creates and returns a hashmap containing information of both 
     // projectNumber, activityName, and registered Hours associated with an activity
     public HashMap<String,String> getActivityInformation(String activityName, String projectNumber, double registeredHours){
@@ -173,4 +160,6 @@ public class DeveloperCalendar {
         activityInformation.put("Registered hours", "" + registeredHours);
         return activityInformation;
     }
+
+    */
 }

@@ -43,6 +43,7 @@ Scenario: Non assigned developer tries to register hours to activity
     And the end time of the activity with name "Activity Name" of project with project number current year plus "001" is year 2022 and week 40
     When the current user registers 5.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     Then the system provides an error message "The user is not assigned the given activity" 
+    Then 5.5 hours are not registered to the current users personal calender on day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     And the total registered time of the project with project number current year plus "001" is set to 19 hours
     And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 10 hours
 
@@ -67,6 +68,7 @@ Scenario: The user tries to register negative hours
     And the total hours registered to the activity with name "Activity Name" of the project with project number current year plus "001" is 10 hours
     When the current user registers -5.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     Then the system provides an error message "Hours must be more than zero and not greater than 24" 
+    Then -5.5 hours are not registered to the current users personal calender on day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     And the total registered time of the project with project number current year plus "001" is set to 19 hours
     And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 10 hours
 
@@ -79,6 +81,7 @@ Scenario: The user tries to register more than 24 hours
     And the total hours registered to the activity with name "Activity Name" of the project with project number current year plus "001" is 10 hours
     When the current user registers 25.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     Then the system provides an error message "Hours must be more than zero and not greater than 24" 
+    Then 25.5 hours are not registered to the current users personal calender on day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     And the total registered time of the project with project number current year plus "001" is set to 19 hours
     And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 10 hours
 
@@ -94,5 +97,21 @@ Scenario: Register time to a project activity outside the time horizon of the pr
     And the end time of the activity with name "Activity Name" of project with project number current year plus "001" is year 2022 and week 40
     When the current user registers 5.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     Then the system provides an error message "The user cannot register hours outside of the time horizon of the activity" 
+    Then 5.5 hours are not registered to the current users personal calender on day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
     And the total registered time of the project with project number current year plus "001" is set to 19 hours
     And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 10 hours
+
+Scenario: Register time to a project activity where the time horizon has not been set yet
+    Given the current user is a developer with initials "amag"
+    And a project with project number current year plus "001" exists in the system
+    And the project with project number current year plus "001" contains an activity with name "Activity Name"
+    And the user with initials "amag" is allowed to register hours for the activity with name "Activity Name" of project with project number current year plus "001"
+    And the user with initials "amag" has registered no hours for the activity with name "Activity Name" of project with project number current year plus "001" for day 1 of week 23 of year 2022 
+    And the total hours registered to the project with project number current year plus "001" is 19 hours
+    And the total hours registered to the activity with name "Activity Name" of the project with project number current year plus "001" is 0 hours
+    And the time horizon of the activity with name "Activity Name" of project with project number current year plus "001" has not been defined
+    When the current user registers 5.5 hours for day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
+    Then the system provides an error message "The user cannot register hours to the activity, before its time horizon has been defined" 
+    Then 5.5 hours are not registered to the current users personal calender on day 1 of week 23 of year 2022 to the activity with name "Activity Name" of project with project number current year plus "001"
+    And the total registered time of the project with project number current year plus "001" is set to 19 hours
+    And the total registered time of the activity with name "Activity Name" of project with project number current year plus "001" is set to 0 hours

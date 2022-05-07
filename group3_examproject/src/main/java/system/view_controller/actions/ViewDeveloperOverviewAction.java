@@ -39,8 +39,45 @@ public class ViewDeveloperOverviewAction extends AbstractAction {
                 int endYear = Integer.parseInt(endYearTextField.getText().trim());
 
                 try {
-                    HashMap<Developer, HashMap<Project, ArrayList<Activity>>> developerActivitiesInPeriod = main.app.getDeveloperActivitiesInPeriod(startWeek, startYear, endWeek, endYear);
-                    main.viewDeveloperOverview(startWeek, startYear, endWeek, endYear, developerActivitiesInPeriod);
+                    // nested hash map where the outer key is the developer and the inner key is the project
+                    HashMap<Developer, HashMap<Project, ArrayList<Activity>>> currentDeveloperActivitiesInPeriod = new HashMap<Developer, HashMap<Project, ArrayList<Activity>>>();
+                    if (!(main.app.isWeekFormatValid(startWeek) && main.app.isWeekFormatValid(endWeek))){
+                        throw new OperationNotAllowedException("The weeks for the period must be a number between 1 to 52");
+                    }
+
+                    if (!main.app.isEndTimeIsAfterStartTime(startYear, startWeek, endYear, endWeek)){
+                        throw new OperationNotAllowedException("The end time must come after the start time");
+                    }
+
+                    for (Developer d : main.app.getDevelopers()) {
+                        HashMap<Project, ArrayList<Activity>> developerActivitiesHashMap = new HashMap<Project, ArrayList<Activity>>();
+                        ArrayList<Activity> developerActivitiesInPeriod = new ArrayList<>();
+        
+                        for (Activity activity : d.getAssignedActivities()) {
+                            // check that the end time of the period comes after the activity start time
+                            // and the start time of the period comes before the activity end time
+                            if ((endYear > activity.getStartYear() || (endYear == activity.getStartYear() && endWeek >= activity.getStartWeek())) &&
+                                (startYear < activity.getEndYear() || (startYear == activity.getEndYear() && startWeek <= activity.getEndWeek()))){
+                                    developerActivitiesInPeriod.add(activity);
+                            }
+                        }
+                        
+                        for (Activity activity : developerActivitiesInPeriod) {
+                            Project parentProject;
+                            
+                            parentProject = activity.getParentProject();
+
+                            // if no previous activities for the developer for the specific project has been registered yet
+                            if (!developerActivitiesHashMap.containsKey(parentProject)) {
+                                developerActivitiesHashMap.put(parentProject, new ArrayList<>());
+                            }
+                            developerActivitiesHashMap.get(parentProject).add(activity);
+                        }
+                        currentDeveloperActivitiesInPeriod.put(d, developerActivitiesHashMap);
+                    }
+                    
+                    main.viewDeveloperOverview(startWeek, startYear, endWeek, endYear, currentDeveloperActivitiesInPeriod);
+                    
                 } catch (OperationNotAllowedException error) {
                     ErrorWindow errorWindow = new ErrorWindow(error.getMessage());
                     errorWindow.showMessage();

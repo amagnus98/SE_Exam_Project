@@ -31,8 +31,8 @@ public class GetProjectReportAction extends AbstractAction {
         Boolean hasError = false;
 
         try {
-            main.app.generateProjectReport(project.getProjectNumber());
-            ProjectReport projectReport = main.app.getCurrentProjectReport();
+            //main.app.generateProjectReport(project.getProjectNumber());
+            ProjectReport projectReport = main.app.getProjectReport(project);
             JFrame frame = new JFrame("Project Report of " + project.getName() + " (" + project.getProjectNumber() + ")");
             frame.setSize(500,700);
             frame.setResizable(false);

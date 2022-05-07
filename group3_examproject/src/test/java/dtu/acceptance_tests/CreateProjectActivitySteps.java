@@ -56,12 +56,22 @@ public class CreateProjectActivitySteps {
       } 
   }
 
-  @Then("the activity with name {string} is added to the list of activities for the project with project number current year plus {string}")
-  public void the_activity_with_name_is_added_to_the_list_of_activities_for_the_project_with_project_number_current_year_plus(String activityName, String trackNumber) throws Exception {
+  @Then("the activity with name {string} is part of the list of activities for the project with project number current year plus {string}")
+  public void the_activity_with_name_is_part_of_the_list_of_activities_for_the_project_with_project_number_current_year_plus(String activityName, String trackNumber) throws Exception {
       int currentYear = Calendar.getInstance().get(Calendar.YEAR);
       String projectNumber = currentYear % 100 + trackNumber;  
       Project project = this.app.getProject(projectNumber);
       assertTrue(project.containsActivity(activityName));
+  }
+
+  @Then("the parent project of the activity with name {string} is set to the project with project number current year plus {string}")
+  public void the_parent_project_of_the_activity_with_name_is_set_to_the_project_with_project_number_current_year_plus(String activityName, String trackNumber) throws Exception {
+      int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+      String projectNumber = currentYear % 100 + trackNumber;  
+      Project project = this.app.getProject(projectNumber);
+      Activity activity = project.getActivity(activityName);
+
+      assertTrue(activity.getParentProject().getProjectNumber().equals(projectNumber));
   }
 
   // SCENARIO 2
@@ -95,8 +105,8 @@ public class CreateProjectActivitySteps {
       assertNotEquals(this.app.getProject(projectNumber).getProjectLeader(), initials);
   }
 
-  @Then("the activity with name {string} is not added to the list of activities for the project with project number current year plus {string}")
-  public void the_activity_with_name_is_not_added_to_the_list_of_activities_for_the_project_with_project_number_current_year_plus(String activityName, String trackNumber) throws Exception {
+  @Then("the activity with name {string} is not part of the list of activities for the project with project number current year plus {string}")
+  public void the_activity_with_name_is_not_part_of_the_list_of_activities_for_the_project_with_project_number_current_year_plus(String activityName, String trackNumber) throws Exception {
       int currentYear = Calendar.getInstance().get(Calendar.YEAR);
       String projectNumber = currentYear % 100 + trackNumber; 
 
@@ -105,6 +115,21 @@ public class CreateProjectActivitySteps {
 
       // Check that activity is not contained within the project
       assertFalse(project.containsActivity(activityName));
+  }
+
+  // SCENARIO 4
+  @When("the current user edits the name of the activity with name {string} of project with project number current year plus {string} to {string}")
+  public void the_current_user_edits_the_name_of_the_activity_with_name_of_project_with_project_number_current_year_plus_to(String activityName, String trackNumber, String newName) throws Exception {
+      try {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String projectNumber = currentYear % 100 + trackNumber;
+        Project project = this.app.getProject(projectNumber);
+        Activity activity = project.getActivity(activityName);
+        this.app.setActivityName(newName, activity, project);
+      }
+      catch (OperationNotAllowedException e){
+        this.errorMessage.setErrorMessage(e.getMessage());
+      } 
   }
 
 }

@@ -1,4 +1,4 @@
-package system.view_controller.pages.Calender;
+package system.view_controller.pages.Calendar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,13 +20,13 @@ import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import java.util.*;
 
-public class ViewCalender {
+public class ViewCalendar {
 
     JFrame frame;
     Main main;
     Constants constants = new Constants();
     
-    public ViewCalender(JFrame frame, Main main) {
+    public ViewCalendar(JFrame frame, Main main) {
         this.frame = frame;
         this.main = main;
     }
@@ -35,7 +35,7 @@ public class ViewCalender {
         JPanel BoxPanel = new BoxPanel().getPanel();
         BoxPanel.setPreferredSize(new Dimension(350, 700));
 
-        JLabel subHeader = new JLabel("My Calender");
+        JLabel subHeader = new JLabel("My Calendar");
         subHeader.setFont(new Font("Arial", Font.BOLD, 25));
         subHeader.setBorder(new EmptyBorder(75,0,25,0));
         BoxPanel.add(subHeader);
@@ -46,9 +46,6 @@ public class ViewCalender {
         InformationPanel.setLayout(new BoxLayout(InformationPanel, BoxLayout.Y_AXIS));
         InformationPanel.setBackground(constants.boxColor);
 
-
-
-        
 
         DeveloperCalendar developerCalendar = main.app.getCurrentUser().getDeveloperCalendar();
         HashMap<String, HashMap<String, HashMap<String, Double>>> calendar = developerCalendar.getCalendar();
@@ -69,8 +66,21 @@ public class ViewCalender {
             JPanel ProjectViewPanel = new JPanel();
             ProjectViewPanel.setLayout(new BoxLayout(ProjectViewPanel, BoxLayout.Y_AXIS));
             ProjectViewPanel.setBackground(constants.boxColor);
+            
+            // sort date keys
+            // get date keys from the calendar for the days with registered hours
+            ArrayList<String> dateKeys = new ArrayList<>(developerCalendar.getCalendar().keySet());
+            // convert from string to int
+            ArrayList<Integer> sortedDateKeysInts = new ArrayList<>();
+            for(String s : dateKeys) sortedDateKeysInts.add(Integer.valueOf(s));
+            // sort datekeys
+            Collections.sort(sortedDateKeysInts);
+            // convert back to string
+            ArrayList<String> sortedDateKeys = new ArrayList<>();
+            for(Integer i : sortedDateKeysInts) sortedDateKeys.add(Integer.toString(i));
+            
 
-            for ( String key : developerCalendar.getSortedDateKeys() ) {
+            for ( String key : sortedDateKeys ) {
 
                 JPanel DayPanelBorder = new JPanel();
                 DayPanelBorder.setLayout(new BoxLayout(DayPanelBorder, BoxLayout.Y_AXIS));

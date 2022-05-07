@@ -65,6 +65,25 @@ public class CreateProjectSteps {
 		this.app.addProject();
 	}
 
+	// SCENARIO 3
+	@Given("the name of the project with project number current year plus {string} is {string}")
+	public void the_name_of_the_project_with_project_number_current_year_plus_is(String trackNumber, String name) throws Exception{
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String projectNumber = currentYear % 100 + trackNumber;
+		Project project = this.app.getProject(projectNumber);
+		project.setName(name);
+		assertTrue(project.getName().equals(name));
+
+	}
+
+	@When("the current user edits the name of the project with project number {string} to {string}")
+	public void the_current_user_edits_the_name_of_the_project_with_project_number_to(String trackNumber, String name) throws Exception {
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String projectNumber = currentYear % 100 + trackNumber;
+		Project project = this.app.getProject(projectNumber);
+		project.setName(name);
+	}
+
 	
 }
 
