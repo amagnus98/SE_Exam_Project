@@ -471,6 +471,11 @@ public class App {
         if (!(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject())) {
             throw new OperationNotAllowedException("The user is not assigned the given activity");
         }
+
+        if (!(activity.isTimeHorizonDefined())){
+            throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been set");
+        }
+
         // check that the user registers hours within the allowed time horizon of the activity
         // this always returns false if the activity is a non work activity since it doesn't have a time horizon
         if (!(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject())){

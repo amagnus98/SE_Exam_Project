@@ -114,11 +114,11 @@ public class ProjectReportPage {
             JPanel activityPanel = new JPanel(new GridLayout(0,2,0,0));
             activityPanel.setBackground(constants.boxColor);
 
-            JLabel activityEstLabel = new JLabel("Est.: " + activity.getEstimatedWorkHours());
+            JLabel activityEstLabel = new JLabel("Est. hours: " + activity.getEstimatedWorkHours());
             activityPanel.add(activityEstLabel);
             activityEstLabel.setHorizontalAlignment(JLabel.LEFT);
 
-            JLabel activityTotalLabel = new JLabel("Reg.: " + activity.getTotalHoursRegistered());
+            JLabel activityTotalLabel = new JLabel("Reg. hours: " + activity.getTotalHoursRegistered());
             activityPanel.add(activityTotalLabel);
             activityTotalLabel.setHorizontalAlignment(JLabel.RIGHT);
             

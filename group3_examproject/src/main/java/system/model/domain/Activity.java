@@ -49,7 +49,7 @@ public class Activity extends Event{
       if (!isDeveloperAssignedByProjectLeader(d)){
         // check if the developer has already been requested to the project
         if (isDeveloperAssigned(d)) {
-          changeDeveloperFromRequestedToAssisgned(d);
+          changeDeveloperFromRequestedToAssigned(d);
         } else {
           addAssignedDeveloper(d);
         }
@@ -59,7 +59,7 @@ public class Activity extends Event{
   }
 
   // change developer status from requested to assigned
-  public void changeDeveloperFromRequestedToAssisgned(Developer d){
+  public void changeDeveloperFromRequestedToAssigned(Developer d){
     this.isAssignedByProjectLeader.put(d.getInitials(),true);
   }
   
@@ -68,6 +68,15 @@ public class Activity extends Event{
     // first check if is currently assigned to the project either by the project leader or by request
     if (this.isDeveloperAssigned(d)){
       return this.isAssignedByProjectLeader.get(d.getInitials());
+    }
+    return false;
+  }
+
+  // check if the current developer has been requested for an activity
+  public boolean isDeveloperRequested(Developer d){
+    // first check if is currently assigned to the project either by the project leader or by request
+    if (this.isDeveloperAssigned(d)){
+      return !this.isAssignedByProjectLeader.get(d.getInitials());
     }
     return false;
   }

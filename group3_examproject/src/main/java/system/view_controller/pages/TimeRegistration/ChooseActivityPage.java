@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import system.model.domain.Activity;
+import system.model.domain.Developer;
 import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.RegisterTimeOnActivityAction;
@@ -50,17 +51,14 @@ public class ChooseActivityPage {
 
         for (int i = 0; i < projects.size(); i++) {
             Project project = projects.get(i);
-
-            if (project.getDevelopers().contains(main.app.getCurrentUser()) || project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber())) {
-                
+            
+            if (project.isNonWorkActivityProject()){
                 String projectName = "Unnamed";
-                if (!projects.get(i).getName().equals("")) {
+                if (!project.getName().equals("")) {
                     projectName = project.getName();
                 }
                 JLabel projectHeader = new JLabel(projectName + " (" + project.getProjectNumber() + ")");
-                if (project.isNonWorkActivityProject()){
-                    projectHeader = new JLabel(projectName);
-                } 
+                projectHeader = new JLabel(projectName);
             
                 projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
                 projectHeader.setBorder(new EmptyBorder(30,0,10,0));
@@ -69,29 +67,48 @@ public class ChooseActivityPage {
                 projectHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
                 
                 ArrayList<Activity> allActivitites = project.getActivities();
-                ArrayList<Activity> activitites = new ArrayList<>();
 
                 for (Activity activity : allActivitites) {
-                    if (activity.getDevelopers().contains(main.app.getCurrentUser()) || project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber())) {
-                        activitites.add(activity);
+                    AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
+                    JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
+                    InformationPanel.add(projectActivityButton);
+                }
+            } else if (project.getDevelopers().contains(main.app.getCurrentUser())){
+                String projectName = "Unnamed";
+                if (!project.getName().equals("")) {
+                    projectName = project.getName();
+                }
+                JLabel projectHeader = new JLabel(projectName + " (" + project.getProjectNumber() + ")");
+                
+                projectHeader.setFont(new Font("Arial", Font.BOLD, 20));
+                projectHeader.setBorder(new EmptyBorder(30,0,10,0));
+                InformationPanel.add(projectHeader);
+                projectHeader.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
+                projectHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
+                
+                ArrayList<Activity> allActivitites = project.getActivities();
+                ArrayList<Activity> activities = new ArrayList<>();
+
+                // only include activities that the current user is assigned to
+                for (Activity activity : allActivitites) {
+                    if (activity.getDevelopers().contains(main.app.getCurrentUser())) {
+                        activities.add(activity);
                     }
                 }
 
-                if (activitites.size() < 1) {
-                    JLabel noActivitiesText = new JLabel("No Activities.");
+                if (activities.size() < 1) {
+                    JLabel noActivitiesText = new JLabel("No assigned activities.");
                     noActivitiesText.setFont(new Font("Arial", Font.PLAIN, 12));
                     InformationPanel.add(noActivitiesText);
                     noActivitiesText.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
                     noActivitiesText.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
                 } else {
-                    for (int j = 0; j < activitites.size(); j++) {
-                        Activity activity = activitites.get(j);
-    
-                        AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
-                        JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
-                        InformationPanel.add(projectActivityButton);
-
-                        if (!project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber()) && !activity.isDeveloperAssignedByProjectLeader(main.app.getCurrentUser())) {
+                    for (Activity activity : activities) {
+                        if (activity.isDeveloperAssignedByProjectLeader(main.app.getCurrentUser())){
+                            AbstractAction registerTimeOnActivityAction = new RegisterTimeOnActivityAction(activity.getParentProject().getProjectNumber(), activity.getName(), main);
+                            JPanel projectActivityButton = new Button(activity.getName(), constants.boxColor, "micro", registerTimeOnActivityAction).getButton();
+                            InformationPanel.add(projectActivityButton);
+                        } else {
                             requestedActivities.add(activity);
                         }
                     }
@@ -99,7 +116,7 @@ public class ChooseActivityPage {
             } else {
                 ArrayList<Activity> activities = project.getActivities();
                 for (Activity activity : activities) {
-                    if (!project.getProjectNumber().equals(main.app.getNonWorkActivitiesProjectNumber()) && activity.isDeveloperAssigned(main.app.getCurrentUser()) && !activity.isDeveloperAssignedByProjectLeader(main.app.getCurrentUser())) {
+                    if (activity.isDeveloperRequested(main.app.getCurrentUser())) {
                         requestedActivities.add(activity);
                     }
                 }
@@ -113,7 +130,7 @@ public class ChooseActivityPage {
             requestedHeader.setAlignmentY(InformationPanel.CENTER_ALIGNMENT);
 
             if (requestedActivities.size() < 1) {
-                JLabel noActivitiesText = new JLabel("No Activities.");
+                JLabel noActivitiesText = new JLabel("No requsted activities.");
                 noActivitiesText.setFont(new Font("Arial", Font.PLAIN, 12));
                 InformationPanel.add(noActivitiesText);
                 noActivitiesText.setAlignmentX(InformationPanel.CENTER_ALIGNMENT);
