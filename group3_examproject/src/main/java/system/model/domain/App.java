@@ -473,7 +473,7 @@ public class App {
         }
 
         if (!(activity.isTimeHorizonDefined())){
-            throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been set");
+            throw new OperationNotAllowedException("The user cannot register hours to the activity, before its time horizon has been defined");
         }
 
         // check that the user registers hours within the allowed time horizon of the activity

@@ -114,9 +114,17 @@ public class ActivityPage {
         InformationPanel.add(new JLabel(""));
         
         InformationPanel.add(new JLabel("Assigned Project Start Time"));
-        InformationPanel.add(new JLabel("Week: " + parentProject.getStartWeek() + ", Year: " + parentProject.getStartYear()));
+        if (parentProject.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + parentProject.getStartWeek() + ", Year: " + parentProject.getStartYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
         InformationPanel.add(new JLabel("Assigned Project End Time"));
-        InformationPanel.add(new JLabel("Week: " + parentProject.getEndWeek() + ", Year: " + parentProject.getEndYear()));
+        if (parentProject.isTimeHorizonDefined()){
+            InformationPanel.add(new JLabel("Week: " + parentProject.getEndWeek() + ", Year: " + parentProject.getEndYear()));
+        } else {
+            InformationPanel.add(new JLabel("Undefined"));
+        }
         
         InformationPanel.add(new JLabel("Activity Start Year"));
         TextField startYearTextField = new TextField("Activity startYear", String.valueOf(activity.getStartYear()), constants.boxColor).getTextField();
