@@ -8,11 +8,6 @@ public class Developer {
     private String initials;
     // developer calendar used to see registered hours for each day
     private DeveloperCalendar calendar = new DeveloperCalendar();
-    // this variable is only used to see if view calender works properly
-    // keys are dateKeys
-    // values are lists of hashmaps with three values - projectNumber, activityName and registeredHours
-    // shows all the activities worked on for the given day
-    //private ArrayList<HashMap<String,String>> calendarOutput;
     private ArrayList<Activity> assignedActivities = new ArrayList<>();
 
     // Constructor of Developer

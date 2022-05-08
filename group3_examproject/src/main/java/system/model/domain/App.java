@@ -19,7 +19,7 @@ public class App {
     private ArrayList<String> initialNonWorkActivities = new ArrayList<>(Arrays.asList("Vacation",
                                                                                 "Sick day",
                                                                                 "Seminar",
-                                                                                "Maternity Leave"));
+                                                                                "Workshop"));
     // initialize project list with a project for non work activities
     private ArrayList<Project> projects = getInitialProjectList();
     
