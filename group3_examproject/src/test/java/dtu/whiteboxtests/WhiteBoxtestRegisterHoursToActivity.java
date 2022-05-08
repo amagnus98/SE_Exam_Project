@@ -1,3 +1,5 @@
+// Responsible - Kasper Helverskov Petersen (s203294)
+
 package dtu.whiteboxtests;
 
 import static org.junit.Assert.assertEquals;

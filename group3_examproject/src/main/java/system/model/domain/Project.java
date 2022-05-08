@@ -1,3 +1,4 @@
+// Responsible - Marcus Roberto Nielsen (s204126)
 package system.model.domain;
 
 import java.util.*;

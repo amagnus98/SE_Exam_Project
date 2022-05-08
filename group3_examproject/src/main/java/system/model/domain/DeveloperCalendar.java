@@ -1,3 +1,4 @@
+// Responsible - Asbjørn Magnussen (s183546)
 package system.model.domain;
 
 import static org.junit.Assert.assertTrue;

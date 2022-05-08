@@ -1,3 +1,5 @@
+// Responsible - Mads Vibe Ringsted (s204144)
+
 package dtu.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;

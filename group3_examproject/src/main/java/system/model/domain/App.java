@@ -30,33 +30,33 @@ public class App {
     // used as a container for the project report
     private ProjectReport currentProjectReport;
 
-    // log in function
+    // log in function // Responsible - Asbjørn Magnussen (s183546)
     public void logIn(String initials) throws OperationNotAllowedException {
         Developer d = getDeveloper(initials);
         setCurrentUser(d);
     }
-
-    // Setter method for currentUser 
+    
+    // Setter method for currentUser // Responsible - Asbjørn Magnussen (s183546)
     private void setCurrentUser(Developer newCurrentUser) {
         this.currentUser = newCurrentUser;
     }
     
-    // getter method for currentUser 
+    // getter method for currentUser // Responsible - Asbjørn Magnussen (s183546)
     public Developer getCurrentUser() {
         return this.currentUser;
     }
 
-    // Checks whether there is a current user or not
+    // Checks whether there is a current user or not // Responsible - Asbjørn Magnussen (s183546)
     public boolean hasCurrentUser() {
         return this.currentUser != null;
     }
     
-    // Removes the current user
+    // Removes the current user // Responsible - Asbjørn Magnussen (s183546)
     public void logOut() {
         this.currentUser = null;
     }
 
-    // Checks whether a developer defined by a set of initials is in the company
+    // Checks whether a developer defined by a set of initials is in the company // Responsible - Asbjørn Magnussen (s183546)
     public boolean developerExists(String initials) {
         for (Developer d : this.developers){
             if (d.getInitials().equals(initials)){
@@ -66,7 +66,7 @@ public class App {
         return false;
     }
     
-    // Return the developer object corresponding to given initials
+    // Return the developer object corresponding to given initials // Responsible - Asbjørn Magnussen (s183546)
     public Developer getDeveloper(String initials) throws OperationNotAllowedException {
         for (Developer d : getDevelopers()) {
             if (d.getInitials().equals(initials.toLowerCase())) {
@@ -76,29 +76,29 @@ public class App {
         throw new OperationNotAllowedException("No developer with the given initials exists in the system");
     }
 
-    // getter method for the current year - also updates the current year variable
+    // getter method for the current year - also updates the current year variable // Responsible - Asbjørn Magnussen (s183546)
     public int getCurrentYear(){
         this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
         return this.currentYear;
     }
 
-    // Get the list of developers
+    // Get the list of developers // Responsible - Asbjørn Magnussen (s183546)
     public ArrayList<Developer> getDevelopers(){
       return this.developers;
     }
 
-    // initializes project list to contain a project for non work activities
+    // initializes project list to contain a project for non work activities // Responsible - Asbjørn Magnussen (s183546)
     public ArrayList<Project> getInitialProjectList() {
         ArrayList<Project> initialProjectList = new ArrayList<>();
         initialProjectList.add(createNonWorkActivitiesProject());
         return initialProjectList;
     }
-
+    // Responsible - Asbjørn Magnussen (s183546)
     public String getNonWorkActivitiesProjectNumber() {
         return this.nonWorkActivityProjectNumber;
     }
 
-    // create non work activity project
+    // create non work activity project // Responsible - Kasper Helverskov Petersen (s203294)
     public Project createNonWorkActivitiesProject(){
         // assign non work activities to a project called "Non work activities"
         Project nonWorkActivitiesProject = new Project(nonWorkActivityProjectNumber,"Non work activities");
@@ -112,17 +112,17 @@ public class App {
         return nonWorkActivitiesProject;
     }
     
-    // checks that the project list contains a non work activity project
+    // checks that the project list contains a non work activity project // Responsible - Kasper Helverskov Petersen (s203294)
     public boolean hasNonWorkActivityProject() throws OperationNotAllowedException {
         return (projectExists(nonWorkActivityProjectNumber) && getProject(nonWorkActivityProjectNumber).isNonWorkActivityProject());
     }
 
-    // getter method for the non work activity project
+    // getter method for the non work activity project // Responsible - Kasper Helverskov Petersen (s203294)
     public Project getNonWorkActivityProject() throws OperationNotAllowedException {
         return getProject(nonWorkActivityProjectNumber);
     }
 
-    // Add project with no name
+    // Add project with no name // Responsible - Kasper Helverskov Petersen (s203294)
     public void addProject(){
         // Increment project count for current year
         incrementProjectCount();
@@ -135,7 +135,7 @@ public class App {
         this.projects.add(newProject);
     }
 
-    // Add a new project to the list of projects with a name
+    // Add a new project to the list of projects with a name // Responsible - Kasper Helverskov Petersen (s203294)
     public void addProject(String name){
         // update the counter of projects for the current year
         incrementProjectCount();
@@ -148,12 +148,12 @@ public class App {
         this.projects.add(newProject);
     }
     
-    // increment project count for current year
+    // increment project count for current year // Responsible - Kasper Helverskov Petersen (s203294)
     public void incrementProjectCount(){
         this.projectCount.put(this.getCurrentYear(), getProjectCountForCurrentYear()+1);
     }
 
-    // Returns the number of projects already created in a given year
+    // Returns the number of projects already created in a given year // Responsible - Kasper Helverskov Petersen (s203294)
     public int getProjectCountForCurrentYear() {
         
         // If projects are present in the current year
@@ -168,6 +168,7 @@ public class App {
     }
 
     // Creates a unique project id number from the current year and the project count in that year
+    // Responsible - Kasper Helverskov Petersen (s203294)
     public String getProjectNumber() {
 
         // Retrieve the project count in the given year
@@ -177,12 +178,13 @@ public class App {
         return String.format("%02d",this.getCurrentYear() % 100) + String.format("%03d", currentYearProjectCount);
     }
 
-    // Returns the list of projects
+    // Returns the list of projects // Responsible - Kasper Helverskov Petersen (s203294)
     public ArrayList<Project> getProjects(){
         return this.projects;
     }
 
     // Checks whether a project with a given project number exist in the list of projects
+    // Responsible - Kasper Helverskov Petersen (s203294)
     public boolean projectExists(String projectNumber){
 
         // Precondition
@@ -207,6 +209,7 @@ public class App {
         return result;
     }
     
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // Get a project from the project number
     public Project getProject(String projectNumber) throws OperationNotAllowedException {
         for (Project p : projects) {
@@ -217,6 +220,7 @@ public class App {
         throw new OperationNotAllowedException("Project with given project number does not exist in the system");
     }
 
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // Checks whether the current user is the project leader of a given project
     public boolean currentUserIsProjectLeader(String projectNumber) throws OperationNotAllowedException{
         if (!getProject(projectNumber).hasProjectLeader()) {
@@ -224,7 +228,8 @@ public class App {
         }
         return getProject(projectNumber).getProjectLeader().getInitials().equals(this.currentUser.getInitials());
     }
-
+    
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // Assign a developer as project leader on a project
     public void assignProjectLeader(String projectNumber,String initials) throws OperationNotAllowedException{
         Developer developer = getDeveloper(initials);
@@ -235,7 +240,8 @@ public class App {
             project.addDeveloper(developer);
         }
     }
-
+    
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // Add activity with a name to a project 
     public void addActivityToProject(String activityName, String projectNumber) throws OperationNotAllowedException{
         Activity activity = new Activity(activityName);
@@ -248,7 +254,8 @@ public class App {
             throw new OperationNotAllowedException("The activity can't be added to the project, because the user is not the project leader");
         }
     }
-
+    
+    // Responsible - Marcus Roberto Nielsen (s204126)
     public void setActivityName(String newName, Activity activity, Project project) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(project.getProjectNumber())){
             if (!project.containsActivity(newName) || newName.equals(activity.getName())){
@@ -261,27 +268,32 @@ public class App {
         }
     }
 
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // time helper functions
     // check that hours format is valid
     public boolean isHoursFormatValid(double hours){
         return (hours > 0 && hours <= 24);
     }
 
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // check that day format is valid
     public boolean isDayFormatValid(int day) throws OperationNotAllowedException{
         return (day >= 1 && day <= 7);
     }
 
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // check that week format is valid
     public boolean isWeekFormatValid(int week){
         return (week >= 1 && week <= 52);
     }
 
+    // Responsible - Marcus Roberto Nielsen (s204126)
     // check that the end time comes after the start time
     public boolean isEndTimeIsAfterStartTime(int startYear, int startWeek, int endYear, int endWeek) {
         return (startYear < endYear || (startYear == endYear && startWeek <= endWeek));
     }
 
+    // Responsible - Mads Vibe Ringsted (s204144)
     public void setTimeHorizonOfProject(int startYear, int startWeek, int endYear, int endWeek, String projectNumber) throws OperationNotAllowedException{
         // check that the current user is the project leader 
         if (!currentUserIsProjectLeader(projectNumber)){
@@ -324,7 +336,7 @@ public class App {
 
 
 
-
+    // Responsible - Mads Vibe Ringsted (s204144)
     public void setTimeHorizonOfActivity(int startYear, int startWeek, int endYear, int endWeek, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (!currentUserIsProjectLeader(projectNumber)){
             throw new OperationNotAllowedException("The start and end time of the activity can't be edited, because the user is not the project leader");
@@ -355,7 +367,7 @@ public class App {
         activity.setEndWeek(endWeek);
         
     }
-
+    // Responsible - Mads Vibe Ringsted (s204144)
     // add developer to project
     public void addDeveloperToProject(String initials, String projectNumber) throws OperationNotAllowedException {
         Developer developer = getDeveloper(initials);
@@ -364,6 +376,7 @@ public class App {
         project.addDeveloper(developer);
     }
 
+    // Responsible - Andreas Bigom (s200925)
     // Adds a developer to the list of currently working developers on an activity
     // the user has to be project leader
     public void addDeveloperToActivity(String initials, String activityName, String projectNumber) throws OperationNotAllowedException{
@@ -382,7 +395,7 @@ public class App {
             throw new OperationNotAllowedException("Only the project leader can assign developers to this activity");
         }
     }
-
+    // Responsible - Andreas Bigom (s200925)
     public void setEstimatedWorkHoursForProject(double workHours, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             if (workHours >= 0){
@@ -395,7 +408,7 @@ public class App {
             throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this project");
         }
     }
-
+    // Responsible - Andreas Bigom (s200925)
     public void setEstimatedWorkHoursForActivity(double workHours, String activityName, String projectNumber) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(projectNumber)){
             if (workHours >= 0){
@@ -410,7 +423,7 @@ public class App {
             throw new OperationNotAllowedException("Only the project leader can set the estimated number of work hours to this activity");
         }
     }
-
+    // Responsible - Andreas Bigom (s200925)
     // request assistance for an activity
     public void requestAssistanceForActivity(String initialsReceiver, String activityName, String projectNumber) throws OperationNotAllowedException {
         // get developer that is being requested
@@ -420,7 +433,7 @@ public class App {
         // the current user request assistance
         activity.requestAssistance(receiver,currentUser);        
     } 
-
+    // Responsible - Andreas Bigom (s200925)
     // register hours to an activity
     public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
         Project project = getProject(projectNumber);
@@ -483,11 +496,11 @@ public class App {
         assertTrue(y + hours - x == project.getTotalHoursRegistered());
         assertTrue(z + hours - x == activity.getTotalHoursRegistered());
     }
-
+    // Responsible - Andreas Bigom (s200925)
     public void registerHoursToNonWorkActivity(double hours, int day, int week, int year, String activityName) throws OperationNotAllowedException{
         registerHoursToActivity(hours, day, week, year, nonWorkActivityProjectNumber, activityName);
     }
-    
+    // Responsible - Andreas Bigom (s200925)
     public void generateProjectReport(Project project) throws OperationNotAllowedException{
         if (currentUserIsProjectLeader(project.getProjectNumber())) {
             this.currentProjectReport = new ProjectReport(project); }
@@ -496,14 +509,14 @@ public class App {
         }
 
     }
-
+    // Responsible - Andreas Bigom (s200925)
     public ProjectReport getProjectReport(Project project) throws OperationNotAllowedException{
         generateProjectReport(project);
         
         return this.currentProjectReport;
         
     }
-
+    // Responsible - Andreas Bigom (s200925)
     public boolean hasCurrentProjectReport(){
         return (!(this.currentProjectReport == null));
     }

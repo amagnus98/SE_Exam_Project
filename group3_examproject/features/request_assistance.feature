@@ -1,3 +1,5 @@
+# Responsible - Asbjørn Magnussen (s183546)
+
 Feature: Request assistance on activity
 Description: A developer requests assistance from another developer for a given activity
 Actors: Developer

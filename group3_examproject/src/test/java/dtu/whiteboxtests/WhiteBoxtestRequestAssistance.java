@@ -1,3 +1,5 @@
+// Responsible - Andreas Bigom (s200925)
+
 package dtu.whiteboxtests;
 
 import static org.junit.Assert.assertEquals;

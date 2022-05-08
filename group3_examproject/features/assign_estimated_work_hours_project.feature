@@ -1,3 +1,5 @@
+# Responsible - Mads Vibe Ringsted (s204144)
+
 Feature: Assign estimated work hours for a project
 Description: The estimated amount of work hours is assigned to a project
 Actors: Project leader

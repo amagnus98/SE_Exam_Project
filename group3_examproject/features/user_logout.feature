@@ -1,3 +1,5 @@
+# Responsible - Kasper Helverskov Petersen (s203294)
+
 Feature: User logout
 	Description: The user logs out from the system
 	Actor: Developer

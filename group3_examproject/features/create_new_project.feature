@@ -1,3 +1,5 @@
+# Responsible - Kasper Helverskov Petersen (s203294)
+
 Feature: Create new project
 Description: The current user creates a new project
 Actor: Developer

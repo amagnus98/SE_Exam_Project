@@ -1,3 +1,4 @@
+// Responsible - Mads Vibe Ringsted (s204144)
 package system.model.domain;
 
 import java.util.*;

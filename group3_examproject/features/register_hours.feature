@@ -1,3 +1,5 @@
+# Responsible - Kasper Helverskov Petersen (s203294)
+
 Feature: Perform time registration
 Description: A developer registers time to a project or non-work actitivy 
 Actor: Developer

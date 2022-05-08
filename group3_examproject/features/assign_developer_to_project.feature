@@ -1,3 +1,5 @@
+# Responsible - Andreas Bigom (s200925)
+
 Feature: Assign developer to project
 Description: The user adds a developer to a project
 Actor: Developer

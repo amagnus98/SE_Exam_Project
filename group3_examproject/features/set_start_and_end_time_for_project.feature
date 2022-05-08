@@ -1,3 +1,5 @@
+# Responsible - Asbjørn Magnussen (s183546)
+
 Feature: Set start and end time of a project
 Description: The user sets the start and end time of a project
 Actors: Project leader

@@ -1,3 +1,5 @@
+// Responsible - Andreas Bigom (s200925)
+
 package dtu.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;

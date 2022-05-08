@@ -1,3 +1,4 @@
+// Responsible - Asbjørn Magnussen (s183546)
 package dtu.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;

@@ -1,5 +1,6 @@
-package dtu.acceptance_tests;
+// Responsible - Marcus Roberto Nielsen (s204126)
 
+package dtu.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

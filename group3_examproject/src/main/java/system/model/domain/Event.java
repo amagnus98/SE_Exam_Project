@@ -1,3 +1,4 @@
+// Responsible - Andreas Bigom (s200925)
 package system.model.domain;
 
 import java.util.*;

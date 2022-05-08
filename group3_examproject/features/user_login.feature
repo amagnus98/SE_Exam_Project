@@ -1,3 +1,5 @@
+# Responsible - Marcus Roberto Nielsen (s204126)
+
 Feature: Login as a user
 Description: Developers are able to login as a user
 Actor: Developer

@@ -1,3 +1,5 @@
+# Responsible - Andreas Bigom (s200925)
+
 Feature: Create project activity
 Description: The user creates a new activity within a project
 Actors: Project leader

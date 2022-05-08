@@ -1,3 +1,5 @@
+# Responsible - Marcus Roberto Nielsen
+
 Feature: Assign developer to activity
 Description: The user adds a developer to an activity
 Actor: Project leader

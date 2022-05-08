@@ -1,3 +1,4 @@
+// Responsible - Mads Vibe Ringsted (s204144)
 package dtu.whiteboxtests;
 
 import static org.junit.Assert.assertEquals;
