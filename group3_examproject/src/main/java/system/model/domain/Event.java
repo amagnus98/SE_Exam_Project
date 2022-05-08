@@ -92,8 +92,8 @@ public abstract class Event {
 
     // check if the start and end time has been set yet
     public boolean isTimeHorizonDefined(){
-        // if the week value is zero it means they are uninitialized
-        return (this.getStartWeek() != 0 && this.getEndWeek() != 0);
+        // if the start week value is zero it means the time horizon is uninitialized
+        return (this.getStartWeek() != 0);
     }
 
     public ArrayList<Developer> getDevelopers() {
