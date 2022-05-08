@@ -1,5 +1,6 @@
 package system.model.domain;
 import java.util.*;
+import static org.junit.Assert.assertTrue;
 
 public class Activity extends Event{
   
@@ -95,6 +96,10 @@ public class Activity extends Event{
     if (isDeveloperAssignedByProjectLeader(sender)){
       // check that the receiver (the one who is being requested) is not already assigned to the project
       if (!isDeveloperAssigned(receiver)){
+          //Precondition
+          assertTrue(isDeveloperAssignedByProjectLeader(sender));
+          assertTrue(isDeveloperAssigned(receiver)==false);
+
           // add the developer as a requested developer
           addRequestedDeveloper(receiver);
           receiver.assignActivity(this);
@@ -104,6 +109,11 @@ public class Activity extends Event{
     } else {
       throw new OperationNotAllowedException("The current user is not assigned to the activity by the project leader and cannot request assistance");
     }
+
+    //Postconditions
+    assertTrue(isDeveloperAssigned(receiver));
+    assertTrue(isDeveloperRequested(receiver));
+
   }
   
     

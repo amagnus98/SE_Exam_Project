@@ -457,8 +457,7 @@ public class App {
         assertTrue(isHoursFormatValid(hours));
         assertTrue(isDayFormatValid(day));
         assertTrue(isWeekFormatValid(week));
-        assertTrue(activity.canRegisterHours(this.currentUser) || project.isNonWorkActivityProject());
-        assertTrue(activity.isDateWithinTimeHorizon(year, week) || project.isNonWorkActivityProject());
+        assertTrue((activity.canRegisterHours(this.currentUser) && activity.isTimeHorizonDefined() && activity.isDateWithinTimeHorizon(year, week) )|| project.isNonWorkActivityProject());
         double x = this.currentUser.getRegisteredHours(day, week, year, projectNumber, activityName);
         double y = project.getTotalHoursRegistered();
         double z = activity.getTotalHoursRegistered();
