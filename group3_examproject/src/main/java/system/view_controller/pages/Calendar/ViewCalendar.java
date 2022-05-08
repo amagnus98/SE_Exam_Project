@@ -105,11 +105,14 @@ public class ViewCalendar {
                 dateHeader.setAlignmentX(DayPanel.CENTER_ALIGNMENT);
                 dateHeader.setAlignmentY(DayPanel.CENTER_ALIGNMENT);
 
-                for ( String projectKey : calendar.get(key).keySet() ) {
+                for ( String projectNumber : calendar.get(key).keySet() ) {
 
                     try {
-                        Project project = main.app.getProject(projectKey);
-                        JLabel projectHeader = new JLabel(project.getName() + " (" + projectKey + ")");
+                        Project project = main.app.getProject(projectNumber);
+                        JLabel projectHeader = new JLabel(project.getName() + " (" + projectNumber + ")");
+                        if (project.isNonWorkActivityProject()){
+                            projectHeader = new JLabel(project.getName());
+                        }
                         projectHeader.setBorder(new EmptyBorder(20,0,10,0));
                         projectHeader.setFont(new Font("Arial", Font.BOLD, 15));
                         projectHeader.setBackground(constants.secondBoxColor);
@@ -117,16 +120,16 @@ public class ViewCalendar {
                         projectHeader.setAlignmentX(DayPanel.CENTER_ALIGNMENT);
                         projectHeader.setAlignmentY(DayPanel.CENTER_ALIGNMENT);
                     } catch (OperationNotAllowedException e) {
-                        JLabel projectHeader = new JLabel(projectKey);
+                        JLabel projectHeader = new JLabel(projectNumber);
                         projectHeader.setFont(new Font("Arial", Font.BOLD, 15));
                         DayPanel.add(projectHeader);
                         projectHeader.setAlignmentX(DayPanel.CENTER_ALIGNMENT);
                         projectHeader.setAlignmentY(DayPanel.CENTER_ALIGNMENT);
                     }
 
-                    for ( String activityKey : calendar.get(key).get(projectKey).keySet() ) {
+                    for ( String activityKey : calendar.get(key).get(projectNumber).keySet() ) {
 
-                        JLabel activityHeader = new JLabel(activityKey + ": " + calendar.get(key).get(projectKey).get(activityKey) + " hours");
+                        JLabel activityHeader = new JLabel(activityKey + ": " + calendar.get(key).get(projectNumber).get(activityKey) + " hours");
                         activityHeader.setFont(new Font("Arial", Font.BOLD, 10));
                         activityHeader.setBackground(constants.secondBoxColor);
                         DayPanel.add(activityHeader);
