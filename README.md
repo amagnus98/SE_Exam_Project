@@ -8,4 +8,4 @@ Students who worked on this project:
 - Mads Vibe Ringsted s204144
 - Marcus Roberto Nielsen s204126
 
-For instructions on how to use the system we refer the reader to the user manual (Usermanual.pdf), which can be found both in this GitHub repository as well as in the provided ZIP-file.
+For instructions on how to use the system we refer the reader to the user manual (UserManual.pdf), which can be found both in this GitHub repository as well as in the provided ZIP-file.
