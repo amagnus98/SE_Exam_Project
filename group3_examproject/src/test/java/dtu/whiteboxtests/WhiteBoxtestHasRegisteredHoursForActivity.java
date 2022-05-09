@@ -24,12 +24,12 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     @BeforeEach
     public void setUp() throws OperationNotAllowedException, Exception {
         System.out.println("Executing setup");
-        app.logIn("kape");
+        app.logIn("mani");
     }
 
     @Test
     public void hasRegisteredHoursForActivityA() throws OperationNotAllowedException{
-        Developer developer = this.app.getDeveloper("kape");
+        Developer developer = this.app.getDeveloper("mani");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
@@ -51,7 +51,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     
     @Test
     public void hasRegisteredHoursForActivityB() throws OperationNotAllowedException{
-        Developer developer = this.app.getDeveloper("kape");
+        Developer developer = this.app.getDeveloper("mani");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
@@ -63,7 +63,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         // create a project, get projectNumber, assign currentUser as projectLeader and set time horizon of project
         app.addProject();
         String projectNumber = app.getProjectNumber();
-        app.assignProjectLeader(projectNumber, "kape");
+        app.assignProjectLeader(projectNumber, "mani");
         app.setTimeHorizonOfProject(year, week, app.getCurrentYear()+1, 2, projectNumber);
         
         // create project activity and register some hours to it so //1 is passed
@@ -89,7 +89,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     
     @Test
     public void hasRegisteredHoursForActivityC() throws OperationNotAllowedException{
-        Developer developer = this.app.getDeveloper("kape");
+        Developer developer = this.app.getDeveloper("mani");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
@@ -101,7 +101,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         // create a project, get projectNumber, assign currentUser as projectLeader and set time horizon of project
         app.addProject();
         String projectNumber = app.getProjectNumber();
-        app.assignProjectLeader(projectNumber, "kape");
+        app.assignProjectLeader(projectNumber, "mani");
         app.setTimeHorizonOfProject(year, week, app.getCurrentYear()+1, 2, projectNumber);
         
         // create project activity and register some hours to it so //1 is passed
@@ -130,7 +130,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
     
     @Test
     public void hasRegisteredHoursForActivityD() throws OperationNotAllowedException{
-        Developer developer = this.app.getDeveloper("kape");
+        Developer developer = this.app.getDeveloper("mani");
         DeveloperCalendar developerCalendar = developer.getDeveloperCalendar();
         HashMap<String,HashMap<String,HashMap<String,Double>>> calendar = developerCalendar.getCalendar();
 
@@ -142,7 +142,7 @@ public class WhiteBoxtestHasRegisteredHoursForActivity {
         // create a project, get projectNumber, assign currentUser as projectLeader and set time horizon of project
         app.addProject();
         String projectNumber = app.getProjectNumber();
-        app.assignProjectLeader(projectNumber, "kape");
+        app.assignProjectLeader(projectNumber, "mani");
         app.setTimeHorizonOfProject(year, week, app.getCurrentYear()+1, 2, projectNumber);
         
         // create project activity and register some hours to it so //1 is passed
