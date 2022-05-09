@@ -1,10 +1,8 @@
 package system.view_controller.pages.LogIn;
 import java.awt.*;
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.ProcessHandle.Info;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -12,18 +10,16 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import org.w3c.dom.Text;
-
 import system.view_controller.constants.Constants;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.Button;
-import system.view_controller.widgets.Header;
 import system.view_controller.widgets.SubHeader;
-import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
 import system.view_controller.widgets.TextField;
 import system.view_controller.actions.LogInAction;
 
+
+// Log In Page // Responsible - Kasper Petersen (s203294)
 public class LogInPage {
 
     Main main;

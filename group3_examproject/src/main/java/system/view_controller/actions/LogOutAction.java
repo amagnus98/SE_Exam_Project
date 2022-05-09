@@ -4,6 +4,7 @@ import system.model.domain.OperationNotAllowedException;
 import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 
+// Log Out of the system action // Responsible - Mads Ringsted (s204144)
 public class LogOutAction extends AbstractAction {
 
     JTextField textField;

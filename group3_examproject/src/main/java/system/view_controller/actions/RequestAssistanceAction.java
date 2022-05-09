@@ -10,6 +10,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// Request assistance action // Responsible - Mads Ringsted (s204144)
 public class RequestAssistanceAction extends AbstractAction {
 
     JTextField textField;

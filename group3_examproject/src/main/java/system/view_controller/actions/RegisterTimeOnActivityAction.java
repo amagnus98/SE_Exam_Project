@@ -5,6 +5,8 @@ import javax.swing.JTextField;
 
 import system.view_controller.pages.*;
 
+
+// Go to register time page action // Responsible - Mads Ringsted (s204144)
 public class RegisterTimeOnActivityAction extends AbstractAction {
 
     JTextField textField;

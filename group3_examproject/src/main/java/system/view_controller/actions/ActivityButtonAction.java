@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import system.model.domain.Activity;
 import system.model.domain.Project;
 
+// Activity for viewing activity // Responsible - Asbjørn Magnussen (s183546)
 public class ActivityButtonAction extends AbstractAction {
 
     JTextField textField;

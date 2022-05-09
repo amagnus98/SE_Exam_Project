@@ -6,7 +6,6 @@ import java.awt.*;
 import system.view_controller.widgets.Button;
 import system.view_controller.actions.CreateNewProjectAction;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.widgets.Header;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
@@ -14,6 +13,8 @@ import system.view_controller.widgets.Container;
 import system.view_controller.widgets.TextField;
 import system.view_controller.constants.Constants;
 
+
+// Create New Project Page // Responsible - Kasper Petersen (s203294)
 public class CreateNewProjectPage {
 
     JFrame frame;

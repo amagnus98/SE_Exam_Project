@@ -13,6 +13,7 @@ import system.model.domain.ProjectReport;
 import system.view_controller.constants.Constants;
 import system.view_controller.widgets.Container;
 
+// Project Report Page // Responsible - Asbjørn Magnussen - (s183546)
 public class ProjectReportPage {
 
     ProjectReport projectReport;

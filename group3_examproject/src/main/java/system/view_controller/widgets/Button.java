@@ -3,7 +3,7 @@ import system.view_controller.constants.Constants;
 import javax.swing.*;
 import java.awt.*;
 
-
+// Button Widget // Responsible - Mads Ringsted - (s204144)
 public class Button {
 
     JButton button;

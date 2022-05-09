@@ -5,21 +5,19 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import system.view_controller.widgets.Button;
-import system.view_controller.widgets.ProjectButton;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.ProjectButtonAction;
-import system.view_controller.widgets.Header;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
 import system.view_controller.constants.Constants;
-import system.model.domain.Developer;
 import system.model.domain.DeveloperCalendar;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import java.util.*;
 
+
+// View Calendar // Responsible - Kasper Petersen (s203294)
 public class ViewCalendar {
 
     JFrame frame;

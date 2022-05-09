@@ -2,6 +2,8 @@ package system.view_controller.messageWindows;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
+// Error window class of the system // Responsible - Andreas Bigom (s200925)
 public class ErrorWindow {
 
     String errorMessage;

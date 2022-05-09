@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import system.view_controller.widgets.Button;
 import system.view_controller.widgets.TextField;
-import system.view_controller.actions.ActivityButtonAction;
 import system.view_controller.actions.CreateNewProjectActivityAction;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.pages.Main;
@@ -17,6 +16,8 @@ import system.view_controller.constants.Constants;
 import system.model.domain.Activity;
 import system.model.domain.Project;
 
+
+// Non Work Activity Project Page // Responsible - Asbjørn Magnussen - (s183546)
 public class NonWorkActivityProjectPage {
 
     JFrame frame;

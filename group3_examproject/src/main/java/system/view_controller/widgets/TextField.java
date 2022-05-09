@@ -3,6 +3,8 @@ import javax.swing.*;
 
 import java.awt.*;
 
+
+// TextField Widget // Responsible - Marcus Nielsen - (s204126)
 public class TextField {
     
     public JTextField textField;

@@ -10,6 +10,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// Create Activity on a Project Action // Responsible - Andreas Bigom (s200925)
 public class CreateNewProjectActivityAction extends AbstractAction {
 
     JTextField textField;

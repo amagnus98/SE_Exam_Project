@@ -5,6 +5,8 @@ import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 
+
+// Log In to the system action // Responsible - Mads Ringsted (s204144)
 public class LogInAction extends AbstractAction {
 
     JTextField textField;

@@ -10,6 +10,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// change project information action // Responsible - Marcus Nielsen (s204126)
 public class SubmitProjectInformationAction extends AbstractAction {
 
     Main main;

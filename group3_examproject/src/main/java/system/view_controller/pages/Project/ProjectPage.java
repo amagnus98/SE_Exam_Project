@@ -17,13 +17,14 @@ import system.view_controller.actions.SetProjectTimeHorizonAction;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
-import system.view_controller.widgets.Header;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.constants.Constants;
 import system.model.domain.Activity;
 import system.model.domain.Developer;
 import system.model.domain.Project;
 
+
+// Project Page // Responsible - Andreas Bigom (s200925)
 public class ProjectPage {
 
     JFrame frame;

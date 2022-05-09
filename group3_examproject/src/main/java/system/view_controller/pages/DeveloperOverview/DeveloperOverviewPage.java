@@ -8,17 +8,17 @@ import java.util.HashMap;
 
 import system.model.domain.Activity;
 import system.model.domain.Developer;
-import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.constants.Constants;
-import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.widgets.Button;
 
+
+// Developer Overview // Responsible - Kasper Petersen (s203294)
 public class DeveloperOverviewPage {
 
     JFrame frame;

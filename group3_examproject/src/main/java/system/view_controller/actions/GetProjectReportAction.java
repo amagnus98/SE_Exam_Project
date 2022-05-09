@@ -14,6 +14,8 @@ import system.view_controller.pages.ProjectReport.ProjectReportPage;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// Get Project Report for a given project Action // Responsible - Andreas Bigom (s200925)
 public class GetProjectReportAction extends AbstractAction {
 
     Main main;

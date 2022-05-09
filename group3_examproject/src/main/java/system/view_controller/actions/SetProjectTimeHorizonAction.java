@@ -10,6 +10,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// Set project time horizon action // Responsible - Marcus Nielsen (s204126)
 public class SetProjectTimeHorizonAction extends AbstractAction {
 
     Main main;

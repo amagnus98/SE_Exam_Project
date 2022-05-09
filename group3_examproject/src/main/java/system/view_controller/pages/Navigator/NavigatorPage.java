@@ -2,7 +2,6 @@ package system.view_controller.pages.Navigator;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.*;
 import system.view_controller.widgets.Header;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.pages.Main;
@@ -14,6 +13,8 @@ import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.LogOutAction;
 import system.view_controller.constants.Constants;
 
+
+// Activity for viewing activity // Responsible - Andreas Bigom (s200925)
 public class NavigatorPage {
 
     JFrame frame;

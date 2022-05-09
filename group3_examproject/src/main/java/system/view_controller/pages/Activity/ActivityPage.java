@@ -2,35 +2,28 @@ package system.view_controller.pages.Activity;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import org.w3c.dom.Text;
-
 import java.awt.*;
 import java.util.ArrayList;
 
 import system.view_controller.widgets.Button;
-import system.view_controller.widgets.ProjectButton;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.widgets.TextField;
 import system.view_controller.actions.AssignActivityDeveloperAction;
-import system.view_controller.actions.AssignProjectDeveloperAction;
-import system.view_controller.actions.CreateNewProjectActivityAction;
-import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
 import system.view_controller.actions.RequestAssistanceAction;
 import system.view_controller.actions.SubmitActivityInformationAction;
 import system.view_controller.actions.SetEstimatedWorkHoursActivityAction;
 import system.view_controller.actions.SetActivityTimeHorizonAction;
-import system.view_controller.widgets.Header;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
 import system.view_controller.constants.Constants;
-import system.view_controller.messageWindows.ErrorWindow;
 import system.model.domain.Activity;
 import system.model.domain.Developer;
-import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Project;
 
+
+// Activity Page // Responsible - Marcus Nielsen (s204126)
 public class ActivityPage {
 
     JFrame frame;

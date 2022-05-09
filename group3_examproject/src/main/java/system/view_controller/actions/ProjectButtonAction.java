@@ -4,6 +4,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import system.model.domain.Project;
 
+
+// Action to go to a specific project // Responsible - Mads Ringsted (s204144)
 public class ProjectButtonAction extends AbstractAction {
 
     JTextField textField;

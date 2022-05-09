@@ -4,6 +4,7 @@ import javax.swing.border.Border;
 
 import java.awt.*;
 
+// Constants of the system // Responsible - Marcus Nielsen (s204126)
 public class Constants {
     
     public Color backgroundColor = new Color(230, 231, 236);

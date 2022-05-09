@@ -10,6 +10,7 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.*;
 
+// Assign Developer to Activitiy // Responsible - Andreas Bigom (s200925)
 public class AssignActivityDeveloperAction extends AbstractAction {
 
     JTextField textField;

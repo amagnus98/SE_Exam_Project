@@ -20,6 +20,8 @@ import system.model.domain.Developer;
 import system.model.domain.Project;
 import java.util.*;
 
+
+// Main GUI // Responsible - Andreas Bigom - (s200925)
 public class Main {
 
     public App app = new App();

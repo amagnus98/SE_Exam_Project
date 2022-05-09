@@ -11,6 +11,7 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+// Set activity time horizon action // Responsible - Asbjørn Magnussen (s183546)
 public class SetActivityTimeHorizonAction extends AbstractAction {
 
     Main main;

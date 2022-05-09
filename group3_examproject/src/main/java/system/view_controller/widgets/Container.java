@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 
+
+// Container Widget // Responsible - Mads Ringsted - (s204144)
 public class Container {
 
     JPanel container;

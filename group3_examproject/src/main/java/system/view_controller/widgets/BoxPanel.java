@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 
+
+// BoxPanelWidget // Responsible - Mads Ringsted - (s204144)
 public class BoxPanel {
 
     JPanel panel;

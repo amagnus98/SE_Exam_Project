@@ -17,6 +17,8 @@ import system.view_controller.widgets.Button;
 import system.view_controller.widgets.Container;
 import system.view_controller.widgets.TextField;
 
+
+// Register Time Page // Responsible - Mads Ringsted - (s204144)
 public class RegisterTimePage {
 
     JFrame frame;

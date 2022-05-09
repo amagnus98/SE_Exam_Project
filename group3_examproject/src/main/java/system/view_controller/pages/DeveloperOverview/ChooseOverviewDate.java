@@ -4,20 +4,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import system.model.domain.Activity;
-import system.model.domain.OperationNotAllowedException;
-import system.model.domain.Project;
 import system.view_controller.actions.MainMenuAction;
-import system.view_controller.actions.RegisterTimeAction;
 import system.view_controller.actions.ViewDeveloperOverviewAction;
 import system.view_controller.constants.Constants;
-import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.*;
 import system.view_controller.widgets.Button;
 import system.view_controller.widgets.Container;
 import system.view_controller.widgets.TextField;
 
+// Choose Developer Overview Date // Responsible - Kasper Petersen (s203294)
 public class ChooseOverviewDate {
 
     JFrame frame;

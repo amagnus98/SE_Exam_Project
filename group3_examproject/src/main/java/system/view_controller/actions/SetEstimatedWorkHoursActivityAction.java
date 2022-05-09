@@ -11,6 +11,7 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+// set estimated work hours activity action // Responsible - Asbjørn Magnussen (s183546)
 public class SetEstimatedWorkHoursActivityAction extends AbstractAction {
 
     Main main;

@@ -11,6 +11,8 @@ import system.view_controller.pages.Main;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+
+// change activity information action // Responsible - Marcus Nielsen (s204126)
 public class SubmitActivityInformationAction extends AbstractAction {
 
     Main main;

@@ -10,6 +10,8 @@ import system.model.domain.Developer;
 import system.model.domain.OperationNotAllowedException;
 import system.model.domain.Activity;
 
+
+// View developer overview action // Responsible - Marcus Nielsen (s204126)
 public class ViewDeveloperOverviewAction extends AbstractAction {
 
     JTextField textField;

@@ -8,6 +8,8 @@ import system.view_controller.messageWindows.ErrorWindow;
 import system.view_controller.messageWindows.SuccessWindow;
 import system.view_controller.pages.*;
 
+
+// Register Time on activity Action // Responsible - Andreas Bigom (s200925)
 public class RegisterTimeAction extends AbstractAction {
 
     JTextField textField;

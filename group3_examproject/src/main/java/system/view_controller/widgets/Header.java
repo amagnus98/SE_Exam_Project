@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 
+
+// Header Widget // Responsible - Mads Ringsted - (s204144)
 public class Header {
 
     Constants constants = new Constants();

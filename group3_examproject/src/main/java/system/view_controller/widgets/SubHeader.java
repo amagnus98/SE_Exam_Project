@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import system.view_controller.constants.Constants;
 
+
+// SubHeader Widget // Responsible - Marcus Nielsen - (s204126)
 public class SubHeader {
 
     Constants constants = new Constants();

@@ -5,6 +5,7 @@ import system.view_controller.pages.Main;
 
 import java.awt.event.ActionEvent;
 
+// Main Menu change screen action // Responsible - Mads Ringsted (s204144)
 public class MainMenuAction extends AbstractAction {
 
     String changeTo;

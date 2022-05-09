@@ -8,7 +8,6 @@ import system.view_controller.widgets.ProjectButton;
 import system.view_controller.widgets.SubHeader;
 import system.view_controller.actions.MainMenuAction;
 import system.view_controller.actions.ProjectButtonAction;
-import system.view_controller.widgets.Header;
 import system.view_controller.pages.Main;
 import system.view_controller.widgets.BoxPanel;
 import system.view_controller.widgets.Container;
@@ -18,6 +17,8 @@ import system.view_controller.constants.Constants;
 import system.model.domain.Project;
 import java.util.*;
 
+
+// View Projects Page // Responsible - Kasper Petersen (s203294)
 public class ViewProjectsPage {
 
     JFrame frame;
