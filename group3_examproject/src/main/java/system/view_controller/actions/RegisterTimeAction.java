@@ -62,7 +62,7 @@ public class RegisterTimeAction extends AbstractAction {
                 hasError = true;
             }
             } catch (NumberFormatException error){
-                ErrorWindow errorWindow = new ErrorWindow("The hours must be an integer or a float!");
+                ErrorWindow errorWindow = new ErrorWindow("The hours must be an integer or a float!  (use dot as decimal separator)");
                 errorWindow.showMessage();
                 hasError = true;
             }

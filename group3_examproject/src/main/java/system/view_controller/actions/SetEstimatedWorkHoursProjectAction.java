@@ -57,7 +57,7 @@ public class SetEstimatedWorkHoursProjectAction extends AbstractAction {
                     } 
                 }
             } catch (NumberFormatException error){
-                ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats!");
+                ErrorWindow errorWindow = new ErrorWindow("This field only accepts integers or floats! (use dot as decimal separator)");
                 errorWindow.showMessage();
                 hasError = true;
             }
