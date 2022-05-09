@@ -1,4 +1,4 @@
-// Marcus Roberto Nielsen (s204126)
+// Code by Hubert Baumeister
 
 package dtu.acceptance_tests;
 
