@@ -60,7 +60,6 @@ public class DeveloperCalendar {
         // Precondition
         assertTrue(day >= 1 && day <= 7);
         assertTrue(week >= 1 && day <= 52);
-        assertTrue(year >= 0);
         assertTrue(projectNumber != null);
         assertTrue(activityName != null);
         boolean result = false;
