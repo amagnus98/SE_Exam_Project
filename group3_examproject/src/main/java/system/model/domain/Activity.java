@@ -1,3 +1,5 @@
+// Responsible - Kasper Helverskov Petersen (s203294)
+
 package system.model.domain;
 import java.util.*;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-# Responsible - Mads
+# Responsible - Mads Vibe Ringsted (s204144)
 
 Feature: Assign project leader
 Description: A developer is assigned as project leader on a project
