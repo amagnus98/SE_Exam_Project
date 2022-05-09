@@ -62,6 +62,7 @@ public class DeveloperCalendar {
         assertTrue(week >= 1 && day <= 52);
         assertTrue(projectNumber != null);
         assertTrue(activityName != null);
+        assertTrue(calendar != null);
         boolean result = false;
         
         // get key that corresponds to the given date

@@ -40,6 +40,7 @@ public class RegisterTimeAction extends AbstractAction {
         if (!hours.getText().trim().equals("") && !day.getText().trim().equals("") && !week.getText().trim().equals("") && !year.getText().trim().equals("")) {
             try {
             double hours  = Double.parseDouble(this.hours.getText().trim());
+            hours  = Math.round(hours * 100.0) / 100.0;
             try {
                 int day = Integer.parseInt(this.day.getText().trim());
                 int week = Integer.parseInt(this.week.getText().trim());

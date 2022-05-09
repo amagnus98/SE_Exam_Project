@@ -46,7 +46,7 @@ public class SetEstimatedWorkHoursProjectAction extends AbstractAction {
         if (!estimatedWorkHours.getText().trim().equals("")) {
             try {
                 Double estimatedWorkHoursDouble = Double.parseDouble(estimatedWorkHours.getText().trim());
-
+                estimatedWorkHoursDouble  = Math.round(estimatedWorkHoursDouble * 100.0) / 100.0;
                 if (!(project.getEstimatedWorkHours() == estimatedWorkHoursDouble)) {
                     try {
                         main.app.setEstimatedWorkHoursForProject(estimatedWorkHoursDouble, project.getProjectNumber());

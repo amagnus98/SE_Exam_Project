@@ -438,7 +438,6 @@ public class App {
     public void registerHoursToActivity(double hours, int day, int week, int year, String projectNumber, String activityName) throws OperationNotAllowedException {
         Project project = getProject(projectNumber);
         Activity activity = project.getActivity(activityName);
-        hours  = Math.round(hours * 100.0) / 100.0;
 
         if (!isHoursFormatValid(hours)){
             throw new OperationNotAllowedException("Hours must be more than zero and not greater than 24");
